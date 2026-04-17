@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DistribuidoraKeppler.Vista.Auth.Aministrador
+namespace DistribuidoraKeppler.Vista.Aministrador
 {
     public partial class DashboardAdministrador : System.Web.UI.Page
     {
