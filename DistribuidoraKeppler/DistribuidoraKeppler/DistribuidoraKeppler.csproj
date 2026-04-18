@@ -70,6 +70,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Auth\Login.aspx" />
+    <Content Include="Vista\Cliente\DashboardCliente.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Vista\Preventista\DashboardPreventista.aspx" />
     <Content Include="Web.config" />
@@ -99,6 +100,13 @@
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
+      <DependentUpon>DashboardCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
+      <DependentUpon>DashboardCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Repartidor\Repartidor.aspx.cs">
       <DependentUpon>Repartidor.aspx</DependentUpon>
