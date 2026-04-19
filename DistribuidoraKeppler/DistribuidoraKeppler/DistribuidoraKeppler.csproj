@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.aspx" />
+    <Content Include="Vista\Aministrador\DashboardAdmin.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
@@ -87,6 +88,13 @@
     <Compile Include="Logica\LoginL.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vista\Aministrador\DashboardAdmin.aspx.cs">
+      <DependentUpon>DashboardAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Aministrador\DashboardAdmin.aspx.designer.cs">
+      <DependentUpon>DashboardAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
