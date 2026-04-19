@@ -71,6 +71,7 @@
     <Content Include="Vista\Aministrador\DashboardAdmin.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Auth\Login.aspx" />
+    <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Vista\Preventista\DashboardPreventista.aspx" />
@@ -108,6 +109,13 @@
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Bodega\DashboardBodega.aspx.cs">
+      <DependentUpon>DashboardBodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Bodega\DashboardBodega.aspx.designer.cs">
+      <DependentUpon>DashboardBodega.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
