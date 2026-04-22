@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.aspx" />
-    <Content Include="Vista\Aministrador\DashboardAdmin.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Aministrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
@@ -103,13 +102,6 @@
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vista\Aministrador\DashboardAdmin.aspx.cs">
-      <DependentUpon>DashboardAdmin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\Aministrador\DashboardAdmin.aspx.designer.cs">
-      <DependentUpon>DashboardAdmin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -117,14 +109,13 @@
     <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
     </Compile>
-
     <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
-
+    </Compile>
     <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.cs">
       <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
