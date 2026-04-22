@@ -59,7 +59,7 @@
             <h3 class="text-center mb-4">Iniciar Sesión</h3>
             <div class="mb-3">
                 <label for="txtUsuario" class="form-label">Usuario</label>
-                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="Ingrese su usuario"></asp:TextBox>
+                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="Ingrese su usuario" type="Email"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label for="txtClave" class="form-label">Contraseña</label>
