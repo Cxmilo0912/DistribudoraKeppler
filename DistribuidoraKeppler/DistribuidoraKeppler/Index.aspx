@@ -113,7 +113,7 @@
 
                     <!-- Carousel Content -->
                     <div class="container mx-auto px-8 lg:px-16 z-10">
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-12 max-w-7xl mx-auto w-full">
+                        <div id="Prueba" class="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto w-full">
                             <!-- Text Area -->
                             <div class="w-full md:w-2/3 space-y-6 letters">
                                 <h1 class="text-6xl lg:text-8xl font-black text-on-background tracking-tighter leading-none font-headline">MÁS ALLÁ
