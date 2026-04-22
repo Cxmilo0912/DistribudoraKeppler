@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
+    </Compile>
 
     <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.cs">
       <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
