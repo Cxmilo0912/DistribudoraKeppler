@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ConexionDB
     {
-        private static readonly string cadena = System.Configuration.ConfigurationManager.ConnectionStrings["ConexionBD"].ConnectionString;
+        private static readonly string cadena = System.Configuration.ConfigurationManager.ConnectionStrings["ConexionDB"].ConnectionString;
 
         public static SqlConnection MtAbrirConexion()
         {

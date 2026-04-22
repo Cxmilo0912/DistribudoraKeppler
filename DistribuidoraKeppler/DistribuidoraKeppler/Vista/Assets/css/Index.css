@@ -1,0 +1,60 @@
+﻿body, html, #app {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    touch-action: none;
+}
+
+#app {
+    height: 100%;
+    font-family: "Montserrat", serif;
+}
+
+    #app a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+.hero {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+#canvas {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.kinetic-gradient {
+    background: linear-gradient(90deg, #5ddda1 0%, #08a56e 100%);
+}
+
+.kinetic-gradient-orange {
+    background: linear-gradient(90deg, #ffb693 0%, #fe6b00 100%);
+}
+
+.w-full {
+   
+    top: 20px; /* Baja 20px */
+    right: 100px; /* Mueve a la derecha 10px */
+}
+
+#Prueba {
+    gap: 30rem;
+}
