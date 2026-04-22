@@ -33,6 +33,42 @@ namespace DistribuidoraKeppler.Vista
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Control menuAdmin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuAdmin;
+
+        /// <summary>
+        /// Control menuBodega.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuBodega;
+
+        /// <summary>
+        /// Control menuCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuCliente;
+
+        /// <summary>
+        /// Control menuPreventista.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuPreventista;
+
+        /// <summary>
         /// Control ContentPlaceHolder1.
         /// </summary>
         /// <remarks>
@@ -40,10 +76,5 @@ namespace DistribuidoraKeppler.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuAdmin;
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuBodega;
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuCliente;
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuPreventista;
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuRepartidor;
     }
 }
