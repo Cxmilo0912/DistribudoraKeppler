@@ -1,4 +1,15 @@
-﻿<body>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DistribuidoraKeppler.Vista.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
     <form id="form1" runat="server">
 
         <!-- SIDEBAR -->
@@ -24,8 +35,8 @@
 
                 <a id="menuPreventista" runat="server" href="Preventista/Preventista.aspx">Preventista</a>
 
-                
-                Repartidor</a>
+
+                <a>Repartidor</a>
 
             </nav>
 
@@ -38,3 +49,5 @@
 
     </form>
 </body>
+
+</html>

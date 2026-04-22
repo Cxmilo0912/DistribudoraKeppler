@@ -21,7 +21,7 @@ namespace DistribuidoraKeppler.Vista.Auth
 
                 switch (acceso.IdRol)
                 {
-                    case 1: Response.Redirect("~/Vista/Aministrador/DashboardAdmin.aspx"); break;
+                    case 1: Response.Redirect("~/Vista/Aministrador/DashboardAdministrador.aspx"); break;
                     case 2: Response.Redirect("~/Vista/Preventista/DashboardPreventista.aspx"); break;
                     case 3: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
                     case 4: Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx"); break;
