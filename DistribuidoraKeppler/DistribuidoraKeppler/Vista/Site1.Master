@@ -35,8 +35,7 @@
 
                 <a id="menuPreventista" runat="server" href="Preventista/Preventista.aspx">Preventista</a>
 
-
-                <a>Repartidor</a>
+                <a id="menuRepartidor" runat="server" href="Repartidor/Repartidor.aspx">Repartidor</a>
 
             </nav>
 
