@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace DistribuidoraKeppler
+namespace DistribuidoraKeppler.Vista.Aministrador
 {
 
 
-    public partial class Index
+    public partial class GestionUsuarios
     {
     }
 }

@@ -9,7 +9,7 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ConexionDB
     {
-        private static readonly string cadena = System.Configuration.ConfigurationManager.ConnectionStrings["ConexionBD"].ConnectionString;
+        private static readonly string cadena = System.Configuration.ConfigurationManager.ConnectionStrings["ConexionDB"].ConnectionString;
 
         public static SqlConnection MtAbrirConexion()
         {

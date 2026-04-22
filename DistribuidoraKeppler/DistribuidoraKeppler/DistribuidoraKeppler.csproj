@@ -69,9 +69,16 @@
   <ItemGroup>
     <Content Include="Index.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdmin.aspx" />
+    <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Aministrador\GestionUsuarios.aspx" />
+    <Content Include="Vista\Assets\css\GestionUsuario.css" />
+    <Content Include="Vista\Aministrador\PerfilAdministrador.aspx" />
+    <Content Include="Vista\Assets\css\Index.css" />
+    <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Cliente\PCliente.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Vista\Preventista\DashboardPreventista.aspx" />
     <Content Include="Web.config" />
@@ -79,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Datos\ConexionDB.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
+    <Compile Include="Datos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -86,11 +94,14 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />
     <Compile Include="Logica\UsuarioL.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\RolM.cs" />
     <Compile Include="Modelo\UsuarioM.cs" />
+    <Compile Include="Modelo\Rol.cs" />
+    <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vista\Aministrador\DashboardAdmin.aspx.cs">
       <DependentUpon>DashboardAdmin.aspx</DependentUpon>
@@ -98,6 +109,28 @@
     </Compile>
     <Compile Include="Vista\Aministrador\DashboardAdmin.aspx.designer.cs">
       <DependentUpon>DashboardAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.cs">
+      <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.designer.cs">
+      <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
+    </Compile>
+
+    <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.cs">
+      <DependentUpon>GestionUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.designer.cs">
+      <DependentUpon>GestionUsuarios.aspx</DependentUpon>
+
+    <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.cs">
+      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.designer.cs">
+      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -119,6 +152,13 @@
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\PCliente.aspx.cs">
+      <DependentUpon>PCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\PCliente.aspx.designer.cs">
+      <DependentUpon>PCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Repartidor\Repartidor.aspx.cs">
       <DependentUpon>Repartidor.aspx</DependentUpon>
@@ -152,11 +192,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Vista\Assets\css\" />
-    <Folder Include="Vista\Assets\img\" />
-    <Folder Include="Vista\Assets\js\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

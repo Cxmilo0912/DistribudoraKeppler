@@ -11,7 +11,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 {
 
 
-    public partial class DashboardAdmin
+    public partial class PerfilAdministrador
     {
     }
 }
