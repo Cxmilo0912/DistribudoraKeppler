@@ -73,8 +73,8 @@
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
-    <Content Include="Vista\Preventista\DashboardPreventista.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -124,19 +124,19 @@
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Preventista\Preventista.aspx.cs">
+      <DependentUpon>Preventista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Preventista.aspx.designer.cs">
+      <DependentUpon>Preventista.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Repartidor\Repartidor.aspx.cs">
       <DependentUpon>Repartidor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Repartidor\Repartidor.aspx.designer.cs">
       <DependentUpon>Repartidor.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\Preventista\DashboardPreventista.aspx.cs">
-      <DependentUpon>DashboardPreventista.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\Preventista\DashboardPreventista.aspx.designer.cs">
-      <DependentUpon>DashboardPreventista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>

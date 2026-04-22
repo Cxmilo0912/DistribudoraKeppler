@@ -40,5 +40,10 @@ namespace DistribuidoraKeppler.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuAdmin;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuBodega;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuCliente;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuPreventista;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuRepartidor;
     }
 }
