@@ -70,11 +70,13 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdmin.aspx" />
     <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Aministrador\PerfilAdministrador.aspx" />
     <Content Include="Vista\Assets\css\Index.css" />
     <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Cliente\PCliente.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Vista\Preventista\DashboardPreventista.aspx" />
     <Content Include="Web.config" />
@@ -105,6 +107,13 @@
     <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.cs">
+      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.designer.cs">
+      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -125,6 +134,13 @@
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\PCliente.aspx.cs">
+      <DependentUpon>PCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\PCliente.aspx.designer.cs">
+      <DependentUpon>PCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Repartidor\Repartidor.aspx.cs">
       <DependentUpon>Repartidor.aspx</DependentUpon>

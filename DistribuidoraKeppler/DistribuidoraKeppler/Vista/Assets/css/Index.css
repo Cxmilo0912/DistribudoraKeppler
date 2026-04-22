@@ -54,3 +54,7 @@ body {
     top: 20px; /* Baja 20px */
     right: 100px; /* Mueve a la derecha 10px */
 }
+
+#Prueba {
+    gap: 30rem;
+}
