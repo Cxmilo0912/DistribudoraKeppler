@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="DashboardBodega.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Bodega.DashboardBodega" %>
+﻿<% @Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="DashboardBodega.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Bodega.DashboardBodega" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://cdn.tailwindcss.com"></script>
