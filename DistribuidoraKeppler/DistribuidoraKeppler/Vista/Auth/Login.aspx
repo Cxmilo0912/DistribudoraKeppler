@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Auth.Login" %>
 
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -8,6 +7,8 @@
     <title>Login - Distribuidora Kepler</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background: #0d1b2a; /* Azul oscuro */
@@ -64,7 +65,7 @@
                 <label for="txtClave" class="form-label">Contraseña</label>
                 <asp:TextBox ID="txtClave" runat="server" CssClass="form-control" TextMode="Password" placeholder="Ingrese su contraseña"></asp:TextBox>
             </div>
-            <asp:Button ID="btnLogin" runat="server" Text="Ingresar" CssClass="btn btn-primary" />
+            <asp:Button ID="btnLogin" runat="server" Text="Ingresar" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
             <div class="text-center mt-3">
                 <a href="#">¿Olvidó su contraseña?</a>
             </div>

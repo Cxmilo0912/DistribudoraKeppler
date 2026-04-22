@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\ConexionDB.cs" />
+    <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -94,7 +95,10 @@
     </Compile>
     <Compile Include="Logica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />
+    <Compile Include="Logica\UsuarioL.cs" />
     <Compile Include="Modelo\Producto.cs" />
+    <Compile Include="Modelo\RolM.cs" />
+    <Compile Include="Modelo\UsuarioM.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
