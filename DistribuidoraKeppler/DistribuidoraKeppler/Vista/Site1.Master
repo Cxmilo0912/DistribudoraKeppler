@@ -1,20 +1,40 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DistribuidoraKeppler.Vista.Site1" %>
-
-<!DOCTYPE html>
-
-<html>
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-</head>
-<body>
+﻿<body>
     <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+
+        <!-- SIDEBAR -->
+        <aside class="w-64 bg-white shadow-lg flex flex-col p-6">
+
+            <div class="flex items-center gap-3 mb-10">
+                <div class="bg-blue-900 text-white p-3 rounded-xl">
+                    <span class="material-symbols-outlined">inventory</span>
+                </div>
+                <div>
+                    <h2 class="font-bold text-lg text-blue-900">Kepler</h2>
+                    <p class="text-xs text-gray-500">Sistema</p>
+                </div>
+            </div>
+
+            <nav class="space-y-2 text-sm">
+
+                <a id="menuAdmin" runat="server" href="Administrador/DashboardAdmin.aspx">Admin</a>
+
+                <a id="menuBodega" runat="server" href="Bodega/DashboardBodega.aspx">Bodega</a>
+
+                <a id="menuCliente" runat="server" href="Cliente/DashboardCliente.aspx">Cliente</a>
+
+                <a id="menuPreventista" runat="server" href="Preventista/Preventista.aspx">Preventista</a>
+
+                
+                Repartidor</a>
+
+            </nav>
+
+        </aside>
+
+        <!-- CONTENIDO DE LAS PÁGINAS -->
+        <div style="margin-left: 260px;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
+
     </form>
 </body>
-</html>
