@@ -68,11 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.aspx" />
-    <Content Include="Vista\Aministrador\DashboardAdministrador.aspx" />
-    <Content Include="Vista\Aministrador\GestionUsuarios.aspx" />
+    <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
-    <Content Include="Vista\Aministrador\PerfilAdministrador.aspx" />
+    <Content Include="Vista\Administrador\PerfilAdministrador.aspx" />
     <Content Include="Vista\Assets\css\Index.css" />
+    <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
@@ -99,32 +100,31 @@
     </Compile>
     <Compile Include="Logica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />
-    <Compile Include="Logica\UsuarioL.cs" />
+    <Compile Include="Modelo\Barrio.cs" />
+    <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Producto.cs" />
-    <Compile Include="Modelo\RolM.cs" />
-    <Compile Include="Modelo\UsuarioM.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.cs">
+    <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Aministrador\DashboardAdministrador.aspx.designer.cs">
+    <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.cs">
+    <Compile Include="Vista\Administrador\GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Aministrador\GestionUsuarios.aspx.designer.cs">
+    <Compile Include="Vista\Administrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.cs">
+    <Compile Include="Vista\Administrador\PerfilAdministrador.aspx.cs">
       <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Aministrador\PerfilAdministrador.aspx.designer.cs">
+    <Compile Include="Vista\Administrador\PerfilAdministrador.aspx.designer.cs">
       <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">

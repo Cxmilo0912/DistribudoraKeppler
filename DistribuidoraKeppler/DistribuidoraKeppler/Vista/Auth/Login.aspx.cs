@@ -1,6 +1,7 @@
-﻿using System;
-using DistribuidoraKeppler.Datos;
+﻿using DistribuidoraKeppler.Datos;
+using DistribuidoraKeppler.Logica;
 using DistribuidoraKeppler.Modelo;
+using System;
 
 namespace DistribuidoraKeppler.Vista.Auth
 {
@@ -8,52 +9,39 @@ namespace DistribuidoraKeppler.Vista.Auth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                txtUsuario.Text = "";
-                txtClave.Text = "";
-
-                if (Session["Usuario"] != null)
-                {
-                    UsuarioM acceso = (UsuarioM)Session["Usuario"];
-                    RedirigirPorRol(acceso.IdRol);
-                }
-            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string email = txtUsuario.Text.Trim();
-            string contrasena = txtClave.Text.Trim();
+            LoginL logica = new LoginL();
+            object ingreso = logica.ValidarLogin(txtUsuario.Text, txtClave.Text);
 
-            UsuarioD datos = new UsuarioD();
-            UsuarioM acceso = datos.ObtenerUsuario(email, contrasena);
 
-            if (acceso != null)
+            if (ingreso != null)
             {
-                Session["Usuario"] = acceso;
-
-                string script = $"Swal.fire('Login correcto', 'Bienvenido {acceso.Nombre} – Rol: {acceso.Rol}', 'success');";
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
-
-                RedirigirPorRol(acceso.IdRol);
+                // VALIDACIÓN POR TIPO DE MODELO
+                if (ingreso is Usuario u)
+                {
+                    Session["SesionTrabajador"] = u;
+                    // Manejo de los 4 roles de trabajador
+                    switch (u.Rol.Id)
+                    {
+                        case 1: Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx"); break;
+                        case 2: Response.Redirect("~/Vista/Preventista/Preventista.aspx"); break;
+                        case 3: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
+                        case 4: Response.Redirect("~/Vista/Repartidor/Repartidor.aspx"); break;
+                    }
+                }
+                else if (ingreso is Modelo.Cliente c)
+                {
+                    Session["SesionCliente"] = c;
+                    Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx");
+                }
             }
             else
             {
                 string script = "Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
-            }
-        }
-
-        private void RedirigirPorRol(int idRol)
-        {
-            switch (idRol)
-            {
-                case 1: Response.Redirect("~/Vista/Aministrador/DashboardAdministrador.aspx"); break;
-                case 2: Response.Redirect("~/Vista/Preventista/Preventista.aspx"); break;
-                case 3: Response.Redirect("~/Vista/Repartidor/Repartidor.aspx"); break;
-                case 4: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
-                case 5: Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx"); break;
             }
         }
     }

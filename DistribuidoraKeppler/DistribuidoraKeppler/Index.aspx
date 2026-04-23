@@ -88,51 +88,36 @@
         <canvas id="canvas"></canvas>
         <div class="hero">
             <!-- TopNavBar -->
-            <nav class="bg-[#1a1c1c] fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-full px-8 py-4 max-w-[1920px] mx-auto">
-                <div class="flex items-center gap-12">
-                    <span class="text-xl font-black tracking-tighter text-[#5ddda1] uppercase font-headline">Distribuidora - Keppler</span>
-                    <div class="hidden md:flex items-center gap-8">
-                        <a class="text-[#5ddda1] font-bold border-b-2 border-[#5ddda1] pb-1 font-label text-sm uppercase tracking-wider" href="#">Página Principal</a>
-                        <a class="text-gray-400 font-medium hover:text-[#5ddda1] transition-colors duration-200 font-label text-sm uppercase tracking-wider" href="#">Atención al Cliente</a>
-                        <a class="text-gray-400 font-medium hover:text-[#5ddda1] transition-colors duration-200 font-label text-sm uppercase tracking-wider" href="#">Más de Nosotros</a>
-                        <a class="text-gray-400 font-medium hover:text-[#5ddda1] transition-colors duration-200 font-label text-sm uppercase tracking-wider" href="#">Política y Privacidad</a>
-                    </div>
-                </div>
-                <div class="flex items-center gap-6">
-                    <div class="relative hidden lg:block">
-                        <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                        </div>
-                    </div>
+            <nav class="bg-[#1a1c1c] fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-full px-4 md:px-8 py-4">
+                <div class="hidden md:flex items-center gap-8">
+                    <span class="text-lg md:text-xl font-black tracking-tighter text-[#5ddda1] uppercase font-headline">Distribuidora - Keppler</span>
                 </div>
             </nav>
             <!-- Main Content Canvas -->
             <main class="pt-20">
                 <!-- Hero Carousel Section -->
-                <section class="relative h-[921px] w-full overflow-hidden flex items-center">
-                    <!-- Background Image with Tonal Layering -->
-
-                    <!-- Carousel Content -->
-                    <div class="container mx-auto px-8 lg:px-16 z-10">
-                        <div id="Prueba" class="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto w-full">
+                <section class="relative min-h-screen w-full overflow-hidden flex items-center">
+                    <div class="w-full pl-6 sm:pl-10 lg:pl-20 pr-4 h-full">
+                        <div id="Prueba" class="flex flex-col md:flex-row items-center md:items-stretch justify-start gap-10 md:gap-20 w-full h-full">
                             <!-- Text Area -->
-                            <div class="w-full md:w-2/3 space-y-6 letters">
-                                <h1 class="text-6xl lg:text-8xl font-black text-on-background tracking-tighter leading-none font-headline">MÁS ALLÁ
+                            <div class="w-full md:w-2/3 text-center md:text-left space-y-4 md:space-y-6">
+                                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-on-background tracking-tighter leading-none font-headline">MÁS ALLÁ
                             <br />
                                     <span class="text-primary">DEL MUNDO.</span>
                                 </h1>
                                 <p class="text-lg lg:text-xl text-on-surface-variant max-w-xl font-body leading-relaxed">
                                     Llevamos tus productos con rapidez, confianza y seguridad, asegurando que lleguen a su destino en perfectas condiciones. Nuestro compromiso es ofrecer un servicio de logística eficiente y confiable, adaptándonos a las necesidades de cada cliente.
-                                </p>                    
+                                </p>
                             </div>
                             <!-- CTA Buttons Column (Aligned Right and Centered Vertically) -->
-                            <div class="md:w-1/3 flex flex-col gap-4 justify-end">
-                                <a href="#" class="bottom-0 kinetic-gradient group flex items-center justify-between px-6 py-5 rounded-md text-on-primary-container transition-all active:scale-95 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                            <div class="w-full md:w-1/3 flex flex-col gap-4 items-center md:items-end md:justify-center">
+                                <a href="#" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg">
                                     <span class="font-label font-bold text-lg uppercase tracking-tight">Registrarse</span>
                                     <span class="material-symbols-outlined">account_box
                                     </span>
                                 </a>
 
-                                <a href="Vista/Auth/Login.aspx" class="bottom-0 kinetic-gradient-orange group flex items-center justify-between px-6 py-5 rounded-md text-on-secondary-fixed transition-all active:scale-95"><span class="font-label font-bold text-lg uppercase tracking-tight">Iniciar Sesión</span>
+                                <a href="Vista/Auth/Login.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg"><span class="font-label font-bold text-lg uppercase tracking-tight">Iniciar Sesión</span>
                                     <span class="material-symbols-outlined">login
                                     </span>
                                 </a>
