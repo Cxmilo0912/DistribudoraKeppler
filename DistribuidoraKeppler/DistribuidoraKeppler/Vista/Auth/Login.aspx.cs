@@ -10,7 +10,6 @@ namespace DistribuidoraKeppler.Vista.Auth
         {
             if (!IsPostBack)
             {
-             
                 txtUsuario.Text = "";
                 txtClave.Text = "";
 
@@ -24,8 +23,8 @@ namespace DistribuidoraKeppler.Vista.Auth
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string email = txtUsuario.Text.Trim();      
-            string contrasena = txtClave.Text.Trim();   
+            string email = txtUsuario.Text.Trim();
+            string contrasena = txtClave.Text.Trim();
 
             UsuarioD datos = new UsuarioD();
             UsuarioM acceso = datos.ObtenerUsuario(email, contrasena);
@@ -52,9 +51,9 @@ namespace DistribuidoraKeppler.Vista.Auth
             {
                 case 1: Response.Redirect("~/Vista/Aministrador/DashboardAdministrador.aspx"); break;
                 case 2: Response.Redirect("~/Vista/Preventista/Preventista.aspx"); break;
-                case 3: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
-                case 4: Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx"); break;
-                default: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
+                case 3: Response.Redirect("~/Vista/Repartidor/DashboardRepartidor.aspx"); break;
+                case 4: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
+                case 5: Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx"); break;
             }
         }
     }
