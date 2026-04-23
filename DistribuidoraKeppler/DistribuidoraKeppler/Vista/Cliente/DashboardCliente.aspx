@@ -1,206 +1,238 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" %>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kepler Distribution Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000080",
+                        secondary: "#000033",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["Manrope", "sans-serif"],
+                        sans: ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
 
-<!-- Tailwind + iconos -->
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-<div class="flex min-h-screen bg-gray-100 font-sans">
-
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-white border-r flex flex-col p-6">
-
-        <!-- LOGO -->
-        <div class="flex items-center gap-3 mb-8">
-            <div class="bg-blue-900 text-white p-2 rounded-lg">
-                <span class="material-symbols-outlined">rocket_launch</span>
-            </div>
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 min-h-screen flex" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <main class="flex-1 p-8 overflow-y-auto custom-scrollbar">
+        <header class="flex justify-between items-start mb-8">
             <div>
-                <h2 class="font-bold text-blue-900">Kepler</h2>
-                <p class="text-xs text-gray-500">Distribution</p>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">¡Bienvenido de nuevo, Carlos!</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-1">Aquí tienes el resumen de tu cuenta para hoy, 24 de Mayo.</p>
             </div>
-        </div>
-
-        <!-- MENU -->
-        <nav class="space-y-2 text-sm">
-
-            <div class="flex items-center gap-3 bg-blue-900 text-white p-3 rounded-lg">
-                <span class="material-symbols-outlined">dashboard</span>
-                Dashboard
-            </div>
-
-            <div class="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
-                <span class="material-symbols-outlined">shopping_bag</span>
-                Catálogo
-            </div>
-
-            <div class="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
-                <span class="material-symbols-outlined">list_alt</span>
-                Mis pedidos
-            </div>
-
-            <div class="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
-                <span class="material-symbols-outlined">history</span>
-                Historial
-            </div>
-
-            <div class="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
-                <span class="material-symbols-outlined">settings</span>
-                Configuración
-            </div>
-
-        </nav>
-
-        <!-- USUARIO -->
-        <div class="mt-auto pt-6 border-t flex items-center gap-3">
-            <img class="w-10 h-10 rounded-full" src="https://i.pravatar.cc/100" />
-            <div>
-                <p class="text-sm font-bold">Carlos</p>
-                <p class="text-xs text-gray-500">ID: #44291</p>
-            </div>
-        </div>
-
-    </aside>
-
-    <!-- CONTENIDO -->
-    <main class="flex-1 p-8">
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-8">
-            <div>
-                <h1 class="text-3xl font-bold">¡Bienvenido, Carlos!</h1>
-                <p class="text-gray-500">Aquí tienes el resumen de tu cuenta</p>
-            </div>
-
             <div class="flex gap-3">
-                <button class="px-4 py-2 border rounded-lg text-sm">Soporte</button>
-                <button class="px-4 py-2 bg-blue-900 text-white rounded-lg shadow">Nueva solicitud</button>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-4 gap-6">
-
-            <!-- IZQUIERDA -->
-            <div class="col-span-3 space-y-6">
-
-                <!-- CARDS -->
-                <div class="grid grid-cols-3 gap-6">
-
-                    <div class="bg-white p-6 rounded-xl shadow">
-                        <p class="text-gray-500 text-sm">Pedidos del mes</p>
-                        <p class="text-3xl font-bold mt-2">2</p>
-                        <p class="text-green-500 text-sm mt-1">+15%</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow">
-                        <p class="text-gray-500 text-sm">Total invertido</p>
-                        <p class="text-3xl font-bold mt-2">$45,200</p>
-                        <p class="text-red-500 text-sm mt-1">-5%</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow">
-                        <p class="text-gray-500 text-sm">En proceso</p>
-                        <p class="text-3xl font-bold mt-2">2</p>
-                    </div>
-
-                </div>
-
-                <!-- ACCESOS -->
-                <div>
-                    <h3 class="font-bold mb-4 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-blue-900">bolt</span>
-                        Accesos rápidos
-                    </h3>
-
-                    <div class="grid grid-cols-3 gap-4">
-
-                        <div class="bg-blue-900 text-white p-6 rounded-xl text-center shadow hover:scale-105 transition">
-                            <span class="material-symbols-outlined text-3xl mb-2">add_shopping_cart</span>
-                            <p class="font-bold">Realizar pedido</p>
-                        </div>
-
-                        <div class="bg-white p-6 rounded-xl text-center border hover:shadow">
-                            <span class="material-symbols-outlined text-3xl mb-2">grid_view</span>
-                            <p class="font-bold">Ver catálogo</p>
-                        </div>
-
-                        <div class="bg-white p-6 rounded-xl text-center border hover:shadow">
-                            <span class="material-symbols-outlined text-3xl mb-2">history</span>
-                            <p class="font-bold">Historial</p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- TABLA -->
-                <div class="bg-white rounded-xl shadow overflow-hidden">
-                    <div class="p-4 border-b flex justify-between">
-                        <h3 class="font-bold">Últimos pedidos</h3>
-                        <span class="text-blue-900 text-sm cursor-pointer">Ver todos</span>
-                    </div>
-
-                    <table class="w-full text-sm">
-                        <thead class="bg-gray-100">
-                            <tr>
-                                <th class="p-3 text-left">ID</th>
-                                <th class="p-3 text-left">Fecha</th>
-                                <th class="p-3 text-left">Total</th>
-                                <th class="p-3 text-left">Estado</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr class="border-t">
-                                <td class="p-3 font-bold">#9802</td>
-                                <td class="p-3">22 Mayo</td>
-                                <td class="p-3">$12,450</td>
-                                <td class="p-3 text-yellow-500 font-bold">Pendiente</td>
-                            </tr>
-
-                            <tr class="border-t">
-                                <td class="p-3 font-bold">#9745</td>
-                                <td class="p-3">18 Mayo</td>
-                                <td class="p-3">$8,900</td>
-                                <td class="p-3 text-blue-500 font-bold">En camino</td>
-                            </tr>
-
-                            <tr class="border-t">
-                                <td class="p-3 font-bold">#9688</td>
-                                <td class="p-3">15 Mayo</td>
-                                <td class="p-3">$23,850</td>
-                                <td class="p-3 text-green-500 font-bold">Entregado</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
-            <!-- PANEL DERECHO -->
-            <div class="bg-blue-900 text-white p-6 rounded-xl shadow space-y-6">
-
-                <div>
-                    <p class="text-sm opacity-80">Crédito disponible</p>
-                    <p class="text-3xl font-bold">$150,000</p>
-                </div>
-
-                <div class="bg-white/20 p-4 rounded-lg">
-                    <p class="text-sm">Próximo vencimiento</p>
-                    <p class="font-bold">05 Junio</p>
-                    <p class="text-xs">Monto: $18,250</p>
-                </div>
-
-                <button class="bg-white text-blue-900 w-full py-2 rounded-lg font-bold hover:bg-gray-200">
-                    PAGAR AHORA
+                <button class="px-5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:bg-slate-50 transition-colors">
+                    Soporte Técnico
                 </button>
-
+                <button class="px-5 py-2.5 bg-primary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+                    Solicitar Preventista
+                </button>
             </div>
-
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pedidos del Mes</span>
+                    <div class="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                        <span class="material-icons-outlined text-blue-500 text-xl">shopping_cart</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-4xl font-extrabold mb-1">2</span>
+                    <span class="text-emerald-500 text-xs font-bold flex items-center">
+                        <span class="material-icons-outlined text-sm mr-1">trending_up</span>
+                        +15% vs mes anterior
+                    </span>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Invertido</span>
+                    <div class="p-2 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg">
+                        <span class="material-icons-outlined text-indigo-500 text-xl">payments</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-4xl font-extrabold mb-1">L. 45,200.00</span>
+                    <span class="text-rose-500 text-xs font-bold flex items-center">
+                        <span class="material-icons-outlined text-sm mr-1">trending_down</span>
+                        -5% vs mes anterior
+                    </span>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">En Proceso</span>
+                    <div class="p-2 bg-amber-50 dark:bg-amber-900/30 rounded-lg">
+                        <span class="material-icons-outlined text-amber-500 text-xl">event_note</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-4xl font-extrabold mb-1">2</span>
+                    <span class="text-slate-400 text-xs font-bold flex items-center">
+                        <span class="material-icons-outlined text-sm mr-1">remove</span>
+                        Sin cambios
+                    </span>
+                </div>
+            </div>
         </div>
-
+        <h3 class="flex items-center gap-2 text-lg font-bold mb-5">
+            <span class="material-icons-outlined text-blue-600">bolt</span>
+            Accesos Rápidos
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <button class="bg-primary hover:bg-secondary text-white p-8 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all group border-0">
+                <span class="material-icons-outlined text-4xl group-hover:scale-110 transition-transform">add_shopping_cart</span>
+                <span class="text-lg font-bold">Realizar pedido</span>
+            </button>
+            <button class="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-primary dark:hover:border-primary transition-all group">
+                <span class="material-icons-outlined text-4xl text-primary group-hover:scale-110 transition-transform">grid_view</span>
+                <span class="text-lg font-bold">Ver catálogo</span>
+            </button>
+            <button class="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-primary dark:hover:border-primary transition-all group">
+                <span class="material-icons-outlined text-4xl text-primary group-hover:scale-110 transition-transform">history</span>
+                <span class="text-lg font-bold">Ver historial</span>
+            </button>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden">
+            <div class="p-6 flex justify-between items-center">
+                <h3 class="text-lg font-bold">Últimos Pedidos</h3>
+                <a class="text-primary font-bold text-sm hover:underline" href="#">Ver todos</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 dark:bg-slate-900/50 border-y border-slate-100 dark:border-slate-700">
+                        <tr>
+                            <th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase">ID Pedido</th>
+                            <th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase">Fecha</th>
+                            <th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase">Total</th>
+                            <th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase">Estado</th>
+                            <th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50 dark:divide-slate-700">
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 font-bold">#KEP-9802</td>
+                            <td class="px-6 py-4 text-slate-500 dark:text-slate-400">22 Mayo, 2024</td>
+                            <td class="px-6 py-4 font-bold">L. 12,450.00</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 text-[10px] font-bold rounded-full uppercase">Pendiente</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 font-bold">#KEP-9745</td>
+                            <td class="px-6 py-4 text-slate-500 dark:text-slate-400">18 Mayo, 2024</td>
+                            <td class="px-6 py-4 font-bold">L. 8,900.00</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 text-[10px] font-bold rounded-full uppercase">En Camino</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 font-bold">#KEP-9688</td>
+                            <td class="px-6 py-4 text-slate-500 dark:text-slate-400">15 Mayo, 2024</td>
+                            <td class="px-6 py-4 font-bold">L. 23,850.00</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-[10px] font-bold rounded-full uppercase">Entregado</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
-
-</div>
-
+    <aside class="w-80 flex-shrink-0 p-8 space-y-6">
+        <div class="bg-secondary rounded-[24px] p-6 text-white shadow-xl">
+            <h4 class="text-sm font-bold opacity-80 mb-6">Estado de Cuenta</h4>
+            <div class="mb-6">
+                <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-1">Crédito Disponible</p>
+                <div class="flex flex-col">
+                    <span class="text-4xl font-extrabold">L. 150,000</span>
+                    <span class="text-2xl font-bold opacity-80 mt-[-4px]">.00</span>
+                </div>
+            </div>
+            <div class="space-y-2 mb-6">
+                <div class="h-2 w-full bg-blue-900/50 rounded-full overflow-hidden">
+                    <div class="h-full bg-white w-[30%]"></div>
+                </div>
+                <p class="text-[10px] opacity-60">Has utilizado el 30% de tu límite (L. 200,000.00)</p>
+            </div>
+            <div class="bg-blue-900/40 rounded-2xl p-4 mb-6">
+                <div class="flex gap-3">
+                    <div class="p-2 bg-amber-500 rounded-lg h-fit">
+                        <span class="material-icons-outlined text-white text-lg">calendar_today</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold opacity-60">Próximo Vencimiento</p>
+                        <p class="text-lg font-bold">05 de Junio</p>
+                        <p class="text-[10px] opacity-60 mt-1">Monto a pagar: L. 18,250.00</p>
+                    </div>
+                </div>
+            </div>
+            <button class="w-full bg-white text-secondary font-extrabold py-4 rounded-2xl hover:bg-slate-100 transition-colors uppercase tracking-widest text-sm shadow-lg">
+                Pagar Ahora
+            </button>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-100 dark:border-slate-700">
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-4">Asesor Asignado</h4>
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center">
+                    <span class="material-icons-outlined text-slate-400">person</span>
+                </div>
+                <div>
+                    <p class="font-bold text-slate-900 dark:text-white">Samuel Rincon</p>
+                    <p class="text-[10px] text-slate-400 font-medium uppercase">Ejecutivo de Cuenta</p>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+                    <span class="material-icons-outlined text-lg">mail</span>
+                    <span class="text-xs font-semibold">s.rincon@kepler.com</span>
+                </div>
+                <div class="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+                    <span class="material-icons-outlined text-lg">phone</span>
+                    <span class="text-xs font-semibold">+57 3125789746</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <script>
+        // Dark mode toggle could be implemented here
+        // For now, it respects system preferences or the 'light' class on html
+    </script>
 </asp:Content>
