@@ -118,7 +118,7 @@
             </div>
 
             <div class="footer">
-                <img src="https://media.tenor.com/SWwBY1UvWmAAAAAC/zavvi-delivery.gif">..
+                •Distribuidora Keppler
             </div>
         </div>
     </form>

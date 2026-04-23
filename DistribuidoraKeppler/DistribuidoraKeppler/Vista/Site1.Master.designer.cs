@@ -39,16 +39,7 @@ namespace DistribuidoraKeppler.Vista
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuAdmin;
-
-        /// <summary>
-        /// Control menuBodega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuBodega;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuAdmin;
 
         /// <summary>
         /// Control menuCliente.
@@ -57,16 +48,7 @@ namespace DistribuidoraKeppler.Vista
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuCliente;
-
-        /// <summary>
-        /// Control menuPreventista.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuPreventista;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuCliente;
 
         /// <summary>
         /// Control menuRepartidor.
@@ -75,7 +57,25 @@ namespace DistribuidoraKeppler.Vista
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuRepartidor;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuRepartidor;
+
+        /// <summary>
+        /// Control menuPreventista.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuPreventista;
+
+        /// <summary>
+        /// Control menuBodega.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuBodega;
 
         /// <summary>
         /// Control ContentPlaceHolder1.

@@ -1,52 +1,204 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DistribuidoraKeppler.Vista.Site1" %>
 
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <meta charset="utf-8" />
+    <title>Kepler</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
-<body>
-    <form id="form1" runat="server">
 
-        <!-- SIDEBAR -->
-        <aside class="w-64 bg-white shadow-lg flex flex-col p-6">
+<body class="bg-gray-100">
+<form id="form1" runat="server">
 
-            <div class="flex items-center gap-3 mb-10">
-                <div class="bg-blue-900 text-white p-3 rounded-xl">
-                    <span class="material-symbols-outlined">inventory</span>
-                </div>
-                <div>
-                    <h2 class="font-bold text-lg text-blue-900">Kepler</h2>
-                    <p class="text-xs text-gray-500">Sistema</p>
-                </div>
+    <!-- SIDEBAR -->
+    <aside class="fixed left-0 top-0 h-full w-64 bg-blue-900 text-white flex flex-col p-5">
+
+        <!-- LOGO -->
+        <div class="flex items-center gap-3 mb-8">
+            <div class="bg-blue-600 p-3 rounded-xl">
+                <span class="material-symbols-outlined">inventory</span>
             </div>
-
-            <nav class="space-y-2 text-sm">
-
-                <a id="menuAdmin" runat="server" href="~/Vista/Aministrador/DashboardAdministrador.aspx">Admin</a>
-
-                <a id="menuBodega" runat="server" href="~/Vista/Bodega/DashboardBodega.aspx">Bodega</a>
-
-                <a id="menuCliente" runat="server" href="~/Vista/Cliente/DashboardCliente.aspx">Cliente</a>
-
-                <a id="menuPreventista" runat="server" href="~/Vista/Preventista/Preventista.aspx">Preventista</a>
-
-                <a id="menuRepartidor" runat="server" href="~/Vista/Repartidor/Repartidor.aspx">Repartidor</a>
-
-            </nav>
-
-        </aside>
-
-        <!-- CONTENIDO DE LAS PÁGINAS -->
-        <div style="margin-left: 260px;">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+            <div>
+                <h2 class="font-bold text-lg">Kepler</h2>
+                <p class="text-xs text-gray-300">Distribución</p>
+            </div>
         </div>
 
-    </form>
-</body>
+        <!-- MENÚ -->
+        <nav class="space-y-2 text-sm flex-1">
 
+            <!-- ADMIN -->
+            <div id="menuAdmin" runat="server" class="space-y-1">
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Vista/Aministrador/DashboardAdministrador.aspx"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">dashboard</span> Tablero
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">group</span> Gestión de usuarios
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">inventory_2</span> Gestión de productos
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">branding_watermark</span> Gestión de marcas
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">category</span> Gestión de categorías
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">warehouse</span> Inventario
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">bar_chart</span> Reportes
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">settings</span> Configuración
+                </asp:HyperLink>
+
+            </div>
+
+            <!-- CLIENTE -->
+            <div id="menuCliente" runat="server" class="space-y-1">
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/DashboardCliente.aspx"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">store</span> Catálogo
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">shopping_cart</span> Mis pedidos
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">history</span> Historial
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">settings</span> Configuración
+                </asp:HyperLink>
+
+            </div>
+
+            <!-- DISTRIBUIDOR -->
+            <div id="menuRepartidor" runat="server" class="space-y-1">
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Vista/Repartidor/Repartidor.aspx"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">groups</span> Repartidores
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">schedule</span> Horario
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">history</span> Historial
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">bar_chart</span> Reportes
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">comment</span> Observaciones
+                </asp:HyperLink>
+
+            </div>
+
+            <!-- PREVENTISTA -->
+            <div id="menuPreventista" runat="server" class="space-y-1">
+                <asp:HyperLink runat="server" NavigateUrl="~/Vista/Preventista/Preventista.aspx"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
+                </asp:HyperLink>
+            </div>
+
+            <!-- BODEGA -->
+            <div id="menuBodega" runat="server" class="space-y-1">
+                <asp:HyperLink runat="server" NavigateUrl="~/Vista/Bodega/DashboardBodega.aspx"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">inventory_2</span> Productos
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="#"
+                    CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
+                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
+                </asp:HyperLink>
+            </div>
+
+        </nav>
+
+        <!-- PERFIL ABAJO -->
+        <div class="bg-blue-800 p-3 rounded-xl flex items-center gap-3 mt-4">
+            <img src="https://i.pravatar.cc/40" class="rounded-full" />
+            <div>
+                <p class="text-sm font-semibold">Usuario</p>
+                <p class="text-xs text-gray-300">Rol</p>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- 🔥 CONTENIDO (CLAVE PARA QUE NO FALLE) -->
+    <main class="ml-64 p-6">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+    </main>
+
+</form>
+</body>
 </html>

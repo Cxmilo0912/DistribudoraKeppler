@@ -36,7 +36,7 @@
 <!-- HEADER -->
 <div class="bg-[#142f57] text-white px-5 pt-8 pb-6 flex justify-between items-center rounded-b-3xl">
     <div>
-        <h1 class="text-lg font-semibold tracking-wide">KEPLER</h1>
+        <h1 class="text-lg font-semibold tracking-wide">KEPPLER</h1>
         <p class="text-xs opacity-80">Bienvenido, Santiago Chaparro</p>
     </div>
 
