@@ -76,9 +76,12 @@
     <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
+    <Content Include="Vista\Bodega\PerfilBodega.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
-    <Content Include="Vista\Cliente\PCliente.aspx" />
+    <Content Include="Vista\Cliente\PerfilCliente.aspx" />
+    <Content Include="Vista\Repartidor\PerfilRepartidor.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -138,12 +141,26 @@
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.designer.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Bodega\PerfilBodega.aspx.cs">
+      <DependentUpon>PerfilBodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
+      <DependentUpon>PerfilBodega.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
+      <DependentUpon>PerfilPreventista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\PerfilPreventista.aspx.designer.cs">
+      <DependentUpon>PerfilPreventista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\Preventista.aspx.cs">
       <DependentUpon>Preventista.aspx</DependentUpon>
@@ -152,12 +169,19 @@
     <Compile Include="Vista\Preventista\Preventista.aspx.designer.cs">
       <DependentUpon>Preventista.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Cliente\PCliente.aspx.cs">
-      <DependentUpon>PCliente.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\PerfilCliente.aspx.cs">
+      <DependentUpon>PerfilCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Cliente\PCliente.aspx.designer.cs">
-      <DependentUpon>PCliente.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\PerfilCliente.aspx.designer.cs">
+      <DependentUpon>PerfilCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Repartidor\PerfilRepartidor.aspx.cs">
+      <DependentUpon>PerfilRepartidor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Repartidor\PerfilRepartidor.aspx.designer.cs">
+      <DependentUpon>PerfilRepartidor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Repartidor\Repartidor.aspx.cs">
       <DependentUpon>Repartidor.aspx</DependentUpon>
