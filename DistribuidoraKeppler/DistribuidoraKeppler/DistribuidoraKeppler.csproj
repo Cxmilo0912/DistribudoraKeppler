@@ -83,6 +83,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos\ClienteD.cs" />
     <Compile Include="Datos\ConexionDB.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\GestionUsuarioD.cs" />
