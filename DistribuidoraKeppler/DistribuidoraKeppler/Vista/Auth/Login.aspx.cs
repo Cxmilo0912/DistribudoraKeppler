@@ -28,8 +28,8 @@ namespace DistribuidoraKeppler.Vista.Auth
                     {
                         case 1: Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx"); break;
                         case 2: Response.Redirect("~/Vista/Preventista/Preventista.aspx"); break;
-                        case 3: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
-                        case 4: Response.Redirect("~/Vista/Repartidor/Repartidor.aspx"); break;
+                        case 3: Response.Redirect("~/Vista/Repartidor/Repartidor.aspx"); break;
+                        case 4: Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx"); break;
                     }
                 }
                 else if (ingreso is Modelo.Cliente c)
