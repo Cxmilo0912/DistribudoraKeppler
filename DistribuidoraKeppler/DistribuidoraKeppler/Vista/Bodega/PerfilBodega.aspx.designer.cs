@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace DistribuidoraKeppler.Vista.Cliente
+namespace DistribuidoraKeppler.Vista.Bodega
 {
 
 
-    public partial class WebForm1
+    public partial class PerfilBodega
     {
     }
 }
