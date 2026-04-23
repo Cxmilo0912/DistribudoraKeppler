@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
-            background: #0d1b2a; /* Azul oscuro */
+            background: #0d1b2a; /* Azul oscuro institucional */
             font-family: 'Segoe UI', sans-serif;
             height: 100vh;
             display: flex;
@@ -29,28 +29,27 @@
             border-radius: 12px;
             box-shadow: 0px 6px 20px rgba(0,0,0,0.3);
             opacity: 0;
-            transform: scale(0.95);
-            animation: zoomIn 0.8s ease forwards;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
         }
-        @keyframes zoomIn {
+        @keyframes fadeInUp {
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
         .login-container h3 {
             color: #0d1b2a;
             font-weight: bold;
         }
-        .separator {
-            height: 2px;
-            background: #0d1b2a;
-            margin: 15px 0;
-            border-radius: 2px;
-        }
         .form-label {
             color: #0d1b2a;
             font-weight: 500;
+        }
+        .input-group-text {
+            background: #0d1b2a;
+            color: #fff;
+            border: none;
         }
         .form-control {
             border-radius: 6px;
@@ -92,27 +91,34 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="login-container">
-            <h3 class="text-center mb-2">Iniciar Sesión</h3>
-            <div class="separator"></div>
-            <div class="mb-3">
-                <label for="txtUsuario" class="form-label">Usuario</label>
-                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="Ingrese su usuario" type="Email"></asp:TextBox>
+        <div class="login-container text-center">
+            <i class="bi bi-box-seam" style="font-size: 3rem; color:#0d1b2a;"></i>
+            <h3 class="mt-2">Distribuidora Kepler</h3>
+            <p class="text-muted mb-3">Sistema de Gestión de Distribución</p>
+
+            <div class="mb-3 input-group">
+                <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="ejemplo@empresa.com" TextMode="Email"></asp:TextBox>
             </div>
-            <div class="mb-3">
-                <label for="txtClave" class="form-label">Contraseña</label>
+
+            <div class="mb-3 input-group">
+                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
                 <asp:TextBox ID="txtClave" runat="server" CssClass="form-control" TextMode="Password" placeholder="Ingrese su contraseña"></asp:TextBox>
             </div>
-            <div class="form-check mb-3">
+
+            <div class="form-check mb-3 text-start">
                 <input class="form-check-input" type="checkbox" id="chkRecordar" />
                 <label class="form-check-label" for="chkRecordar">Recordar usuario</label>
             </div>
-            <asp:Button ID="btnLogin" runat="server" Text="Ingresar" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
+
+            <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
+
             <div class="text-center mt-3">
-                <a href="#">¿Olvidó su contraseña?</a>
+                <a href="#">¿Olvidaste tu contraseña?</a> - <a href="#">Crear cuenta</a>
             </div>
+
             <div class="footer">
-                © 2026 Distribuidora Kepler
+                •Distribuidora Keppler
             </div>
         </div>
     </form>

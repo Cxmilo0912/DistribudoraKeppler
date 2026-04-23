@@ -17,6 +17,8 @@ namespace DistribuidoraKeppler.Modelo
 
         public byte Estado { get; set; }
 
+        public int Documento { get; set; }
+
         public Rol Rol { get; set; }
     }
 }
