@@ -7,42 +7,47 @@ namespace DistribuidoraKeppler.Datos
 {
     public class UsuarioD
     {
-        private string cadenaConexion = ConfigurationManager.ConnectionStrings["ConexionDB"].ConnectionString;
-
-        public UsuarioM ObtenerUsuario(string email, string contrasena)
+        public object ObtenerUsuario(string email, string contrasena)
         {
-            using (SqlConnection con = new SqlConnection(cadenaConexion))
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
-                string query = @"SELECT u.Id, u.Nombre, u.Email, u.Contrasena, u.Estado, u.IdRol, r.Nombre AS Rol
-                                 FROM Usuario u
-                                 LEFT JOIN Rol r ON u.IdRol = r.Id
-                                 WHERE u.Email = @Email AND u.Contrasena = @Contrasena";
-
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@Email", email);
-                cmd.Parameters.AddWithValue("@Contrasena", contrasena);
-
                 con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                // 1. Intentar con Trabajadores
+                string sqlU = "SELECT U.*, R.Nombre AS NomRol FROM Usuario U INNER JOIN Rol R ON U.IdRol = R.Id WHERE Email=@E AND Contrasena=@P";
+                SqlCommand cmdU = new SqlCommand(sqlU, con);
+                cmdU.Parameters.AddWithValue("@E", email);
+                cmdU.Parameters.AddWithValue("@P", contrasena);
+                SqlDataReader drU = cmdU.ExecuteReader();
 
-                UsuarioM u = null;
-
-                if (reader.Read())
+                if (drU.Read())
                 {
-                    u = new UsuarioM
+                    return new Usuario
                     {
-                        Id = Convert.ToInt32(reader["Id"]),
-                        Nombre = reader["Nombre"].ToString(),
-                        Email = reader["Email"].ToString(),
-                        Contrasena = reader["Contrasena"].ToString(),
-                        Estado = reader["Estado"].ToString(),
-                        IdRol = reader["IdRol"] != DBNull.Value ? Convert.ToInt32(reader["IdRol"]) : 0,
-                        Rol = reader["Rol"] != DBNull.Value ? reader["Rol"].ToString() : "Sin rol"
+                        Id = Convert.ToInt32(drU["Id"]),
+                        Nombre = drU["Nombre"].ToString(),
+                        Rol = new Rol { Id = Convert.ToInt32(drU["IdRol"]), Nombre = drU["NomRol"].ToString() }
                     };
                 }
+                drU.Close();
 
-                return u;
+                // 2. Intentar con Clientes
+                string sqlC = "SELECT * FROM Cliente WHERE Email=@E AND Contrasena=@P";
+                SqlCommand cmdC = new SqlCommand(sqlC, con);
+                cmdC.Parameters.AddWithValue("@E", email);
+                cmdC.Parameters.AddWithValue("@P", contrasena);
+                SqlDataReader drC = cmdC.ExecuteReader();
+
+                if (drC.Read())
+                {
+                    return new Cliente
+                    {
+                        Nit = drC["Nit"].ToString(),
+                        NombreEmpresa = drC["NombreEmpresa"].ToString(),
+                        Email = drC["Email"].ToString()
+                    };
+                }
             }
+            return null;
         }
     }
 }

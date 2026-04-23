@@ -5,9 +5,11 @@ using System.Web;
 
 namespace DistribuidoraKeppler.Modelo
 {
-    public class RolM
+    public class Barrio
     {
-        public int Id { get; set; }  
-        public string Nombre { get; set; } 
+        public int Id { get; set; }
+
+        public string Nombre { get; set; }
+
     }
 }

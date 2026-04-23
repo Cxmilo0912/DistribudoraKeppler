@@ -28,9 +28,9 @@ namespace DistribuidoraKeppler.Datos
                                 Nombre = dr["Nombre"].ToString(),
                                 Email = dr["Email"].ToString(),
                                 Estado = Convert.ToByte(dr["Estado"]),
-                                IdRol = new Rol
+                                Rol = new Rol
                                 {
-                                    Nombre = dr["Nombre"].ToString()
+                                    Nombre = dr["NombreRol"].ToString()
                                 }
                             });
                         }
