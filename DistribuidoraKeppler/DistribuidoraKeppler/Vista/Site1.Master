@@ -27,15 +27,15 @@
 
             <nav class="space-y-2 text-sm">
 
-                <a id="menuAdmin" runat="server" href="Administrador/DashboardAdmin.aspx">Admin</a>
+                <a id="menuAdmin" runat="server" href="~/Vista/Aministrador/DashboardAdministrador.aspx">Admin</a>
 
-                <a id="menuBodega" runat="server" href="Bodega/DashboardBodega.aspx">Bodega</a>
+                <a id="menuBodega" runat="server" href="~/Vista/Bodega/DashboardBodega.aspx">Bodega</a>
 
-                <a id="menuCliente" runat="server" href="Cliente/DashboardCliente.aspx">Cliente</a>
+                <a id="menuCliente" runat="server" href="~/Vista/Cliente/DashboardCliente.aspx">Cliente</a>
 
-                <a id="menuPreventista" runat="server" href="Preventista/Preventista.aspx">Preventista</a>
+                <a id="menuPreventista" runat="server" href="~/Vista/Preventista/Preventista.aspx">Preventista</a>
 
-                <a id="menuRepartidor" runat="server" href="Repartidor/Repartidor.aspx">Repartidor</a>
+                <a id="menuRepartidor" runat="server" href="~/Vista/Repartidor/Repartidor.aspx">Repartidor</a>
 
             </nav>
 
