@@ -6,41 +6,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="flex min-h-screen bg-gray-100 font-sans">
-
-        <!-- SIDEBAR -->
-        <aside class="w-64 bg-white shadow-lg flex flex-col p-6">
-
-            <div class="flex items-center gap-3 mb-10">
-                <div class="bg-blue-900 text-white p-3 rounded-xl">
-                    <span class="material-symbols-outlined">inventory</span>
-                </div>
-                <div>
-                    <h2 class="font-bold text-lg text-blue-900">Kepler</h2>
-                    <p class="text-xs text-gray-500">Bodega</p>
-                </div>
-            </div>
-
-            <nav class="space-y-2 text-sm">
-
-                <div class="flex items-center gap-3 bg-blue-900 text-white p-3 rounded-lg shadow">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    Dashboard
-                </div>
-
-                <div class="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
-                    <span class="material-symbols-outlined">inventory_2</span>
-                    Productos
-                </div>
-
-                <div class="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
-                    <span class="material-symbols-outlined">local_shipping</span>
-                    Pedidos
-                </div>
-
-            </nav>
-
-        </aside>
-
         <!-- MAIN -->
         <main class="flex-1 p-8">
 
