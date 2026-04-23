@@ -124,7 +124,9 @@
                     </div>
                     <div class="mt-4">
                         <p class="text-sm font-medium text-gray-400">Clientes Registrados</p>
-                        <h3 class="text-2xl font-black mt-1">1,250</h3>
+                        <h3 class="text-2xl font-black mt-1">
+                            <asp:Label ID="lblTotalClientes" runat="server" Text="0"></asp:Label>
+                        </h3>
                     </div>
                 </div>
             </div>
