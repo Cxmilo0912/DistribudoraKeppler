@@ -11,13 +11,12 @@ namespace DistribuidoraKeppler.Vista.Aministrador
     public partial class DashboardAdministrador : System.Web.UI.Page
     {
         ClienteD clienteD = new ClienteD();
-        MarcaD marcaD = new MarcaD();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarTotalClientes();
-                CargarMarcas();
+                
             }
         }
         public void CargarTotalClientes()
@@ -26,10 +25,6 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             lblTotalClientes.Text = total.ToString();
         }
 
-        public void CargarMarcas()
-        {
-            rpMarcas.DataSource = marcaD.ListarMarcas();
-            rpMarcas.DataBind();
-        }
+       
     }
 }

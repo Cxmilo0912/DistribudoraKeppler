@@ -1,32 +1,27 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionMarcas1.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Administrador.GestionMarcas1" %>
+﻿<%@ Page Language="C#"  AutoEventWireup="true"MasterPageFile="~/Vista/Site1.Master"CodeBehind="GestionMarcas1.aspx.cs"Inherits="DistribuidoraKeppler.Vista.Administrador.GestionMarcas1" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1"
+    ContentPlaceHolderID="ContentPlaceHolder1"
+    runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Gestión de Marcas</title>
-</head>
+    <div class="p-6">
 
-<body>
-    <form id="form1" runat="server">
+        <!-- TÍTULO -->
+        <h2 class="text-2xl font-bold mb-6">
+            Gestión de Marcas
+        </h2>
 
-        <div style="padding: 20px;">
+        <!-- LISTADO DE MARCAS -->
+        <asp:Repeater ID="rpMarcas" runat="server">
+            <ItemTemplate>
+                <div class="bg-white p-4 mb-3 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        <%# Eval("Nombre") %>
+                    </h3>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
 
-            <h2 style="font-size: 24px; font-weight: bold;">Listado de Marcas
-            </h2>
+    </div>
 
-            <!-- AQUÍ SE MUESTRAN LAS MARCAS -->
-            <asp:Repeater ID="rpMarcas" runat="server">
-                <ItemTemplate>
-                    <div style="background: #f5f5f5; padding: 12px; margin-top: 10px; border-radius: 8px;">
-                        <h3 style="margin: 0;"><%# Eval("Nombre") %></h3>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-
-        </div>
-
-    </form>
-</body>
-</html>
+</asp:Content>
