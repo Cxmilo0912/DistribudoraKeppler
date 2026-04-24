@@ -1,31 +1,25 @@
-﻿using System;
+﻿using DistribuidoraKeppler.Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DistribuidoraKeppler.Datos;
 
-namespace DistribuidoraKeppler.Vista.Aministrador
+namespace DistribuidoraKeppler.Vista.Administrador
 {
-    public partial class DashboardAdministrador : System.Web.UI.Page
+    public partial class GestionMarcas1 : System.Web.UI.Page
     {
-        ClienteD clienteD = new ClienteD();
         MarcaD marcaD = new MarcaD();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarTotalClientes();
                 CargarMarcas();
             }
-        }
-        public void CargarTotalClientes()
-        {
-            int total = clienteD.ObtenerTotalClientes();
-            lblTotalClientes.Text = total.ToString();
-        }
 
+
+        }
         public void CargarMarcas()
         {
             rpMarcas.DataSource = marcaD.ListarMarcas();

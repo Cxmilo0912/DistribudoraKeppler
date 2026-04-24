@@ -131,6 +131,7 @@
                 </div>
             </div>
             <!-- END: Summary Cards -->
+
             <!-- BEGIN: Charts & Featured Section -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left: Sales Performance Chart -->
