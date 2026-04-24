@@ -31,7 +31,12 @@ namespace DistribuidoraKeppler.Datos
                 drU.Close();
 
                 // 2. Intentar con Clientes
-                string sqlC = "SELECT * FROM Cliente WHERE Email=@E AND Contrasena=@P";
+                // Se incorporo cambios en la consulta sql de los datos del cliente para obtener los datos completos 
+                string sqlC = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
+                FROM Cliente C
+                INNER JOIN Barrio B ON C.IdBarrio = B.Id
+                WHERE C.Email = @E AND C.Contrasena = @P";
+
                 SqlCommand cmdC = new SqlCommand(sqlC, con);
                 cmdC.Parameters.AddWithValue("@E", email);
                 cmdC.Parameters.AddWithValue("@P", contrasena);
@@ -41,9 +46,18 @@ namespace DistribuidoraKeppler.Datos
                 {
                     return new Cliente
                     {
+                        Id = Convert.ToInt32(drC["Id"]),
                         Nit = drC["Nit"].ToString(),
                         NombreEmpresa = drC["NombreEmpresa"].ToString(),
-                        Email = drC["Email"].ToString()
+                        Email = drC["Email"].ToString(),
+                        Telefono = drC["Telefono"].ToString(),      
+                        Direccion = drC["Direccion"].ToString(),     
+                        Imagen = drC["Imagen"].ToString(),        
+                        Barrio = new Barrio                       
+                        {
+                            Id = Convert.ToInt32(drC["BarrioId"]),
+                            Nombre = drC["BarrioNombre"].ToString()
+                        }
                     };
                 }
             }
