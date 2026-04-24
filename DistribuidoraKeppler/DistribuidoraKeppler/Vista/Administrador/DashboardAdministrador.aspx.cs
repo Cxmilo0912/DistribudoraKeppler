@@ -16,6 +16,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             if (!IsPostBack)
             {
                 CargarTotalClientes();
+                
             }
         }
         public void CargarTotalClientes()
@@ -23,5 +24,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             int total = clienteD.ObtenerTotalClientes();
             lblTotalClientes.Text = total.ToString();
         }
+
+       
     }
 }
