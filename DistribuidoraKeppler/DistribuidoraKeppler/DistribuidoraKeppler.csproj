@@ -70,6 +70,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
@@ -94,6 +95,7 @@
     <Compile Include="Datos\CategoriaD.cs" />
     <Compile Include="Datos\ClienteD.cs" />
     <Compile Include="Datos\ConexionDB.cs" />
+    <Compile Include="Datos\MarcaD.cs" />
     <Compile Include="Datos\ProductoD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\GestionUsuarioD.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Modelo\Barrio.cs" />
     <Compile Include="Modelo\Categoria.cs" />
     <Compile Include="Modelo\Cliente.cs" />
+    <Compile Include="Modelo\Marca.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
@@ -128,6 +131,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
+      <DependentUpon>GestionMarcas1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionMarcas1.aspx.designer.cs">
+      <DependentUpon>GestionMarcas1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\GestionProductos.aspx.cs">
       <DependentUpon>GestionProductos.aspx</DependentUpon>
