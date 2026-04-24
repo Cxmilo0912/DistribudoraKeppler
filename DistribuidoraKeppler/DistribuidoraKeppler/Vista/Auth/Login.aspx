@@ -114,7 +114,7 @@
             <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
 
             <div class="text-center mt-3">
-                <a href="#">¿Olvidaste tu contraseña?</a> - <a href="#">Crear cuenta</a>
+                <a href="RecuperarPassword.aspx">¿Olvidaste tu contraseña?</a> - <a href="#">Crear cuenta</a>
             </div>
 
             <div class="footer">
