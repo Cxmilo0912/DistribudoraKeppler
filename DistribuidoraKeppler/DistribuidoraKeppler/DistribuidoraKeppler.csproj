@@ -78,6 +78,8 @@
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
+    <Content Include="Vista\Auth\RecuperarPassword.aspx" />
+    <Content Include="Vista\Auth\ResetPassword.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Bodega\PerfilBodega.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
@@ -154,6 +156,20 @@
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
+      <DependentUpon>RecuperarPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\RecuperarPassword.aspx.designer.cs">
+      <DependentUpon>RecuperarPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Auth\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
