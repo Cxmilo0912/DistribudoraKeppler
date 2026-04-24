@@ -81,7 +81,9 @@
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Bodega\PerfilBodega.aspx" />
+    <Content Include="Vista\Cliente\CambiarContrasena.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Cliente\EditarPerfil.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
@@ -179,12 +181,26 @@
     <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
       <DependentUpon>PerfilBodega.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.designer.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\EditarPerfil.aspx.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\EditarPerfil.aspx.designer.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>
