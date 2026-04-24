@@ -27,5 +27,9 @@ namespace DistribuidoraKeppler.Logica
             }
             return resultado ? "Producto registrado exitosamente." : "Error al registrar el producto.";
         }
+        public List<Producto> ListarProductos()
+        {
+            return productos.ListarProductos();
+        }
     }
 }

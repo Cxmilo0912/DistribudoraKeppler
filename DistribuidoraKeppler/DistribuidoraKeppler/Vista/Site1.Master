@@ -48,7 +48,7 @@
                     <span class="material-symbols-outlined">group</span> Gestión de usuarios
                     </asp:HyperLink>
 
-                    <asp:HyperLink runat="server" NavigateUrl="#"
+                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionProductos.aspx"
                         CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
                     <span class="material-symbols-outlined">inventory_2</span> Gestión de productos
                     </asp:HyperLink>
