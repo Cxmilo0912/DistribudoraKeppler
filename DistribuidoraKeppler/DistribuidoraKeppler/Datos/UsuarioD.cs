@@ -50,10 +50,11 @@ namespace DistribuidoraKeppler.Datos
                         Nit = drC["Nit"].ToString(),
                         NombreEmpresa = drC["NombreEmpresa"].ToString(),
                         Email = drC["Email"].ToString(),
-                        Telefono = drC["Telefono"].ToString(),
-                        Direccion = drC["Direccion"].ToString(),
+                        Telefono = drC["Telefono"].ToString(),      
+                        Direccion = drC["Direccion"].ToString(),     
                         Imagen = drC["Imagen"].ToString(),
-                        Barrio = new Barrio
+                        Contrasena = drC["Contrasena"].ToString(),
+                        Barrio = new Barrio                       
                         {
                             Id = Convert.ToInt32(drC["BarrioId"]),
                             Nombre = drC["BarrioNombre"].ToString()

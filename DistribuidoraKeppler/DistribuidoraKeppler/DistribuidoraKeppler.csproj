@@ -70,6 +70,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
@@ -82,7 +83,9 @@
     <Content Include="Vista\Auth\ResetPassword.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Bodega\PerfilBodega.aspx" />
+    <Content Include="Vista\Cliente\CambiarContrasena.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Cliente\EditarPerfil.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
@@ -94,6 +97,7 @@
     <Compile Include="Datos\CategoriaD.cs" />
     <Compile Include="Datos\ClienteD.cs" />
     <Compile Include="Datos\ConexionDB.cs" />
+    <Compile Include="Datos\MarcaD.cs" />
     <Compile Include="Datos\ProductoD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\GestionUsuarioD.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Modelo\Barrio.cs" />
     <Compile Include="Modelo\Categoria.cs" />
     <Compile Include="Modelo\Cliente.cs" />
+    <Compile Include="Modelo\Marca.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Usuario.cs" />
@@ -128,6 +133,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
+      <DependentUpon>GestionMarcas1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionMarcas1.aspx.designer.cs">
+      <DependentUpon>GestionMarcas1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\GestionProductos.aspx.cs">
       <DependentUpon>GestionProductos.aspx</DependentUpon>
@@ -185,12 +197,26 @@
     <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
       <DependentUpon>PerfilBodega.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.designer.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\EditarPerfil.aspx.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\EditarPerfil.aspx.designer.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>
