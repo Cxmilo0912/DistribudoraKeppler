@@ -16,10 +16,18 @@ namespace DistribuidoraKeppler.Vista.Auth
             LoginL logica = new LoginL();
             object ingreso = logica.ValidarLogin(txtUsuario.Text, txtClave.Text);
 
+
+            // VALIDACIÓN POR TIPO DE MODELO
             if (ingreso != null)
             {
                 if (ingreso is Usuario u)
                 {
+                    if (txtClave.Text == u.Documento.ToString())
+                    {
+                        Session["IdUsuario"] = u.Id;
+                        Session["RolUsuario"] = u.Rol.Nombre;
+                        Response.Redirect("NuevoUsuario.aspx");
+                    }
                     Session["SesionTrabajador"] = u;
 
                     switch (u.Rol.Id)
@@ -46,7 +54,7 @@ namespace DistribuidoraKeppler.Vista.Auth
                     }
                 }
 
- 
+
                 else if (ingreso is Modelo.Cliente c)
                 {
                     Session["SesionCliente"] = c;
@@ -60,6 +68,9 @@ namespace DistribuidoraKeppler.Vista.Auth
                 string script = "Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
             }
+
+
+
         }
     }
 }

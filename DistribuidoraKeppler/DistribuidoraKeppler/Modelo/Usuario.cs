@@ -14,6 +14,7 @@ namespace DistribuidoraKeppler.Modelo
         public string Email { get; set; }
 
         public string Contrasena { get; set; }
+        public string Foto { get; set; }
 
         public byte Estado { get; set; }
 
