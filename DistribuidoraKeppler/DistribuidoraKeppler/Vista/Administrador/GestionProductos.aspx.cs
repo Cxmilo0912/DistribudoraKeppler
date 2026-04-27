@@ -24,7 +24,6 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             {
                 ProductoL logica = new ProductoL();
 
-                // Suponiendo que tu método devuelve una List<ProductosM>
                 var listaProductos = logica.ListarProductos();
 
                 if (listaProductos != null && listaProductos.Count > 0)
@@ -32,19 +31,80 @@ namespace DistribuidoraKeppler.Vista.Aministrador
                     rpProductos.DataSource = listaProductos;
                     rpProductos.DataBind();
 
-                    // Actualizar el contador del footer
                     lblTotalProductos.Text = listaProductos.Count.ToString();
                 }
             }
             catch (Exception ex)
             {
-                // ScriptManager para mostrar error si algo falla
+            }
+        }
+        protected void btnEliminar_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandName == "Eliminar")
+            {
+                try
+                {
+                    int idProducto = Convert.ToInt32(e.CommandArgument);
+
+                    ProductoL logica = new ProductoL();
+                    bool eliminado = logica.EliminarProducto(idProducto);
+
+                    if (eliminado)
+                    {
+                        CargarProductos();
+
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alert",
+                            "mostrarAlerta('¡Éxito!', 'Producto eliminado correctamente', 'success');", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert",
+                        $"mostrarAlerta('Error', '{ex.Message}', 'error');", true);
+                }
             }
         }
 
         protected void btnCrearProducto_Click(object sender, EventArgs e)
         {
             Response.Redirect("CreacionProducto.aspx");
+        }
+
+        protected void FiltrarCategoria_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            string categoriaSeleccionada = btn.CommandArgument;
+
+            ProductoL logica = new ProductoL();
+            var listaCompleta = logica.ListarProductos();
+
+            if (categoriaSeleccionada == "Todos")
+            {
+                rpProductos.DataSource = listaCompleta;
+            }
+            else
+            {
+                var listaFiltrada = listaCompleta.Where(p => p.CategoriaNombre == categoriaSeleccionada).ToList();
+                rpProductos.DataSource = listaFiltrada;
+            }
+            rpProductos.DataBind();
+            lblTotalProductos.Text = rpProductos.Items.Count.ToString();
+            ActualizarEstiloBotones(categoriaSeleccionada);
+        }
+        private void ActualizarEstiloBotones(string categoria)
+        {
+            string claseActivo = "px-5 py-2 rounded-full bg-primary-container text-white text-xs font-bold uppercase tracking-wider";
+            string claseInactivo = "px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all";
+
+            btnTodos.CssClass = btnBebidas.CssClass = btnHogar.CssClass = btnPersonal.CssClass = btnSnacks.CssClass = btnAbarrotes.CssClass = claseInactivo;
+
+            if (categoria == "Todos") btnTodos.CssClass = claseActivo;
+            else if (categoria == "Bebidas") btnBebidas.CssClass = claseActivo;
+            else if (categoria == "Cuidado del hogar") btnHogar.CssClass = claseActivo;
+            else if (categoria == "Cuidado personal") btnPersonal.CssClass = claseActivo;
+            else if (categoria == "Snacks") btnSnacks.CssClass = claseActivo;
+            else if (categoria == "Abarrotes") btnAbarrotes.CssClass = claseActivo;
+
         }
     }
 }
