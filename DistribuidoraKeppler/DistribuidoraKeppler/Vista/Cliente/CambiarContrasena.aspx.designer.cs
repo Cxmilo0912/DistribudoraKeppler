@@ -11,115 +11,106 @@ namespace DistribuidoraKeppler.Vista.Cliente
 {
 
 
-    public partial class WebForm1
+    public partial class CambiarContrasena
     {
 
         /// <summary>
-        /// Control imgPerfil.
+        /// Control pnlError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPerfil;
+        protected global::System.Web.UI.WebControls.Panel pnlError;
 
         /// <summary>
-        /// Control fuImagen.
+        /// Control lblError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuImagen;
+        protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
-        /// Control btnSubirFoto.
+        /// Control txtActual.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubirFoto;
+        protected global::System.Web.UI.WebControls.TextBox txtActual;
 
         /// <summary>
-        /// Control lblNombreEmpresa.
+        /// Control rfvActual.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreEmpresa;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvActual;
 
         /// <summary>
-        /// Control lblNit.
+        /// Control txtNueva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNit;
+        protected global::System.Web.UI.WebControls.TextBox txtNueva;
 
         /// <summary>
-        /// Control btnEditar.
+        /// Control rfvNueva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditar;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNueva;
 
         /// <summary>
-        /// Control btnCambiarContrasena.
+        /// Control revNueva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCambiarContrasena;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revNueva;
 
         /// <summary>
-        /// Control lblNombreContacto.
+        /// Control txtConfirmar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreContacto;
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmar;
 
         /// <summary>
-        /// Control lblEmail.
+        /// Control rfvConfirmar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConfirmar;
 
         /// <summary>
-        /// Control lblTelefono.
+        /// Control cvContrasena.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTelefono;
+        protected global::System.Web.UI.WebControls.CompareValidator cvContrasena;
 
         /// <summary>
-        /// Control lblDireccion.
+        /// Control btnGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDireccion;
-
-        /// <summary>
-        /// Control lblBarrio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBarrio;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }
