@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace DistribuidoraKeppler.Vista
 {
@@ -43,10 +42,28 @@ namespace DistribuidoraKeppler.Vista
                 case "Bodega":
                     menuBodega.Visible = true;
                     break;
-            
             }
         }
 
+        // 🚪 CERRAR SESIÓN CON SWEET ALERT
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.Abandon();
+
+            string script = @"
+                Swal.fire({
+                    title: 'Sesión cerrada',
+                    text: 'Has cerrado sesión correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = '../Auth/Login.aspx';
+                });
+            ";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "logout", script, true);
+        }
     }
-    
 }

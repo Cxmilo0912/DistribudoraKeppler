@@ -35,10 +35,14 @@
 
 <!-- HEADER -->
 <div class="bg-[#142f57] text-white px-5 pt-8 pb-6 flex justify-between items-center rounded-b-3xl">
+
     <div>
         <h1 class="text-lg font-semibold tracking-wide">KEPPLER</h1>
         <p class="text-xs opacity-80">Bienvenido, Santiago Chaparro</p>
     </div>
+
+ 
+
 
     <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
         <!-- icono usuario -->
@@ -46,6 +50,9 @@
             <path stroke-width="2" d="M5.121 17.804A9 9 0 1118.9 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
         </svg>
     </div>
+   <asp:Button ID="btnCerrarSesion" runat="server" Text="Salir"
+       CssClass="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs"
+       OnClick="btnCerrarSesion_Click" />
 </div>
 
 <!-- ALERTA -->
