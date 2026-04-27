@@ -51,7 +51,7 @@ namespace DistribuidoraKeppler.Vista.Administrador
             if (actualizado)
             {
                 // Actualiza la Session con los nuevos datos
-                Session["SesionCliente"] = usuario;
+                Session["SesionTrabajador"] = usuario;
                 Response.Redirect("~/Vista/Administrador/PerfilAdministrador.aspx");
             }
             else
