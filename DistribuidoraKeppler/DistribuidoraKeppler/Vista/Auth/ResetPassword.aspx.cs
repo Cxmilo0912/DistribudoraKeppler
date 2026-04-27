@@ -14,47 +14,93 @@ namespace DistribuidoraKeppler.Vista.Auth
         {
             if (!IsPostBack)
             {
+                // Limpiamos cualquier mensaje previo
+                lblError.Visible = false;
+
                 string token = Request.QueryString["token"];
 
+                // 1. Validar si el token existe en la URL
                 if (string.IsNullOrEmpty(token))
                 {
-                    Response.Write("Token inválido");
+                    MostrarError("Token no proporcionado. No puedes cambiar la contraseña sin un enlace válido.");
+                    // BloquearFormulario(); // Comentado para que puedas probar el diseño libremente
                     return;
                 }
 
+                // 2. Validar si el token es real en la base de datos
                 UsuarioD datos = new UsuarioD();
                 string email = datos.ObtenerEmailPorToken(token);
 
                 if (email == null)
                 {
-                    Response.Write("Token inválido o no existe");
+                    MostrarError("El enlace de recuperación es inválido o ya ha expirado.");
+                    // BloquearFormulario(); // Comentado para que puedas probar el diseño libremente
                 }
             }
         }
+
         protected void btnCambiar_Click(object sender, EventArgs e)
         {
             string token = Request.QueryString["token"];
-
             UsuarioD datos = new UsuarioD();
             string email = datos.ObtenerEmailPorToken(token);
 
             if (email != null)
             {
+                // Validar que los campos no estén vacíos
+                if (string.IsNullOrWhiteSpace(txtNueva.Text) || string.IsNullOrWhiteSpace(txtConfirmar.Text))
+                {
+                    MostrarError("Por favor, completa ambos campos.");
+                    return;
+                }
+
+                // Validar que las contraseñas coincidan
                 if (txtNueva.Text == txtConfirmar.Text)
                 {
-                    datos.ActualizarPassword(email, txtNueva.Text);
+                    try
+                    {
+                        datos.ActualizarPassword(email, txtNueva.Text);
 
-                    Response.Write("Contraseña actualizada correctamente");
+                        // Mensaje de éxito estilizado en verde
+                        lblError.Text = "¡Contraseña actualizada con éxito!";
+                        lblError.CssClass = "block mb-4 p-3 text-xs font-semibold text-green-600 bg-green-50 border border-green-200 rounded-lg text-center";
+                        lblError.Visible = true;
+
+                        // Ocultar campos tras el éxito para evitar doble envío
+                        txtNueva.Visible = false;
+                        txtConfirmar.Visible = false;
+                        btnCambiar.Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MostrarError("Ocurrió un error al actualizar: " + ex.Message);
+                    }
                 }
                 else
                 {
-                    Response.Write("Las contraseñas no coinciden");
+                    MostrarError("Las contraseñas ingresadas no coinciden.");
                 }
             }
             else
             {
-                Response.Write("Token inválido");
+                MostrarError("No se pudo procesar la solicitud. El token ya no es válido.");
             }
+        }
+
+        // Método para estandarizar cómo mostramos los errores
+        private void MostrarError(string mensaje)
+        {
+            lblError.Text = mensaje;
+            lblError.CssClass = "block mb-4 p-3 text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-lg text-center";
+            lblError.Visible = true;
+        }
+
+        // Método de seguridad (puedes activarlo cuando ya vayas a subir el sitio)
+        private void BloquearFormulario()
+        {
+            txtNueva.Visible = false;
+            txtConfirmar.Visible = false;
+            btnCambiar.Visible = false;
         }
     }
 }

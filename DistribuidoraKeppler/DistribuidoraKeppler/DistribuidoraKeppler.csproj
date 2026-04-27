@@ -70,7 +70,11 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
+<<<<<<< HEAD
     <Content Include="Vista\Administrador\GestionCategorias.aspx" />
+=======
+    <Content Include="Vista\Administrador\EditarPerfil.aspx" />
+>>>>>>> c8a1427e45179b5a18cad04cac1713c2352ff2f0
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
@@ -136,12 +140,21 @@
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Vista\Administrador\GestionCategorias.aspx.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Administrador\GestionCategorias.aspx.designer.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
+=======
+    <Compile Include="Vista\Administrador\EditarPerfil.aspx.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\EditarPerfil.aspx.designer.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+>>>>>>> c8a1427e45179b5a18cad04cac1713c2352ff2f0
     </Compile>
     <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
       <DependentUpon>GestionMarcas1.aspx</DependentUpon>

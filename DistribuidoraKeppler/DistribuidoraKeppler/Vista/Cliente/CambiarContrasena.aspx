@@ -137,7 +137,7 @@
                     CssClass="bg-[#0A0A6E] text-white px-6 py-3 rounded-xl font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer" />
                 <a href="PerfilCliente.aspx"
                     class="bg-[#F3F4F6] text-gray-700 px-6 py-3 rounded-xl font-medium text-sm hover:bg-gray-200 transition-colors">Cancelar
-            </a>
+                </a>
             </div>
         </div>
 
@@ -158,5 +158,5 @@
                 icon.textContent = 'visibility';
             }
         }
-</script>
+    </script>
 </asp:Content>
