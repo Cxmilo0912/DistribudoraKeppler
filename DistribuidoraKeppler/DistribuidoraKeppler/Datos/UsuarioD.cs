@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Collections.Generic; // 🔥 IMPORTANTE
+using System.Collections.Generic; // IMPORTANTE
 using DistribuidoraKeppler.Modelo;
 
 namespace DistribuidoraKeppler.Datos
@@ -56,11 +56,11 @@ namespace DistribuidoraKeppler.Datos
                         Nit = drC["Nit"].ToString(),
                         NombreEmpresa = drC["NombreEmpresa"].ToString(),
                         Email = drC["Email"].ToString(),
-                        Telefono = drC["Telefono"].ToString(),      
-                        Direccion = drC["Direccion"].ToString(),     
+                        Telefono = drC["Telefono"].ToString(),
+                        Direccion = drC["Direccion"].ToString(),
                         Imagen = drC["Imagen"].ToString(),
                         Contrasena = drC["Contrasena"].ToString(),
-                        Barrio = new Barrio                       
+                        Barrio = new Barrio
                         {
                             Id = Convert.ToInt32(drC["BarrioId"]),
                             Nombre = drC["BarrioNombre"].ToString()
@@ -71,7 +71,7 @@ namespace DistribuidoraKeppler.Datos
             return null;
         }
 
-        // 🔍 BUSCAR POR CORREO
+        // BUSCAR POR CORREO
         public object ObtenerPorCorreo(string email)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -135,7 +135,7 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
         }
-        // 🔐 GUARDAR TOKEN
+        // GUARDAR TOKEN
         public void GuardarToken(string email, string token, DateTime expira)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -160,7 +160,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        // 🔎 VALIDAR TOKEN
+        // VALIDAR TOKEN
         public string ObtenerEmailPorToken(string token)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -185,7 +185,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        // 🔄 CAMBIAR CONTRASEÑA
+        // CAMBIAR CONTRASEÑA
         public void ActualizarPassword(string email, string nueva)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -209,7 +209,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        // 🔥 NUEVO: OBTENER TODOS LOS CORREOS
+        // NUEVO: OBTENER TODOS LOS CORREOS
         public List<string> ObtenerTodosLosCorreos()
         {
             List<string> lista = new List<string>();
@@ -233,6 +233,43 @@ namespace DistribuidoraKeppler.Datos
             }
 
             return lista;
+        }
+
+        // Actualizacion de constraseña del usuario
+
+        public bool ActualizarContrasena(int idUsuario, string nuevaContrasena)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string sql = "UPDATE Usuario SET Contrasena = @Pass WHERE Id = @Id";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Pass", nuevaContrasena);
+                cmd.Parameters.AddWithValue("@Id", idUsuario);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        //Acutalizacion de datos del usuario
+        public bool ActualizarUsuario(Modelo.Usuario usuario)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string sql = @"UPDATE Usuario SET 
+                            Nombre        = @Nombre,
+                            Email         = @Email
+                            WHERE Id = @Id";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                cmd.Parameters.AddWithValue("@Email", usuario.Email);
+                cmd.Parameters.AddWithValue("@Id", usuario.Id);
+
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
     }
 }
