@@ -1,43 +1,41 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilAdministrador.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Aministrador.PerfilAdministrador" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Kepler Admin - Perfil del Administrador</title>
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-        <script>
-            tailwind.config = {
-                darkMode: "class",
-                theme: {
-                    extend: {
-                        colors: {
-                            primary: "#000080",
-                            "background-light": "#F8FAFC",
-                            "background-dark": "#0F172A",
-                        },
-                        fontFamily: {
-                            display: ["Inter", "sans-serif"],
-                        },
-                        borderRadius: {
-                            DEFAULT: "0.75rem",
-                        },
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kepler Admin - Perfil del Administrador</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000080",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0F172A",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
                     },
                 },
-            };
-        </script>
-        <style>
-            .material-symbols-outlined {
-                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            }
+            },
+        };
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
 
-            body {
-                font-family: 'Inter', sans-serif;
-            }
-        </style>
-    </head>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -106,10 +104,12 @@
 
                     <!-- Action Buttons -->
                     <div class="w-full space-y-3">
-                        <button class="w-full py-3 bg-primary text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-blue-900 transition-colors">
-                            <span class="material-symbols-outlined text-lg">edit</span>
-                            Editar Información
-                        </button>
+                        <asp:Button
+                            ID="btnEditar"
+                            runat="server"
+                            Text="Editar información"
+                            OnClick="btnEditar_Click"
+                            CssClass="w-full py-3 bg-primary text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-blue-900 transition-colors" />
                         <button class="w-full py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
                             Descargar Reporte ID
                         </button>
@@ -155,40 +155,94 @@
                     </div>
                 </div>
 
-                <%-- Pensando en quitar esta funionalidad --%>
+                <%-- Cambio de contraseña --%>
                 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+
+                    <!-- Mensaje error -->
+                    <asp:Panel ID="pnlError" runat="server" Visible="false"
+                        CssClass="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-red-500">error</span>
+                        <asp:Label ID="lblError" runat="server" />
+                    </asp:Panel>
+
                     <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary">lock</span>
                         <h4 class="font-bold text-slate-900 dark:text-white">Seguridad y Contraseña</h4>
                     </div>
                     <div class="p-8 space-y-6">
+                        <%-- Constraseña Actual --%>
                         <div class="max-w-md">
                             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Contraseña Actual</label>
                             <div class="relative">
-                                <input class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" type="password" value="••••••••" />
-                                <span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-400 cursor-pointer">visibility</span>
+                                <asp:TextBox
+                                    ID="txtActual"
+                                    runat="server"
+                                    TextMode="Password"
+                                    CssClass="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" type="password" />
+                                <button type="button" onclick="togglePassword('txtActual', this)"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <span class="material-symbols-outlined text-xl">visibility</span>
+                                </button>
                             </div>
+                            
                         </div>
+
+                        <%-- Nueva Contraseña --%>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
+                                <%-- Nueva --%>
                                 <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Nueva Contraseña</label>
                                 <div class="relative">
-                                    <input class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Mínimo 8 caracteres" type="password" />
-                                    <span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-400 cursor-pointer">visibility</span>
+                                    <asp:TextBox
+                                        ID="txtNueva"
+                                        runat="server"
+                                        TextMode="Password"
+                                        CssClass="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" />
+                                    <button type="button" onclick="togglePassword('txtNueva', this)"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
                                 </div>
+                                
+                                <asp:RegularExpressionValidator
+                                    ID="revNueva" runat="server"
+                                    ControlToValidate="txtNueva"
+                                    ValidationExpression="^.{6,}$"
+                                    ErrorMessage="La contraseña debe tener al menos 6 caracteres."
+                                    CssClass="text-red-500 text-xs mt-1 block"
+                                    Display="Dynamic" />
                             </div>
                             <div>
+                                <%-- Repetir  --%>
                                 <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Confirmar Nueva Contraseña</label>
                                 <div class="relative">
-                                    <input class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Repite la contraseña" type="password" />
-                                    <span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-400 cursor-pointer">visibility</span>
+                                    <asp:TextBox
+                                        ID="txtConfirmar"
+                                        runat="server"
+                                        TextMode="Password"
+                                        CssClass="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" />
+                                    <button type="button" onclick="togglePassword('txtConfirmar', this)"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
                                 </div>
+                                
+                                <asp:CompareValidator
+                                    ID="cvContrasena" runat="server"
+                                    ControlToValidate="txtConfirmar"
+                                    ControlToCompare="txtNueva"
+                                    ErrorMessage="Las contraseñas no coinciden."
+                                    CssClass="text-red-500 text-xs mt-1 block"
+                                    Display="Dynamic" />
                             </div>
                         </div>
                         <div class="flex justify-end pt-2">
-                            <button class="px-6 py-2.5 bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400 font-bold text-sm rounded-xl hover:bg-primary hover:text-white dark:hover:bg-primary transition-all">
-                                Actualizar Contraseña
-                            </button>
+                            <asp:Button
+                                ID="btnGuardar"
+                                runat="server"
+                                Text="Actualizar contraseña"
+                                OnClick="btnGuardar_Click"
+                                CssClass="px-6 py-2.5 bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400 font-bold text-sm rounded-xl hover:bg-primary hover:text-white dark:hover:bg-primary transition-all" />
                         </div>
                     </div>
                 </div>
@@ -229,4 +283,20 @@
             </div>
         </div>
     </main>
+    <script>
+        // Muestra/oculta la contraseña
+        function togglePassword(controlId, btn) {
+            var input = document.getElementById('<%= Page.ClientID %>_' + controlId)
+                || document.querySelector('[id$="_' + controlId + '"]')
+                || document.querySelector('[id*="' + controlId + '"]');
+            var icon = btn.querySelector('span');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+    </script>
 </asp:Content>
