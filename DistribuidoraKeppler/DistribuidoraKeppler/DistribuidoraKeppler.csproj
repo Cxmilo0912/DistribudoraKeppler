@@ -70,6 +70,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Administrador\GestionCategorias.aspx" />
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
@@ -135,6 +136,13 @@
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Administrador\GestionCategorias.aspx.cs">
+      <DependentUpon>GestionCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionCategorias.aspx.designer.cs">
+      <DependentUpon>GestionCategorias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
       <DependentUpon>GestionMarcas1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -176,7 +184,7 @@
     </Compile>
     <Compile Include="Vista\Auth\NuevoUsuario.aspx.designer.cs">
       <DependentUpon>NuevoUsuario.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
       <DependentUpon>RecuperarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

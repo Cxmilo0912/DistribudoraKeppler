@@ -14,5 +14,13 @@ namespace DistribuidoraKeppler.Logica
         {
             return categoria.MtObtenerCategorias();
         }
+        public bool EliminarCategoria(int idCategoria)
+        {
+            return categoria.EliminarCategoria(idCategoria);
+        }
+        public bool RegistrarCategoria(Categoria categoria)
+        {
+            return this.categoria.RegistrarCategoria(categoria);
+        }
     }
 }

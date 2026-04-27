@@ -39,7 +39,7 @@
                 confirmButtonColor: '#0c1b4d'
             });
         }
-</script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -95,6 +95,13 @@
                                         CssClass="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:border-[#0c1b4d] focus:ring-0 outline-none appearance-none cursor-pointer">
                                     </asp:DropDownList>
                                 </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-700 mb-1">Estado *</label>
+                                <asp:TextBox ID="txtEstado" runat="server"
+                                    CssClass="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:border-[#0c1b4d] focus:ring-0 outline-none"
+                                    placeholder="Activo">
+                                </asp:TextBox>
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 mb-1">Descripción detallada</label>
