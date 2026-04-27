@@ -15,6 +15,13 @@ namespace DistribuidoraKeppler.Vista.Cliente
         {
             if (!IsPostBack)
             {
+                // Mensaje de éxito al volver desde CambiarContrasena
+                if (Request.QueryString["msg"] == "contrasena")
+                {
+                    string script = "Swal.fire('¡Listo!', 'Contraseña actualizada correctamente.', 'success');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "msg", script, true);
+                }
+
                 if (Session["SesionCliente"] == null)
                 {
                     Response.Redirect("~/Vista/Login.aspx");
@@ -23,6 +30,7 @@ namespace DistribuidoraKeppler.Vista.Cliente
                 CargarDatosCliente();
             }
         }
+
         private void CargarDatosCliente()
         {
             // Ejemplo: obtener cliente desde Session o una capa de negocio
@@ -47,15 +55,20 @@ namespace DistribuidoraKeppler.Vista.Cliente
             lblBarrio.Text = cliente.Barrio.Nombre ?? "Sin barrio asignado";
         }
 
+
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Vista/Cliente/EditarPerfil.aspx");
         }
 
+
+
         protected void btnCambiarContrasena_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Vista/Cliente/CambiarContrasena.aspx");
         }
+
+
 
         protected void btnSubirFoto_Click(object sender, EventArgs e)
         {
@@ -116,6 +129,8 @@ namespace DistribuidoraKeppler.Vista.Cliente
                 MostrarAlerta("error", "No se pudo guardar en la base de datos.");
             }
         }
+
+
         private void MostrarAlerta(string tipo, string mensaje)
         {
             string script = $"Swal.fire('', '{mensaje}', '{tipo}');";

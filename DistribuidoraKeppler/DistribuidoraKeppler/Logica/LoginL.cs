@@ -17,5 +17,12 @@ namespace DistribuidoraKeppler.Logica
 
             return resultado; 
         }
+
+        public string MtUsuarioNuevo( string contrasena, int idEmpleado) 
+        {
+            UsuarioD datos = new UsuarioD();
+            string resultado = datos.MtNuevoUsuario(contrasena, idEmpleado);
+            return resultado;
+        }
     }
 }

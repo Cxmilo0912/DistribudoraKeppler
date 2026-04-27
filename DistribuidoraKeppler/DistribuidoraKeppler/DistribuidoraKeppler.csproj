@@ -79,9 +79,14 @@
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
+    <Content Include="Vista\Auth\NuevoUsuario.aspx" />
+    <Content Include="Vista\Auth\RecuperarPassword.aspx" />
+    <Content Include="Vista\Auth\ResetPassword.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Bodega\PerfilBodega.aspx" />
+    <Content Include="Vista\Cliente\CambiarContrasena.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+    <Content Include="Vista\Cliente\EditarPerfil.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
@@ -166,6 +171,27 @@
     <Compile Include="Vista\Auth\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Auth\NuevoUsuario.aspx.cs">
+      <DependentUpon>NuevoUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\NuevoUsuario.aspx.designer.cs">
+      <DependentUpon>NuevoUsuario.aspx</DependentUpon>
+      </Compile>
+    <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
+      <DependentUpon>RecuperarPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\RecuperarPassword.aspx.designer.cs">
+      <DependentUpon>RecuperarPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Auth\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -180,12 +206,26 @@
     <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
       <DependentUpon>PerfilBodega.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.designer.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\EditarPerfil.aspx.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\EditarPerfil.aspx.designer.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>

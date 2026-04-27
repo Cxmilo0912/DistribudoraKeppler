@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Collections.Generic; // 🔥 IMPORTANTE
 using DistribuidoraKeppler.Modelo;
 
 namespace DistribuidoraKeppler.Datos
@@ -25,13 +26,18 @@ namespace DistribuidoraKeppler.Datos
                     {
                         Id = Convert.ToInt32(drU["Id"]),
                         Nombre = drU["Nombre"].ToString(),
-                        Rol = new Rol { Id = Convert.ToInt32(drU["IdRol"]), Nombre = drU["NomRol"].ToString() }
+                        Email = drU["Email"].ToString(),
+                        Contrasena = drU["Contrasena"].ToString(),
+                        Foto = drU["Foto"].ToString(),
+                        Estado = Convert.ToByte(drU["Estado"]),
+                        Documento = Convert.ToInt32(drU["Documento"]),
+                        Rol = new Rol { Id = Convert.ToInt32(drU["IdRol"]), Nombre = drU["NomRol"].ToString() },
+
                     };
                 }
                 drU.Close();
 
                 // 2. Intentar con Clientes
-                // Se incorporo cambios en la consulta sql de los datos del cliente para obtener los datos completos 
                 string sqlC = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
                 FROM Cliente C
                 INNER JOIN Barrio B ON C.IdBarrio = B.Id
@@ -52,7 +58,8 @@ namespace DistribuidoraKeppler.Datos
                         Email = drC["Email"].ToString(),
                         Telefono = drC["Telefono"].ToString(),      
                         Direccion = drC["Direccion"].ToString(),     
-                        Imagen = drC["Imagen"].ToString(),        
+                        Imagen = drC["Imagen"].ToString(),
+                        Contrasena = drC["Contrasena"].ToString(),
                         Barrio = new Barrio                       
                         {
                             Id = Convert.ToInt32(drC["BarrioId"]),
@@ -62,6 +69,170 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
             return null;
+        }
+
+        // 🔍 BUSCAR POR CORREO
+        public object ObtenerPorCorreo(string email)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sqlU = "SELECT * FROM Usuario WHERE Email=@E";
+                SqlCommand cmdU = new SqlCommand(sqlU, con);
+                cmdU.Parameters.AddWithValue("@E", email);
+
+                SqlDataReader drU = cmdU.ExecuteReader();
+
+                if (drU.Read())
+                {
+                    return new Usuario
+                    {
+                        Id = Convert.ToInt32(drU["Id"]),
+                        Nombre = drU["Nombre"].ToString()
+                    };
+                }
+                drU.Close();
+
+                string sqlC = "SELECT * FROM Cliente WHERE Email=@E";
+                SqlCommand cmdC = new SqlCommand(sqlC, con);
+                cmdC.Parameters.AddWithValue("@E", email);
+
+                SqlDataReader drC = cmdC.ExecuteReader();
+
+                if (drC.Read())
+                {
+                    return new Cliente
+                    {
+                        Id = Convert.ToInt32(drC["Id"]),
+                        Email = drC["Email"].ToString()
+                    };
+                }
+            }
+            return null;
+        }
+
+        public string MtNuevoUsuario(string contrasena, int idEmpleado)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consulta = @"UPDATE Usuario SET Contrasena=@contrasena WHERE Id=@idEmpleado";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                    cmd.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    if (filasAfectadas > 0)
+                    {
+                        return "Contraseña actualizada correctamente";
+                    }
+                    else
+                    {
+                        return "No se encontró el usuario con el Id proporcionado";
+                    }
+                }
+            }
+        }
+        // 🔐 GUARDAR TOKEN
+        public void GuardarToken(string email, string token, DateTime expira)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"
+                UPDATE Usuario 
+                SET TokenRecuperacion=@T, FechaExpiracion=@F 
+                WHERE Email=@E;
+
+                UPDATE Cliente 
+                SET TokenRecuperacion=@T, FechaExpiracion=@F 
+                WHERE Email=@E;";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@T", token);
+                cmd.Parameters.AddWithValue("@F", expira);
+                cmd.Parameters.AddWithValue("@E", email);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // 🔎 VALIDAR TOKEN
+        public string ObtenerEmailPorToken(string token)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"
+        SELECT Email FROM Usuario 
+        WHERE TokenRecuperacion=@T
+
+        UNION
+
+        SELECT Email FROM Cliente 
+        WHERE TokenRecuperacion=@T";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@T", token);
+
+                object result = cmd.ExecuteScalar();
+
+                return result != null ? result.ToString() : null;
+            }
+        }
+
+        // 🔄 CAMBIAR CONTRASEÑA
+        public void ActualizarPassword(string email, string nueva)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"
+                UPDATE Usuario 
+                SET Contrasena=@P, TokenRecuperacion=NULL, FechaExpiracion=NULL 
+                WHERE Email=@E;
+
+                UPDATE Cliente 
+                SET Contrasena=@P, TokenRecuperacion=NULL, FechaExpiracion=NULL 
+                WHERE Email=@E;";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@P", nueva);
+                cmd.Parameters.AddWithValue("@E", email);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // 🔥 NUEVO: OBTENER TODOS LOS CORREOS
+        public List<string> ObtenerTodosLosCorreos()
+        {
+            List<string> lista = new List<string>();
+
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"
+                SELECT Email FROM Usuario
+                UNION
+                SELECT Email FROM Cliente";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(dr["Email"].ToString());
+                }
+            }
+
+            return lista;
         }
     }
 }
