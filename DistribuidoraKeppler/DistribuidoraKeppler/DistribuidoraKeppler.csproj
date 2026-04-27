@@ -79,6 +79,7 @@
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
     <Content Include="Vista\Auth\Login.aspx" />
+    <Content Include="Vista\Auth\NuevoUsuario.aspx" />
     <Content Include="Vista\Auth\RecuperarPassword.aspx" />
     <Content Include="Vista\Auth\ResetPassword.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
@@ -169,6 +170,13 @@
     <Compile Include="Vista\Auth\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Auth\NuevoUsuario.aspx.cs">
+      <DependentUpon>NuevoUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\NuevoUsuario.aspx.designer.cs">
+      <DependentUpon>NuevoUsuario.aspx</DependentUpon>
+      </Compile>
     <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
       <DependentUpon>RecuperarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

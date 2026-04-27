@@ -112,6 +112,29 @@ namespace DistribuidoraKeppler.Datos
             return null;
         }
 
+        public string MtNuevoUsuario(string contrasena, int idEmpleado)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consulta = @"UPDATE Usuario SET Contrasena=@contrasena WHERE Id=@idEmpleado";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                    cmd.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    if (filasAfectadas > 0)
+                    {
+                        return "Contraseña actualizada correctamente";
+                    }
+                    else
+                    {
+                        return "No se encontró el usuario con el Id proporcionado";
+                    }
+                }
+            }
+        }
         // 🔐 GUARDAR TOKEN
         public void GuardarToken(string email, string token, DateTime expira)
         {
