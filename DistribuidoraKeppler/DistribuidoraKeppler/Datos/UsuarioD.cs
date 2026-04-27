@@ -271,5 +271,17 @@ namespace DistribuidoraKeppler.Datos
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+        public bool ActualizarFoto(int idUsuario, string rutaFoto)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string sql = "UPDATE Usuario SET Foto = @Foto WHERE Id = @Id";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Foto", rutaFoto);
+                cmd.Parameters.AddWithValue("@Id", idUsuario);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
     }
 }
