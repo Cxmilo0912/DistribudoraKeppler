@@ -1,6 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Vista/Site1.Master"
-    CodeBehind="GestionMarcas1.aspx.cs"
-    Inherits="DistribuidoraKeppler.Vista.Administrador.GestionMarcas1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Vista/Site1.Master" CodeBehind="GestionMarcas1.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Administrador.GestionMarcas1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -10,7 +8,7 @@
         <div class="mb-6">
             <h2 class="text-2xl font-bold text-gray-800">Gestión de Marcas</h2>
             <p class="text-sm text-gray-500">
-                Administra y visualiza las marcas registradas en el sistema
+               <%-- Administra y visualiza las marcas registradas en el sistema--%>
             </p>
         </div>
 
@@ -87,7 +85,7 @@
 
     </div>
 
-    <!-- ================= MODAL AGREGAR MARCA ================= -->
+    <!-- MODAL AGREGAR MARCA  -->
     <div id="modalMarca"
         class="fixed inset-0 bg-black bg-opacity-40 hidden flex items-center justify-center z-50">
 
@@ -110,14 +108,14 @@
                     <label class="text-sm text-gray-600">Nombre de la Marca</label>
                     <asp:TextBox ID="txtNombreMarca" runat="server"
                         CssClass="w-full border rounded-lg px-3 py-2"
-                        placeholder="Ej: Coca Cola, Nestlé..." />
+                        placeholder="Ej: Coca Cola, Scott..." />
                 </div>
 
                 <div>
                     <label class="text-sm text-gray-600">País de Origen</label>
                     <asp:TextBox ID="txtPaisOrigen" runat="server"
                         CssClass="w-full border rounded-lg px-3 py-2"
-                        placeholder="Ej: Estados Unidos, Colombia..." />
+                        placeholder="Ej: Colombia..." />
                 </div>
 
                 <div>
@@ -125,7 +123,7 @@
                     <asp:TextBox ID="txtDescripcion" runat="server"
                         TextMode="MultiLine" Rows="3"
                         CssClass="w-full border rounded-lg px-3 py-2"
-                        placeholder="Breve reseña de la marca..." />
+                        placeholder="Breve descripcion de la marca..." />
                 </div>
 
                 <div>
@@ -155,6 +153,7 @@
                     CssClass="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" />
             </div>
 
+
         </div>
     </div>
 
@@ -168,5 +167,6 @@
             document.getElementById('modalMarca').classList.add('hidden');
         }
     </script>
-
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </asp:Content>
