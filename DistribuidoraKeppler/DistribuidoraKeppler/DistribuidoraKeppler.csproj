@@ -176,7 +176,7 @@
     </Compile>
     <Compile Include="Vista\Auth\NuevoUsuario.aspx.designer.cs">
       <DependentUpon>NuevoUsuario.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
       <DependentUpon>RecuperarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
