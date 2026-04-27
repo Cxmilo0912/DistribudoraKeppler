@@ -13,5 +13,11 @@ namespace DistribuidoraKeppler.Vista.Preventista
         {
 
         }
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("~/Vista/Auth/Login.aspx");
+        }
     }
 }

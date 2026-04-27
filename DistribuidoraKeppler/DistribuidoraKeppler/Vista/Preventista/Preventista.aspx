@@ -46,7 +46,11 @@
             <p class="text-xs text-gray-500">Preventista Kepler • ID: 4529</p>
         </div>
     </div>
-    <span class="text-xl">🔔</span>
+
+    <!-- BOTÓN CERRAR SESIÓN -->
+    <asp:Button ID="btnCerrarSesion" runat="server" Text="Salir"
+        CssClass="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs"
+        OnClick="btnCerrarSesion_Click" />
 </div>
 
 <!-- CONTENIDO -->

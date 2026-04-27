@@ -90,7 +90,6 @@
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
-    <Content Include="Vista\RegistrarCliente.aspx" />
     <Content Include="Vista\Repartidor\PerfilRepartidor.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Web.config" />
@@ -177,7 +176,7 @@
     </Compile>
     <Compile Include="Vista\Auth\NuevoUsuario.aspx.designer.cs">
       <DependentUpon>NuevoUsuario.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
       <DependentUpon>RecuperarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -247,13 +246,6 @@
     </Compile>
     <Compile Include="Vista\Cliente\PerfilCliente.aspx.designer.cs">
       <DependentUpon>PerfilCliente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\RegistrarCliente.aspx.cs">
-      <DependentUpon>RegistrarCliente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\RegistrarCliente.aspx.designer.cs">
-      <DependentUpon>RegistrarCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Repartidor\PerfilRepartidor.aspx.cs">
       <DependentUpon>PerfilRepartidor.aspx</DependentUpon>
