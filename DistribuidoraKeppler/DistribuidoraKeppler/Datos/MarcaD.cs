@@ -17,7 +17,7 @@ namespace DistribuidoraKeppler.Datos
             {
                 cn.Open();
 
-                string query = "SELECT Id, Nombre FROM Marca";
+                string query = "SELECT Id, Nombre  FROM Marca";
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
                     SqlDataReader dr = cmd.ExecuteReader();
