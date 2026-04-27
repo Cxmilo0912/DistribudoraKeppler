@@ -56,13 +56,12 @@ namespace DistribuidoraKeppler.Vista.Aministrador
                     return;
                 }
 
-                // 2. Intentar parsear los datos numéricos de forma segura
-                // Esto evita que el programa "explote" y caiga en el Catch genérico
                 bool precioOk = decimal.TryParse(txtPrecio.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal precio);
                 bool limiteVentaOk = int.TryParse(txtLimiteVenta.Text, out int limiteVenta);
                 bool limiteMinimoOk = int.TryParse(txtLimiteMinimo.Text, out int limiteMinimo);
                 bool stockOk = int.TryParse(txtStock.Text, out int stock);
                 bool marcaOk = int.TryParse(txtMarca.Text, out int idMarca);
+
 
                 if (!precioOk || !limiteVentaOk || !limiteMinimoOk || !stockOk || !marcaOk)
                 {
@@ -76,7 +75,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
                     Nombre = txtNombre.Text.Trim(),
                     Precio = precio,
                     Descripcion = txtDescripcion.Text.Trim(),
-                    Estado = "Activo",
+                    Estado = txtEstado.Text.Trim(),
                     LimiteVenta = limiteVenta,
                     LimiteMinimo = limiteMinimo,
                     Stock = stock,

@@ -16,13 +16,10 @@ namespace DistribuidoraKeppler.Datos
                 using (var conexion = ConexionDB.MtAbrirConexion())
                 {
                     conexion.Open();
-
-                    // 1. Cambiado a "Producto" (singular)
-                    // 2. Mantenemos las 8 columnas y 8 valores
                     string query = @"INSERT INTO Producto 
-                            (Nombre, Descripcion, Precio, Stock, LimiteVenta, LimiteMinimo, IdCategoria, IdMarca) 
+                            (Nombre, Descripcion, Precio, Stock, Estado, LimiteVenta, LimiteMinimo, IdCategoria, IdMarca) 
                             VALUES 
-                            (@Nombre, @Descripcion, @Precio, @Stock, @LimiteVenta, @LimiteMinimo, @IdCategoria, @IdMarca)";
+                            (@Nombre, @Descripcion, @Precio, @Stock, @Estado, @LimiteVenta, @LimiteMinimo, @IdCategoria, @IdMarca)";
 
                     using (var comando = new System.Data.SqlClient.SqlCommand(query, conexion))
                     {
@@ -30,6 +27,7 @@ namespace DistribuidoraKeppler.Datos
                         comando.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
                         comando.Parameters.AddWithValue("@Precio", producto.Precio);
                         comando.Parameters.AddWithValue("@Stock", producto.Stock);
+                        comando.Parameters.AddWithValue("@Estado", producto.Estado);
                         comando.Parameters.AddWithValue("@LimiteVenta", producto.LimiteVenta);
                         comando.Parameters.AddWithValue("@LimiteMinimo", producto.LimiteMinimo);
                         comando.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
@@ -86,6 +84,28 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
             return lista;
+        }
+
+        public bool EliminarProducto(int id)
+        {
+            try
+            {
+                using (var conexion = ConexionDB.MtAbrirConexion())
+                {
+                    conexion.Open();
+                    string query = "DELETE FROM Producto WHERE Id = @Id";
+                    using (var comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@Id", id);
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        return filasAfectadas > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el producto: " + ex.Message);
+            }
         }
     }
 }

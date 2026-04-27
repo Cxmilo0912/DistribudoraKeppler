@@ -35,5 +35,33 @@ namespace DistribuidoraKeppler.Datos
                 return categorias;
             }
         }
+        public bool EliminarCategoria(int idCategoria)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string consulta = "DELETE FROM Categoria WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(consulta, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", idCategoria);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+        }
+        public bool RegistrarCategoria(Categoria categoria)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string consulta = "INSERT INTO Categoria (Nombre) VALUES (@Nombre)";
+                using (SqlCommand cmd = new SqlCommand(consulta, con))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+        }
     }
 }
