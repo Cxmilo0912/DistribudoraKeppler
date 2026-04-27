@@ -20,5 +20,12 @@ namespace DistribuidoraKeppler.Logica
 
             return resultado; // Pasa el objeto (sea Usuario o Cliente) a Presentación
         }
+
+        public string MtUsuarioNuevo( string contrasena, int idEmpleado) 
+        {
+            UsuarioD datos = new UsuarioD();
+            string resultado = datos.MtNuevoUsuario(contrasena, idEmpleado);
+            return resultado;
+        }
     }
 }
