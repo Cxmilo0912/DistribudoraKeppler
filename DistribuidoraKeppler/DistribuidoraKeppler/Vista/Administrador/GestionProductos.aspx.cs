@@ -81,9 +81,6 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 
         }
 
-        protected void btnEliminar_Command(object sender, CommandEventArgs e)
-        {
-        }
         protected void FiltrarCategoria_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;

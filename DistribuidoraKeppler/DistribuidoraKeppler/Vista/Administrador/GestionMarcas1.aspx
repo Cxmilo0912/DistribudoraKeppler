@@ -38,7 +38,7 @@
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-semibold text-gray-800">Lista de Marcas</h3>
 
-            <!-- BOTÓN MODIFICADO -->
+            <!-- BOTÓN -->
             <asp:Button
                 ID="btnAgregarMarca"
                 runat="server"
@@ -85,8 +85,8 @@
 
     </div>
 
-    <!-- MODAL AGREGAR MARCA  -->
-    <div id="modalMarca"
+    <!-- MODAL AGREGAR MARCA  --> <!--Ventana emergente-->
+    <div id="modalMarca" 
         class="fixed inset-0 bg-black bg-opacity-40 hidden flex items-center justify-center z-50">
 
         <div class="bg-white rounded-xl w-full max-w-lg p-6 relative">
@@ -167,6 +167,6 @@
             document.getElementById('modalMarca').classList.add('hidden');
         }
     </script>
-    <!-- SweetAlert2 -->
+    <!-- SweetAlert2 --> <!--Busca el modal y le quita la clase que lo está ocultando-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </asp:Content>

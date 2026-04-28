@@ -7,11 +7,11 @@ namespace DistribuidoraKeppler.Vista.Administrador
 {
     public partial class GestionMarcas1 : System.Web.UI.Page
     {
-        MarcaD marcaD = new MarcaD();
+        MarcaD marcaD = new MarcaD(); //crear el objeto
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!IsPostBack) // evita recargar datos en cada clic
             {
                 CargarMarcas();
             }
@@ -19,15 +19,15 @@ namespace DistribuidoraKeppler.Vista.Administrador
 
         public void CargarMarcas()
         {
-            var lista = marcaD.ListarMarcas();
+            var lista = marcaD.ListarMarcas(); //Llama a la BD y trae las marcas
             rpMarcas.DataSource = lista;
             rpMarcas.DataBind();
-            lblTotalMarcas.Text = lista.Count.ToString();
+            lblTotalMarcas.Text = lista.Count.ToString(); //Muestra el total de marcas
         }
 
         protected void btnGuardarMarca_Click(object sender, EventArgs e)
         {
-            // VALIDACIÓN BÁSICA
+            // El campo no este vacio
             if (txtNombreMarca.Text.Trim() == "")
             {
                 ScriptManager.RegisterStartupScript(
@@ -44,22 +44,22 @@ namespace DistribuidoraKeppler.Vista.Administrador
                 return;
             }
 
-            // CREAR OBJETO MARCA (SIN LOGO)
+            // crea objeto 
             Marca m = new Marca
             {
                 Nombre = txtNombreMarca.Text.Trim()
             };
 
-            // GUARDAR EN BASE DE DATOS
+            // guarda en la BD
             marcaD.InsertarMarca(m);
 
-            // RECARGAR LISTA
+            
             CargarMarcas();
 
-            // LIMPIAR CAMPO
+            
             txtNombreMarca.Text = "";
 
-            // CERRAR MODAL Y MENSAJE
+            // cierra la venta y manda el mensaje 
             ScriptManager.RegisterStartupScript(
      this, GetType(),
      "ok",

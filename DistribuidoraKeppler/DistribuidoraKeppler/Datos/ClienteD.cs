@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 
 
@@ -11,7 +13,6 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ClienteD
     {
-      
 
         public bool ActualizarImagen(int idCliente, string rutaImagen)
         {
