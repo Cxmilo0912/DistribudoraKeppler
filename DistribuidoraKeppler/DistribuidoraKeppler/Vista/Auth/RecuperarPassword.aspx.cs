@@ -34,7 +34,6 @@ namespace DistribuidoraKeppler.Vista.Auth
                 DateTime expira = DateTime.Now.AddHours(1);
                 datos.GuardarToken(email, token, expira);
 
-                // Corregido: Una sola declaración de link
                 string link = Request.Url.GetLeftPart(UriPartial.Authority) + "/Vista/Auth/ResetPassword.aspx?token=" + token;
 
                 if (EnviarCorreo(email, link))
@@ -50,7 +49,6 @@ namespace DistribuidoraKeppler.Vista.Auth
             }
         }
 
-        // Corregido: Se eliminó la línea duplicada que terminaba en ";"
         private bool EnviarCorreo(string destino, string link)
         {
             try
