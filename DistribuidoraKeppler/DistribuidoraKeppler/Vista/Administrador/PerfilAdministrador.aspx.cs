@@ -1,6 +1,7 @@
 ﻿using DistribuidoraKeppler.Datos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,8 @@ namespace DistribuidoraKeppler.Vista.Aministrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+
             if (!IsPostBack)
             {
                 // Mensaje de éxito al volver desde CambiarContrasena
@@ -49,7 +52,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             lblEmail.Text = admin.Email;
 
             // Dirección y barrio
-            lblDocumento.Text = admin.Documento.ToString();          
+            lblDocumento.Text = admin.Documento.ToString();
         }
         protected void btnSubirFoto_Click(object sender, EventArgs e)
         {
@@ -115,6 +118,54 @@ namespace DistribuidoraKeppler.Vista.Aministrador
         {
             string script = $"Swal.fire('', '{mensaje}', '{tipo}');";
             ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!Page.IsValid) return;
+
+            Modelo.Usuario usuario = (Modelo.Usuario)Session["SesionTrabajador"];
+
+            // Verificar que la contraseña actual sea correcta
+            if (txtActual.Text.Trim() != usuario.Contrasena)
+            {
+                pnlError.Visible = true;
+                lblError.Text = "La contraseña actual es incorrecta.";
+                return;
+            }
+           
+
+            // Verificar que la nueva no sea igual a la actual
+            if (txtNueva.Text.Trim() == usuario.Contrasena)
+            {
+                pnlError.Visible = true;
+                lblError.Text = "La nueva contraseña debe ser diferente a la actual.";
+                return;
+            }
+    
+
+            UsuarioD datos = new UsuarioD();
+            bool actualizado = datos.ActualizarContrasena(usuario.Id, txtNueva.Text.Trim());
+
+            if (actualizado)
+            {
+                // ✅ Actualiza la contraseña en Session
+                usuario.Contrasena = txtNueva.Text.Trim();
+                Session["SesionTrabajador"] = usuario;
+
+                // Redirige con mensaje de éxito
+                Response.Redirect("~/Vista/Administrador/PerfilAdministrador.aspx?msg=contrasena");
+            }
+            else
+            {
+                pnlError.Visible = true;
+                lblError.Text = "No se pudo actualizar. Intente nuevamente.";
+            }
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Vista/Administrador/EditarPerfil.aspx");
         }
     }
 }

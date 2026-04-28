@@ -17,7 +17,7 @@ namespace DistribuidoraKeppler.Datos
             {
                 cn.Open();
 
-                string query = "SELECT Id, Nombre FROM Marca";
+                string query = "SELECT Id, Nombre  FROM Marca";
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
                     SqlDataReader dr = cmd.ExecuteReader();
@@ -36,6 +36,21 @@ namespace DistribuidoraKeppler.Datos
             }
 
             return lista;
+        }
+
+        public void InsertarMarca(Marca m)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                string query = "INSERT INTO Marca (Nombre) VALUES (@Nombre)";
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", m.Nombre);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

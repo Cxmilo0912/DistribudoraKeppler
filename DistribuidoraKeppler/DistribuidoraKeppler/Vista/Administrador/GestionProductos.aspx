@@ -88,8 +88,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <!-- Header Section -->
     <header class="flex justify-between items-center w-full px-12 py-8 bg-surface">
         <div>
             <h2 class="text-3xl font-black text-primary-container tracking-tight">Gestión de Productos</h2>
@@ -108,7 +106,6 @@
             </asp:LinkButton>
         </div>
     </header>
-    <!-- Filters & Navigation -->
     <section class="px-12 pb-6 space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="relative flex-1 max-w-xl">
@@ -122,17 +119,38 @@
                 </button>
             </div>
         </div>
-        <!-- Categories Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            <button type="button" class="px-5 py-2 rounded-full bg-primary-container text-white text-xs font-bold uppercase tracking-wider">Todos</button>
-            <button type="button" class="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">Bebidas</button>
-            <button type="button" class="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">Cuidado del hogar</button>
-            <button type="button" class="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">Cuidado personal</button>
-            <button type="button" class="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">Confitería y snacks</button>
-            <button type="button" class="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">Abarrotes</button>
-        </div>
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                <asp:LinkButton ID="btnTodos" runat="server" OnClick="FiltrarCategoria_Click" CommandArgument="Todos"
+                    CssClass="px-5 py-2 rounded-full bg-primary-container text-white text-xs font-bold uppercase tracking-wider">
+        Todos
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnBebidas" runat="server" OnClick="FiltrarCategoria_Click" CommandArgument="Bebidas"
+                    CssClass="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">
+        Bebidas
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnHogar" runat="server" OnClick="FiltrarCategoria_Click" CommandArgument="Cuidado del hogar"
+                    CssClass="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">
+        Cuidado del hogar
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnPersonal" runat="server" OnClick="FiltrarCategoria_Click" CommandArgument="Cuidado personal"
+                    CssClass="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">
+        Aseo Personal
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnSnacks" runat="server" OnClick="FiltrarCategoria_Click" CommandArgument="Confitería y snacks"
+                    CssClass="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">
+        Snacks
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnAbarrotes" runat="server" OnClick="FiltrarCategoria_Click" CommandArgument="Abarrotes"
+                    CssClass="px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all">
+        Abarrotes
+                </asp:LinkButton>
+            </div>
     </section>
-    <!-- Product Table Canvas -->
     <section class="px-12 flex-1">
         <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-outline-variant/10">
             <table class="w-full text-left border-collapse">
@@ -179,8 +197,14 @@
                                         <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>' CssClass="p-2 text-slate-400 hover:text-primary-container transition-colors">
                         <span class="material-symbols-outlined text-lg">edit</span>
                                         </asp:LinkButton>
-                                        <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('¿Está seguro de eliminar?');" CssClass="p-2 text-slate-400 hover:text-error transition-colors">
-                        <span class="material-symbols-outlined text-lg">delete</span>
+                                        <asp:LinkButton runat="server"
+                                            ID="btnEliminar"
+                                            CommandName="Eliminar"
+                                            CommandArgument='<%# Eval("Id") %>'
+                                            OnCommand="btnEliminar_Command"
+                                            OnClientClick="return confirm('¿Está seguro de eliminar este producto?');"
+                                            CssClass="p-2 text-slate-400 hover:text-error transition-colors">
+                                            <span class="material-symbols-outlined text-lg">delete</span>
                                         </asp:LinkButton>
                                     </div>
                                 </td>
@@ -189,7 +213,6 @@
                     </asp:Repeater>
                 </tbody>
             </table>
-            <!-- Pagination -->
             <div class="flex items-center justify-between px-8 py-4 bg-surface-container-low/30">
                 <span class="text-xs font-medium text-slate-500 uppercase tracking-tighter">Mostrando 1 a 6 de 1,245 productos</span>
                 <div class="flex items-center gap-1">
@@ -204,7 +227,6 @@
             </div>
         </div>
     </section>
-    <!-- Summary Cards Footer -->
     <footer class="px-12 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-primary-container text-white p-8 rounded-xl flex flex-col gap-1 shadow-sm relative overflow-hidden group">
             <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">

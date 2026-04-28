@@ -80,7 +80,7 @@ namespace DistribuidoraKeppler.Vista.Cliente
 
             if (actualizado)
             {
-                // ✅ Actualiza la Session con los nuevos datos
+                // Actualiza la Session con los nuevos datos
                 Session["SesionCliente"] = cliente;
                 Response.Redirect("~/Vista/Cliente/PerfilCliente.aspx");
             }

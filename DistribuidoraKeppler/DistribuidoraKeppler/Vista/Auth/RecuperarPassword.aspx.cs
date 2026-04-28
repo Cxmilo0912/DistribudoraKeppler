@@ -9,12 +9,21 @@ namespace DistribuidoraKeppler.Vista.Auth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                lblMensaje.Visible = false;
+            }
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-            string email = txtCorreo.Text.Trim();
+            string email = txtEmail.Text.Trim();
+
+            if (string.IsNullOrEmpty(email))
+            {
+                MostrarMensaje("Por favor, ingresa tu correo electrónico.", false);
+                return;
+            }
 
             UsuarioD datos = new UsuarioD();
             var user = datos.ObtenerPorCorreo(email);
@@ -23,44 +32,54 @@ namespace DistribuidoraKeppler.Vista.Auth
             {
                 string token = Guid.NewGuid().ToString();
                 DateTime expira = DateTime.Now.AddHours(1);
-
                 datos.GuardarToken(email, token, expira);
 
-                // 🔥 LINK DINÁMICO (IMPORTANTE)
-                string link = "https://saxophone-decline-pegboard.ngrok-free.dev/Vista/Auth/ResetPassword.aspx?token=" + token;
+<<<<<<< HEAD
+                // LINK DINÁMICO (IMPORTANTE)
+                string link = Request.Url.GetLeftPart(UriPartial.Authority) + "/Vista/Auth/ResetPassword.aspx?token="+ token;
+=======
+                string link = Request.Url.GetLeftPart(UriPartial.Authority)
+                + "/Vista/Auth/ResetPassword.aspx?token=" + token;
+>>>>>>> 69d307edc3c15dcfbebc7c3b2fce18e04ecdd071
 
-                EnviarCorreo(email, link);
-
-                Response.Write("Revisa tu correo");
+                if (EnviarCorreo(email, link))
+                {
+                    MostrarMensaje("¡Revisa tu correo! Te hemos enviado las instrucciones.", true);
+                    txtEmail.Enabled = false;
+                    btnEnviar.Visible = false;
+                }
             }
             else
             {
-                Response.Write("Correo no encontrado");
+                MostrarMensaje("El correo no está registrado en nuestro sistema.", false);
             }
         }
 
-        // 🔥 MÉTODO DE ENVÍO CORREGIDO
+<<<<<<< HEAD
+        // MÉTODO DE ENVÍO CORREGIDO
         private void EnviarCorreo(string destino, string link)
+=======
+        private bool EnviarCorreo(string destino, string link)
+>>>>>>> 69d307edc3c15dcfbebc7c3b2fce18e04ecdd071
         {
             try
             {
                 MailMessage correo = new MailMessage();
                 correo.From = new MailAddress("distribuidorakeppler@gmail.com", "Distribuidora Kepler");
+<<<<<<< HEAD
 
-                // 🚨 CORRECCIÓN: Solo enviar al que lo solicitó
+                // CORRECCIÓN: Solo enviar al que lo solicitó
+=======
+>>>>>>> 69d307edc3c15dcfbebc7c3b2fce18e04ecdd071
                 correo.To.Add(destino);
-
                 correo.Subject = "Recuperar contraseña - Distribuidora Kepler";
-
-                // Usar IsBodyHtml = true para que el link sea clickeable
                 correo.IsBodyHtml = true;
                 correo.Body = $@"
-            <h3>Solicitud de cambio de contraseña</h3>
-            <p>Has solicitado restablecer tu contraseña en Distribuidora Kepler.</p>
-            <p>Haz clic en el siguiente enlace para continuar:</p>
-            <a href='{link}'>Restablecer Contraseña</a>
-            <br><br>
-            <p>Este enlace expirará en 1 hora.</p>";
+                    <div style='font-family: sans-serif; padding: 20px;'>
+                        <h2>Recuperación de Contraseña</h2>
+                        <p>Haz clic en el enlace para restablecer tu acceso:</p>
+                        <a href='{link}' style='background: #111827; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Restablecer Contraseña</a>
+                    </div>";
 
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.EnableSsl = true;
@@ -68,12 +87,23 @@ namespace DistribuidoraKeppler.Vista.Auth
                 smtp.Credentials = new NetworkCredential("distribuidorakeppler@gmail.com", "ifbu xnmz ryed rsyf");
 
                 smtp.Send(correo);
+                return true;
             }
             catch (Exception ex)
             {
-                // En producción, es mejor usar un Label que Response.Write
-                Response.Write("Error: " + ex.Message);
+                MostrarMensaje("Error al enviar: " + ex.Message, false);
+                return false;
             }
+        }
+
+        private void MostrarMensaje(string texto, bool esExito)
+        {
+            lblMensaje.Text = texto;
+            lblMensaje.Visible = true;
+            // Estilo dinámico según el resultado
+            lblMensaje.CssClass = esExito
+                ? "block mb-6 p-3 text-xs font-semibold text-green-600 bg-green-50 border border-green-200 rounded-lg text-center"
+                : "block mb-6 p-3 text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-lg text-center";
         }
     }
 }

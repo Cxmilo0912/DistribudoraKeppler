@@ -71,6 +71,8 @@
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Administrador\EditarProducto.aspx" />
+    <Content Include="Vista\Administrador\GestionCategorias.aspx" />
+    <Content Include="Vista\Administrador\EditarPerfil.aspx" />
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
@@ -144,6 +146,20 @@
     </Compile>
     <Compile Include="Vista\Administrador\EditarProducto.aspx.designer.cs">
       <DependentUpon>EditarProducto.aspx</DependentUpon>
+      </Compile>
+    <Compile Include="Vista\Administrador\GestionCategorias.aspx.cs">
+      <DependentUpon>GestionCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionCategorias.aspx.designer.cs">
+      <DependentUpon>GestionCategorias.aspx</DependentUpon>
+      </Compile>
+    <Compile Include="Vista\Administrador\EditarPerfil.aspx.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\EditarPerfil.aspx.designer.cs">
+      <DependentUpon>EditarPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
       <DependentUpon>GestionMarcas1.aspx</DependentUpon>
