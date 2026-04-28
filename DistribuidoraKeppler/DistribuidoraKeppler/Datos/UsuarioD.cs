@@ -10,6 +10,7 @@ namespace DistribuidoraKeppler.Datos
     {
         public object ObtenerUsuario(string email, string contrasena)
         {
+           
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
                 con.Open();

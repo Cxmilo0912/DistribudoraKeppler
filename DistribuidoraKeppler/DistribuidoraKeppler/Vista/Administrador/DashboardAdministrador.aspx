@@ -87,7 +87,6 @@
                 <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
                     <div class="flex items-start justify-between">
                         <div class="p-3 bg-blue-100 rounded-xl"><span class="material-symbols-outlined text-blue-500">payments</span></div>
-                        <span class="text-[11px] font-bold text-emerald-500 bg-emerald-50 px-2.5 py-1 rounded-lg">+15%</span>
                     </div>
                     <div class="mt-4">
                         <p class="text-sm font-medium text-gray-400">Ventas de Hoy</p>
@@ -98,29 +97,30 @@
                 <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
                     <div class="flex items-start justify-between">
                         <div class="p-3 bg-purple-100 rounded-xl"><span class="material-symbols-outlined text-purple-500">inventory_2</span></div>
-                        <span class="text-[11px] font-bold text-emerald-500 bg-emerald-50 px-2.5 py-1 rounded-lg">+5%</span>
                     </div>
                     <div class="mt-4">
                         <p class="text-sm font-medium text-gray-400">Pedidos Activos</p>
                         <h3 class="text-2xl font-black mt-1">84</h3>
                     </div>
                 </div>
-                <!-- Card 3: Productos Bajo Stock -->
+                <!-- Card 3: Productos con Estado Activo -->
                 <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
                     <div class="flex items-start justify-between">
-                        <div class="p-3 bg-orange-100 rounded-xl"><span class="material-symbols-outlined text-orange-500">warning</span></div>
-                        <div class="p-3 bg-orange-100 rounded-xl"><span class="material-symbols-outlined text-orange-500">warning</span></div>
+                        <div class="p-3 bg-green-100 rounded-xl">
+                            <span class="material-symbols-outlined text-green-500">check</span>
+                        </div>
                     </div>
                     <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-400">Productos Bajo Stock</p>
-                        <h3 class="text-2xl font-black mt-1">12</h3>
+                        <p class="text-sm font-medium text-gray-400">Productos con Estado Activo</p>
+                        <h3 class="text-2xl font-black mt-1">
+                            <asp:Label ID="lblProductosActivos" runat="server" Text="Label"></asp:Label>
+                        </h3>
                     </div>
                 </div>
                 <!-- Card 4: Clientes Registrados -->
                 <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
                     <div class="flex items-start justify-between">
                         <div class="p-3 bg-indigo-100 rounded-xl"><span class="material-symbols-outlined text-indigo-500">person_add</span></div>
-                        <span class="text-[11px] font-bold text-emerald-500 bg-emerald-50 px-2.5 py-1 rounded-lg">+10%</span>
                     </div>
                     <div class="mt-4">
                         <p class="text-sm font-medium text-gray-400">Clientes Registrados</p>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <!-- END: Summary Cards -->         
+            <!-- END: Summary Cards -->
             <!-- BEGIN: Charts & Featured Section -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left: Sales Performance Chart -->

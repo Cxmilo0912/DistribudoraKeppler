@@ -5,25 +5,30 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DistribuidoraKeppler.Datos;
+using DistribuidoraKeppler.Logica;
 
 namespace DistribuidoraKeppler.Vista.Aministrador
 {
     public partial class DashboardAdministrador : System.Web.UI.Page
     {
-        ClienteD clienteD = new ClienteD();
+        DashboardAdministradorL oAdminL = new DashboardAdministradorL();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarTotalClientes();
-                
+                CargarInfoCards();
+
             }
         }
-        public void CargarTotalClientes()
+        public void CargarInfoCards()
         {
-            int total = clienteD.ObtenerTotalClientes();
+            int total = oAdminL.MtTotalClientes();
             lblTotalClientes.Text = total.ToString();
+            int totalProductos = oAdminL.MtProductosActivos();
+            lblProductosActivos.Text = totalProductos.ToString();
         }
+
+        
 
        
     }

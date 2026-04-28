@@ -114,10 +114,6 @@
             </div>
             <div class="flex items-center gap-3">
                 <button type="button" class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest border border-outline-variant/20 text-on-surface-variant rounded-lg text-sm font-medium hover:bg-surface-container-low transition-all">
-                    <span class="material-symbols-outlined text-sm">filter_list</span>
-                    Filtros Avanzados
-                </button>
-                <button type="button" class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest border border-outline-variant/20 text-on-surface-variant rounded-lg text-sm font-medium hover:bg-surface-container-low transition-all">
                     <span class="material-symbols-outlined text-sm">download</span>
                     Exportar
                 </button>
