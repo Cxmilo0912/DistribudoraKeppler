@@ -33,6 +33,15 @@ namespace DistribuidoraKeppler.Vista.Auth
         protected global::System.Web.UI.WebControls.TextBox txtNuevaClave;
 
         /// <summary>
+        /// Control revNuevaContrasena.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revNuevaContrasena;
+
+        /// <summary>
         /// Control txtConfirmarClave.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace DistribuidoraKeppler.Vista.Auth
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmarClave;
+
+        /// <summary>
+        /// Control cvContrasena.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvContrasena;
 
         /// <summary>
         /// Control btnConfirmar.
