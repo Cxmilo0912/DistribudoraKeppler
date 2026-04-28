@@ -72,24 +72,6 @@
                             </button>
                         </div>
 
-                        <script>
-                            var btnCamara = document.getElementById('btnCamara');
-                            var fuImagen = document.getElementById('<%= fuImagen.ClientID %>');
-                            var btnSubir = document.getElementById('<%= btnSubirFoto.ClientID %>');
-
-                            // Clic en cámara → abre el explorador
-                            btnCamara.addEventListener('click', function () {
-                                fuImagen.click();
-                            });
-
-                            // Al seleccionar archivo → hace clic en el botón ASP.NET oculto
-                            fuImagen.addEventListener('change', function () {
-                                if (this.files.length > 0) {
-                                    btnSubir.click(); // ✅ Esto sí envía el archivo correctamente
-                                }
-                            });
-                        </script>
-
                         <!-- User Info -->
                     </div>
                     <asp:Label
@@ -298,5 +280,22 @@
                 icon.textContent = 'visibility';
             }
         }
+    </script>
+    <script>
+        var btnCamara = document.getElementById('btnCamara');
+        var fuImagen = document.getElementById('<%= fuImagen.ClientID %>');
+    var btnSubir = document.getElementById('<%= btnSubirFoto.ClientID %>');
+
+        // Clic en cámara → abre el explorador
+        btnCamara.addEventListener('click', function () {
+            fuImagen.click();
+        });
+
+        // Al seleccionar archivo → hace clic en el botón ASP.NET oculto
+        fuImagen.addEventListener('change', function () {
+            if (this.files.length > 0) {
+                btnSubir.click(); // ✅ Esto sí envía el archivo correctamente
+            }
+        });
     </script>
 </asp:Content>

@@ -103,7 +103,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             {
                 // Actualizar Session para reflejar el cambio
                 usuario.Foto = rutaDB;
-                Session["SesionCliente"] = usuario;
+                Session["SesionTrabajador"] = usuario;
 
                 imgPerfil.ImageUrl = ResolveUrl(rutaDB);
                 MostrarAlerta("success", "Foto actualizada correctamente.");
@@ -116,8 +116,12 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 
         private void MostrarAlerta(string tipo, string mensaje)
         {
-            string script = $"Swal.fire('', '{mensaje}', '{tipo}');";
-            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            // Prevenir que comillas rompan el JS
+            mensaje = mensaje.Replace("'", "\\'").Replace("\"", "\\\"");
+
+            string script = $"Swal.fire({{ icon: '{tipo}', text: '{mensaje}', confirmButtonColor: '#111827' }});";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alerta", script, true);
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)

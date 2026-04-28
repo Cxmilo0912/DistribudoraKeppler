@@ -58,9 +58,9 @@ namespace DistribuidoraKeppler.Vista.Bodega
             imgAvatarHeader.ImageUrl = rutaFoto;
         }
 
-        // ─────────────────────────────────────────────
-        //  GUARDAR PERFIL  →  _datos.ActualizarUsuario()
-        // ─────────────────────────────────────────────
+
+        //  GUARDAR PERFIL  
+
         protected void btnGuardarPerfil_Click(object sender, EventArgs e)
         {
             Usuario usuario = Session["SesionTrabajador"] as Usuario;
@@ -97,9 +97,9 @@ namespace DistribuidoraKeppler.Vista.Bodega
             }
         }
 
-        // ─────────────────────────────────────────────
-        //  ACTUALIZAR CONTRASEÑA  →  _datos.ActualizarContrasena()
-        // ─────────────────────────────────────────────
+
+        //  ACTUALIZAR CONTRASEÑA 
+
         protected void btnActualizarContrasena_Click(object sender, EventArgs e)
         {
             Usuario usuario = Session["SesionTrabajador"] as Usuario;
