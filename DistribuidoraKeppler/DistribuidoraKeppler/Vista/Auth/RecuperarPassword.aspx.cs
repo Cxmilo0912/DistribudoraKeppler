@@ -34,13 +34,8 @@ namespace DistribuidoraKeppler.Vista.Auth
                 DateTime expira = DateTime.Now.AddHours(1);
                 datos.GuardarToken(email, token, expira);
 
-<<<<<<< HEAD
-                // LINK DINÁMICO (IMPORTANTE)
-                string link = Request.Url.GetLeftPart(UriPartial.Authority) + "/Vista/Auth/ResetPassword.aspx?token="+ token;
-=======
-                string link = Request.Url.GetLeftPart(UriPartial.Authority)
-                + "/Vista/Auth/ResetPassword.aspx?token=" + token;
->>>>>>> 69d307edc3c15dcfbebc7c3b2fce18e04ecdd071
+                // Corregido: Una sola declaración de link
+                string link = Request.Url.GetLeftPart(UriPartial.Authority) + "/Vista/Auth/ResetPassword.aspx?token=" + token;
 
                 if (EnviarCorreo(email, link))
                 {
@@ -55,22 +50,13 @@ namespace DistribuidoraKeppler.Vista.Auth
             }
         }
 
-<<<<<<< HEAD
-        // MÉTODO DE ENVÍO CORREGIDO
-        private void EnviarCorreo(string destino, string link)
-=======
+        // Corregido: Se eliminó la línea duplicada que terminaba en ";"
         private bool EnviarCorreo(string destino, string link)
->>>>>>> 69d307edc3c15dcfbebc7c3b2fce18e04ecdd071
         {
             try
             {
                 MailMessage correo = new MailMessage();
                 correo.From = new MailAddress("distribuidorakeppler@gmail.com", "Distribuidora Kepler");
-<<<<<<< HEAD
-
-                // CORRECCIÓN: Solo enviar al que lo solicitó
-=======
->>>>>>> 69d307edc3c15dcfbebc7c3b2fce18e04ecdd071
                 correo.To.Add(destino);
                 correo.Subject = "Recuperar contraseña - Distribuidora Kepler";
                 correo.IsBodyHtml = true;
@@ -100,7 +86,6 @@ namespace DistribuidoraKeppler.Vista.Auth
         {
             lblMensaje.Text = texto;
             lblMensaje.Visible = true;
-            // Estilo dinámico según el resultado
             lblMensaje.CssClass = esExito
                 ? "block mb-6 p-3 text-xs font-semibold text-green-600 bg-green-50 border border-green-200 rounded-lg text-center"
                 : "block mb-6 p-3 text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-lg text-center";
