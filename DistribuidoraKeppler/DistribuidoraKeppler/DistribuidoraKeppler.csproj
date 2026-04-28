@@ -70,6 +70,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
+    <Content Include="Vista\Administrador\EditarProducto.aspx" />
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
@@ -98,6 +99,7 @@
     <Compile Include="Datos\CategoriaD.cs" />
     <Compile Include="Datos\ClienteD.cs" />
     <Compile Include="Datos\ConexionDB.cs" />
+    <Compile Include="Datos\DashboardAdministradorD.cs" />
     <Compile Include="Datos\MarcaD.cs" />
     <Compile Include="Datos\ProductoD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
@@ -110,6 +112,7 @@
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logica\CategoriaL.cs" />
+    <Compile Include="Logica\DashboardAdministradorL.cs" />
     <Compile Include="Logica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />
     <Compile Include="Logica\ProductoL.cs" />
@@ -134,6 +137,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.designer.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\EditarProducto.aspx.cs">
+      <DependentUpon>EditarProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\EditarProducto.aspx.designer.cs">
+      <DependentUpon>EditarProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
       <DependentUpon>GestionMarcas1.aspx</DependentUpon>
@@ -176,7 +186,7 @@
     </Compile>
     <Compile Include="Vista\Auth\NuevoUsuario.aspx.designer.cs">
       <DependentUpon>NuevoUsuario.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Vista\Auth\RecuperarPassword.aspx.cs">
       <DependentUpon>RecuperarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

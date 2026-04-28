@@ -180,40 +180,37 @@
                             <div class="relative mb-3 input-group">
                                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
                                 <asp:TextBox ID="txtNuevaClave" CssClass="form-control" runat="server" TextMode="Password" placeholder="Digite su nueva contraseña"></asp:TextBox>
-                                <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline" data-icon="visibility">visibility</span>
+                                <button type="button" onclick="togglePassword('txtNuevaClave', this)"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <span class="material-symbols-outlined text-xl">visibility</span>
+                                </button>
                             </div>
                         </div>
+                        <asp:RegularExpressionValidator ID="revNuevaContrasena" runat="server"
+                            ControlToValidate="txtNuevaClave"
+                            ErrorMessage="La contraseña debe tener almenos 8 caracteres, una mayuscula(A-Z) y un número (0-9)"
+                            ValidationExpression="^(?=.*[A-Z])(?=.*\d).{8,}$"
+                            CssClass="text-red-500 txt-xs mt-1 block"
+                            Display="Dynamic">
+                            
+                        </asp:RegularExpressionValidator>
                         <!-- Confirm Password -->
                         <div class="space-y-xs">
                             <label class="font-label-md text-on-surface-variant" for="confirm-password">Confirmar Nueva Contraseña</label>
                             <div class="relative mb-3 input-group">
                                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
                                 <asp:TextBox ID="txtConfirmarClave" CssClass="form-control" runat="server" TextMode="Password" placeholder="Digite nuevamente la contraseña"></asp:TextBox>
-                                <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline" data-icon="visibility">visibility</span>
+                                <button type="button" onclick="togglePassword('txtConfirmarClave', this)"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <span class="material-symbols-outlined text-xl">visibility</span>
+                                </button>
                             </div>
                         </div>
-                        <!-- Password Requirements Section -->
-                        <div class="bg-surface-container-lowest border border-outline-variant rounded p-md space-y-sm">
-                            <p class="font-label-md text-on-surface mb-xs uppercase tracking-wider">Requisitos de Contraseña</p>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-sm">
-                                <div class="flex items-center gap-xs text-on-surface-variant">
-                                    <span class="material-symbols-outlined text-body-sm text-outline" data-icon="check_circle">check_circle</span>
-                                    <span class="text-body-sm">Mínimo 8 caracteres</span>
-                                </div>
-                                <div class="flex items-center gap-xs text-on-surface-variant">
-                                    <span class="material-symbols-outlined text-body-sm text-outline" data-icon="check_circle">check_circle</span>
-                                    <span class="text-body-sm">Una mayúscula (A-Z)</span>
-                                </div>
-                                <div class="flex items-center gap-xs text-on-surface-variant">
-                                    <span class="material-symbols-outlined text-body-sm text-outline" data-icon="check_circle">check_circle</span>
-                                    <span class="text-body-sm">Un número (0-9)</span>
-                                </div>
-                                <div class="flex items-center gap-xs text-on-surface-variant">
-                                    <span class="material-symbols-outlined text-body-sm text-outline" data-icon="check_circle">check_circle</span>
-                                    <span class="text-body-sm">Carácter especial (@#$!)</span>
-                                </div>
-                            </div>
-                        </div>
+                        <asp:CompareValidator ID="cvContrasena" runat="server" ErrorMessage="Las coontraseñas no coinciden"
+                            ControlToValidate="txtConfirmarClave"
+                            ControlToCompare="txtNuevaClave"
+                            CssClass="text-red-500 txt-xs mt-1 block"
+                            Display="Dynamic"></asp:CompareValidator>
                         <!-- Action Button -->
                         <div class="pt-md">
                             <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar" CssClass="w-full h-12 bg-primary text-on-primary font-label-md rounded hover:bg-slate-800 active:opacity-80 transition-all flex items-center justify-center gap-sm" OnClick="btnConfirmar_Click" />
@@ -223,5 +220,21 @@
             </div>
         </main>
     </form>
+    <script>
+        // Muestra/oculta la contraseña
+        function togglePassword(controlId, btn) {
+            var input = document.getElementById('<%= Page.ClientID %>_' + controlId)
+                || document.querySelector('[id$="_' + controlId + '"]')
+                || document.querySelector('[id*="' + controlId + '"]');
+            var icon = btn.querySelector('span');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+    </script>
 </body>
 </html>
