@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Collections.Generic; // IMPORTANTE
+using System.Collections.Generic;
 using DistribuidoraKeppler.Modelo;
 
 namespace DistribuidoraKeppler.Datos
@@ -13,7 +13,6 @@ namespace DistribuidoraKeppler.Datos
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
                 con.Open();
-                // 1. Intentar con Trabajadores
                 string sqlU = "SELECT U.*, R.Nombre AS NomRol FROM Usuario U INNER JOIN Rol R ON U.IdRol = R.Id WHERE Email=@E AND Contrasena=@P";
                 SqlCommand cmdU = new SqlCommand(sqlU, con);
                 cmdU.Parameters.AddWithValue("@E", email);
@@ -37,7 +36,6 @@ namespace DistribuidoraKeppler.Datos
                 }
                 drU.Close();
 
-                // 2. Intentar con Clientes
                 string sqlC = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
                 FROM Cliente C
                 INNER JOIN Barrio B ON C.IdBarrio = B.Id
@@ -71,7 +69,6 @@ namespace DistribuidoraKeppler.Datos
             return null;
         }
 
-        // BUSCAR POR CORREO
         public object ObtenerPorCorreo(string email)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -135,7 +132,6 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
         }
-        // GUARDAR TOKEN
         public void GuardarToken(string email, string token, DateTime expira)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -160,7 +156,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        // VALIDAR TOKEN
+
         public string ObtenerEmailPorToken(string token)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -185,7 +181,6 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        // CAMBIAR CONTRASEÑA
         public void ActualizarPassword(string email, string nueva)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -209,7 +204,6 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        // NUEVO: OBTENER TODOS LOS CORREOS
         public List<string> ObtenerTodosLosCorreos()
         {
             List<string> lista = new List<string>();
@@ -235,7 +229,6 @@ namespace DistribuidoraKeppler.Datos
             return lista;
         }
 
-        // Actualizacion de constraseña del usuario
 
         public bool ActualizarContrasena(int idUsuario, string nuevaContrasena)
         {
@@ -251,7 +244,6 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        //Acutalizacion de datos del usuario
         public bool ActualizarUsuario(Modelo.Usuario usuario)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())

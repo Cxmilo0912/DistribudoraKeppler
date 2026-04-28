@@ -13,28 +13,23 @@ namespace DistribuidoraKeppler.Vista.Auth
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                // Limpiamos cualquier mensaje previo
+            { 
                 lblError.Visible = false;
 
                 string token = Request.QueryString["token"];
 
-                // 1. Validar si el token existe en la URL
                 if (string.IsNullOrEmpty(token))
                 {
                     MostrarError("Token no proporcionado. No puedes cambiar la contraseña sin un enlace válido.");
-                    // BloquearFormulario(); // Comentado para que puedas probar el diseño libremente
                     return;
                 }
 
-                // 2. Validar si el token es real en la base de datos
                 UsuarioD datos = new UsuarioD();
                 string email = datos.ObtenerEmailPorToken(token);
 
                 if (email == null)
                 {
                     MostrarError("El enlace de recuperación es inválido o ya ha expirado.");
-                    // BloquearFormulario(); // Comentado para que puedas probar el diseño libremente
                 }
             }
         }
@@ -47,26 +42,22 @@ namespace DistribuidoraKeppler.Vista.Auth
 
             if (email != null)
             {
-                // Validar que los campos no estén vacíos
                 if (string.IsNullOrWhiteSpace(txtNueva.Text) || string.IsNullOrWhiteSpace(txtConfirmar.Text))
                 {
                     MostrarError("Por favor, completa ambos campos.");
                     return;
                 }
 
-                // Validar que las contraseñas coincidan
                 if (txtNueva.Text == txtConfirmar.Text)
                 {
                     try
                     {
                         datos.ActualizarPassword(email, txtNueva.Text);
 
-                        // Mensaje de éxito estilizado en verde
                         lblError.Text = "¡Contraseña actualizada con éxito!";
                         lblError.CssClass = "block mb-4 p-3 text-xs font-semibold text-green-600 bg-green-50 border border-green-200 rounded-lg text-center";
                         lblError.Visible = true;
 
-                        // Ocultar campos tras el éxito para evitar doble envío
                         txtNueva.Visible = false;
                         txtConfirmar.Visible = false;
                         btnCambiar.Visible = false;
@@ -87,7 +78,6 @@ namespace DistribuidoraKeppler.Vista.Auth
             }
         }
 
-        // Método para estandarizar cómo mostramos los errores
         private void MostrarError(string mensaje)
         {
             lblError.Text = mensaje;
@@ -95,7 +85,6 @@ namespace DistribuidoraKeppler.Vista.Auth
             lblError.Visible = true;
         }
 
-        // Método de seguridad (puedes activarlo cuando ya vayas a subir el sitio)
         private void BloquearFormulario()
         {
             txtNueva.Visible = false;

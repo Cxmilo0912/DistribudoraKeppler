@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 
 
@@ -11,20 +13,20 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ClienteD
     {
-        public int ObtenerTotalClientes()
+        public int ObtenerTotalClientes() //Cantidad de clientes que hay en la base de datos 
         {
-            int total = 0;
+            int total = 0; //toma los valores reales de la BD 
 
             using (SqlConnection cn = ConexionDB.MtAbrirConexion())
             {
                 cn.Open();
 
-                string query = "SELECT COUNT(*) FROM Cliente";
+                string query = "SELECT COUNT(*) FROM Cliente"; // Todos los registros de la tabla 
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
-                    total = Convert.ToInt32(cmd.ExecuteScalar());
-                }
+                    total = Convert.ToInt32(cmd.ExecuteScalar()); // Ejecuta la consulta devuelve un solo valor 
+                } 
             }
 
             return total;
