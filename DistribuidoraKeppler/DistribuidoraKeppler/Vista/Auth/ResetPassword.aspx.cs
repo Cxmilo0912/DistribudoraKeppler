@@ -85,6 +85,7 @@ namespace DistribuidoraKeppler.Vista.Auth
             lblError.Visible = true;
         }
 
+        // Método de seguridad 
         private void BloquearFormulario()
         {
             txtNueva.Visible = false;
