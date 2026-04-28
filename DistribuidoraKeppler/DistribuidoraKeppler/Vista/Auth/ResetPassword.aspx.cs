@@ -23,7 +23,6 @@ namespace DistribuidoraKeppler.Vista.Auth
                 if (string.IsNullOrEmpty(token))
                 {
                     MostrarError("Token no proporcionado. No puedes cambiar la contraseña sin un enlace válido.");
-                    // BloquearFormulario(); // Comentado para que puedas probar el diseño libremente
                     return;
                 }
 
@@ -34,7 +33,6 @@ namespace DistribuidoraKeppler.Vista.Auth
                 if (email == null)
                 {
                     MostrarError("El enlace de recuperación es inválido o ya ha expirado.");
-                    // BloquearFormulario(); // Comentado para que puedas probar el diseño libremente
                 }
             }
         }
@@ -95,7 +93,7 @@ namespace DistribuidoraKeppler.Vista.Auth
             lblError.Visible = true;
         }
 
-        // Método de seguridad (puedes activarlo cuando ya vayas a subir el sitio)
+        // Método de seguridad 
         private void BloquearFormulario()
         {
             txtNueva.Visible = false;

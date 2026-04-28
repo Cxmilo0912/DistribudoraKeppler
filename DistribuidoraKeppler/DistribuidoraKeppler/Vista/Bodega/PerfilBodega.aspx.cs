@@ -201,7 +201,7 @@ namespace DistribuidoraKeppler.Vista.Bodega
             if (ok)
             {
                 usuario.Foto = nuevaRuta;
-                Session["Usuario"] = usuario;
+                Session["SesionTrabajador"] = usuario;
                 CargarPerfil();
                 MostrarMensaje("Foto actualizada correctamente.", "success");
             }

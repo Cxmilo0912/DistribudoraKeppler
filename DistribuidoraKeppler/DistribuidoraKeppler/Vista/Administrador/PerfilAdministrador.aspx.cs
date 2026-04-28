@@ -83,14 +83,14 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 
             // Nombre único para evitar colisiones
             string nombreArchivo = $"cliente_{usuario.Id}_{DateTime.Now.Ticks}{extension}";
-            string carpeta = Server.MapPath("~/Imagenes/Perfiles/");
+            string carpeta = Server.MapPath("~/Recursos/Fotos/");
 
             // Crear carpeta si no existe
             if (!Directory.Exists(carpeta))
                 Directory.CreateDirectory(carpeta);
 
             string rutaFisica = Path.Combine(carpeta, nombreArchivo);
-            string rutaDB = $"~/Imagenes/Perfiles/{nombreArchivo}";
+            string rutaDB = $"~/Recursos/Fotos/{nombreArchivo}";
 
             // Guardar archivo en el servidor
             fuImagen.SaveAs(rutaFisica);
