@@ -1,4 +1,5 @@
 ﻿using DistribuidoraKeppler.Logica;
+using DistribuidoraKeppler.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -70,6 +71,19 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             Response.Redirect("CreacionProducto.aspx");
         }
 
+        protected void btnEditar_Command(object sender, CommandEventArgs e)
+        {
+
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminar_Command(object sender, CommandEventArgs e)
+        {
+        }
         protected void FiltrarCategoria_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
