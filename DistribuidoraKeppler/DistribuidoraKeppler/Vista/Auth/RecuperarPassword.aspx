@@ -8,7 +8,7 @@
     <title>Recuperar Contraseña - Distribuidora Keppler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0b1724; } /* Fondo azul marino del sistema */
+        body { background-color: #0b1724; }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">

@@ -8,7 +8,7 @@
     <title>Nueva contraseña - Distribuidora Keppler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0b1724; } /* Azul oscuro de tu Login */
+        body { background-color: #0b1724; }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
