@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Logica;
+using DistribuidoraKeppler.Utilidades;
 
 namespace DistribuidoraKeppler.Vista.Aministrador
 {
@@ -16,6 +17,10 @@ namespace DistribuidoraKeppler.Vista.Aministrador
         {
             if (!IsPostBack) //ejecuta el metodo
             {
+                if (SesionHelper.Rol != "Administrador")
+                {
+                    Response.Redirect("~/Vista/Auth/Login.aspx");
+                }
                 CargarInfoCards();
 
             }

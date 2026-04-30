@@ -24,7 +24,7 @@ namespace DistribuidoraKeppler.Vista.Bodega
 
         private void CargarPerfil()
         {
-            Usuario usuario = Session["SesionTrabajador"] as Usuario;
+            Modelo.Usuario usuario = Session["SesionTrabajador"] as Modelo.Usuario;
 
             if (usuario == null)
             {
@@ -63,7 +63,7 @@ namespace DistribuidoraKeppler.Vista.Bodega
 
         protected void btnGuardarPerfil_Click(object sender, EventArgs e)
         {
-            Usuario usuario = Session["SesionTrabajador"] as Usuario;
+            Modelo.Usuario usuario = Session["SesionTrabajador"] as Modelo.Usuario;
             if (usuario == null) { Response.Redirect("~/Auth/Login.aspx"); return; }
 
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
@@ -102,7 +102,7 @@ namespace DistribuidoraKeppler.Vista.Bodega
 
         protected void btnActualizarContrasena_Click(object sender, EventArgs e)
         {
-            Usuario usuario = Session["SesionTrabajador"] as Usuario;
+            Modelo.Usuario usuario = Session["SesionTrabajador"] as Modelo.Usuario;
             if (usuario == null) { Response.Redirect("~/Auth/Login.aspx"); return; }
 
             string actual = txtContrasenaActual.Text;
@@ -157,7 +157,7 @@ namespace DistribuidoraKeppler.Vista.Bodega
 
         protected void btnSubirFoto_Click(object sender, EventArgs e)
         {
-            Usuario usuario = Session["SesionTrabajador"] as Usuario;
+            Modelo.Usuario usuario = Session["SesionTrabajador"] as Modelo.Usuario;
             if (usuario == null) { Response.Redirect("~/Auth/Login.aspx"); return; }
 
             if (!fuFoto.HasFile)
