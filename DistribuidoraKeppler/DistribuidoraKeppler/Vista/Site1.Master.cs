@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using DistribuidoraKeppler.Utilidades;
 
 namespace DistribuidoraKeppler.Vista
 {
@@ -10,7 +11,7 @@ namespace DistribuidoraKeppler.Vista
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string rol = Session["rol"] as string;
+            string rol = SesionHelper.Rol; // Obtener el rol del usuario desde la sesión
 
             menuAdmin.Visible = false;
             menuCliente.Visible = false;
@@ -23,7 +24,7 @@ namespace DistribuidoraKeppler.Vista
 
             switch (rol)
             {
-                case "Admin":
+                case "Administrador":
                     menuAdmin.Visible = true;
                     break;
 
