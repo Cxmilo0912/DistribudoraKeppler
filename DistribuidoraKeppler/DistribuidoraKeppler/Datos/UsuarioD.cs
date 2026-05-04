@@ -349,12 +349,11 @@ namespace DistribuidoraKeppler.Datos
                 cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
                 cmd.Parameters.AddWithValue("@Email", usuario.Email);
                 cmd.Parameters.AddWithValue("@Contrasena", usuario.Contrasena);
-                cmd.Parameters.AddWithValue("@Foto", usuario.Foto);
-                cmd.Parameters.AddWithValue("@Estado", usuario.Estado);
+                cmd.Parameters.AddWithValue("@Foto", string.IsNullOrEmpty(usuario.Foto) ? (object)DBNull.Value : usuario.Foto); cmd.Parameters.AddWithValue("@Estado", usuario.Estado);
                 cmd.Parameters.AddWithValue("@Documento", usuario.Documento);
                 cmd.Parameters.AddWithValue("@IdRol", usuario.Rol.Id);
                 return cmd.ExecuteNonQuery() > 0;
-            }            
+            }
         }
 
 
