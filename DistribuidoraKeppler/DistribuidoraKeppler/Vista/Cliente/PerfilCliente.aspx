@@ -6,33 +6,66 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="max-width: 900px; margin: auto;">
 
-        <h2 style="margin-bottom: 20px;">Mi Perfil</h2>
+        <h2>Mi Perfil</h2>
 
-        <div style="display: flex; gap: 30px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <asp:Image ID="imgPerfil" runat="server" Width="120" />
+        <div style="margin-top: 10px;">
+            <asp:FileUpload ID="fuImagen" runat="server" CssClass="form-control" />
 
-            <!-- FOTO -->
-            <div>
-                <asp:Image ID="imgPerfil" runat="server"
-                    Width="150" Height="150"
-                    Style="border-radius: 50%; object-fit: cover;" />
-            </div>
+            <asp:Button ID="btnSubirFoto" runat="server"
+                Text="Subir Foto"
+                CssClass="btn btn-primary mt-2"
+                OnClick="btnSubirFoto_Click" />
+        </div>
+        <div>
+            <label>Empresa:</label>
+            <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+        </div>
 
-            <!-- DATOS -->
-            <div style="flex: 1;">
+        <div>
+            <label>Email:</label>
+            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+        </div>
 
-                <p><strong>Empresa:</strong></p>
-                <asp:Label ID="lblEmpresa" runat="server" />
+        <div>
+            <label>Teléfono:</label>
+            <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
+        </div>
 
-                <p style="margin-top: 10px;"><strong>Email:</strong></p>
-                <asp:Label ID="lblEmail" runat="server" />
+        <div>
+            <label>Dirección:</label>
+            <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" />
+        </div>
 
-                <p style="margin-top: 10px;"><strong>Teléfono:</strong></p>
-                <asp:Label ID="lblTelefono" runat="server" />
+        <asp:Button ID="btnGuardar" runat="server"
+            Text="Guardar cambios"
+            OnClick="btnGuardar_Click"
+            CssClass="btn btn-success" />
+        <%-- Cambiar contraseña --%>
+        <div class="bg-white p-6 rounded-xl shadow mt-6">
 
-                <p style="margin-top: 10px;"><strong>Dirección:</strong></p>
-                <asp:Label ID="lblDireccion" runat="server" />
+            <h2 class="text-lg font-bold mb-4">Cambiar contraseña</h2>
 
-            </div>
+            <asp:TextBox ID="txtActual" runat="server"
+                TextMode="Password"
+                CssClass="w-full p-2 border rounded mb-3"
+                placeholder="Contraseña actual" />
+
+            <asp:TextBox ID="txtNueva" runat="server"
+                TextMode="Password"
+                CssClass="w-full p-2 border rounded mb-3"
+                placeholder="Nueva contraseña" />
+
+            <asp:TextBox ID="txtConfirmar" runat="server"
+                TextMode="Password"
+                CssClass="w-full p-2 border rounded mb-3"
+                placeholder="Confirmar contraseña" />
+
+            <asp:Button ID="btnCambiarPass" runat="server"
+                Text="Actualizar contraseña"
+                CssClass="bg-blue-600 text-white px-4 py-2 rounded"
+                OnClick="btnCambiarPass_Click" />
+
         </div>
     </div>
 </asp:Content>

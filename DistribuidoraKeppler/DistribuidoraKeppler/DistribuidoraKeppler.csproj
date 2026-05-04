@@ -207,6 +207,7 @@
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logica\CategoriaL.cs" />
+    <Compile Include="Logica\ClienteL.cs" />
     <Compile Include="Logica\DashboardAdministradorL.cs" />
     <Compile Include="Logica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />

@@ -1,4 +1,5 @@
 ﻿using DistribuidoraKeppler.Modelo;
+using DistribuidoraKeppler.Vista.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -54,7 +55,7 @@ namespace DistribuidoraKeppler.Datos
         }
 
         // Actualiza los datos del cliente en la BD
-        public bool ActualizarCliente(Modelo.Cliente cliente)
+        public bool ActualizarCliente(Cliente cliente)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
@@ -92,6 +93,76 @@ namespace DistribuidoraKeppler.Datos
 
                 return cmd.ExecuteNonQuery() > 0;
             }
+        }
+
+        // Metodo Para insertar datos de Cliente 
+        public bool MtInsertarDatosCliente(Cliente cliente)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"INSERT INTO Cliente 
+                (NombreEmpresa, Nit, Direccion, Email, Contrasena, Telefono, Imagen, IdBarrio)
+                VALUES 
+                (@NombreEmpresa, @Nit, @Direccion, @Email, @Contrasena, @Telefono, @Imagen, @IdBarrio)";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                cmd.Parameters.AddWithValue("@NombreEmpresa", cliente.NombreEmpresa);
+                cmd.Parameters.AddWithValue("@Nit", cliente.Nit);
+                cmd.Parameters.AddWithValue("@Direccion", cliente.Direccion);
+                cmd.Parameters.AddWithValue("@Email", cliente.Email);
+                cmd.Parameters.AddWithValue("@Contrasena", cliente.Contrasena);
+                cmd.Parameters.AddWithValue("@Telefono", cliente.Telefono);
+
+                cmd.Parameters.AddWithValue("@Imagen",
+                    string.IsNullOrEmpty(cliente.Imagen) ? (object)DBNull.Value : cliente.Imagen);
+
+                cmd.Parameters.AddWithValue("@IdBarrio", cliente.Barrio.Id);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        //Metodo para obtener client por Id
+        public Cliente MtObtenerPorId(int idCliente)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
+                       FROM Cliente C
+                       INNER JOIN Barrio B ON C.IdBarrio = B.Id
+                       WHERE C.Id = @Id";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Id", idCliente);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    return new Cliente
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        NombreEmpresa = dr["NombreEmpresa"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Contrasena = dr["Contrasena"].ToString(),
+                        Telefono = dr["Telefono"].ToString(),
+                        Direccion = dr["Direccion"].ToString(),
+                        Imagen = dr["Imagen"].ToString(),
+                        Barrio = new Barrio
+                        {
+                            Id = Convert.ToInt32(dr["BarrioId"]),
+                            Nombre = dr["BarrioNombre"].ToString()
+                        }
+                    };
+                }
+            }
+
+            return null;
         }
 
     }
