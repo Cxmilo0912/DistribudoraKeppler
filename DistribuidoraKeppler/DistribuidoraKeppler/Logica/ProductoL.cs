@@ -25,7 +25,6 @@ namespace DistribuidoraKeppler.Logica
             {
                 return "Hubo un error al guardar en la base de datos.";
             }
-            return resultado ? "Producto registrado exitosamente." : "Error al registrar el producto.";
         }
         public List<Producto> ListarProductos()
         {
@@ -35,5 +34,19 @@ namespace DistribuidoraKeppler.Logica
         {
             return productos.EliminarProducto(idProducto);
         }
+
+        //--METODOS CREADOS POR JHON -- INICIO//
+        
+        //Metodo para Cargar el Catalogo de los produtos 
+        public List<Producto> MtObtenerCatalogoPaginado(string busqueda, int idCategoria, int pagina, int tamPagina, out bool hayMas) 
+        {
+            var oTodos = productos.MtObtenerCatalogo(busqueda, idCategoria);
+            var oPaginados = oTodos.Take(pagina * tamPagina).ToList();
+            hayMas = oTodos.Count > pagina * tamPagina;
+            return oPaginados;
+        }
+
+        //--METODOS CREADOS POR JHON -- FIN//
+
     }
 }

@@ -11,106 +11,70 @@ namespace DistribuidoraKeppler.Vista.Cliente
 {
 
 
-    public partial class CambiarContrasena
+    public partial class CatalogoProductos
     {
 
         /// <summary>
-        /// Control pnlError.
+        /// Control txtBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlError;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
 
         /// <summary>
-        /// Control lblError.
+        /// Control btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// Control txtActual.
+        /// Control rptCategorias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActual;
+        protected global::System.Web.UI.WebControls.Repeater rptCategorias;
 
         /// <summary>
-        /// Control rfvActual.
+        /// Control rptProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvActual;
+        protected global::System.Web.UI.WebControls.Repeater rptProductos;
 
         /// <summary>
-        /// Control txtNueva.
+        /// Control pnlEmpty.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNueva;
+        protected global::System.Web.UI.WebControls.Panel pnlEmpty;
 
         /// <summary>
-        /// Control rfvNueva.
+        /// Control pnlVerMas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNueva;
+        protected global::System.Web.UI.WebControls.Panel pnlVerMas;
 
         /// <summary>
-        /// Control revNueva.
+        /// Control btnVerMas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revNueva;
-
-        /// <summary>
-        /// Control txtConfirmar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmar;
-
-        /// <summary>
-        /// Control rfvConfirmar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConfirmar;
-
-        /// <summary>
-        /// Control cvContrasena.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cvContrasena;
-
-        /// <summary>
-        /// Control btnGuardar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button btnVerMas;
     }
 }

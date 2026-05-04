@@ -29,7 +29,17 @@ namespace DistribuidoraKeppler.Vista.Usuario
                 txtNombre.Text = u.Nombre;
                 txtEmail.Text = u.Email;
 
+                litNombreHeader.Text = u.Nombre;
+                litEmailHeader.Text = u.Email;
+                litIniciales.Text = u.Nombre.Substring(0, 1).ToUpper();
 
+                // Y si tiene foto, mostrar la imagen y ocultar las iniciales:
+                if (!string.IsNullOrEmpty(u.Foto))
+                {
+                    imgPerfil.ImageUrl = u.Foto;
+                    imgPerfil.Style["display"] = "block";
+                    litIniciales.Visible = false;
+                }
                 imgPerfil.ImageUrl = string.IsNullOrEmpty(u.Foto) ? "/Imagenes/default-profile.png" : u.Foto; // Mostrar foto de perfil o imagen por defecto
             }
 
