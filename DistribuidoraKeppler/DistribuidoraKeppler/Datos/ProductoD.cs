@@ -144,8 +144,8 @@ namespace DistribuidoraKeppler.Datos
                 using (var oCon = new SqlConnection(_conn))
                 using (var oCmd = new SqlCommand(sql, oCon))
                 {
-                    oCmd.Parameters.Add("@Busqueda", SqlDbType.NVarChar).Value = busqueda ?? "";
-                    oCmd.Parameters.Add("@IdCategoria", SqlDbType.NVarChar).Value = idCategoria;
+                    oCmd.Parameters.Add("@Busqueda", SqlDbType.NVarChar).Value = busqueda ?? ""; // Si busqueda es null, se asigna una cadena vacía para evitar errores en la consulta
+                    oCmd.Parameters.Add("@IdCategoria", SqlDbType.Int).Value = idCategoria; // Si idCategoria es 0, se considerará como "todas las categorías" en la consulta
                     oCon.Open();
 
                     using (var oDr = oCmd.ExecuteReader())
@@ -213,7 +213,7 @@ namespace DistribuidoraKeppler.Datos
                         oLista.Add(new Categoria
                         {
                             Id = (int)oDr["Id"],
-                            Nombre = oDr["Nomrbe"].ToString()
+                            Nombre = oDr["Nombre"].ToString()
                         });
                     }
                 }

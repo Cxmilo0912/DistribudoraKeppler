@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DistribuidoraKeppler.Logica;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,68 +10,63 @@ namespace DistribuidoraKeppler.Vista.Cliente
 {
     public partial class CatalogoProductos : System.Web.UI.Page
     {
-        private const int PageSize = 8;
+        private const int TamPagina = 8; // Cantidad de productos por página
+        ProductoL oLogica = new ProductoL();
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                Session["CategoriaActiva"] = "Todos los productos";
+                Session["CategoriaActiva"] = 0;
                 Session["PaginaActual"] = 1;
-                //CargarCategorias();
-                //CargarProductos();
+                MtCargarCategorias();
+                MtCargarProductos();
             }
         }
-        //private void CargarCategorias()
-        //{
-        //    var cats = CategoriaProductoNegocio.ObtenerTodas();
-        //    // Agrega "Todos" al inicio
-        //    cats.Insert(0, new CategoriaProducto { Nombre = "Todos los productos" });
-        //    rptCategorias.DataSource = cats;
-        //    rptCategorias.DataBind();
-        //}
+        private void MtCargarCategorias()
+        {
+            rptCategorias.DataSource = oLogica.MtObtenerCategoriasConTodos();
+            rptCategorias.DataBind();
+        }
 
-        //private void CargarProductos()
-        //{
-        //    string busqueda = txtBuscar.Text.Trim();
-        //    string categoria = Session["CategoriaActiva"]?.ToString();
-        //    int pagina = Convert.ToInt32(Session["PaginaActual"]);
+        private void MtCargarProductos()
+        {
+            string busqueda = txtBuscar.Text.Trim(); // Obtener texto de búsqueda
+            int idCategoria = Convert.ToInt32(Session["CategoriaActiva"] ?? 0); // 0 para "Todos los productos"
+            int pagina = Convert.ToInt32(Session["PaginaActual"] ?? 1);
 
-        //    var todos = ProductoNegocio.ObtenerFiltrados(busqueda, categoria);
+            var oProdutos = oLogica.MtObtenerCatalogoPaginado(busqueda, idCategoria, pagina, TamPagina, out bool hayMas);
 
-        //    // Paginación simple
-        //    var pagina_actual = todos.Take(pagina * PageSize).ToList();
+            rptProductos.DataSource = oProdutos; // Asignar productos al Repeater
+            rptProductos.DataBind(); // Re-bind para mostrar los productos filtrados
 
-        //    rptProductos.DataSource = pagina_actual;
-        //    rptProductos.DataBind();
+            pnlEmpty.Visible = oProdutos.Count == 0; // Mostrar mensaje si no hay productos
+            btnVerMas.Visible = hayMas; // Mostrar botón "Ver más" solo si hay más productos para cargar
+        }
 
-        //    pnlEmpty.Visible = pagina_actual.Count == 0;
-        //    pnlVerMas.Visible = todos.Count > pagina * PageSize;
-        //}
+        protected void btnVerMas_Click(object sender, EventArgs e)
+        {
+            Session["PaginaActual"] = Convert.ToInt32(Session["PaginaActual"]) + 1;
+            MtCargarProductos();
+        }
 
-        //protected void btnVerMas_Click(object sender, EventArgs e)
-        //{
-        //    Session["PaginaActual"] = Convert.ToInt32(Session["PaginaActual"]) + 1;
-        //    CargarProductos();
-        //}
-
-        //protected void btnBuscar_Click(object sender, EventArgs e)
-        //{
-        //    Session["PaginaActual"] = 1;
-        //    CargarProductos();
-        //}
-        //protected void FiltrarCategoria_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
-        //{
-        //    Session["CategoriaActiva"] = e.CommandArgument.ToString();
-        //    Session["PaginaActual"] = 1;
-        //    txtBuscar.Text = string.Empty;
-        //    CargarCategorias(); // re-bind para actualizar clase "activo"
-        //    CargarProductos();
-        //}
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            Session["PaginaActual"] = 1;
+            MtCargarProductos();
+        }
+        protected void FiltrarCategoria_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        {
+            Session["CategoriaActiva"] = Convert.ToInt32(e.CommandArgument);
+            Session["PaginaActual"] = 1;
+            txtBuscar.Text = string.Empty;
+            MtCargarCategorias(); // re-bind para actualizar clase "activo"
+            MtCargarProductos();
+        }
 
         protected void AgregarCarrito_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
-            int idProducto = Convert.ToInt32(e.CommandArgument);
-            // TODO: lógica de carrito
+            
         }
     }
 }

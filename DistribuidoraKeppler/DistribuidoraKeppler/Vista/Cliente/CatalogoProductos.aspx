@@ -318,8 +318,8 @@
             <asp:Repeater ID="rptCategorias" runat="server">
                 <ItemTemplate>
                     <asp:LinkButton runat="server"
-                        CssClass='<%# (string)Session["CategoriaActiva"] == Eval("Nombre").ToString() ? "cat-filter-btn activo" : "cat-filter-btn" %>'
-                        CommandArgument='<%# Eval("Nombre") %>'
+                        CssClass='<%# Convert.ToUInt32(Session["CategoriaActiva"]) == Convert.ToUInt32(Eval("Id")) ? "cat-filter-btn activo" : "cat-filter-btn" %>'
+                        CommandArgument='<%# Eval("Id") %>'
                         OnCommand="FiltrarCategoria_Command"
                         Text='<%# Eval("Nombre") %>' />
                 </ItemTemplate>
@@ -334,10 +334,10 @@
 
                         <%-- Imagen → navega al detalle --%>
                         <a class="prod-img-link"
-                            href='<%# "DetalleProducto.aspx?id=" + Eval("IdProducto") %>'>
+                            href='<%# "DetalleProducto.aspx?id=" + Eval("Id") %>'>
                             <div class="prod-img-wrap">
                                 <asp:Image ID="imgProducto" runat="server"
-                                    ImageUrl='<%# Eval("ImagenUrl") %>'
+                                    ImageUrl='<%# Eval("Imagen") %>'
                                     AlternateText='<%# Eval("Nombre") %>' />
                                 <%# Convert.ToInt32(Eval("Stock")) == 0
                                     ? "<span class=\"badge-agotado\">Agotado</span>"
@@ -346,7 +346,7 @@
                         </a>
 
                         <div class="prod-body">
-                            <p class="prod-marca"><%# Eval("Marca") %></p>
+                            <p class="prod-marca"><%# Eval("MarcaNombre") %></p>
                             <p class="prod-nombre"><%# Eval("Nombre") %></p>
                         </div>
 
@@ -355,7 +355,7 @@
                             </span>
                             <asp:LinkButton runat="server"
                                 CssClass="btn-carrito"
-                                CommandArgument='<%# Eval("IdProducto") %>'
+                                CommandArgument='<%# Eval("Id") %>'
                                 OnCommand="AgregarCarrito_Command"
                                 ToolTip="Agregar al carrito">
                                 &#128722;
