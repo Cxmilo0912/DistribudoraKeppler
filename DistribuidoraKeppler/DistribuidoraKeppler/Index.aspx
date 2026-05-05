@@ -112,11 +112,11 @@
                             </div>
                             <!-- CTA Buttons Column (Aligned Right and Centered Vertically) -->
                             <div class="w-full md:w-1/3 flex flex-col gap-4 items-center md:items-end md:justify-center">
-                                <a href="#" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg">
-                                    <span class="font-label font-bold text-lg uppercase tracking-tight">Registrarse</span>
-                                    <span class="material-symbols-outlined">account_box
-                                    </span>
-                                </a>
+                                <a href="Vista/Cliente/Registro.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg">
+    <span class="font-label font-bold text-lg uppercase tracking-tight">Registrarse</span>
+    <span class="material-symbols-outlined">account_box</span>
+</a>
+
 
                                 <a href="Vista/Auth/Login.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg"><span class="font-label font-bold text-lg uppercase tracking-tight">Iniciar Sesión</span>
                                     <span class="material-symbols-outlined">login

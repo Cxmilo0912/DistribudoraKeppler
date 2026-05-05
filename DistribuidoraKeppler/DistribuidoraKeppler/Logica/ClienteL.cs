@@ -1,17 +1,15 @@
 ﻿using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Modelo;
 using DistribuidoraKeppler.Utilidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DistribuidoraKeppler.Logica
 {
     public class ClienteL
     {
-        ClienteD oClienteD = new ClienteD();
-        // Metodo Para crear nuevo cliente
+        ClienteD clienteD = new ClienteD();
+        UsuarioD usuarioD = new UsuarioD();
+
+        
         public bool MtCrearCliente(Cliente cliente, string clave)
         {
             if (cliente == null) return false;
@@ -21,7 +19,6 @@ namespace DistribuidoraKeppler.Logica
                 string.IsNullOrEmpty(cliente.NombreEmpresa))
                 return false;
 
-            UsuarioD usuarioD = new UsuarioD();
             var existente = usuarioD.ObtenerPorCorreo(cliente.Email);
 
             if (existente != null)
@@ -29,13 +26,13 @@ namespace DistribuidoraKeppler.Logica
 
             cliente.Contrasena = HashHelper.Encriptar(clave);
 
-            return oClienteD.MtInsertarDatosCliente(cliente);
+            return clienteD.MtInsertarDatosCliente(cliente);
         }
 
-        // Metodo Para cambiar la Contraseña
+   
         public bool MtCambiaContrasena(int idCliente, string actual, string nueva)
         {
-            var cliente = oClienteD.MtObtenerPorId(idCliente);
+            var cliente = clienteD.MtObtenerPorId(idCliente);
 
             if (cliente == null) return false;
 
@@ -46,10 +43,9 @@ namespace DistribuidoraKeppler.Logica
 
             string hashNueva = HashHelper.Encriptar(nueva);
 
-            return oClienteD.ActualizarContrasena(idCliente, hashNueva);
+            return clienteD.ActualizarContrasena(idCliente, hashNueva);
         }
 
-        // Metodo para Actualizar Perfil
         public bool MtActualizarPerfil(Cliente cliente)
         {
             if (cliente == null)
@@ -62,14 +58,23 @@ namespace DistribuidoraKeppler.Logica
             if (!cliente.Email.Contains("@"))
                 return false;
 
-            // Validar duplicado (opcional pero recomendado)
-            UsuarioD usuarioD = new UsuarioD();
             var existente = usuarioD.ObtenerPorCorreo(cliente.Email);
 
-            if (existente != null && ((Cliente)existente).Id != cliente.Id)
-                return false;
+            if (existente != null)
+            {
+                // Si es Cliente
+                if (existente is Cliente clienteExistente)
+                {
+                    if (clienteExistente.Id != cliente.Id)
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
-            return oClienteD.ActualizarCliente(cliente);
+            return clienteD.ActualizarCliente(cliente);
         }
     }
 }

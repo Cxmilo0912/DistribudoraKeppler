@@ -10,56 +10,61 @@ namespace DistribuidoraKeppler.Vista.Auth
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             LoginL logica = new LoginL();
 
-            var resultado = logica.MtValidarLogin(txtUsuario.Text.Trim(), txtClave.Text.Trim()); // Llama al método de validación de login
+            var resultado = logica.MtValidarLogin(
+                txtUsuario.Text.Trim(),
+                txtClave.Text.Trim()
+            );
 
             if (resultado != null)
             {
-
-
-                SesionHelper.Usuario = resultado.Usuario; // Guarda el usuario en la sesión
+                SesionHelper.Usuario = resultado.Usuario;
                 SesionHelper.Cliente = resultado.Cliente;
                 SesionHelper.Rol = resultado.Rol;
 
-                switch (resultado.Rol)
+                string rol = resultado.Rol.Trim().ToLower();
+
+                switch (rol)
                 {
-                    case "Administrador":
-                        Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx");
+                    case "administrador":
+                        Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx", false);
                         break;
 
-                    case "Bodega":
-                        Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx");
+                    case "bodega":
+                        Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx", false);
                         break;
 
-                    case "Preventista":
-                        Response.Redirect("~/Vista/Preventista/Preventista.aspx");
+                    case "preventista":
+                        Response.Redirect("~/Vista/Preventista/Preventista.aspx", false);
                         break;
 
-                    case "Repartidor":
-                        Response.Redirect("~/Vista/Repartidor/Repartidor.aspx");
+                    case "repartidor":
+                        Response.Redirect("~/Vista/Repartidor/Repartidor.aspx", false);
                         break;
 
-                    case "Cliente":
-                        Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx");
+                    case "cliente":
+                        Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx", false);
+                        break;
+
+                    default:
+                       
+                        Response.Write("Rol no reconocido: " + resultado.Rol);
                         break;
                 }
 
-
-
+                Context.ApplicationInstance.CompleteRequest();
             }
             else
             {
                 string script = "Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
             }
-
-
         }
     }
 }
