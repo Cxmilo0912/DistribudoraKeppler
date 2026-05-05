@@ -8,31 +8,6 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ClienteD
     {
-        // Obtener cliente por Email
-        public Cliente MtObtenerPorEmail(string email)
-        {
-            using (SqlConnection con = ConexionDB.MtAbrirConexion())
-            {
-                con.Open();
-
-                string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre
-                               FROM Cliente C
-                               INNER JOIN Barrio B ON C.IdBarrio = B.Id
-                               WHERE C.Email = @E";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.Add("@E", SqlDbType.VarChar).Value = email;
-
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    if (dr.Read())
-                    {
-                        return MapearCliente(dr);
-                    }
-                }
-            }
-            return null;
-        }
 
         // Mapeo del cliente
         private Cliente MapearCliente(SqlDataReader dr)
@@ -47,11 +22,11 @@ namespace DistribuidoraKeppler.Datos
                 Telefono = dr["Telefono"].ToString(),
                 Direccion = dr["Direccion"].ToString(),
                 Imagen = dr["Imagen"]?.ToString(),
-                Barrio = new Barrio
+                Barrio = dr["BarrioId"] != DBNull.Value ? new Barrio
                 {
                     Id = Convert.ToInt32(dr["BarrioId"]),
                     Nombre = dr["BarrioNombre"].ToString()
-                }
+                } : null
             };
         }
 
@@ -168,7 +143,7 @@ namespace DistribuidoraKeppler.Datos
         }
 
 
-        public Cliente ObtenerPorEmail(string email)
+        public Cliente MtObtenerPorEmail(string email)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {

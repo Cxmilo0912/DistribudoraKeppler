@@ -28,7 +28,7 @@ namespace DistribuidoraKeppler.Vista
                     menuAdmin.Visible = true;
                     break;
 
-                case "Cliente":
+                case "Cliente": 
                     menuCliente.Visible = true;
                     break;
 
@@ -46,7 +46,7 @@ namespace DistribuidoraKeppler.Vista
             }
         }
 
-        // 🚪 CERRAR SESIÓN CON SWEET ALERT
+        // CERRAR SESIÓN CON SWEET ALERT
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
