@@ -31,7 +31,7 @@ namespace DistribuidoraKeppler.Vista.Auth
             if (user != null)
             {
                 string token = Guid.NewGuid().ToString();
-                DateTime expira = DateTime.Now.AddHours(1);
+                DateTime expira = DateTime.UtcNow.AddHours(1);
                 datos.GuardarToken(email, token, expira);
 
                 string link = Request.Url.GetLeftPart(UriPartial.Authority) + "/Vista/Auth/ResetPassword.aspx?token=" + token;
