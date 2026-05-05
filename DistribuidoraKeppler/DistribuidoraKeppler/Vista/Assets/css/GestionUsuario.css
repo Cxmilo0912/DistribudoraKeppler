@@ -23,3 +23,49 @@
     background-color: rgba(255, 255, 255, 0.1);
     border-left: 4px solid #ffffff;
 }
+
+.user-table-wrapper {
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+table.dataTable {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+#example thead th {
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 6px 14px !important;
+    margin-left: 4px !important;
+    transition: all 0.2s ease;
+}
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #0f172a !important;
+        color: white !important;
+        border-color: #0f172a !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.current) {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+    }
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: none !important;
+}
+
+
+.dataTables_filter {
+    display: none !important;
+}

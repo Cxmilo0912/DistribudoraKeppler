@@ -146,7 +146,7 @@
     </Compile>
     <Compile Include="Vista\Administrador\EditarProducto.aspx.designer.cs">
       <DependentUpon>EditarProducto.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Vista\Administrador\GestionCategorias.aspx.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
