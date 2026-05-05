@@ -17,9 +17,17 @@ namespace DistribuidoraKeppler.Vista.Aministrador
         {
             GestionUsuarioL oGestionUsuarioL = new GestionUsuarioL();
             lista = oGestionUsuarioL.MtListarTrabajadores();
+
+            var count = lista.Count; // ¿Es 0 o tiene datos?
+
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lbtnEditar_Click(object sender, EventArgs e)
         {
 
         }

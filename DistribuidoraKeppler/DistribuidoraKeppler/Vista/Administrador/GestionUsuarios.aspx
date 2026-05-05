@@ -58,56 +58,53 @@
         </section>
         <!-- END: Filters -->
         <!-- BEGIN: User Table Card -->
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden" data-purpose="user-table-container">
-            <table id="example" class="table table-striped w-full text-left border-collapse">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%foreach (var item in lista)
-                        {  %>
-                    <tr>
-                        <td><%=item.Nombre%></td>
-                        <td><%=item.Email%></td>
-                        <td><%=item.Rol.Nombre%></td>
-                        <td><%=item.Estado == 1 ? "Activo" : "Inactivo"%></td>
-                        <td>
-                            <!-- Botón Editar (Lápiz) -->
-                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="text-blue-600 hover:text-blue-800 mr-3 btnEditar" OnClick="LinkButton1_Click">
-                                            <i class="fas fa-edit"></i></asp:LinkButton>
-                            <!-- Botón Eliminar (Basura) -->
-                            <button class="text-red-600 hover:text-red-800 btnEliminar" title="Eliminar">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </td>
-
-                    </tr>
-                    <%} %>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </tfoot>
-            </table>
-
-            <!-- Table Footer/Pagination -->
-
+        <div class="bg-white rounded-3x1 shadow-sm border border-gray-100 overflow-hidden" data-purpose="user-table-container">
+            <div class="user-table-wrapper p-4">
+                <table id="example" class="w-full text-sm text-left border-separate border-spacing-0">
+                    <thead class="bg-slate-50 text-slate-600">
+                        <tr>
+                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Nombre</th>
+                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Email</th>
+                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Rol</th>
+                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Estado</th>
+                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                        <%foreach (var item in lista)
+                            {  %>
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="px-6 py-4 font-medium text-slate-900"><%=item.Nombre%></td>
+                            <td class="px-6 py-4 text-slate-500"><%=item.Email%></td>
+                            <td class="px6 py-4">
+                                <span class="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-xs font-semibold"><%=item.Rol.Nombre%></span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%if (item.Estado == 1)
+                                    { %>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emearald-800">
+                                    <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-500 rounded-full"></span>Activo
+                                </span>
+                                <%}else{  %>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800">
+                                    <span class="w-1.5 h-1.5 mr-1.5 bg-rose-500 rounded-full"></span>Inactivo
+                                </span>
+                                <%} %>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <asp:LinkButton ID="lbtnEditar" runat="server" CssClass="text-slate-400 hover:text-indigo-600 transition-colors mr-3 btnEditar" OnClick="lbtnEditar_Click">
+                                    <i class="fas fa-edit"></i>
+                                </asp:LinkButton>
+                                <button type="button" class="text-salte-400 hover:text-rose-600 transition-colors btnEliminar" title="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <%} %>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <!-- END: User Table Card -->
-
-
-
     </body>
     <script src="../Assets/js/GestionUsuario.js"></script>
 
