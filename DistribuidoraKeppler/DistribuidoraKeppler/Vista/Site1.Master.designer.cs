@@ -33,6 +33,15 @@ namespace DistribuidoraKeppler.Vista
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Control ScriptManager1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
         /// Control menuAdmin.
         /// </summary>
         /// <remarks>
@@ -78,13 +87,31 @@ namespace DistribuidoraKeppler.Vista
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuBodega;
 
         /// <summary>
-        /// Control btnCerrarSesion.
+        /// Control lblMesAnio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarSesion;
+        protected global::System.Web.UI.WebControls.Label lblMesAnio;
+
+        /// <summary>
+        /// Control ltlDiasCalendario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlDiasCalendario;
+
+        /// <summary>
+        /// Control btnCerrarSesionLink.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarSesionLink;
 
         /// <summary>
         /// Control ContentPlaceHolder1.

@@ -44,7 +44,7 @@ namespace DistribuidoraKeppler.Vista.Auth
                         Response.Redirect("~/Vista/Preventista/Preventista.aspx", false);
                         break;
 
-                    case "repartidor":
+                    case "distribuidor":
                         Response.Redirect("~/Vista/Repartidor/Repartidor.aspx", false);
                         break;
 
