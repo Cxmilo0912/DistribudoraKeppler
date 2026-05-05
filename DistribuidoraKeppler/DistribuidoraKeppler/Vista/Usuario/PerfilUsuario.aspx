@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilCliente.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Cliente.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilUsuario.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Usuario.PerfilUsuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,9 +15,9 @@
             padding: 0 1rem;
         }
 
-        /* ── Header de perfil ── */
+        /* ── Header ── */
         .perfil-header {
-            background: #0f1f35;
+            background: #1a1033;
             border-radius: 16px;
             padding: 2rem 2.25rem;
             display: flex;
@@ -26,17 +26,12 @@
             margin-bottom: 1.25rem;
         }
 
-        .perfil-avatar-wrap {
-            position: relative;
-            flex-shrink: 0;
-        }
-
         .perfil-avatar-img {
             width: 88px;
             height: 88px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2.5px solid #3b7dd8;
+            border: 2.5px solid #7c5ce8;
             display: block;
         }
 
@@ -44,14 +39,15 @@
             width: 88px;
             height: 88px;
             border-radius: 50%;
-            background: #1e3a5f;
-            border: 2.5px solid #3b7dd8;
+            background: #2a1f4a;
+            border: 2.5px solid #7c5ce8;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'DM Serif Display', serif;
             font-size: 30px;
-            color: #aaccf5;
+            color: #c4b0f5;
+            flex-shrink: 0;
         }
 
         .perfil-header-info {
@@ -61,13 +57,13 @@
         .perfil-nombre {
             font-size: 21px;
             font-weight: 600;
-            color: #e8f0fb;
+            color: #ede8fc;
             margin: 0 0 3px;
         }
 
         .perfil-email-display {
             font-size: 13px;
-            color: #6b8bb0;
+            color: #8070aa;
             margin: 0 0 12px;
         }
 
@@ -75,12 +71,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #1a3455;
-            border: 0.5px solid #2d5080;
+            background: #2a1f4a;
+            border: 0.5px solid #4a3880;
             border-radius: 20px;
             padding: 4px 12px;
             font-size: 11px;
-            color: #6ba3d6;
+            color: #a08de0;
             font-weight: 500;
         }
 
@@ -90,7 +86,7 @@
                 width: 6px;
                 height: 6px;
                 border-radius: 50%;
-                background: #3ecf8e;
+                background: #7c5ce8;
             }
 
         .perfil-upload-zone {
@@ -103,14 +99,15 @@
 
             .perfil-upload-zone input[type=file] {
                 font-size: 12px;
-                color: #6b8bb0;
+                color: #8070aa;
+                width: 180px;
             }
 
         .btn-foto {
             background: transparent;
-            border: 0.5px solid #2d5080;
+            border: 0.5px solid #4a3880;
             border-radius: 8px;
-            color: #6ba3d6;
+            color: #a08de0;
             font-family: 'Outfit', sans-serif;
             font-size: 13px;
             font-weight: 500;
@@ -120,8 +117,8 @@
         }
 
             .btn-foto:hover {
-                background: #1a3455;
-                color: #aaccf5;
+                background: #2a1f4a;
+                color: #c4b0f5;
             }
 
         /* ── Cards ── */
@@ -144,7 +141,7 @@
             border-bottom: 0.5px solid #eaedf1;
         }
 
-        /* ── Grid de campos ── */
+        /* ── Campos ── */
         .perfil-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -177,7 +174,7 @@
                 padding: 10px 14px;
                 font-size: 14px;
                 font-family: 'Outfit', sans-serif;
-                color: #1a2332;
+                color: #1a1033;
                 transition: border-color 0.2s, box-shadow 0.2s;
                 width: 100%;
                 box-sizing: border-box;
@@ -186,16 +183,16 @@
                 .perfil-field .form-control:focus,
                 .perfil-field input:focus {
                     outline: none;
-                    border-color: #3b7dd8;
-                    box-shadow: 0 0 0 3px rgba(59, 125, 216, 0.12);
+                    border-color: #7c5ce8;
+                    box-shadow: 0 0 0 3px rgba(124, 92, 232, 0.12);
                     background: #ffffff;
                 }
 
         /* ── Botones ── */
         .btn-guardar {
             margin-top: 1.5rem;
-            background: #0f1f35;
-            color: #aaccf5;
+            background: #1a1033;
+            color: #c4b0f5;
             border: none;
             border-radius: 8px;
             padding: 11px 28px;
@@ -203,19 +200,19 @@
             font-weight: 500;
             font-family: 'Outfit', sans-serif;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s;
         }
 
             .btn-guardar:hover {
-                background: #1a3455;
-                color: #d0e4f7;
+                background: #2a1f4a;
+                color: #ede8fc;
             }
 
         .btn-pass {
             margin-top: 1.5rem;
             background: transparent;
-            color: #2563eb;
-            border: 0.5px solid #bdd3f7;
+            color: #6d3ae0;
+            border: 0.5px solid #c4b0f5;
             border-radius: 8px;
             padding: 11px 28px;
             font-size: 14px;
@@ -226,9 +223,8 @@
         }
 
             .btn-pass:hover {
-                background: #eff5ff;
+                background: #f5f2ff;
             }
-        
 
         @media (max-width: 600px) {
             .perfil-header {
@@ -255,22 +251,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <%-- ── Header de perfil ── --%>
         <div class="perfil-header">
-            <div class="perfil-avatar-wrap">
-                <asp:Image ID="imgPerfil" runat="server" CssClass="perfil-avatar-img" />
+            <div class="perfil-avatar-placeholder">
+                <asp:Image ID="imgPerfil" runat="server" CssClass="perfil-avatar-img"
+                    Style="display: none;" />
+                <asp:Literal ID="litIniciales" runat="server" Text="U" />
             </div>
 
             <div class="perfil-header-info">
                 <p class="perfil-nombre">
-                    <asp:Literal ID="litNombreHeader" runat="server" Text="Mi Empresa" />
+                    <asp:Literal ID="litNombreHeader" runat="server" Text="Usuario" />
                 </p>
                 <p class="perfil-email-display">
-                    <asp:Literal ID="litEmailHeader" runat="server" Text="correo@empresa.com" />
+                    <asp:Literal ID="litEmailHeader" runat="server" Text="usuario@keppler.com" />
                 </p>
-                <span class="perfil-badge">Cliente activo</span>
+                <span class="perfil-badge">Usuario interno</span>
             </div>
 
             <div class="perfil-upload-zone">
-                <asp:FileUpload ID="fuImagen" runat="server" CssClass="form-control" />
+                <asp:FileUpload ID="fuImagen" runat="server" />
                 <asp:Button ID="btnSubirFoto" runat="server"
                     Text="Cambiar foto"
                     CssClass="btn-foto"
@@ -278,29 +276,19 @@
             </div>
         </div>
 
-        <%-- ── Información de la empresa ── --%>
+        <%-- ── Datos del usuario ── --%>
         <div class="perfil-card">
-            <p class="perfil-card-title">Información de la empresa</p>
+            <p class="perfil-card-title">Datos personales</p>
 
             <div class="perfil-grid">
                 <div class="perfil-field">
-                    <label for="<%= txtNombre.ClientID %>">Empresa</label>
+                    <label for="<%= txtNombre.ClientID %>">Nombre</label>
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
                 </div>
 
                 <div class="perfil-field">
-                    <label for="<%= txtTelefono.ClientID %>">Teléfono</label>
-                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
-                </div>
-
-                <div class="perfil-field field-full">
                     <label for="<%= txtEmail.ClientID %>">Email</label>
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
-                </div>
-
-                <div class="perfil-field field-full">
-                    <label for="<%= txtDireccion.ClientID %>">Dirección</label>
-                    <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" />
                 </div>
             </div>
 

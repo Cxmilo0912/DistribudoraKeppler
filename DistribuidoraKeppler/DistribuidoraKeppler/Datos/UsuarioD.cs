@@ -8,62 +8,80 @@ namespace DistribuidoraKeppler.Datos
 {
     public class UsuarioD
     {
-        public object ObtenerUsuario(string email, string contrasena)
+        // Método para obtener un usuario o cliente por correo electrónico
+        public Usuario MtObtenerUsuarioPorEmail(string email)
         {
-           
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
                 con.Open();
-                string sqlU = "SELECT U.*, R.Nombre AS NomRol FROM Usuario U INNER JOIN Rol R ON U.IdRol = R.Id WHERE Email=@E AND Contrasena=@P";
-                SqlCommand cmdU = new SqlCommand(sqlU, con);
-                cmdU.Parameters.AddWithValue("@E", email);
-                cmdU.Parameters.AddWithValue("@P", contrasena);
-                SqlDataReader drU = cmdU.ExecuteReader();
 
-                if (drU.Read())
+                string sql = @"SELECT U.*, R.Nombre AS NomRol 
+                       FROM Usuario U 
+                       INNER JOIN Rol R ON U.IdRol = R.Id 
+                       WHERE U.Email = @E";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.Add("@E", System.Data.SqlDbType.VarChar).Value = email;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
                 {
                     return new Usuario
                     {
-                        Id = Convert.ToInt32(drU["Id"]),
-                        Nombre = drU["Nombre"].ToString(),
-                        Email = drU["Email"].ToString(),
-                        Contrasena = drU["Contrasena"].ToString(),
-                        Foto = drU["Foto"].ToString(),
-                        Estado = Convert.ToByte(drU["Estado"]),
-                        Documento = Convert.ToInt32(drU["Documento"]),
-                        Rol = new Rol { Id = Convert.ToInt32(drU["IdRol"]), Nombre = drU["NomRol"].ToString() },
-
+                        Id = Convert.ToInt32(dr["Id"]),
+                        Nombre = dr["Nombre"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Contrasena = dr["Contrasena"].ToString(),
+                        Foto = dr["Foto"].ToString(),
+                        Estado = Convert.ToByte(dr["Estado"]),
+                        Documento = Convert.ToInt32(dr["Documento"]),
+                        Rol = new Rol
+                        {
+                            Id = Convert.ToInt32(dr["IdRol"]),
+                            Nombre = dr["NomRol"].ToString()
+                        }
                     };
                 }
-                drU.Close();
+            }
 
-                string sqlC = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
-                FROM Cliente C
-                INNER JOIN Barrio B ON C.IdBarrio = B.Id
-                WHERE C.Email = @E AND C.Contrasena = @P";
+            return null;
+        }
 
-                SqlCommand cmdC = new SqlCommand(sqlC, con);
-                cmdC.Parameters.AddWithValue("@E", email);
-                cmdC.Parameters.AddWithValue("@P", contrasena);
-                SqlDataReader drC = cmdC.ExecuteReader();
+        // Método para obtener un cliente por correo electrónico
+        public Cliente MtObtenerClientePorEmail(string email)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
 
-                if (drC.Read())
+                string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
+                       FROM Cliente C
+                       INNER JOIN Barrio B ON C.IdBarrio = B.Id
+                       WHERE C.Email = @E";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.Add("@E", System.Data.SqlDbType.VarChar).Value = email;  // El system.Data.SqlDbType.VarChar es importante para evitar problemas de conversión de tipos, sirve para indicar que el parámetro es de tipo cadena de texto (varchar) en la base de datos, lo que ayuda a prevenir errores al ejecutar la consulta.
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
                 {
                     return new Cliente
                     {
-                        Id = Convert.ToInt32(drC["Id"]),
-                        Nit = drC["Nit"].ToString(),
-                        NombreEmpresa = drC["NombreEmpresa"].ToString(),
-                        Email = drC["Email"].ToString(),
-                        Telefono = drC["Telefono"].ToString(),
-                        Direccion = drC["Direccion"].ToString(),
-                        Imagen = drC["Imagen"].ToString(),
-                        Contrasena = drC["Contrasena"].ToString(),
+                        Id = Convert.ToInt32(dr["Id"]),
+                        Nit = dr["Nit"].ToString(),
+                        NombreEmpresa = dr["NombreEmpresa"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Telefono = dr["Telefono"].ToString(),
+                        Direccion = dr["Direccion"].ToString(),
+                        Imagen = dr["Imagen"].ToString(),
+                        Contrasena = dr["Contrasena"].ToString(),
                         Barrio = new Barrio
                         {
-                            Id = Convert.ToInt32(drC["BarrioId"]),
-                            Nombre = drC["BarrioNombre"].ToString()
+                            Id = Convert.ToInt32(dr["BarrioId"]),
+                            Nombre = dr["BarrioNombre"].ToString()
                         }
+
                     };
                 }
             }
@@ -245,7 +263,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        public bool ActualizarUsuario(Modelo.Usuario usuario)
+        public bool ActualizarUsuario(Usuario usuario)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
@@ -264,6 +282,82 @@ namespace DistribuidoraKeppler.Datos
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
+        public bool MtActualizarCliente(Cliente cliente)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string sql = @"UPDATE Cliente SET 
+                            NombreEmpresa = @NombreEmpresa,
+                            Telefono      = @Telefono,
+                            Direccion     = @Direccion
+                            WHERE Id = @Id";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@NombreEmpresa", cliente.NombreEmpresa);
+                cmd.Parameters.AddWithValue("@Telefono", cliente.Telefono);
+                cmd.Parameters.AddWithValue("@Direccion", cliente.Direccion);
+                cmd.Parameters.AddWithValue("@Id", cliente.Id);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        // Metodo Para obtener el usuario por su Id
+        public Usuario MtObtenerUsuarioPorId(int id)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string sql = @"SELECT U.*, R.Nombre AS NomRol 
+                       FROM Usuario U 
+                       INNER JOIN Rol R ON U.IdRol = R.Id
+                       WHERE U.Id = @Id";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Id", id);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return new Usuario
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        Nombre = dr["Nombre"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Contrasena = dr["Contrasena"].ToString(),
+                        Foto = dr["Foto"].ToString(),
+                        Estado = Convert.ToByte(dr["Estado"]),
+                        Documento = Convert.ToInt32(dr["Documento"]),
+                        Rol = new Rol
+                        {
+                            Id = Convert.ToInt32(dr["IdRol"]),
+                            Nombre = dr["NomRol"].ToString()
+                        }
+                    };
+                }
+            }
+            return null;
+        }
+
+        // Metodo para insertar usuario
+        public bool MtInsertarUsuario(Usuario usuario)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+                string sql = @"INSERT INTO Usuario (Nombre, Email, Contrasena, Foto, Estado, Documento, IdRol) 
+                               VALUES (@Nombre, @Email, @Contrasena, @Foto, @Estado, @Documento, @IdRol)";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                cmd.Parameters.AddWithValue("@Email", usuario.Email);
+                cmd.Parameters.AddWithValue("@Contrasena", usuario.Contrasena);
+                cmd.Parameters.AddWithValue("@Foto", string.IsNullOrEmpty(usuario.Foto) ? (object)DBNull.Value : usuario.Foto); cmd.Parameters.AddWithValue("@Estado", usuario.Estado);
+                cmd.Parameters.AddWithValue("@Documento", usuario.Documento);
+                cmd.Parameters.AddWithValue("@IdRol", usuario.Rol.Id);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+
+        // Metodo para actualizar la foto del usuario
         public bool ActualizarFoto(int idUsuario, string rutaFoto)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())

@@ -1,4 +1,6 @@
 ﻿using DistribuidoraKeppler.Datos;
+using DistribuidoraKeppler.Logica;
+using DistribuidoraKeppler.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,128 +15,169 @@ namespace DistribuidoraKeppler.Vista.Cliente
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Postback para evitar recargar los datos cada vez que se envía un formulario
+
             if (!IsPostBack)
             {
-                // Mensaje de éxito al volver desde CambiarContrasena
-                if (Request.QueryString["msg"] == "contrasena")
+                if (SesionHelper.Cliente == null)
                 {
-                    string script = "Swal.fire('¡Listo!', 'Contraseña actualizada correctamente.', 'success');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "msg", script, true);
-                }
-
-                if (Session["SesionCliente"] == null)
-                {
-                    Response.Redirect("~/Vista/Login.aspx");
+                    Response.Redirect("~/Vista/Auth/Login.aspx");
                     return;
                 }
-                CargarDatosCliente();
+
+                CargarDatos();
             }
         }
-
-        private void CargarDatosCliente()
-        {
-            // Ejemplo: obtener cliente desde Session o una capa de negocio
-            Modelo.Cliente cliente = (Modelo.Cliente)Session["SesionCliente"];
-
-            // Imagen de perfil
-            imgPerfil.ImageUrl = !string.IsNullOrEmpty(cliente.Imagen)
-                ? cliente.Imagen
-                : "~/Recursos/default-avatar.png";
-
-            // Encabezado
-            lblNombreEmpresa.Text = cliente.NombreEmpresa;
-            lblNit.Text = cliente.Nit;
-
-            // Información de contacto
-            lblNombreContacto.Text = cliente.NombreEmpresa;
-            lblEmail.Text = cliente.Email;
-            lblTelefono.Text = cliente.Telefono;
-
-            // Dirección y barrio
-            lblDireccion.Text = cliente.Direccion;
-            lblBarrio.Text = cliente.Barrio.Nombre ?? "Sin barrio asignado";
-        }
-
-
-        protected void btnEditar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Vista/Cliente/EditarPerfil.aspx");
-        }
-
-
-
-        protected void btnCambiarContrasena_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Vista/Cliente/CambiarContrasena.aspx");
-        }
-
-
 
         protected void btnSubirFoto_Click(object sender, EventArgs e)
         {
+            if (SesionHelper.Cliente == null)
+            {
+                Response.Redirect("~/Vista/Auth/Login.aspx");
+                return;
+            }
+
             if (!fuImagen.HasFile)
             {
-                MostrarAlerta("warning", "No seleccionaste ninguna imagen.");
+                Mostrar("Error", "Selecciona una imagen", "error");
                 return;
             }
 
-            // Validar que sea imagen
-            string[] extensionesPermitidas = { ".jpg", ".jpeg", ".png", ".webp" };
             string extension = Path.GetExtension(fuImagen.FileName).ToLower();
 
-            if (!extensionesPermitidas.Contains(extension))
+            string[] permitidas = { ".jpg", ".jpeg", ".png" };
+
+            if (!permitidas.Contains(extension))
             {
-                MostrarAlerta("error", "Solo se permiten imágenes JPG, PNG o WEBP.");
+                Mostrar("Error", "Solo JPG o PNG", "error");
                 return;
             }
 
-            // Validar tamaño máximo (2MB)
+            // Tamaño (2MB)
             if (fuImagen.PostedFile.ContentLength > 2 * 1024 * 1024)
             {
-                MostrarAlerta("error", "La imagen no puede superar 2MB.");
+                Mostrar("Error", "Máx 2MB", "error");
                 return;
             }
 
-            Modelo.Cliente cliente = (Modelo.Cliente)Session["SesionCliente"];
+            string nombre = $"cliente_{SesionHelper.Cliente.Id}_{DateTime.Now.Ticks}{extension}";
 
-            // Nombre único para evitar colisiones
-            string nombreArchivo = $"cliente_{cliente.Id}_{DateTime.Now.Ticks}{extension}";
-            string carpeta = Server.MapPath("~/Imagenes/Perfiles/");
+            string rutaServidor = Server.MapPath("~/Imagenes/Clientes/");
 
-            // Crear carpeta si no existe
-            if (!Directory.Exists(carpeta))
-                Directory.CreateDirectory(carpeta);
+            if (!Directory.Exists(rutaServidor))
+                Directory.CreateDirectory(rutaServidor);
 
-            string rutaFisica = Path.Combine(carpeta, nombreArchivo);
-            string rutaDB = $"~/Imagenes/Perfiles/{nombreArchivo}";
+            string rutaCompleta = Path.Combine(rutaServidor, nombre);
 
-            // Guardar archivo en el servidor
-            fuImagen.SaveAs(rutaFisica);
+            fuImagen.SaveAs(rutaCompleta);
 
-            // Guardar ruta en la base de datos
-            ClienteD datos = new ClienteD();
-            bool actualizado = datos.ActualizarImagen(cliente.Id, rutaDB);
+            string rutaBD = "~/Imagenes/Clientes/" + nombre;
 
-            if (actualizado)
+            ClienteL logica = new ClienteL();
+
+            bool ok = logica.MtActualizarImagen(SesionHelper.Cliente.Id, rutaBD);
+
+            if (ok)
             {
-                // Actualizar Session para reflejar el cambio
-                cliente.Imagen = rutaDB;
-                Session["SesionCliente"] = cliente;
+                // actualizar sesión
+                SesionHelper.Cliente.Imagen = rutaBD;
 
-                imgPerfil.ImageUrl = ResolveUrl(rutaDB);
-                MostrarAlerta("success", "Foto actualizada correctamente.");
+                imgPerfil.ImageUrl = rutaBD;
+
+                Mostrar("OK", "Imagen actualizada", "success");
             }
             else
             {
-                MostrarAlerta("error", "No se pudo guardar en la base de datos.");
+                Mostrar("Error", "No se pudo guardar", "error");
             }
         }
 
-
-        private void MostrarAlerta(string tipo, string mensaje)
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            string script = $"Swal.fire('', '{mensaje}', '{tipo}');";
-            ClientScript.RegisterStartupScript(this.GetType(), "alerta", script, true);
+            var clienteSesion = SesionHelper.Cliente;
+
+            Modelo.Cliente cliente = new Modelo.Cliente
+            {
+                Id = clienteSesion.Id,
+                NombreEmpresa = txtNombre.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
+                Telefono = txtTelefono.Text.Trim(),
+                Direccion = txtDireccion.Text.Trim(),
+                Barrio = clienteSesion.Barrio // importante
+            };
+
+            ClienteL logica = new ClienteL();
+
+            bool ok = logica.MtActualizarPerfil(cliente);
+
+            if (ok)
+            {
+                // refrescar sesión
+                SesionHelper.Cliente = logica.MtObtenerPorId(cliente.Id);
+
+                Mostrar("OK", "Perfil actualizado", "success");
+            }
+            else
+            {
+                Mostrar("Error", "No se pudo actualizar", "error");
+            }
+        }
+        private void CargarDatos()
+        {
+            var cliente = SesionHelper.Cliente;
+
+            txtNombre.Text = cliente.NombreEmpresa;
+            txtEmail.Text = cliente.Email;
+            txtTelefono.Text = cliente.Telefono;
+            txtDireccion.Text = cliente.Direccion;
+
+            imgPerfil.ImageUrl = string.IsNullOrEmpty(cliente.Imagen)
+                ? "~/Imagenes/default.png"
+                : cliente.Imagen;
+        }
+
+        private void Mostrar(string t, string m, string tipo)
+        {
+            string script = $"Swal.fire('{t}','{m}','{tipo}');";
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+        }
+
+        protected void btnCambiarPass_Click(object sender, EventArgs e)
+        {
+            if (SesionHelper.Cliente == null)
+            {
+                Response.Redirect("~/Vista/Auth/Login.aspx");
+                return;
+            }
+
+            string actual = txtActual.Text;
+            string nueva = txtNueva.Text;
+            string confirmar = txtConfirmar.Text;
+
+            // Validar confirmación
+            if (nueva != confirmar)
+            {
+                Mostrar("Error", "Las contraseñas no coinciden", "error");
+                return;
+            }
+
+            ClienteL logica = new ClienteL();
+
+            bool resultado = logica.MtCambiaContrasena(
+                SesionHelper.Cliente.Id,
+                actual,
+                nueva
+            );
+
+            if (resultado)
+            {
+                Mostrar("OK", "Contraseña actualizada", "success");
+            }
+            else
+            {
+                Mostrar("Error", "Contraseña actual incorrecta o inválida", "error");
+            }
         }
     }
+
 }

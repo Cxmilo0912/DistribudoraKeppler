@@ -12,7 +12,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 {
     public partial class GestionUsuarios : System.Web.UI.Page
     {
-        protected List<Usuario> lista = new List<Usuario>();
+        protected List<Modelo.Usuario> lista = new List<Modelo.Usuario>();
         protected void Page_Load(object sender, EventArgs e)
         {
             GestionUsuarioL oGestionUsuarioL = new GestionUsuarioL();
