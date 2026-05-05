@@ -6,7 +6,6 @@ namespace DistribuidoraKeppler.Logica
 {
     public class ClienteL
     {
-        UsuarioD usuarioD = new UsuarioD();
 
         ClienteD oClienteD = new ClienteD();
 
