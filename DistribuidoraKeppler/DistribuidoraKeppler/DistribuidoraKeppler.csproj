@@ -178,7 +178,6 @@
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\CatalogoProductos.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
-    <Content Include="Vista\Cliente\EditarPerfil.aspx" />
     <Content Include="Vista\Cliente\Registro.aspx" />
     <Content Include="Vista\Cliente\DetalleProducto.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />

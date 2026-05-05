@@ -8,14 +8,10 @@ namespace DistribuidoraKeppler.Logica
     {
         public ResultadoLogin MtValidarLogin(string email, string clave)
         {
-            UsuarioD usuarioD = new UsuarioD();
-            ClienteD clienteD = new ClienteD();
-
             string hash = HashHelper.Encriptar(clave);
             email = email.Trim();
 
-           
-            var usuario = usuarioD.MtObtenerUsuarioPorEmail(email);
+            var usuario = new UsuarioD().MtObtenerUsuarioPorEmail(email);
 
             if (usuario != null && usuario.Contrasena == hash)
             {
@@ -26,15 +22,14 @@ namespace DistribuidoraKeppler.Logica
                 };
             }
 
-         
-            var cliente = clienteD.ObtenerPorEmail(email);
+            var cliente = new ClienteD().MtObtenerPorEmail(email);
 
             if (cliente != null && cliente.Contrasena == hash)
             {
                 return new ResultadoLogin
                 {
                     Cliente = cliente,
-                    Rol = "cliente"
+                    Rol = "Cliente"
                 };
             }
 
