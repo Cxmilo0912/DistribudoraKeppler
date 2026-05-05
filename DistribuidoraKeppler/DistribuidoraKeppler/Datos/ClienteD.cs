@@ -2,6 +2,7 @@
 using DistribuidoraKeppler.Vista.Cliente;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -14,6 +15,52 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ClienteD
     {
+        // Obtener cliente por Email
+        public Cliente MtObtenerPorEmail(string email)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre
+                               FROM Cliente C
+                               INNER JOIN Barrio B ON C.IdBarrio = B.Id
+                               WHERE C.Email = @E";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.Add("@E", SqlDbType.VarChar).Value = email;
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        return MapearCliente(dr);
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Mapeo del cliente
+        private Cliente MapearCliente(SqlDataReader dr)
+        {
+            return new Cliente
+            {
+                Id = Convert.ToInt32(dr["Id"]),
+                NombreEmpresa = dr["NombreEmpresa"].ToString(),
+                Nit = dr["Nit"]?.ToString(),
+                Email = dr["Email"].ToString(),
+                Contrasena = dr["Contrasena"].ToString(),
+                Telefono = dr["Telefono"].ToString(),
+                Direccion = dr["Direccion"].ToString(),
+                Imagen = dr["Imagen"]?.ToString(),
+                Barrio = new Barrio
+                {
+                    Id = Convert.ToInt32(dr["BarrioId"]),
+                    Nombre = dr["BarrioNombre"].ToString()
+                }
+            };
+        }
 
         public bool ActualizarImagen(int idCliente, string rutaImagen)
         {

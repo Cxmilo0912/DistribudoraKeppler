@@ -73,9 +73,9 @@ namespace DistribuidoraKeppler.Vista.Cliente
 
             string rutaBD = "~/Imagenes/Clientes/" + nombre;
 
-            ClienteD datos = new ClienteD();
+            ClienteL logica = new ClienteL();
 
-            bool ok = datos.ActualizarImagen(SesionHelper.Cliente.Id, rutaBD);
+            bool ok = logica.MtActualizarImagen(SesionHelper.Cliente.Id, rutaBD);
 
             if (ok)
             {
@@ -113,7 +113,7 @@ namespace DistribuidoraKeppler.Vista.Cliente
             if (ok)
             {
                 // refrescar sesión
-                SesionHelper.Cliente = cliente;
+                SesionHelper.Cliente = logica.MtObtenerPorId(cliente.Id);
 
                 Mostrar("OK", "Perfil actualizado", "success");
             }

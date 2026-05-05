@@ -164,12 +164,10 @@
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Administrador\EditarProducto.aspx" />
     <Content Include="Vista\Administrador\GestionCategorias.aspx" />
-    <Content Include="Vista\Administrador\EditarPerfil.aspx" />
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
-    <Content Include="Vista\Administrador\PerfilAdministrador.aspx" />
     <Content Include="Vista\Assets\css\Index.css" />
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
@@ -178,10 +176,9 @@
     <Content Include="Vista\Auth\RecuperarPassword.aspx" />
     <Content Include="Vista\Auth\ResetPassword.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
-    <Content Include="Vista\Bodega\PerfilBodega.aspx" />
-    <Content Include="Vista\Cliente\CambiarContrasena.aspx" />
+    <Content Include="Vista\Cliente\CatalogoProductos.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
-    <Content Include="Vista\Cliente\EditarPerfil.aspx" />
+    <Content Include="Vista\Cliente\DetalleProducto.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
@@ -252,13 +249,6 @@
     <Compile Include="Vista\Administrador\GestionCategorias.aspx.designer.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Administrador\EditarPerfil.aspx.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\Administrador\EditarPerfil.aspx.designer.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
       <DependentUpon>GestionMarcas1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,13 +269,6 @@
     </Compile>
     <Compile Include="Vista\Administrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\Administrador\PerfilAdministrador.aspx.cs">
-      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\Administrador\PerfilAdministrador.aspx.designer.cs">
-      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -322,19 +305,12 @@
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.designer.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Bodega\PerfilBodega.aspx.cs">
-      <DependentUpon>PerfilBodega.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\CatalogoProductos.aspx.cs">
+      <DependentUpon>CatalogoProductos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
-      <DependentUpon>PerfilBodega.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.cs">
-      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.designer.cs">
-      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\CatalogoProductos.aspx.designer.cs">
+      <DependentUpon>CatalogoProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
@@ -343,12 +319,12 @@
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Cliente\EditarPerfil.aspx.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\DetalleProducto.aspx.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Cliente\EditarPerfil.aspx.designer.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\DetalleProducto.aspx.designer.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>

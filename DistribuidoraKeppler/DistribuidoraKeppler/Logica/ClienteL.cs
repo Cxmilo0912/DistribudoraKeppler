@@ -11,6 +11,21 @@ namespace DistribuidoraKeppler.Logica
     public class ClienteL
     {
         ClienteD oClienteD = new ClienteD();
+        
+        // Obtener cliente por Id
+        public Cliente MtObtenerPorId(int id)
+        {
+            if (id <= 0) return null;
+
+            return oClienteD.MtObtenerPorId(id);
+        }
+
+        public Cliente MtObtenerPorEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return null;
+
+            return oClienteD.MtObtenerPorEmail(email);
+        }
         // Metodo Para crear nuevo cliente
         public bool MtCrearCliente(Cliente cliente, string clave)
         {
@@ -70,6 +85,14 @@ namespace DistribuidoraKeppler.Logica
                 return false;
 
             return oClienteD.ActualizarCliente(cliente);
+        }
+
+        public bool MtActualizarImagen(int idCliente, string ruta)
+        {
+            if (string.IsNullOrEmpty(ruta))
+                return false;
+
+            return oClienteD.ActualizarImagen(idCliente, ruta);
         }
     }
 }
