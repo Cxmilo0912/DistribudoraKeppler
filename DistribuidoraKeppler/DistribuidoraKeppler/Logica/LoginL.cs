@@ -1,54 +1,54 @@
-﻿
-using DistribuidoraKeppler.Datos;
+﻿using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Modelo;
 using DistribuidoraKeppler.Utilidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DistribuidoraKeppler.Logica
 {
     public class LoginL
     {
-        // Método para validar el login de un usuario o cliente
         public ResultadoLogin MtValidarLogin(string email, string clave)
         {
-            UsuarioD oUsuarioD = new UsuarioD();
-            string hash = HashHelper.Encriptar(clave); // Hash de la contraseña ingresada
+            UsuarioD usuarioD = new UsuarioD();
+            ClienteD clienteD = new ClienteD();
 
-            var usuario = oUsuarioD.MtObtenerUsuarioPorEmail(email); // Llamamos al método para obtener el usuario por email
+            string hash = HashHelper.Encriptar(clave);
+            email = email.Trim();
 
-         
+           
+            var usuario = usuarioD.MtObtenerUsuarioPorEmail(email);
 
             if (usuario != null && usuario.Contrasena == hash)
             {
-                return new ResultadoLogin // Si el usuario existe y la contraseña es correcta, devolvemos el resultado con el usuario y su rol
+                return new ResultadoLogin
                 {
                     Usuario = usuario,
                     Rol = usuario.Rol.Nombre
                 };
             }
 
-            var cliente = oUsuarioD.MtObtenerClientePorEmail(email); // Si no se encontró un usuario, intentamos obtener un cliente por email
+         
+            var cliente = clienteD.ObtenerPorEmail(email);
 
             if (cliente != null && cliente.Contrasena == hash)
             {
-                return new ResultadoLogin // Lo mismo que hicimos con el usuario, pero para el cliente
+                return new ResultadoLogin
                 {
                     Cliente = cliente,
-                    Rol = "Cliente"
+                    Rol = "cliente"
                 };
             }
 
-            return null; // Si no se encontró ni un usuario ni un cliente, devolvemos null
+            return null;
         }
 
-        public string MtUsuarioNuevo(string contrasena, int idEmpleado)
+    
+        public bool MtUsuarioNuevo(string contrasena, int idEmpleado)
         {
-            UsuarioD datos = new UsuarioD();            
-            string resultado = datos.MtNuevoUsuario(contrasena, idEmpleado);
-            return resultado;
+            UsuarioD datos = new UsuarioD();
+
+            string hash = HashHelper.Encriptar(contrasena);
+
+            return datos.ActualizarContrasena(idEmpleado, hash);
         }
     }
 }

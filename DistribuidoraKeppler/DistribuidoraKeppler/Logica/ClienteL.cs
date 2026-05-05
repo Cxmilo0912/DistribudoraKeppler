@@ -1,17 +1,15 @@
 ﻿using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Modelo;
 using DistribuidoraKeppler.Utilidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DistribuidoraKeppler.Logica
 {
     public class ClienteL
     {
+        UsuarioD usuarioD = new UsuarioD();
+
         ClienteD oClienteD = new ClienteD();
-        
+
         // Obtener cliente por Id
         public Cliente MtObtenerPorId(int id)
         {
@@ -36,7 +34,6 @@ namespace DistribuidoraKeppler.Logica
                 string.IsNullOrEmpty(cliente.NombreEmpresa))
                 return false;
 
-            UsuarioD usuarioD = new UsuarioD();
             var existente = usuarioD.ObtenerPorCorreo(cliente.Email);
 
             if (existente != null)
@@ -47,7 +44,7 @@ namespace DistribuidoraKeppler.Logica
             return oClienteD.MtInsertarDatosCliente(cliente);
         }
 
-        // Metodo Para cambiar la Contraseña
+
         public bool MtCambiaContrasena(int idCliente, string actual, string nueva)
         {
             var cliente = oClienteD.MtObtenerPorId(idCliente);
@@ -64,7 +61,6 @@ namespace DistribuidoraKeppler.Logica
             return oClienteD.ActualizarContrasena(idCliente, hashNueva);
         }
 
-        // Metodo para Actualizar Perfil
         public bool MtActualizarPerfil(Cliente cliente)
         {
             if (cliente == null)
@@ -77,12 +73,21 @@ namespace DistribuidoraKeppler.Logica
             if (!cliente.Email.Contains("@"))
                 return false;
 
-            // Validar duplicado (opcional pero recomendado)
-            UsuarioD usuarioD = new UsuarioD();
             var existente = usuarioD.ObtenerPorCorreo(cliente.Email);
 
-            if (existente != null && ((Cliente)existente).Id != cliente.Id)
-                return false;
+            if (existente != null)
+            {
+                // Si es Cliente
+                if (existente is Cliente clienteExistente)
+                {
+                    if (clienteExistente.Id != cliente.Id)
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
             return oClienteD.ActualizarCliente(cliente);
         }

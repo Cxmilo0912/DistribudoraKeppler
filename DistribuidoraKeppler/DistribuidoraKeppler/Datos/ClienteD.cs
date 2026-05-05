@@ -1,15 +1,8 @@
 ﻿using DistribuidoraKeppler.Modelo;
-using DistribuidoraKeppler.Vista.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.UI;
-
 
 namespace DistribuidoraKeppler.Datos
 {
@@ -144,6 +137,7 @@ namespace DistribuidoraKeppler.Datos
 
         // Metodo Para insertar datos de Cliente 
         public bool MtInsertarDatosCliente(Cliente cliente)
+
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
@@ -166,13 +160,56 @@ namespace DistribuidoraKeppler.Datos
                 cmd.Parameters.AddWithValue("@Imagen",
                     string.IsNullOrEmpty(cliente.Imagen) ? (object)DBNull.Value : cliente.Imagen);
 
-                cmd.Parameters.AddWithValue("@IdBarrio", cliente.Barrio.Id);
+                cmd.Parameters.AddWithValue("@IdBarrio",
+                    cliente.Barrio != null ? cliente.Barrio.Id : (object)DBNull.Value);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
 
-        //Metodo para obtener client por Id
+
+        public Cliente ObtenerPorEmail(string email)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
+                               FROM Cliente C
+                               LEFT JOIN Barrio B ON C.IdBarrio = B.Id
+                               WHERE C.Email = @Email";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = email;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    return new Cliente
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        Nit = dr["Nit"].ToString(),
+                        NombreEmpresa = dr["NombreEmpresa"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Telefono = dr["Telefono"].ToString(),
+                        Direccion = dr["Direccion"].ToString(),
+                        Imagen = dr["Imagen"] == DBNull.Value ? null : dr["Imagen"].ToString(),
+                        Contrasena = dr["Contrasena"].ToString(),
+
+                        Barrio = dr["BarrioId"] != DBNull.Value ? new Barrio
+                        {
+                            Id = Convert.ToInt32(dr["BarrioId"]),
+                            Nombre = dr["BarrioNombre"].ToString()
+                        } : null
+                    };
+                }
+            }
+
+            return null;
+        }
+
+
         public Cliente MtObtenerPorId(int idCliente)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -180,9 +217,9 @@ namespace DistribuidoraKeppler.Datos
                 con.Open();
 
                 string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre 
-                       FROM Cliente C
-                       INNER JOIN Barrio B ON C.IdBarrio = B.Id
-                       WHERE C.Id = @Id";
+                               FROM Cliente C
+                               LEFT JOIN Barrio B ON C.IdBarrio = B.Id
+                               WHERE C.Id = @Id";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@Id", idCliente);
@@ -199,12 +236,13 @@ namespace DistribuidoraKeppler.Datos
                         Contrasena = dr["Contrasena"].ToString(),
                         Telefono = dr["Telefono"].ToString(),
                         Direccion = dr["Direccion"].ToString(),
-                        Imagen = dr["Imagen"].ToString(),
-                        Barrio = new Barrio
+                        Imagen = dr["Imagen"] == DBNull.Value ? null : dr["Imagen"].ToString(),
+
+                        Barrio = dr["BarrioId"] != DBNull.Value ? new Barrio
                         {
                             Id = Convert.ToInt32(dr["BarrioId"]),
                             Nombre = dr["BarrioNombre"].ToString()
-                        }
+                        } : null
                     };
                 }
             }
