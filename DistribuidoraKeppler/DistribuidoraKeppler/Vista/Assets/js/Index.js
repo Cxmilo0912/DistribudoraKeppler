@@ -1,5 +1,6 @@
 ﻿import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
 
+// 👉 Esto sí puede ir arriba
 const app = TubesCursor(document.getElementById('canvas'), {
     tubes: {
         colors: ["#f967fb", "#53bc28", "#6958d5"],
@@ -13,7 +14,6 @@ const app = TubesCursor(document.getElementById('canvas'), {
 document.body.addEventListener('click', () => {
     const colors = randomColors(3)
     const lightsColors = randomColors(4)
-    console.log(colors, lightsColors)
     app.tubes.setColors(colors)
     app.tubes.setLightsColors(lightsColors)
 })
@@ -23,3 +23,4 @@ function randomColors(count) {
         .fill(0)
         .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'))
 }
+

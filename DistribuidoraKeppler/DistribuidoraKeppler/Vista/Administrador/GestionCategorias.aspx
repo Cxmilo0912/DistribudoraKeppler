@@ -100,7 +100,7 @@
         function cerrarModal() {
             document.getElementById('modalCategoria').classList.add('hidden');
         }
-</script>
+    </script>
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -113,225 +113,225 @@
 
     <!-- Main Content Canvas -->
 
-
-    <section class="p-container-padding max-w-7xl mx-auto w-full flex flex-col gap-stack-gap">
-        <!-- Page Header -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <h2 class="text-headline-lg font-headline-lg text-[#00214D]">Gestión de Categorías</h2>
-                <p class="text-body-md font-body-md text-slate-500">Organiza y administra las agrupaciones de tus productos.</p>
-            </div>
-            <button type="button" onclick="abrirModal()" class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-body-md font-semibold flex items-center gap-2 shadow-sm hover:opacity-90 active:scale-[0.98] transition-all">
-                <span class="material-symbols-outlined text-sm">add</span>
-                Agregar Categoría
-            </button>
-        </div>
-        <!-- Search Section -->
-        <div class="w-full">
-            <div class="relative group">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary-container transition-colors" data-icon="search">search</span>
+    <main>
+        <section class="p-container-padding max-w-7xl mx-auto w-full flex flex-col gap-stack-gap">
+            <!-- Page Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-headline-lg font-headline-lg text-[#00214D]">Gestión de Categorías</h2>
+                    <p class="text-body-md font-body-md text-slate-500">Organiza y administra las agrupaciones de tus productos.</p>
                 </div>
-                <input class="w-full bg-white border border-[#E2E8F0] rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-[#00214D]/10 focus:border-[#00214D] outline-none transition-all shadow-sm font-body-md" placeholder="Buscar categoría por nombre..." type="text" />
+                <button type="button" onclick="abrirModal()" class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-body-md font-semibold flex items-center gap-2 shadow-sm hover:opacity-90 active:scale-[0.98] transition-all">
+                    <span class="material-symbols-outlined text-sm">add</span>
+                    Agregar Categoría
+                </button>
             </div>
-        </div>
-        <!-- Content Card (Table) -->
-        <div class="bg-white rounded-xl border border-[#E2E8F0] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-50/50 border-b border-[#E2E8F0]">
-                        <tr>
-                            <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">NOMBRE DE LA CATEGORÍA</th>
-                            <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">DESCRIPCIÓN</th>
-                            <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">PRODUCTOS</th>
-                            <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider text-right">ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-[#E2E8F0]">
-                        <!-- Row 1 -->
-                        <tr class="hover:bg-slate-50/50 transition-colors">
-                            <td class="px-6 py-table-row-padding">
-                                <div class="flex items-center gap-4">
-                                    <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                        <span class="material-symbols-outlined" data-icon="coffee">coffee</span>
-                                    </div>
-                                    <span class="font-body-md font-bold text-[#00214D]">Bebidas</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-body-md text-slate-600">Bebidas calientes y frías, incluyendo cafés y tés.
-                            </td>
-                            <td class="px-6 py-table-row-padding">
-                                <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">24 productos
-                                </span>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-right">
-                                <div class="flex justify-end gap-2">
-                                    <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                    </button>
-                                    <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 2 -->
-                        <tr class="hover:bg-slate-50/50 transition-colors">
-                            <td class="px-6 py-table-row-padding">
-                                <div class="flex items-center gap-4">
-                                    <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                        <span class="material-symbols-outlined" data-icon="cleaning_services">cleaning_services</span>
-                                    </div>
-                                    <span class="font-body-md font-bold text-[#00214D]">Cuidado del Hogar</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-body-md text-slate-600">Productos de limpieza y mantenimiento doméstico.
-                            </td>
-                            <td class="px-6 py-table-row-padding">
-                                <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">15 productos
-                                </span>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-right">
-                                <div class="flex justify-end gap-2">
-                                    <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                    </button>
-                                    <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 3 -->
-                        <tr class="hover:bg-slate-50/50 transition-colors">
-                            <td class="px-6 py-table-row-padding">
-                                <div class="flex items-center gap-4">
-                                    <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                        <span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span>
-                                    </div>
-                                    <span class="font-body-md font-bold text-[#00214D]">Panadería</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-body-md text-slate-600">Pan artesanal, bollería y productos de repostería.
-                            </td>
-                            <td class="px-6 py-table-row-padding">
-                                <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">12 productos
-                                </span>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-right">
-                                <div class="flex justify-end gap-2">
-                                    <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                    </button>
-                                    <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 4 -->
-                        <tr class="hover:bg-slate-50/50 transition-colors">
-                            <td class="px-6 py-table-row-padding">
-                                <div class="flex items-center gap-4">
-                                    <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                        <span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
-                                    </div>
-                                    <span class="font-body-md font-bold text-[#00214D]">Carnes y Aves</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-body-md text-slate-600">Cortes selectos y aves de granja de alta calidad.
-                            </td>
-                            <td class="px-6 py-table-row-padding">
-                                <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">32 productos
-                                </span>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-right">
-                                <div class="flex justify-end gap-2">
-                                    <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                    </button>
-                                    <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 5 -->
-                        <tr class="hover:bg-slate-50/50 transition-colors">
-                            <td class="px-6 py-table-row-padding">
-                                <div class="flex items-center gap-4">
-                                    <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                        <span class="material-symbols-outlined" data-icon="nutrition">nutrition</span>
-                                    </div>
-                                    <span class="font-body-md font-bold text-[#00214D]">Frutas y Verduras</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-body-md text-slate-600">Productos frescos de temporada directamente del campo.
-                            </td>
-                            <td class="px-6 py-table-row-padding">
-                                <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">45 productos
-                                </span>
-                            </td>
-                            <td class="px-6 py-table-row-padding text-right">
-                                <div class="flex justify-end gap-2">
-                                    <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                    </button>
-                                    <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- Pagination Section -->
-            <div class="px-6 py-4 bg-slate-50/50 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p class="text-body-sm text-slate-500">Mostrando 1 a 5 de 12 categorías</p>
-                <div class="flex items-center gap-1">
-                    <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 transition-colors">
-                        <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
-                    </button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-container text-white font-bold shadow-sm">1</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 border border-[#E2E8F0] hover:bg-white hover:border-slate-300 transition-colors">2</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 border border-[#E2E8F0] hover:bg-white hover:border-slate-300 transition-colors">3</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 transition-colors">
-                        <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Bento Info Section (Optional Visual Flare) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 p-6 bg-[#00214D] text-white rounded-2xl flex flex-col justify-between min-h-[160px] relative overflow-hidden">
-                <div class="z-10">
-                    <h3 class="text-headline-md mb-2">Resumen de Inventario</h3>
-                    <p class="text-slate-300 max-w-md">Optimiza la distribución de tus productos categorizando eficientemente según la demanda estacional.</p>
-                </div>
-                <div class="z-10 mt-4 flex gap-4">
-                    <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl">
-                        <span class="block text-xl font-bold">12</span>
-                        <span class="text-[10px] uppercase tracking-wider text-slate-400">Total Categorías</span>
+            <!-- Search Section -->
+            <div class="w-full">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary-container transition-colors" data-icon="search">search</span>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl">
-                        <span class="block text-xl font-bold">342</span>
-                        <span class="text-[10px] uppercase tracking-wider text-slate-400">Total Productos</span>
+                    <input class="w-full bg-white border border-[#E2E8F0] rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-[#00214D]/10 focus:border-[#00214D] outline-none transition-all shadow-sm font-body-md" placeholder="Buscar categoría por nombre..." type="text" />
+                </div>
+            </div>
+            <!-- Content Card (Table) -->
+            <div class="bg-white rounded-xl border border-[#E2E8F0] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50/50 border-b border-[#E2E8F0]">
+                            <tr>
+                                <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">NOMBRE DE LA CATEGORÍA</th>
+                                <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">DESCRIPCIÓN</th>
+                                <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">PRODUCTOS</th>
+                                <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider text-right">ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#E2E8F0]">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-6 py-table-row-padding">
+                                    <div class="flex items-center gap-4">
+                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+                                            <span class="material-symbols-outlined" data-icon="coffee">coffee</span>
+                                        </div>
+                                        <span class="font-body-md font-bold text-[#00214D]">Bebidas</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Bebidas calientes y frías, incluyendo cafés y tés.
+                                </td>
+                                <td class="px-6 py-table-row-padding">
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">24 productos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                        </button>
+                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-6 py-table-row-padding">
+                                    <div class="flex items-center gap-4">
+                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+                                            <span class="material-symbols-outlined" data-icon="cleaning_services">cleaning_services</span>
+                                        </div>
+                                        <span class="font-body-md font-bold text-[#00214D]">Cuidado del Hogar</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Productos de limpieza y mantenimiento doméstico.
+                                </td>
+                                <td class="px-6 py-table-row-padding">
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">15 productos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                        </button>
+                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-6 py-table-row-padding">
+                                    <div class="flex items-center gap-4">
+                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+                                            <span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span>
+                                        </div>
+                                        <span class="font-body-md font-bold text-[#00214D]">Panadería</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Pan artesanal, bollería y productos de repostería.
+                                </td>
+                                <td class="px-6 py-table-row-padding">
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">12 productos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                        </button>
+                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-6 py-table-row-padding">
+                                    <div class="flex items-center gap-4">
+                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+                                            <span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+                                        </div>
+                                        <span class="font-body-md font-bold text-[#00214D]">Carnes y Aves</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Cortes selectos y aves de granja de alta calidad.
+                                </td>
+                                <td class="px-6 py-table-row-padding">
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">32 productos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                        </button>
+                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 5 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-6 py-table-row-padding">
+                                    <div class="flex items-center gap-4">
+                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+                                            <span class="material-symbols-outlined" data-icon="nutrition">nutrition</span>
+                                        </div>
+                                        <span class="font-body-md font-bold text-[#00214D]">Frutas y Verduras</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Productos frescos de temporada directamente del campo.
+                                </td>
+                                <td class="px-6 py-table-row-padding">
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">45 productos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-table-row-padding text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                        </button>
+                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination Section -->
+                <div class="px-6 py-4 bg-slate-50/50 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-body-sm text-slate-500">Mostrando 1 a 5 de 12 categorías</p>
+                    <div class="flex items-center gap-1">
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 transition-colors">
+                            <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                        </button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-container text-white font-bold shadow-sm">1</button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 border border-[#E2E8F0] hover:bg-white hover:border-slate-300 transition-colors">2</button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 border border-[#E2E8F0] hover:bg-white hover:border-slate-300 transition-colors">3</button>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 transition-colors">
+                            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                        </button>
                     </div>
                 </div>
-                <!-- Decorative element -->
-                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
             </div>
-            <div class="p-6 bg-white border border-[#E2E8F0] rounded-2xl flex flex-col items-center justify-center text-center shadow-sm">
-                <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3">
-                    <span class="material-symbols-outlined text-[#00214D]" data-icon="auto_awesome">auto_awesome</span>
+            <!-- Bento Info Section (Optional Visual Flare) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 p-6 bg-[#00214D] text-white rounded-2xl flex flex-col justify-between min-h-[160px] relative overflow-hidden">
+                    <div class="z-10">
+                        <h3 class="text-headline-md mb-2">Resumen de Inventario</h3>
+                        <p class="text-slate-300 max-w-md">Optimiza la distribución de tus productos categorizando eficientemente según la demanda estacional.</p>
+                    </div>
+                    <div class="z-10 mt-4 flex gap-4">
+                        <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl">
+                            <span class="block text-xl font-bold">12</span>
+                            <span class="text-[10px] uppercase tracking-wider text-slate-400">Total Categorías</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl">
+                            <span class="block text-xl font-bold">342</span>
+                            <span class="text-[10px] uppercase tracking-wider text-slate-400">Total Productos</span>
+                        </div>
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
                 </div>
-                <h4 class="font-bold text-[#00214D] mb-1">Auto-Clasificación</h4>
-                <p class="text-body-sm text-slate-500">¿Deseas activar la clasificación inteligente por IA?</p>
-                <button class="mt-4 text-[#00214D] font-semibold text-xs uppercase tracking-widest hover:underline">Configurar</button>
+                <div class="p-6 bg-white border border-[#E2E8F0] rounded-2xl flex flex-col items-center justify-center text-center shadow-sm">
+                    <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3">
+                        <span class="material-symbols-outlined text-[#00214D]" data-icon="auto_awesome">auto_awesome</span>
+                    </div>
+                    <h4 class="font-bold text-[#00214D] mb-1">Auto-Clasificación</h4>
+                    <p class="text-body-sm text-slate-500">¿Deseas activar la clasificación inteligente por IA?</p>
+                    <button class="mt-4 text-[#00214D] font-semibold text-xs uppercase tracking-widest hover:underline">Configurar</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     </main>
     <div id="modalCategoria" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 hidden backdrop-blur-sm p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
@@ -347,10 +347,11 @@
                     <label class="text-body-sm font-bold text-slate-700 uppercase tracking-wider">Nombre de la Categoría</label>
                     <asp:TextBox ID="txtNombreCat" runat="server" CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-[#00214D]/10 focus:border-[#00214D] outline-none transition-all" placeholder="Ej. Electrónicos"></asp:TextBox>
                 </div>
-            <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
-                <button type="button" onclick="cerrarModal()" class="px-4 py-2 text-slate-500 font-semibold hover:text-slate-700 transition-all">Cancelar</button>
-                <asp:Button ID="btnGuardarCat" runat="server" Text="Guardar Categoría" OnClick="btnGuardarCat_Click"
-                    CssClass="bg-[#00214D] text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:opacity-90 active:scale-95 transition-all cursor-pointer" />
+                <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
+                    <button type="button" onclick="cerrarModal()" class="px-4 py-2 text-slate-500 font-semibold hover:text-slate-700 transition-all">Cancelar</button>
+                    <asp:Button ID="btnGuardarCat" runat="server" Text="Guardar Categoría" OnClick="btnGuardarCat_Click"
+                        CssClass="bg-[#00214D] text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:opacity-90 active:scale-95 transition-all cursor-pointer" />
+                </div>
             </div>
         </div>
     </div>

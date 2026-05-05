@@ -24,6 +24,33 @@ namespace DistribuidoraKeppler.Vista.Usuario
         protected global::System.Web.UI.WebControls.Image imgPerfil;
 
         /// <summary>
+        /// Control litIniciales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litIniciales;
+
+        /// <summary>
+        /// Control litNombreHeader.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litNombreHeader;
+
+        /// <summary>
+        /// Control litEmailHeader.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litEmailHeader;
+
+        /// <summary>
         /// Control fuImagen.
         /// </summary>
         /// <remarks>

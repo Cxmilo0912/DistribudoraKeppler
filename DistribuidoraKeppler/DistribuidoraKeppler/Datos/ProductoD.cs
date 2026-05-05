@@ -1,6 +1,9 @@
 ﻿using DistribuidoraKeppler.Modelo;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -9,6 +12,7 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ProductoD
     {
+        private readonly string _conn = ConfigurationManager.ConnectionStrings["ConexionDB"].ConnectionString;
         public bool MtRegistrarProducto(Producto producto)
         {
             try
@@ -107,5 +111,142 @@ namespace DistribuidoraKeppler.Datos
                 throw new Exception("Error al eliminar el producto: " + ex.Message);
             }
         }
+
+        // -- PARTE HECHA POR JHON -- INICIO //
+
+        // Metodo para obtener el catalogo de los productos
+        public List<Producto> MtObtenerCatalogo(string busqueda, int idCategoria)
+        {
+            List<Producto> oLista = new List<Producto>();
+
+            using (var conexion = ConexionDB.MtAbrirConexion())
+            {
+
+
+                string sql = @"
+                SELECT  p.Id, p.Nombre, p.Descripcion, p.Precio,
+                        p.Stock, p.Estado, p.Imagen,
+                        p.LimiteVenta, p.LimiteMinimo, p.LimiteMaximo,
+                        p.IdMarca, p.IdCategoria,
+                        m.Nombre  AS NombreMarca,
+                        c.Nombre  AS NombreCategoria
+                FROM    dbo.Producto  p
+                INNER JOIN dbo.Marca     m ON m.Id = p.IdMarca
+                INNER JOIN dbo.Categoria c ON c.Id = p.IdCategoria
+                WHERE   p.Estado = 'Activo'
+                  AND  (@Busqueda    = ''
+                        OR p.Nombre  LIKE '%' + @Busqueda + '%'
+                        OR m.Nombre  LIKE '%' + @Busqueda + '%')
+                  AND  (@IdCategoria = 0
+                        OR p.IdCategoria = @IdCategoria)
+                ORDER BY p.Nombre";
+
+                using (var oCon = new SqlConnection(_conn))
+                using (var oCmd = new SqlCommand(sql, oCon))
+                {
+                    oCmd.Parameters.Add("@Busqueda", SqlDbType.NVarChar).Value = busqueda ?? ""; // Si busqueda es null, se asigna una cadena vacía para evitar errores en la consulta
+                    oCmd.Parameters.Add("@IdCategoria", SqlDbType.Int).Value = idCategoria; // Si idCategoria es 0, se considerará como "todas las categorías" en la consulta
+                    oCon.Open();
+
+                    using (var oDr = oCmd.ExecuteReader())
+                    {
+                        while (oDr.Read())
+                        {
+                            oLista.Add(MtMapear(oDr));
+                        }
+                    }
+
+                }
+            }
+            return oLista;
+        }
+
+        // Metodo para Obtener los productos por Id
+        public Producto MtObtenerPorId(int id)
+        {
+            Producto oProducto = null;
+
+            string sql = @"
+                SELECT  p.Id, p.Nombre, p.Descripcion, p.Precio,
+                        p.Stock, p.Estado, p.Imagen,
+                        p.LimiteVenta, p.LimiteMinimo, p.LimiteMaximo,
+                        p.IdMarca, p.IdCategoria,
+                        m.Nombre  AS NombreMarca,
+                        c.Nombre  AS NombreCategoria
+                FROM    dbo.Producto  p
+                INNER JOIN dbo.Marca     m ON m.Id = p.IdMarca
+                INNER JOIN dbo.Categoria c ON c.Id = p.IdCategoria
+                WHERE   p.Id = @Id";
+
+            using (var oCon = new SqlConnection(_conn))
+            using (var oCmd = new SqlCommand(sql, oCon))
+            {
+                oCmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                oCon.Open();
+
+                using (var oDr = oCmd.ExecuteReader())
+                {
+                    if (oDr.Read())
+                    {
+                        oProducto = MtMapear(oDr);
+                    }
+                }
+            }
+
+            return oProducto;
+        }
+         // Metodo para obtener las Categorias
+         public List<Categoria> MtObtenerCategoria()
+        {
+            var oLista = new List<Categoria>();
+
+            string sql = @"SELECT Id, Nombre FROM dbo.Categoria ORDER BY Nombre";
+
+            using (var oCon = new SqlConnection(_conn))
+            using (var oCmd = new SqlCommand(sql, oCon))
+            {
+                oCon.Open();
+                using (var oDr = oCmd.ExecuteReader())
+                {
+                    while (oDr.Read())
+                    {
+                        oLista.Add(new Categoria
+                        {
+                            Id = (int)oDr["Id"],
+                            Nombre = oDr["Nombre"].ToString()
+                        });
+                    }
+                }
+            }
+            return oLista;
+        }
+
+
+        // Metodo para Mapear el DataRead
+        private Producto MtMapear(SqlDataReader oDr)
+        {
+            return new Producto
+            {
+                Id = (int)oDr["Id"],
+                Nombre = oDr["Nombre"].ToString(),
+                Descripcion = oDr["Descripcion"].ToString(),
+                Precio = (decimal)oDr["Precio"],
+                Stock = (int)oDr["Stock"],
+                Estado = oDr["Estado"].ToString(),
+                Imagen = oDr["Imagen"] == DBNull.Value
+                                      ? null
+                                      : oDr["Imagen"].ToString(),
+                LimiteVenta = Convert.ToInt32(oDr["LimiteVenta"]),
+                LimiteMinimo = Convert.ToInt32(oDr["LimiteMinimo"]),
+                LimiteMaximo = oDr["LimiteMaximo"] == DBNull.Value
+                                      ? (int?)null
+                                      : Convert.ToInt32(oDr["LimiteMaximo"]),
+                IdMarca = (int)oDr["IdMarca"],
+                IdCategoria = (int)oDr["IdCategoria"],
+                MarcaNombre = oDr["NombreMarca"].ToString(),
+                CategoriaNombre = oDr["NombreCategoria"].ToString()
+            };
+        }
+        //--FIN DEL CODIGO GENERADO POR JHON --//
     }
 }

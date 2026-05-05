@@ -6,10 +6,25 @@ namespace DistribuidoraKeppler.Logica
 {
     public class ClienteL
     {
-        ClienteD clienteD = new ClienteD();
         UsuarioD usuarioD = new UsuarioD();
 
-        
+        ClienteD oClienteD = new ClienteD();
+
+        // Obtener cliente por Id
+        public Cliente MtObtenerPorId(int id)
+        {
+            if (id <= 0) return null;
+
+            return oClienteD.MtObtenerPorId(id);
+        }
+
+        public Cliente MtObtenerPorEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return null;
+
+            return oClienteD.MtObtenerPorEmail(email);
+        }
+        // Metodo Para crear nuevo cliente
         public bool MtCrearCliente(Cliente cliente, string clave)
         {
             if (cliente == null) return false;
@@ -26,13 +41,13 @@ namespace DistribuidoraKeppler.Logica
 
             cliente.Contrasena = HashHelper.Encriptar(clave);
 
-            return clienteD.MtInsertarDatosCliente(cliente);
+            return oClienteD.MtInsertarDatosCliente(cliente);
         }
 
-   
+
         public bool MtCambiaContrasena(int idCliente, string actual, string nueva)
         {
-            var cliente = clienteD.MtObtenerPorId(idCliente);
+            var cliente = oClienteD.MtObtenerPorId(idCliente);
 
             if (cliente == null) return false;
 
@@ -43,7 +58,7 @@ namespace DistribuidoraKeppler.Logica
 
             string hashNueva = HashHelper.Encriptar(nueva);
 
-            return clienteD.ActualizarContrasena(idCliente, hashNueva);
+            return oClienteD.ActualizarContrasena(idCliente, hashNueva);
         }
 
         public bool MtActualizarPerfil(Cliente cliente)
@@ -74,7 +89,15 @@ namespace DistribuidoraKeppler.Logica
                 }
             }
 
-            return clienteD.ActualizarCliente(cliente);
+            return oClienteD.ActualizarCliente(cliente);
+        }
+
+        public bool MtActualizarImagen(int idCliente, string ruta)
+        {
+            if (string.IsNullOrEmpty(ruta))
+                return false;
+
+            return oClienteD.ActualizarImagen(idCliente, ruta);
         }
     }
 }
