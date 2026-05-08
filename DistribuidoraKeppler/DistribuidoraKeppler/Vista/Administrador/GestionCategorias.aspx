@@ -197,7 +197,7 @@
                                 </td>
                                 <td class="px-6 py-table-row-padding text-body-md text-slate-600"><%=item.Descripcion%></td>
                                 <td class="px-6 py-table-row-padding">
-                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">24 productos
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full"><%=item.TotalProductos%> Productos
                                     </span>
                                 </td>
                                 <td class="px-6 py-table-row-padding text-right">
