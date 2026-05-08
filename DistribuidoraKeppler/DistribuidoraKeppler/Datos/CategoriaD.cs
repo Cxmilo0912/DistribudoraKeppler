@@ -27,7 +27,8 @@ namespace DistribuidoraKeppler.Datos
                             categorias.Add(new Categoria
                             {
                                 Id = Convert.ToInt32(dr["Id"]),
-                                Nombre = dr["Nombre"].ToString()
+                                Nombre = dr["Nombre"].ToString(),
+                                Descripcion = dr["Descripcion"].ToString() // Jhon
                             });
                         }
                     }
