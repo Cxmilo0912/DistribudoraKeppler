@@ -11,9 +11,13 @@ namespace DistribuidoraKeppler.Vista.Administrador
 {
     public partial class GestionCategorias : System.Web.UI.Page
     {
+        protected List<Categoria> lista = new List<Categoria>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            CategoriaL oCategoriaL = new CategoriaL();
+            lista = oCategoriaL.MtObtenerCategorias();
 
+            var count = lista.Count;
         }
         protected void btnGuardarCat_Click(object sender, EventArgs e)
         {
@@ -60,6 +64,11 @@ namespace DistribuidoraKeppler.Vista.Administrador
                 string errorMsg = $"swal('Error de Sistema', '{ex.Message}', 'error');";
                 ScriptManager.RegisterStartupScript(this, GetType(), "exception", errorMsg, true);
             }
+        }
+
+        protected void lbtnEditar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

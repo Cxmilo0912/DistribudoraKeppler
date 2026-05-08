@@ -16,7 +16,18 @@ namespace DistribuidoraKeppler.Datos
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
                 con.Open();
-                string consulta = "Select * from Categoria";
+                string consulta = @"SELECT
+                                    c.Id,
+                                    c.Nombre,
+                                    c.Descripcion,
+                                    COUNT(p.Id) AS TotalProductos
+                                    FROM Categoria c
+                                    LEFT JOIN Producto p
+                                        ON p.IdCategoria = c.Id
+                                    GROUP BY
+                                        c.Id,
+                                        c.Nombre,
+                                        c.Descripcion";
                 using (SqlCommand cmd = new SqlCommand(consulta, con))
                 {
 
@@ -27,7 +38,9 @@ namespace DistribuidoraKeppler.Datos
                             categorias.Add(new Categoria
                             {
                                 Id = Convert.ToInt32(dr["Id"]),
-                                Nombre = dr["Nombre"].ToString()
+                                Nombre = dr["Nombre"].ToString(),
+                                Descripcion = dr["Descripcion"].ToString(), // Jhon
+                                TotalProductos = Convert.ToInt32(dr["TotalProductos"])
                             });
                         }
                     }

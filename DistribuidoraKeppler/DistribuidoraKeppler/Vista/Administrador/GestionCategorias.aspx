@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -107,6 +110,35 @@
             display: inline-block;
             vertical-align: middle;
         }
+
+        /*PARTE EDITADA POR JHON*/
+        .dataTables_wrapper .dataTables_paginate {
+            margin-top: 20px;
+        }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                border-radius: 10px !important;
+                border: 1px solid #E2E8F0 !important;
+                margin: 0 4px;
+                background: white !important;
+                color: #475569 !important;
+            }
+
+                .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+                    background: #00214D !important;
+                    color: white !important;
+                    border: none !important;
+                }
+
+                .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                    background: #F8FAFC !important;
+                    color: #00214D !important;
+                }
+
+                .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                    color: white !important;
+                }
+        /*PARTE EDITADA POR JHON-FIN*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -126,6 +158,8 @@
                     Agregar Categoría
                 </button>
             </div>
+
+            <%-- PARTE EDITADA POR JOHN- INICIO --%>
             <!-- Search Section -->
             <div class="w-full">
                 <div class="relative group">
@@ -138,7 +172,7 @@
             <!-- Content Card (Table) -->
             <div class="bg-white rounded-xl border border-[#E2E8F0] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
+                    <table id="example" class="w-full text-left border-collapse">
                         <thead class="bg-slate-50/50 border-b border-[#E2E8F0]">
                             <tr>
                                 <th class="px-6 py-4 text-label-caps font-label-caps text-slate-500 uppercase tracking-wider">NOMBRE DE LA CATEGORÍA</th>
@@ -148,20 +182,22 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-[#E2E8F0]">
+                            <%foreach (var item in lista)
+                                {  %>
                             <!-- Row 1 -->
                             <tr class="hover:bg-slate-50/50 transition-colors">
+
                                 <td class="px-6 py-table-row-padding">
                                     <div class="flex items-center gap-4">
                                         <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
                                             <span class="material-symbols-outlined" data-icon="coffee">coffee</span>
                                         </div>
-                                        <span class="font-body-md font-bold text-[#00214D]">Bebidas</span>
+                                        <span class="font-body-md font-bold text-[#00214D]"><%=item.Nombre%></span>
                                     </div>
                                 </td>
-                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Bebidas calientes y frías, incluyendo cafés y tés.
-                                </td>
+                                <td class="px-6 py-table-row-padding text-body-md text-slate-600"><%=item.Descripcion%></td>
                                 <td class="px-6 py-table-row-padding">
-                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">24 productos
+                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full"><%=item.TotalProductos%> Productos
                                     </span>
                                 </td>
                                 <td class="px-6 py-table-row-padding text-right">
@@ -175,131 +211,10 @@
                                     </div>
                                 </td>
                             </tr>
-                            <!-- Row 2 -->
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="px-6 py-table-row-padding">
-                                    <div class="flex items-center gap-4">
-                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                            <span class="material-symbols-outlined" data-icon="cleaning_services">cleaning_services</span>
-                                        </div>
-                                        <span class="font-body-md font-bold text-[#00214D]">Cuidado del Hogar</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Productos de limpieza y mantenimiento doméstico.
-                                </td>
-                                <td class="px-6 py-table-row-padding">
-                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">15 productos
-                                    </span>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-right">
-                                    <div class="flex justify-end gap-2">
-                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                        </button>
-                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 3 -->
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="px-6 py-table-row-padding">
-                                    <div class="flex items-center gap-4">
-                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                            <span class="material-symbols-outlined" data-icon="bakery_dining">bakery_dining</span>
-                                        </div>
-                                        <span class="font-body-md font-bold text-[#00214D]">Panadería</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Pan artesanal, bollería y productos de repostería.
-                                </td>
-                                <td class="px-6 py-table-row-padding">
-                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">12 productos
-                                    </span>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-right">
-                                    <div class="flex justify-end gap-2">
-                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                        </button>
-                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 4 -->
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="px-6 py-table-row-padding">
-                                    <div class="flex items-center gap-4">
-                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                            <span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
-                                        </div>
-                                        <span class="font-body-md font-bold text-[#00214D]">Carnes y Aves</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Cortes selectos y aves de granja de alta calidad.
-                                </td>
-                                <td class="px-6 py-table-row-padding">
-                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">32 productos
-                                    </span>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-right">
-                                    <div class="flex justify-end gap-2">
-                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                        </button>
-                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 5 -->
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="px-6 py-table-row-padding">
-                                    <div class="flex items-center gap-4">
-                                        <div class="h-10 w-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
-                                            <span class="material-symbols-outlined" data-icon="nutrition">nutrition</span>
-                                        </div>
-                                        <span class="font-body-md font-bold text-[#00214D]">Frutas y Verduras</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-body-md text-slate-600">Productos frescos de temporada directamente del campo.
-                                </td>
-                                <td class="px-6 py-table-row-padding">
-                                    <span class="inline-flex items-center px-3 py-1 bg-[#d7e2ff] text-[#00214d] text-xs font-semibold rounded-full">45 productos
-                                    </span>
-                                </td>
-                                <td class="px-6 py-table-row-padding text-right">
-                                    <div class="flex justify-end gap-2">
-                                        <button class="p-2 text-slate-400 hover:text-[#00214D] hover:bg-slate-100 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="edit">edit</span>
-                                        </button>
-                                        <button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/20 rounded-lg transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            <%} %>
                         </tbody>
+                        <%-- PARTE EDITADA POR JOHN- FIN --%>
                     </table>
-                </div>
-                <!-- Pagination Section -->
-                <div class="px-6 py-4 bg-slate-50/50 border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p class="text-body-sm text-slate-500">Mostrando 1 a 5 de 12 categorías</p>
-                    <div class="flex items-center gap-1">
-                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 transition-colors">
-                            <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
-                        </button>
-                        <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-container text-white font-bold shadow-sm">1</button>
-                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 border border-[#E2E8F0] hover:bg-white hover:border-slate-300 transition-colors">2</button>
-                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-600 border border-[#E2E8F0] hover:bg-white hover:border-slate-300 transition-colors">3</button>
-                        <button class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 transition-colors">
-                            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-                        </button>
-                    </div>
                 </div>
             </div>
             <!-- Bento Info Section (Optional Visual Flare) -->
@@ -355,4 +270,33 @@
             </div>
         </div>
     </div>
+
+    <%-- PARTE EDITADA POR JOHN- INICIO --%>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                searching: true,
+                paging: true,
+                info: false,
+
+                pageLength: 5,
+
+                dom: 'rtp',
+
+
+
+                language: {
+                    paginate: { previous: "Anterior", next: "Siguiente" }
+                },
+                drawCallback: function () {
+                    $('.dataTables_paginate').addClass('flex justify-end mt-4');
+                }
+            });
+
+            $('input[placeholder="Buscar categoría por nombre..."]').on('keyup input', function () {
+                table.search($(this).val()).draw();
+            });
+        });
+    </script>
+    <%-- PARTE EDITADA POR JOHN- FIN --%>
 </asp:Content>
