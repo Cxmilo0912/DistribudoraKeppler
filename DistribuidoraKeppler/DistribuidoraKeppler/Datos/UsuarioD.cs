@@ -8,7 +8,6 @@ namespace DistribuidoraKeppler.Datos
 {
     public class UsuarioD
     {
-
         public Usuario MtObtenerUsuarioPorEmail(string email)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -247,12 +246,12 @@ namespace DistribuidoraKeppler.Datos
 
                 string sql = @"
         SELECT Email FROM Usuario 
-        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETDATE()
+        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETUTCDATE()
 
         UNION
 
         SELECT Email FROM Cliente 
-        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETDATE()";
+        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETUTCDATE()";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@Token", token);
@@ -263,7 +262,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        public void ActualizarPassword(string email, string nueva)
+        public bool ActualizarPassword(string email, string nueva)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
@@ -282,7 +281,7 @@ namespace DistribuidoraKeppler.Datos
                 cmd.Parameters.AddWithValue("@Pass", nueva);
                 cmd.Parameters.AddWithValue("@Email", email);
 
-                cmd.ExecuteNonQuery();
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
     }

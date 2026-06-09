@@ -45,5 +45,23 @@ namespace DistribuidoraKeppler.Logica
 
             return datos.ActualizarContrasena(idEmpleado, hash);
         }
+
+        public bool CambiarContrasenaCliente(int idCliente, string nuevaContrasena)
+        {
+            ClienteD clienteD = new ClienteD();
+
+            string hash = HashHelper.Encriptar(nuevaContrasena);
+
+            return clienteD.ActualizarContrasena(idCliente, hash);
+        }
+        public bool CambiarContrasenaPorEmail(string email, string nuevaContrasena)
+        {
+            string hash = HashHelper.Encriptar(nuevaContrasena);
+
+            UsuarioD datos = new UsuarioD();
+            datos.ActualizarPassword(email, hash);
+
+            return datos.ActualizarPassword(email, hash);
+        }
     }
 }

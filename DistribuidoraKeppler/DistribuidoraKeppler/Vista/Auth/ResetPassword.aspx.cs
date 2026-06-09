@@ -1,4 +1,5 @@
 ﻿using DistribuidoraKeppler.Datos;
+using DistribuidoraKeppler.Logica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,15 @@ namespace DistribuidoraKeppler.Vista.Auth
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            { 
+            {
                 lblError.Visible = false;
 
                 string token = Request.QueryString["token"];
 
                 if (string.IsNullOrEmpty(token))
                 {
-                    MostrarError("Token no proporcionado. No puedes cambiar la contraseña sin un enlace válido.");
+                    MostrarError("Token no proporcionado.");
+                    BloquearFormulario();
                     return;
                 }
 
@@ -29,52 +31,61 @@ namespace DistribuidoraKeppler.Vista.Auth
 
                 if (email == null)
                 {
-                    MostrarError("El enlace de recuperación es inválido o ya ha expirado.");
+                    MostrarError("El enlace es inválido o expirado.");
+                    BloquearFormulario();
+                    return;
                 }
+
+                // guardar para despues
+                ViewState["email"] = email;
+                ViewState["token"] = token;
             }
         }
 
         protected void btnCambiar_Click(object sender, EventArgs e)
         {
-            string token = Request.QueryString["token"];
-            UsuarioD datos = new UsuarioD();
-            string email = datos.ObtenerEmailPorToken(token);
+            string nuevaPass = txtNueva.Text.Trim();
+            string confirmar = txtConfirmar.Text.Trim();
 
-            if (email != null)
+            if (string.IsNullOrEmpty(nuevaPass))
             {
-                if (string.IsNullOrWhiteSpace(txtNueva.Text) || string.IsNullOrWhiteSpace(txtConfirmar.Text))
-                {
-                    MostrarError("Por favor, completa ambos campos.");
-                    return;
-                }
+                MostrarError("Ingresa una contraseña");
+                return;
+            }
 
-                if (txtNueva.Text == txtConfirmar.Text)
-                {
-                    try
-                    {
-                        datos.ActualizarPassword(email, txtNueva.Text);
+            if (nuevaPass != confirmar)
+            {
+                MostrarError("Las contraseñas no coinciden.");
+                return;
+            }
 
-                        lblError.Text = "¡Contraseña actualizada con éxito!";
-                        lblError.CssClass = "block mb-4 p-3 text-xs font-semibold text-green-600 bg-green-50 border border-green-200 rounded-lg text-center";
-                        lblError.Visible = true;
+            if (ViewState["email"] == null)
+            {
+                MostrarError("Sesión inválida. Intenta nuevamente.");
+                BloquearFormulario();
+                return;
+            }
 
-                        txtNueva.Visible = false;
-                        txtConfirmar.Visible = false;
-                        btnCambiar.Visible = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        MostrarError("Ocurrió un error al actualizar: " + ex.Message);
-                    }
-                }
-                else
-                {
-                    MostrarError("Las contraseñas ingresadas no coinciden.");
-                }
+            string email = ViewState["email"].ToString();
+            string token = ViewState["token"].ToString();
+
+            LoginL logica = new LoginL();
+
+            bool ok = logica.CambiarContrasenaPorEmail(email, nuevaPass);
+
+            if (ok)
+            {
+                UsuarioD datos = new UsuarioD();
+
+                lblError.CssClass = "block mb-4 p-3 text-xs font-semibold text-green-600 bg-green-50 border border-green-200 rounded-lg text-center";
+                lblError.Text = "Contraseña actualizada correctamente.";
+                lblError.Visible = true;
+
+                BloquearFormulario();
             }
             else
             {
-                MostrarError("No se pudo procesar la solicitud. El token ya no es válido.");
+                MostrarError("Error al actualizar la contraseña");
             }
         }
 
