@@ -24,6 +24,9 @@ namespace DistribuidoraKeppler.Vista.Auth
 
             if (resultado != null)
             {
+                Session["Cliente"] = resultado.Cliente;
+                Session["Usuario"] = resultado.Usuario;
+                Session["Rol"] = resultado.Rol;
                 SesionHelper.Usuario = resultado.Usuario;
                 SesionHelper.Cliente = resultado.Cliente;
                 SesionHelper.Rol = resultado.Rol;

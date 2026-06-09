@@ -12,7 +12,7 @@ namespace DistribuidoraKeppler.Logica
         ProductoD productos = new ProductoD();
         public string MtRegistrarProducto(Producto oProducto)
         {
-            if (string.IsNullOrEmpty(oProducto.Nombre) || string.IsNullOrEmpty(oProducto.Descripcion) || oProducto.Precio <= 0 || oProducto.Stock < 0 || string.IsNullOrEmpty(oProducto.Estado) || oProducto.LimiteVenta <= 0 || oProducto.LimiteMinimo < 0 || oProducto.IdCategoria <= 0)
+            if (string.IsNullOrEmpty(oProducto.Nombre) || string.IsNullOrEmpty(oProducto.Descripcion) || oProducto.Precio <= 0 || oProducto.Stock < 0 || string.IsNullOrEmpty(oProducto.Estado) || oProducto.LimiteVenta <= 0 || oProducto.LimiteMinimo < 0 || oProducto.IdCategoria.Id <= 0)
             {
                 return "Todos los campos son obligatorios y deben ser válidos.";
             }
@@ -67,7 +67,6 @@ namespace DistribuidoraKeppler.Logica
         public List<Categoria> MtObtenerCategoriasConTodos()
         {
             var oLista = productos.MtObtenerCategoria();
-            oLista.Insert(0, new Categoria { Id = 0, Nombre = "Todos" }); // Agregar opción "Todos" al inicio de la lista
             return oLista;
         }
 
@@ -101,5 +100,21 @@ namespace DistribuidoraKeppler.Logica
 
         //--METODOS CREADOS POR JHON -- FIN//
 
+        //Camilo
+        public bool MtEditarProducto(Producto oProducto) 
+        {
+            ProductoD oProductoD = new ProductoD();
+
+            bool verificacion = oProductoD.MtEditarProducto(oProducto);
+
+            return verificacion;
+        }
+
+        public bool MtEliminarProducto(int id) 
+        {
+            bool resultado = productos.MtEliminarProducto(id);
+
+            return resultado;
+        }
     }
 }

@@ -79,8 +79,13 @@ namespace DistribuidoraKeppler.Vista.Aministrador
                     LimiteVenta = limiteVenta,
                     LimiteMinimo = limiteMinimo,
                     Stock = stock,
-                    IdMarca = idMarca,
-                    IdCategoria = Convert.ToInt32(ddlCategorias.SelectedValue)
+                    IdMarca = new Marca
+                    {
+                        Id = idMarca,
+                    },
+                    IdCategoria = new Categoria {
+                        Id = Convert.ToInt32(ddlCategorias.SelectedValue)
+                    }
                 };
 
                 // 4. Llamar a la Capa de Lógica

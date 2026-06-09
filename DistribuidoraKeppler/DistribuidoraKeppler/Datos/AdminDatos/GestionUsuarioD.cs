@@ -16,7 +16,7 @@ namespace DistribuidoraKeppler.Datos
             {
                 cn.Open();
 
-                using (SqlCommand cmd = new SqlCommand("listarTrabajadores", cn))
+                using (SqlCommand cmd = new SqlCommand("spListarTrabajadores", cn))
                 {
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -25,6 +25,7 @@ namespace DistribuidoraKeppler.Datos
                         {
                             oTrabajadores.Add(new Usuario
                             {
+                                Id = Convert.ToInt32(dr["Id"]),
                                 Nombre = dr["Nombre"].ToString(),
                                 Email = dr["Email"].ToString(),
                                 Estado = Convert.ToByte(dr["Estado"]),

@@ -12,7 +12,6 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ProductoD
     {
-        private readonly string _conn = ConfigurationManager.ConnectionStrings["ConexionDB"].ConnectionString;
         public bool MtRegistrarProducto(Producto producto)
         {
             try
@@ -57,8 +56,8 @@ namespace DistribuidoraKeppler.Datos
             {
                 conexion.Open();
 
-                string query = @"SELECT p.Id, p.Nombre, p.Descripcion, p.Precio, p.Stock, 
-                                        p.LimiteVenta, p.LimiteMinimo, p.IdCategoria, p.IdMarca,
+                string query = @"SELECT p.Imagen, p.Id, p.Nombre, p.Descripcion, p.Precio, p.Stock, 
+                                        p.LimiteVenta, p.LimiteMinimo, p.IdCategoria, p.IdMarca, p.Estado,
                                         m.Nombre AS Marca, c.Nombre AS Categoria
                                  FROM Producto p
                                  LEFT JOIN Marca m ON p.IdMarca = m.Id
@@ -72,6 +71,7 @@ namespace DistribuidoraKeppler.Datos
                     {
                         lista.Add(new Producto
                         {
+                            Imagen = reader["Imagen"].ToString(),
                             Id = Convert.ToInt32(reader["Id"]),
                             Nombre = reader["Nombre"].ToString(),
                             Descripcion = reader["Descripcion"].ToString(),
@@ -79,8 +79,15 @@ namespace DistribuidoraKeppler.Datos
                             Stock = Convert.ToInt32(reader["Stock"]),
                             LimiteVenta = Convert.ToInt32(reader["LimiteVenta"]),
                             LimiteMinimo = Convert.ToInt32(reader["LimiteMinimo"]),
-                            IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
-                            IdMarca = Convert.ToInt32(reader["IdMarca"]),
+                            IdCategoria = new Categoria
+                            {
+                                Id = Convert.ToInt32(reader["IdCategoria"]),
+                            },
+                            IdMarca = new Marca
+                            {
+                                Id = Convert.ToInt32(reader["IdMarca"]),
+                            },
+                            Estado = reader["Estado"].ToString(),
                             MarcaNombre = reader["Marca"].ToString(),
                             CategoriaNombre = reader["Categoria"].ToString()
                         });
@@ -121,7 +128,7 @@ namespace DistribuidoraKeppler.Datos
 
             using (var conexion = ConexionDB.MtAbrirConexion())
             {
-
+                conexion.Open();
 
                 string sql = @"
                 SELECT  p.Id, p.Nombre, p.Descripcion, p.Precio,
@@ -141,13 +148,10 @@ namespace DistribuidoraKeppler.Datos
                         OR p.IdCategoria = @IdCategoria)
                 ORDER BY p.Nombre";
 
-                using (var oCon = new SqlConnection(_conn))
-                using (var oCmd = new SqlCommand(sql, oCon))
+                using (var oCmd = new SqlCommand(sql, conexion))
                 {
                     oCmd.Parameters.Add("@Busqueda", SqlDbType.NVarChar).Value = busqueda ?? ""; // Si busqueda es null, se asigna una cadena vacía para evitar errores en la consulta
                     oCmd.Parameters.Add("@IdCategoria", SqlDbType.Int).Value = idCategoria; // Si idCategoria es 0, se considerará como "todas las categorías" en la consulta
-                    oCon.Open();
-
                     using (var oDr = oCmd.ExecuteReader())
                     {
                         while (oDr.Read())
@@ -166,7 +170,11 @@ namespace DistribuidoraKeppler.Datos
         {
             Producto oProducto = null;
 
-            string sql = @"
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+
+                cn.Open();
+                string sql = @"
                 SELECT  p.Id, p.Nombre, p.Descripcion, p.Precio,
                         p.Stock, p.Estado, p.Imagen,
                         p.LimiteVenta, p.LimiteMinimo, p.LimiteMaximo,
@@ -178,43 +186,46 @@ namespace DistribuidoraKeppler.Datos
                 INNER JOIN dbo.Categoria c ON c.Id = p.IdCategoria
                 WHERE   p.Id = @Id";
 
-            using (var oCon = new SqlConnection(_conn))
-            using (var oCmd = new SqlCommand(sql, oCon))
-            {
-                oCmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-                oCon.Open();
 
-                using (var oDr = oCmd.ExecuteReader())
+                using (var oCmd = new SqlCommand(sql, cn))
                 {
-                    if (oDr.Read())
+                    oCmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                    using (var oDr = oCmd.ExecuteReader())
                     {
-                        oProducto = MtMapear(oDr);
+                        if (oDr.Read())
+                        {
+                            oProducto = MtMapear(oDr);
+                        }
                     }
                 }
             }
 
             return oProducto;
         }
-         // Metodo para obtener las Categorias
-         public List<Categoria> MtObtenerCategoria()
+        // Metodo para obtener las Categorias
+        public List<Categoria> MtObtenerCategoria()
         {
             var oLista = new List<Categoria>();
 
-            string sql = @"SELECT Id, Nombre FROM dbo.Categoria ORDER BY Nombre";
-
-            using (var oCon = new SqlConnection(_conn))
-            using (var oCmd = new SqlCommand(sql, oCon))
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
             {
-                oCon.Open();
-                using (var oDr = oCmd.ExecuteReader())
+                cn.Open();
+
+                string sql = @"SELECT Id, Nombre FROM dbo.Categoria ORDER BY Nombre";
+
+                using (var oCmd = new SqlCommand(sql, cn))
                 {
-                    while (oDr.Read())
+                    using (var oDr = oCmd.ExecuteReader())
                     {
-                        oLista.Add(new Categoria
+                        while (oDr.Read())
                         {
-                            Id = (int)oDr["Id"],
-                            Nombre = oDr["Nombre"].ToString()
-                        });
+                            oLista.Add(new Categoria
+                            {
+                                Id = (int)oDr["Id"],
+                                Nombre = oDr["Nombre"].ToString()
+                            });
+                        }
                     }
                 }
             }
@@ -241,12 +252,83 @@ namespace DistribuidoraKeppler.Datos
                 LimiteMaximo = oDr["LimiteMaximo"] == DBNull.Value
                                       ? (int?)null
                                       : Convert.ToInt32(oDr["LimiteMaximo"]),
-                IdMarca = (int)oDr["IdMarca"],
-                IdCategoria = (int)oDr["IdCategoria"],
+                IdMarca = new Marca 
+                {
+                    Id = Convert.ToInt32(oDr["IdMarca"])
+                },
+                IdCategoria = new Categoria 
+                {
+                    Id = Convert.ToInt32(oDr["IdCategoria"])
+                },
                 MarcaNombre = oDr["NombreMarca"].ToString(),
                 CategoriaNombre = oDr["NombreCategoria"].ToString()
             };
         }
         //--FIN DEL CODIGO GENERADO POR JHON --//
+
+
+        //Camilo
+        public bool MtEditarProducto(Producto oProducto)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                string consulta = @"Update Producto SET 
+                Nombre = @Nombre, 
+                Descripcion = @Descripcion, 
+                Estado = @Estado,
+                Precio = @Precio, 
+                Stock = @Stock, 
+                LimiteMinimo = @lMinimo,
+                LimiteVenta = @lVenta,
+                IdCategoria = @IdCat,
+                IdMarca = @IdMarca,
+                Imagen = @Img
+                Where Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", oProducto.Nombre);
+                    cmd.Parameters.AddWithValue("@Descripcion", oProducto.Descripcion);
+                    cmd.Parameters.AddWithValue("@Estado", oProducto.Estado);
+                    cmd.Parameters.AddWithValue("@Precio", oProducto.Precio);
+                    cmd.Parameters.AddWithValue("@Stock", oProducto.Stock);
+                    cmd.Parameters.AddWithValue("@lMinimo", oProducto.LimiteMinimo);
+                    cmd.Parameters.AddWithValue("@lVenta", oProducto.LimiteVenta);
+                    cmd.Parameters.AddWithValue("@IdCat", oProducto.IdCategoria.Id);
+                    cmd.Parameters.AddWithValue("@IdMarca", oProducto.IdMarca.Id);
+                    cmd.Parameters.AddWithValue("@Img", oProducto.Imagen);
+                    cmd.Parameters.AddWithValue("@Id", oProducto.Id);
+
+                    if (cmd.ExecuteNonQuery() > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool MtEliminarProducto(int id)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                string consulta = @"Delete From Producto Where Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+
+                    return filasAfectadas > 0;
+                }
+            }
+        }
     }
 }

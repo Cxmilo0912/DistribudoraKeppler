@@ -105,6 +105,21 @@
         }
     </script>
     <title>Distribuidora Keppler</title>
+    <style>
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+    </style>
 </head>
 <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
 
@@ -194,9 +209,9 @@
                             <!-- CTA Buttons Column (Aligned Right and Centered Vertically) -->
                             <div class="w-full md:w-1/3 flex flex-col gap-4 items-center md:items-end md:justify-center">
                                 <a href="Vista/Cliente/Registro.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg">
-    <span class="font-label font-bold text-lg uppercase tracking-tight">Registrarse</span>
-    <span class="material-symbols-outlined">account_box</span>
-</a>
+                                    <span class="font-label font-bold text-lg uppercase tracking-tight">Registrarse</span>
+                                    <span class="material-symbols-outlined">account_box</span>
+                                </a>
 
 
                                 <a href="Vista/Auth/Login.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg"><span class="font-label font-bold text-lg uppercase tracking-tight">Iniciar Sesión</span>
@@ -264,7 +279,7 @@
 
                                             <div class="h-52 overflow-hidden relative">
                                                 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                    src="https://es.dreamstime.com/photos-images/coca-cola-logo.html" />
+                                                    src="<%# Eval("Imagen") %>" alt="..." />
                                                 <span class="absolute top-3 left-3 bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Fresh Produce
                                                 </span>
                                             </div>
@@ -315,45 +330,9 @@
             </div>
         </main>
     </div>
-
-
-    <!-- Mobile Bottom NavBar (Visible only on small screens) -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 h-16 flex items-center justify-around z-50">
-        <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-symbols-outlined">inventory_2</span>
-            <span class="text-[10px] font-bold">Catalog</span>
-        </a>
-        <a class="flex flex-col items-center text-gray-400" href="#">
-            <span class="material-symbols-outlined">search</span>
-            <span class="text-[10px] font-medium">Search</span>
-        </a>
-        <a class="flex flex-col items-center text-gray-400" href="#">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            <span class="text-[10px] font-medium">Cart</span>
-        </a>
-        <a class="flex flex-col items-center text-gray-400" href="#">
-            <span class="material-symbols-outlined">person</span>
-            <span class="text-[10px] font-medium">Account</span>
-        </a>
-    </nav>
-
     </section>
-        <style>
-            @keyframes marquee {
-                0% {
-                    transform: translateX(0);
-                }
 
-                100% {
-                    transform: translateX(-50%);
-                }
-            }
 
-            .animate-marquee {
-                animation: marquee 20s linear infinite;
-            }
-        </style>
-    </div>
 </body>
 
 <script type="module" src="Vista/Assets/js/Index.js"></script>

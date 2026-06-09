@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,32 +13,24 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 {
     public partial class GestionPeoductos : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CargarProductos();
+                MtCargarCards();
             }
         }
-        private void CargarProductos()
+
+        [WebMethod]
+        public static object CargarProductos()
         {
-            try
-            {
-                ProductoL logica = new ProductoL();
 
-                var listaProductos = logica.ListarProductos();
+            ProductoL logica = new ProductoL();
 
-                if (listaProductos != null && listaProductos.Count > 0)
-                {
-                    rpProductos.DataSource = listaProductos;
-                    rpProductos.DataBind();
+            List<Producto> listaProductos = logica.ListarProductos();
 
-                    lblTotalProductos.Text = listaProductos.Count.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-            }
+            return new { data = listaProductos };
         }
         protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
@@ -81,40 +74,61 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 
         }
 
-        protected void FiltrarCategoria_Click(object sender, EventArgs e)
+        //Camilo
+
+        public void MtCargarCards()
         {
-            LinkButton btn = (LinkButton)sender;
-            string categoriaSeleccionada = btn.CommandArgument;
+            DashboardAdministradorL oAdminL = new DashboardAdministradorL();
+            lblTotalProductos.Text = oAdminL.MtProductosTotales().ToString();
 
-            ProductoL logica = new ProductoL();
-            var listaCompleta = logica.ListarProductos();
+            ProductoL oProductoL = new ProductoL();
+            List<Categoria> lista = oProductoL.MtObtenerCategoriasConTodos();
 
-            if (categoriaSeleccionada == "Todos")
-            {
-                rpProductos.DataSource = listaCompleta;
-            }
-            else
-            {
-                var listaFiltrada = listaCompleta.Where(p => p.CategoriaNombre == categoriaSeleccionada).ToList();
-                rpProductos.DataSource = listaFiltrada;
-            }
-            rpProductos.DataBind();
-            lblTotalProductos.Text = rpProductos.Items.Count.ToString();
-            ActualizarEstiloBotones(categoriaSeleccionada);
+            MarcaL oMarcaL = new MarcaL();
+            List<Marca> listaM = oMarcaL.MtListarMarcas();
+            ddlCategoria.DataSource = lista.ToList();
+            ddlCategoria.DataTextField = "Nombre";
+            ddlCategoria.DataValueField = "Id";
+            ddlCategoria.DataBind();
+
+            ddlMarca.DataSource = listaM.ToList();
+            ddlMarca.DataTextField = "Nombre";
+            ddlMarca.DataValueField = "Id";
+            ddlMarca.DataBind();
         }
-        private void ActualizarEstiloBotones(string categoria)
+
+        [WebMethod]
+        public static bool MtEditarProducto(Producto oProducto)
         {
-            string claseActivo = "px-5 py-2 rounded-full bg-primary-container text-white text-xs font-bold uppercase tracking-wider";
-            string claseInactivo = "px-5 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-slate-600 text-xs font-bold uppercase tracking-wider hover:bg-surface-container-low transition-all";
+            Producto nuevoProducto = new Producto
+            {
+                Id = oProducto.Id,
+                Nombre = oProducto.Nombre,
+                Descripcion = oProducto.Descripcion,
+                Estado = oProducto.Estado,
+                Precio = oProducto.Precio,
+                Stock = oProducto.Stock,
+                LimiteMinimo = oProducto.LimiteMinimo,
+                LimiteVenta = oProducto.LimiteVenta,
+                IdCategoria = oProducto.IdCategoria,
+                IdMarca = oProducto.IdMarca,
+                Imagen = oProducto.Imagen
 
-            btnTodos.CssClass = btnBebidas.CssClass = btnHogar.CssClass = btnPersonal.CssClass = btnSnacks.CssClass = btnAbarrotes.CssClass = claseInactivo;
+            };
 
-            if (categoria == "Todos") btnTodos.CssClass = claseActivo;
-            else if (categoria == "Bebidas") btnBebidas.CssClass = claseActivo;
-            else if (categoria == "Cuidado del hogar") btnHogar.CssClass = claseActivo;
-            else if (categoria == "Cuidado personal") btnPersonal.CssClass = claseActivo;
-            else if (categoria == "Snacks") btnSnacks.CssClass = claseActivo;
-            else if (categoria == "Abarrotes") btnAbarrotes.CssClass = claseActivo;
+
+            ProductoL oProductoL = new ProductoL();
+            bool resultado = oProductoL.MtEditarProducto(nuevoProducto);
+            return resultado;
+        }
+
+        [WebMethod]
+        public static bool MtEliminarProducto(int id)
+        {
+
+            ProductoL oProductoL = new ProductoL();
+            return oProductoL.MtEliminarProducto(id);
+
 
         }
     }

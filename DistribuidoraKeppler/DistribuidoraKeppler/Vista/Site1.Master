@@ -196,13 +196,13 @@
                 <img src="https://i.pravatar.cc/40" class="rounded-full" />
                 <div>
                     <p class="text-sm font-semibold">Usuario</p>
-                    <p class="text-xs text-gray-300">Rol</p>
+                    <asp:Label ID="lblRol" runat="server" CssClass="text-xs text-gray-300" Text="0"></asp:Label>
                 </div>
             </div>
             <!-- CERRAR SESIÓN -->
             <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar sesión"
                 CssClass="mt-3 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg"
-                    OnClick="btnCerrarSesion_Click" />
+                OnClick="btnCerrarSesion_Click" />
 
         </aside>
 
