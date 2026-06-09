@@ -17,8 +17,8 @@ namespace DistribuidoraKeppler.Modelo
         public int LimiteVenta { get; set; }
         public int LimiteMinimo { get; set; }
         public int? LimiteMaximo { get; set; }
-        public int IdMarca { get; set; }
-        public int IdCategoria { get; set; }
+        public Marca IdMarca { get; set; }
+        public Categoria IdCategoria { get; set; }
         public string MarcaNombre { get; set; }
         public string CategoriaNombre { get; set; }
     }

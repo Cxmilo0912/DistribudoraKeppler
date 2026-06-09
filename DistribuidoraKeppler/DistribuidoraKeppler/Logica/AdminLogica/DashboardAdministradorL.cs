@@ -8,17 +8,20 @@ namespace DistribuidoraKeppler.Logica
 {
     public class DashboardAdministradorL
     {
+        DashboardAdministradorD dashboardD = new DashboardAdministradorD();
         public int MtTotalClientes()
         {
-            DashboardAdministradorD dashboardD = new DashboardAdministradorD();
+
             return dashboardD.ObtenerTotalClientes();
         }
 
         public int MtProductosActivos()
         {
-            DashboardAdministradorD oDBodarAdmin = new DashboardAdministradorD();
-
-            return oDBodarAdmin.MtProductosActivos();
+            return dashboardD.MtProductosActivos();
+        }
+        public int MtProductosTotales()
+        {
+            return dashboardD.MtTotalProductos();
         }
     }
 }

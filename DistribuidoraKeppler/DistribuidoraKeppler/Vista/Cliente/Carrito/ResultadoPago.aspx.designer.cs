@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace DistribuidoraKeppler.Vista.Aministrador
+namespace DistribuidoraKeppler.Vista.Cliente.Carrito
 {
 
 
-    public partial class GestionUsuarios
+    public partial class ResultadoPago
     {
     }
 }

@@ -5,15 +5,19 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Kepler Admin - Gestión de Usuarios</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.bootstrap5.css" />
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sp-2.3.3/sl-2.0.3/datatables.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.bootstrap5.js"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sp-2.3.3/sl-2.0.3/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="../Assets/css/GestionUsuario.css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -63,44 +67,15 @@
                 <table id="example" class="w-full text-sm text-left border-separate border-spacing-0">
                     <thead class="bg-slate-50 text-slate-600">
                         <tr>
-                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Nombre</th>
-                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Email</th>
-                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Rol</th>
-                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100">Estado</th>
-                            <th class="px-6 py-4 font-bold uppercase tracking-wider border-b border-slate-100 text-center">Acciones</th>
+                            <th >Id</th>
+                            <th >Nombre</th>
+                            <th >Email</th>
+                            <th >Rol</th>
+                            <th >Estado</th>
+                            <th >Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-50">
-                        <%foreach (var item in lista)
-                            {  %>
-                        <tr class="hover:bg-slate-50/50 transition-colors group">
-                            <td class="px-6 py-4 font-medium text-slate-900"><%=item.Nombre%></td>
-                            <td class="px-6 py-4 text-slate-500"><%=item.Email%></td>
-                            <td class="px6 py-4">
-                                <span class="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-xs font-semibold"><%=item.Rol.Nombre%></span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <%if (item.Estado == 1)
-                                    { %>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emearald-800">
-                                    <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-500 rounded-full"></span>Activo
-                                </span>
-                                <%}else{  %>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800">
-                                    <span class="w-1.5 h-1.5 mr-1.5 bg-rose-500 rounded-full"></span>Inactivo
-                                </span>
-                                <%} %>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <asp:LinkButton ID="lbtnEditar" runat="server" CssClass="text-slate-400 hover:text-indigo-600 transition-colors mr-3 btnEditar" OnClick="lbtnEditar_Click">
-                                    <i class="fas fa-edit"></i>
-                                </asp:LinkButton>
-                                <button type="button" class="text-salte-400 hover:text-rose-600 transition-colors btnEliminar" title="Eliminar">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <%} %>
                     </tbody>
                 </table>
             </div>
