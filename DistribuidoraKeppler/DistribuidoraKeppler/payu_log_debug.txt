@@ -71,3 +71,6 @@ risk =
 reference_sale = KEP-1780517061669
 additional_value = 0.00
 --- Ref: KEP-1780517061669 | Estado: 4 | Valor: 27000.00 ---
+Cadena armada en C#: 4Vj8eK4rloUd272L48hsrarnUA~508029~KEP-1781728080180~26500.00~COP
+Firma MD5: 612d61de914192610e1326f7531ddce6
+--- FIN OK ---

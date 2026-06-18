@@ -3,274 +3,388 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Kepler Admin Dashboard</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <title>Admin</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
-    <style data-purpose="typography">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+
+    <style data-purpose="kepler-theme">
+        :root {
+            --kepler-blue: #0b1184;
+            --kepler-blue-dark: #060a52;
+            --kepler-blue-light: #eef0fd;
+            --kepler-bg: #f4f6fb;
+            --kepler-radius: 1rem;
+            --kepler-radius-lg: 1.5rem;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-        }
-    </style>
-    <style data-purpose="custom-colors">
-        :root {
-            --kepler-blue: #090e82;
-            --kepler-blue-light: #1e249d;
-            --bg-gray: #f4f7fe;
+            background-color: var(--kepler-bg);
         }
 
-        .bg-kepler-blue {
+        .bg-kepler {
+            background-color: var(--kepler-blue) !important;
+        }
+
+        .bg-kepler-gradient {
+            background: linear-gradient(135deg, var(--kepler-blue) 0%, var(--kepler-blue-dark) 100%) !important;
+        }
+
+        .text-kepler {
+            color: var(--kepler-blue) !important;
+        }
+
+        .bg-kepler-soft {
+            background-color: var(--kepler-blue-light) !important;
+        }
+
+        .btn-kepler {
             background-color: var(--kepler-blue);
+            border-color: var(--kepler-blue);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            padding: 0.6rem 1.25rem;
         }
 
-        .text-kepler-blue {
-            color: var(--kepler-blue);
+            .btn-kepler:hover {
+                background-color: var(--kepler-blue-dark);
+                border-color: var(--kepler-blue-dark);
+                color: #fff;
+            }
+
+        .kepler-card {
+            border: none;
+            border-radius: var(--kepler-radius-lg);
+            box-shadow: 0 2px 14px rgba(17, 24, 76, 0.06);
         }
 
-        .bg-main-content {
-            background-color: var(--bg-gray);
+        .kepler-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .kepler-search {
+            border-radius: 1rem;
+            background-color: #f1f3f9;
+            border: none;
+            padding-left: 2.75rem;
+        }
+
+            .kepler-search:focus {
+                background-color: #fff;
+                box-shadow: 0 0 0 0.2rem rgba(11, 17, 132, 0.12);
+            }
+
+        .kepler-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .kepler-bar {
+            width: 28px;
+            border-radius: 0.5rem 0.5rem 0 0;
+            background-color: #cfd8f7;
+            transition: background-color 0.2s ease;
+        }
+
+            .kepler-bar.active {
+                background-color: var(--kepler-blue);
+            }
+
+        .kepler-period-toggle .btn {
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 0.6rem;
+            padding: 0.35rem 0.85rem;
+        }
+
+        .table-kepler thead th {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #9aa0b4;
+            border-bottom: 1px solid #eef0f6;
+        }
+
+        .table-kepler tbody td {
+            vertical-align: middle;
+            border-bottom: 1px solid #f3f4f9;
+            font-size: 0.9rem;
+        }
+
+        .table-kepler tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge-soft-success {
+            background-color: #e3f7ec;
+            color: #1e9e5a;
+            font-weight: 700;
+        }
+
+        .badge-soft-warning {
+            background-color: #fef2e1;
+            color: #c2790a;
+            font-weight: 700;
+        }
+
+        .kepler-product-pill {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <!-- BEGIN: Main Content Area -->
-    <main class="flex-1 flex flex-col h-full bg-main-content overflow-y-auto">
-        <!-- BEGIN: Header -->
-        <header class="flex items-center justify-between px-8 py-4 bg-transparent" data-purpose="top-header">
-            <!-- Search Bar -->
-            <div class="relative w-96">
-                <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <span class="material-symbols-outlined text-gray-400 text-lg">search</span>
-                </span>
-                <input class="block w-full pl-11 pr-4 py-2.5 bg-gray-100 border-none rounded-2xl text-sm focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400" placeholder="Buscar pedidos, productos o clientes..." type="text" />
-            </div>
-            <!-- Right Header Tools -->
-            <div class="flex items-center space-x-6">
-                <button class="relative p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                    <span class="material-symbols-outlined text-gray-400">notifications</span>
-                    <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
-                </button>
-                <button class="text-gray-400 hover:text-gray-600 transition-colors">
-                    <span class="material-symbols-outlined text-gray-400">help_outline</span>
-                </button>
-                <div class="h-8 w-[1px] bg-gray-200"></div>
-                <div class="flex items-center space-x-3">
-                    <div class="text-right">
-                        <p class="text-xs font-bold">Panel Kepler</p>
-                        <p class="text-[10px] text-gray-400">V2.4.0</p>
-                    </div>
-                    <div class="w-10 h-10 bg-kepler-blue text-white rounded-xl flex items-center justify-center font-bold text-sm">
-                        K
-                    </div>
+
+    <!-- BEGIN: Header -->
+    <header class="d-flex align-items-center justify-content-between px-4 px-md-5 py-3 flex-wrap gap-3">
+        <div class="position-relative" style="max-width: 420px; width: 100%;">
+            <i class="bi bi-search position-absolute top-50 translate-middle-y text-muted" style="left: 1rem;"></i>
+            <input type="text" class="form-control kepler-search" placeholder="Buscar pedidos, productos o clientes..." />
+        </div>
+
+        <div class="d-flex align-items-center gap-3 gap-md-4">
+            <button class="btn btn-link text-muted position-relative p-1">
+                <i class="bi bi-bell fs-5"></i>
+                <span class="position-absolute top-0 end-0 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+            </button>
+            <button class="btn btn-link text-muted p-1">
+                <i class="bi bi-question-circle fs-5"></i>
+            </button>
+            <div class="vr d-none d-md-block"></div>
+            <div class="d-flex align-items-center gap-2">
+                <div class="text-end d-none d-sm-block">
+                    <p class="mb-0 fw-bold small">Panel Kepler</p>
+                    <p class="mb-0 text-muted" style="font-size: 0.7rem;">V2.4.0</p>
+                </div>
+                <div class="bg-kepler text-white rounded-3 d-flex align-items-center justify-content-center fw-bold" style="width: 42px; height: 42px;">
+                    K
                 </div>
             </div>
-        </header>
-        <!-- END: Header -->
-        <!-- BEGIN: Dashboard Body -->
-        <div class="px-8 pb-8 space-y-8">
-            <!-- Welcome Section -->
-            <div class="flex items-end justify-between">
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-800">Resumen General</h2>
-                    <p class="text-gray-400 mt-1">Bienvenido el sistema de distribución Kepler. Aquí tienes los datos de hoy.</p>
-                </div>
-                <button class="bg-kepler-blue hover:bg-blue-900 text-white px-6 py-3 rounded-2xl flex items-center space-x-2 font-semibold text-sm transition-all shadow-lg shadow-blue-900/20">
-                    <span class="material-symbols-outlined text-white text-sm">download</span>
-                    <span>Generar Reporte</span>
-                </button>
+        </div>
+    </header>
+    <!-- END: Header -->
+
+    <!-- BEGIN: Dashboard Body -->
+    <div class="px-4 px-md-5 pb-5">
+
+        <!-- Welcome Section -->
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 mb-4">
+            <div>
+                <h2 class="fw-bold text-dark mb-1">Resumen general</h2>
+                <p class="text-muted mb-0">Bienvenido al sistema de distribución Kepler. Aquí tienes los datos de hoy.</p>
             </div>
-            <!-- BEGIN: Summary Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card 1: Ventas de Hoy -->
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
-                    <div class="flex items-start justify-between">
-                        <div class="p-3 bg-blue-100 rounded-xl"><span class="material-symbols-outlined text-blue-500">payments</span></div>
+            <button class="btn btn-kepler d-flex align-items-center gap-2">
+                <i class="bi bi-download"></i>
+                <span>Generar reporte</span>
+            </button>
+        </div>
+
+        <!-- BEGIN: Summary Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="kepler-card card h-100 p-3">
+                    <div class="kepler-icon-box bg-kepler-soft text-kepler mb-3">
+                        <i class="bi bi-cash-coin"></i>
                     </div>
-                    <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-400">Ventas de Hoy</p>
-                        <h3 class="text-2xl font-black mt-1">$12,450.00</h3>
-                    </div>
-                </div>
-                <!-- Card 2: Pedidos Activos -->
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
-                    <div class="flex items-start justify-between">
-                        <div class="p-3 bg-purple-100 rounded-xl"><span class="material-symbols-outlined text-purple-500">inventory_2</span></div>
-                    </div>
-                    <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-400">Pedidos Activos</p>
-                        <h3 class="text-2xl font-black mt-1">84</h3>
-                    </div>
-                </div>
-                <!-- Card 3: Productos con Estado Activo -->
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
-                    <div class="flex items-start justify-between">
-                        <div class="p-3 bg-green-100 rounded-xl">
-                            <span class="material-symbols-outlined text-green-500">check</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-400">Productos con Estado Activo</p>
-                        <h3 class="text-2xl font-black mt-1">
-                            <asp:Label ID="lblProductosActivos" runat="server" Text="Label"></asp:Label>
-                        </h3>
-                    </div>
-                </div>
-                <!-- Card 4: Clientes Registrados -->
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 relative">
-                    <div class="flex items-start justify-between">
-                        <div class="p-3 bg-indigo-100 rounded-xl"><span class="material-symbols-outlined text-indigo-500">person_add</span></div>
-                    </div>
-                    <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-400">Clientes Registrados</p>
-                        <h3 class="text-2xl font-black mt-1">
-                            <asp:Label ID="lblTotalClientes" runat="server" Text="0"></asp:Label>
-                        </h3>
-                    </div>
+                    <p class="text-muted small mb-1">Ventas de hoy</p>
+                    <h3 class="fw-bold mb-0">$12.450,00</h3>
                 </div>
             </div>
-            <!-- END: Summary Cards -->
-            <!-- BEGIN: Charts & Featured Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Left: Sales Performance Chart -->
-                <div class="lg:col-span-2 bg-white p-8 rounded-[2.5rem] shadow-sm">
-                    <div class="flex items-center justify-between mb-8">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="kepler-card card h-100 p-3">
+                    <div class="kepler-icon-box mb-3" style="background-color: #f1ecfb; color: #7c4dd6;">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <p class="text-muted small mb-1">Pedidos activos</p>
+                    <h3 class="fw-bold mb-0">84</h3>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="kepler-card card h-100 p-3">
+                    <div class="kepler-icon-box mb-3" style="background-color: #e3f7ec; color: #1e9e5a;">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <p class="text-muted small mb-1">Productos con estado activo</p>
+                    <h3 class="fw-bold mb-0">
+                        <asp:Label ID="lblProductosActivos" runat="server" Text="Label"></asp:Label>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="kepler-card card h-100 p-3">
+                    <div class="kepler-icon-box mb-3" style="background-color: #fdeae3; color: #d6602f;">
+                        <i class="bi bi-person-plus"></i>
+                    </div>
+                    <p class="text-muted small mb-1">Clientes registrados</p>
+                    <h3 class="fw-bold mb-0">
+                        <asp:Label ID="lblTotalClientes" runat="server" Text="0"></asp:Label>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!-- END: Summary Cards -->
+
+        <!-- BEGIN: Charts & Featured Section -->
+        <div class="row g-3 mb-4">
+            <!-- Left: Sales Performance Chart -->
+            <div class="col-12 col-lg-8">
+                <div class="kepler-card card h-100 p-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
                         <div>
-                            <h4 class="text-xl font-bold">Rendimiento de Ventas</h4>
-                            <p class="text-sm text-gray-400">Volumen de ventas semanal</p>
+                            <h5 class="fw-bold mb-1">Rendimiento de ventas</h5>
+                            <p class="text-muted small mb-0">Volumen de ventas semanal</p>
                         </div>
-                        <div class="bg-gray-100 p-1 rounded-xl flex">
-                            <button class="px-4 py-1.5 bg-white shadow-sm rounded-lg text-xs font-bold">Semana</button>
-                            <button class="px-4 py-1.5 text-gray-400 text-xs font-bold hover:text-gray-600">Mes</button>
-                            <button class="px-4 py-1.5 text-gray-400 text-xs font-bold hover:text-gray-600">Año</button>
+                        <div class="kepler-period-toggle bg-light rounded-3 p-1 d-flex gap-1">
+                            <button class="btn btn-white bg-white shadow-sm">Semana</button>
+                            <button class="btn btn-link text-muted">Mes</button>
+                            <button class="btn btn-link text-muted">Año</button>
                         </div>
                     </div>
-                    <!-- Bar Graph Simulation -->
-                    <div class="flex items-end justify-between h-48 px-2">
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-blue-100 h-24 group-hover:bg-blue-200 transition-colors rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-gray-400 mt-3">LUN</span>
+                    <div class="d-flex align-items-end justify-content-between" style="height: 200px;">
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar" style="height: 96px;"></div>
+                            <span class="small text-muted fw-bold" style="font-size: 0.7rem;">LUN</span>
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-blue-100 h-36 group-hover:bg-blue-200 transition-colors rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-gray-400 mt-3">MAR</span>
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar" style="height: 144px;"></div>
+                            <span class="small text-muted fw-bold" style="font-size: 0.7rem;">MAR</span>
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-blue-100 h-28 group-hover:bg-blue-200 transition-colors rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-gray-400 mt-3">MIE</span>
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar" style="height: 112px;"></div>
+                            <span class="small text-muted fw-bold" style="font-size: 0.7rem;">MIE</span>
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-blue-100 h-32 group-hover:bg-blue-200 transition-colors rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-gray-400 mt-3">JUE</span>
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar" style="height: 128px;"></div>
+                            <span class="small text-muted fw-bold" style="font-size: 0.7rem;">JUE</span>
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-kepler-blue h-44 shadow-lg shadow-blue-900/30 rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-slate-800 mt-3">VIE</span>
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar active" style="height: 176px;"></div>
+                            <span class="small fw-bold text-dark" style="font-size: 0.7rem;">VIE</span>
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-blue-100 h-34 group-hover:bg-blue-200 transition-colors rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-gray-400 mt-3">SAB</span>
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar" style="height: 136px;"></div>
+                            <span class="small text-muted fw-bold" style="font-size: 0.7rem;">SAB</span>
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div class="w-12 bg-blue-100 h-20 group-hover:bg-blue-200 transition-colors rounded-t-lg"></div>
-                            <span class="text-[10px] font-bold text-gray-400 mt-3">DOM</span>
+                        <div class="d-flex flex-column align-items-center gap-2">
+                            <div class="kepler-bar" style="height: 80px;"></div>
+                            <span class="small text-muted fw-bold" style="font-size: 0.7rem;">DOM</span>
                         </div>
                     </div>
                 </div>
-                <!-- Right: Monthly Growth Card -->
-                <div class="bg-kepler-blue p-8 rounded-[2.5rem] shadow-xl text-white flex flex-col justify-between">
+            </div>
+
+            <!-- Right: Monthly Growth Card -->
+            <div class="col-12 col-lg-4">
+                <div class="kepler-card card h-100 p-4 bg-kepler-gradient text-white d-flex flex-column justify-content-between">
                     <div>
-                        <h4 class="text-xl font-medium opacity-90">Crecimiento Mensual</h4>
-                        <p class="text-xs opacity-60 mt-1">Basado en el mismo periodo el mes anterior.</p>
-                        <div class="mt-8 flex items-center space-x-4">
-                            <span class="text-5xl font-black">+24.8%</span>
-                            <div class="bg-white/10 px-3 py-1.5 rounded-full flex items-center space-x-1.5">
-                                <span class="material-symbols-outlined text-white text-[12px]">trending_up</span>
-                                <span class="text-[10px] font-bold">Alto</span>
-                            </div>
+                        <h5 class="fw-medium mb-1" style="opacity: 0.9;">Crecimiento mensual</h5>
+                        <p class="small mb-0" style="opacity: 0.6;">Basado en el mismo periodo del mes anterior.</p>
+                        <div class="d-flex align-items-center gap-3 mt-4">
+                            <span class="fw-bold" style="font-size: 2.5rem;">+24.8%</span>
+                            <span class="kepler-product-pill px-3 py-1 d-flex align-items-center gap-1" style="font-size: 0.7rem; font-weight: 700;">
+                                <i class="bi bi-graph-up-arrow"></i>Alto
+                            </span>
                         </div>
                     </div>
-                    <div class="mt-12">
-                        <p class="text-[10px] font-bold opacity-50 tracking-widest uppercase">Producto más vendido</p>
-                        <div class="mt-4 flex items-center space-x-4 bg-white/10 p-4 rounded-2xl">
-                            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white opacity-80">local_cafe</span>
+                    <div class="mt-4">
+                        <p class="text-uppercase mb-2" style="font-size: 0.65rem; letter-spacing: 0.08em; opacity: 0.5; font-weight: 700;">Producto más vendido</p>
+                        <div class="kepler-product-pill d-flex align-items-center gap-3 p-3">
+                            <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 46px; height: 46px; background-color: rgba(255,255,255,0.1);">
+                                <i class="bi bi-cup-hot fs-5"></i>
                             </div>
                             <div>
-                                <p class="font-bold text-sm">Cafd Premium Kepler</p>
-                                <p class="text-xs opacity-60">1,402 Unidades</p>
+                                <p class="fw-bold mb-0" style="font-size: 0.85rem;">Café Premium Kepler</p>
+                                <p class="mb-0" style="font-size: 0.75rem; opacity: 0.6;">1.402 unidades</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END: Charts & Featured Section -->
-            <!-- BEGIN: Recent Orders Table -->
-            <section class="bg-white rounded-[2.5rem] shadow-sm overflow-hidden border border-gray-50">
-                <div class="px-8 py-6 border-b border-gray-50">
-                    <h4 class="font-bold">Pedidos Recientes</h4>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                                <th class="px-8 py-4">ID Pedido</th>
-                                <th class="px-8 py-4">Cliente</th>
-                                <th class="px-8 py-4">Fecha</th>
-                                <th class="px-8 py-4">Total</th>
-                                <th class="px-8 py-4">Estado</th>
-                                <th class="px-8 py-4 text-right">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-50">
-                            <!-- Row 1 -->
-                            <tr class="hover:bg-gray-50/50 transition-colors">
-                                <td class="px-8 py-4 text-sm font-bold">#ORD-9021</td>
-                                <td class="px-8 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-600">MA</div>
-                                        <span class="text-sm font-medium">Maria Alarcon</span>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-4 text-sm text-gray-500">Oct 24, 2023</td>
-                                <td class="px-8 py-4 text-sm font-bold">$2,450.00</td>
-                                <td class="px-8 py-4">
-                                    <span class="px-3 py-1 rounded-lg bg-emerald-100 text-emerald-700 text-[10px] font-bold tracking-wide">ENTREGADO</span>
-                                </td>
-                                <td class="px-8 py-4 text-right">
-                                    <button class="text-gray-300 hover:text-gray-500">
-                                        <span class="material-symbols-outlined text-gray-400">more_vert</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- Row 2 -->
-                            <tr class="hover:bg-gray-50/50 transition-colors">
-                                <td class="px-8 py-4 text-sm font-bold">#ORD-9022</td>
-                                <td class="px-8 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-600">JR</div>
-                                        <span class="text-sm font-medium">Juan Ramirez</span>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-4 text-sm text-gray-500">Oct 23, 2023</td>
-                                <td class="px-8 py-4 text-sm font-bold">$840.00</td>
-                                <td class="px-8 py-4">
-                                    <span class="px-3 py-1 rounded-lg bg-orange-100 text-orange-700 text-[10px] font-bold tracking-wide">PENDIENTE</span>
-                                </td>
-                                <td class="px-8 py-4 text-right">
-                                    <button class="text-gray-300 hover:text-gray-500">
-                                        <span class="material-symbols-outlined text-gray-400">more_vert</span>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <!-- END: Recent Orders Table -->
         </div>
-        <!-- END: Dashboard Body -->
-    </main>
-    <!-- END: Main Content Area -->
+        <!-- END: Charts & Featured Section -->
+
+        <!-- BEGIN: Recent Orders Table -->
+        <div class="kepler-card card">
+            <div class="card-header bg-white border-0 px-4 py-3">
+                <h5 class="fw-bold mb-0">Pedidos recientes</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-kepler mb-0">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-3">ID pedido</th>
+                            <th class="py-3">Cliente</th>
+                            <th class="py-3">Fecha</th>
+                            <th class="py-3">Total</th>
+                            <th class="py-3">Estado</th>
+                            <th class="py-3 text-end px-4">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 fw-bold">#ORD-9021</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="kepler-avatar" style="background-color: #e6f1fb; color: #185fa5;">MA</div>
+                                    <span class="fw-medium">Maria Alarcon</span>
+                                </div>
+                            </td>
+                            <td class="text-muted">24 oct, 2023</td>
+                            <td class="fw-bold">$2.450,00</td>
+                            <td><span class="badge badge-soft-success rounded-pill px-3 py-2">Entregado</span></td>
+                            <td class="text-end px-4">
+                                <button class="btn btn-link text-muted p-0">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 fw-bold">#ORD-9022</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="kepler-avatar" style="background-color: #f1ecfb; color: #7c4dd6;">JR</div>
+                                    <span class="fw-medium">Juan Ramirez</span>
+                                </div>
+                            </td>
+                            <td class="text-muted">23 oct, 2023</td>
+                            <td class="fw-bold">$840,00</td>
+                            <td><span class="badge badge-soft-warning rounded-pill px-3 py-2">Pendiente</span></td>
+                            <td class="text-end px-4">
+                                <button class="btn btn-link text-muted p-0">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END: Recent Orders Table -->
+
+    </div>
+    <!-- END: Dashboard Body -->
+
+    <!-- Bootstrap 5 JS Bundle (incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </asp:Content>

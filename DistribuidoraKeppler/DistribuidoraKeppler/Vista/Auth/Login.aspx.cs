@@ -24,8 +24,6 @@ namespace DistribuidoraKeppler.Vista.Auth
 
             if (resultado != null)
             {
-                Session["Cliente"] = resultado.Cliente;
-                Session["Usuario"] = resultado.Usuario;
                 Session["Rol"] = resultado.Rol;
                 SesionHelper.Usuario = resultado.Usuario;
                 SesionHelper.Cliente = resultado.Cliente;
@@ -36,22 +34,28 @@ namespace DistribuidoraKeppler.Vista.Auth
                 switch (rol)
                 {
                     case "administrador":
+                        Session["Usuario"] = resultado.Usuario;
                         Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx", false);
                         break;
 
                     case "bodega":
+                        Session["Usuario"] = resultado.Usuario;
                         Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx", false);
                         break;
 
                     case "preventista":
+                        Session["Usuario"] = resultado.Usuario;
                         Response.Redirect("~/Vista/Preventista/Preventista.aspx", false);
                         break;
 
                     case "repartidor":
+                        Session["Usuario"] = resultado.Usuario;
                         Response.Redirect("~/Vista/Repartidor/Repartidor.aspx", false);
                         break;
 
                     case "cliente":
+                        Session["Cliente"] = resultado.Cliente;
+                        Session["IdCliente"] = resultado.Cliente.Id;
                         Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx", false);
                         break;
 

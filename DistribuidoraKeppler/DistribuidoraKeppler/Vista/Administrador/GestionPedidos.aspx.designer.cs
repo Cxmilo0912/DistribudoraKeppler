@@ -11,7 +11,7 @@ namespace DistribuidoraKeppler.Vista.Administrador
 {
 
 
-    public partial class GestionCategorias
+    public partial class Pedidos
     {
     }
 }

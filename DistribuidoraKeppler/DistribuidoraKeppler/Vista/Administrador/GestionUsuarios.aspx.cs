@@ -16,8 +16,19 @@ namespace DistribuidoraKeppler.Vista.Aministrador
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            MtCargas();
         }
 
+        public void MtCargas()
+        {
+            GestionUsuarioL oGestionUsuarioL = new GestionUsuarioL();
+            lblTotalUsuarios.Text = oGestionUsuarioL.MtTotalUsuariosDelSistema().ToString();
+            lblAdmins.Text = oGestionUsuarioL.MtTotalAdministradores().ToString();
+            lblBodega.Text = oGestionUsuarioL.MtTotalPersonalBodega().ToString();
+            lblPrev.Text = oGestionUsuarioL.MtTotalPreventistas().ToString();
+            lblDistribuidores.Text = oGestionUsuarioL.MtTotalDistribuidores().ToString();
+            lblInactivo.Text = oGestionUsuarioL.MtUsuariosInactivos().ToString();
+        }
         [WebMethod]
         public static object MtListarTrabajadores()
         {
