@@ -399,52 +399,60 @@
         </asp:Panel>
     </div>
     <script>
-     document.addEventListener('DOMContentLoaded', () => {
-                // Actualiza el número apenas carga la página
-                MtActualizarContador();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Actualiza el número apenas carga la página
+            MtActualizarContador();
 
             document.addEventListener('click', function (e) {
-             const boton = e.target.closest('.btn-agregar');
+                const boton = e.target.closest('.btn-agregar');
 
-            if (boton) {
-                 const producto = {
-                id: boton.getAttribute('data-id'),
-            nombre: boton.getAttribute('data-nombre'),
-            precio: parseFloat(boton.getAttribute('data-precio')),
-            cantidad: 1
-                 };
-            MtAgregarAlCarrito(producto);
-             }
-         });
-     });
+                if (boton) {
+                    const producto = {
+                        id: boton.getAttribute('data-id'),
+                        nombre: boton.getAttribute('data-nombre'),
+                        precio: parseFloat(boton.getAttribute('data-precio')),
+                        cantidad: 1
+                    };
+                    MtAgregarAlCarrito(producto);
+                }
+            });
+        });
 
-            function MtAgregarAlCarrito(nuevoProducto) {
-                let carrito = JSON.parse(localStorage.getItem('carritoCompras')) || [];
-         const existe = carrito.find(p => p.id == nuevoProducto.id);
-
+        function MtAgregarAlCarrito(nuevoProducto) {
+            let carritoClave = 'carritoCompras';
+            const userId = localStorage.getItem("usuarioActivoId");
+            if (userId) {
+                carritoClave = `carritoCliente-${userId}`;
+            }
+            let carrito = JSON.parse(localStorage.getItem(carritoClave)) || [];
+            const existe = carrito.find(p => p.id == nuevoProducto.id);
             if (existe) {
                 existe.cantidad++;
-         } else {
+            } else {
                 carrito.push(nuevoProducto);
-         }
+            }
 
-            localStorage.setItem('carritoCompras', JSON.stringify(carrito));
+            localStorage.setItem(carritoClave, JSON.stringify(carrito));
 
 
             MtActualizarContador();
 
 
-     }
+        }
 
-            function MtActualizarContador() {
-                let carrito = JSON.parse(localStorage.getItem('carritoCompras')) || [];
-         // Sumamos las cantidades de todos los productos
-         const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+        function MtActualizarContador() {
+            let carritoClave = 'carritoCompras';
+            const userId = localStorage.getItem("usuarioActivoId");
+            if (userId) {
+                carritoClave = `carritoCliente-${userId}`;
+            }
+            let carrito = JSON.parse(localStorage.getItem(carritoClave)) || [];            
+            const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
 
             const badge = document.getElementById('cart-count');
             if (badge) {
                 badge.innerText = total;
-         }
-     }
+            }
+        }
     </script>
 </asp:Content>

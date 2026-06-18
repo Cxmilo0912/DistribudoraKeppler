@@ -3,8 +3,10 @@ $(document).ready(function () {
     var table = $('#example').DataTable({
         searching: true,
         paging: true,
-        colReorder: true,
         pageLength: 2,
+        "initComplete": function (settings, json) {
+            $('#example thead').hide();
+        },
         layout: {
             topEnd: [
                 {
@@ -48,7 +50,7 @@ $(document).ready(function () {
                     ]
                 },
                 'search'
-            ]
+            ],
         },
         "ajax": {
             "url": "GestionUsuarios.aspx/MtListarTrabajadores",
@@ -69,24 +71,26 @@ $(document).ready(function () {
                 "data": "Rol.Nombre",
                 "render": function (data) {
                     if (data === "Administrador") {
-                        return '<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Administrador</span>';
+                        return '<span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">Administrador</span>';
                     } else if (data === "Preventista") {
-                        return '<span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Preventista</span>';
+                        return '<span class="badge bg-purple-subtle text-purple rounded-pill px-3 py-2" style="background-color: #f3e8ff; color: #6b21a8;">Preventista</span>';
                     } else if (data === "Distribuidor") {
-                        return '<span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Distribuidor</span>';
+                        return '<span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2">Distribuidor</span>';
                     } else if (data === "Bodega") {
-                        return '<span class="px-2 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">Bodega</span>';
+                        return '<span class="badge bg-info-subtle text-info-emphasis rounded-pill px-3 py-2">Bodega</span>';
                     }
+                    return data;
                 }
             },
             {
                 "data": "Estado",
                 "render": function (data) {
                     if (data === 1) {
-                        return '<span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Activo</span>';
+                        return '<span class="badge bg-success-subtle text-success rounded-pill px-3 py-2">Activo</span>';
                     } else if (data === 0) {
-                        return '<span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-sm">Inactivo</span>';
+                        return '<span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-2">Inactivo</span>';
                     }
+                    return data;
 
                 }
             },
@@ -106,10 +110,13 @@ $(document).ready(function () {
             }
         ],
         language: {
-            paginate: { previous: "Anterior", next: "Siguiente" }
+            "paginate": {
+                "previous": "<i class='bi bi-chevron-left'></i> Anterior", // Puedes meter iconos de Bootstrap aquí
+                "next": "Siguiente <i class='bi bi-chevron-right'></i>"
+            }
         },
         drawCallback: function () {
-            $('.dataTables_paginate').addClass('flex justify-end mt-4');
+            $('.dt-paging').addClass('d-flex justify-content-end mt-3');
         }
     });
 

@@ -1,90 +1,19 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="GestionProductos.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Aministrador.GestionPeoductos" %>
+﻿<%@ Page Title="Kepler Admin - Gestión de Productos" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="GestionProductos.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Aministrador.GestionPeoductos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Gestión de Productos - Kepler Admin</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "background": "#f8f9fa",
-                        "surface-bright": "#f8f9fa",
-                        "outline": "#757780",
-                        "on-primary-fixed": "#001847",
-                        "on-tertiary": "#ffffff",
-                        "tertiary": "#0c0100",
-                        "surface-tint": "#495d90",
-                        "primary-fixed": "#dae2ff",
-                        "on-secondary-container": "#5b6278",
-                        "tertiary-fixed-dim": "#ffb59e",
-                        "secondary-fixed": "#dbe2fc",
-                        "secondary-container": "#d8dff9",
-                        "on-surface-variant": "#44464f",
-                        "error-container": "#ffdad6",
-                        "surface-container-highest": "#e1e3e4",
-                        "on-background": "#191c1d",
-                        "surface-container-high": "#e7e8e9",
-                        "tertiary-fixed": "#ffdbd0",
-                        "surface-container-lowest": "#ffffff",
-                        "on-tertiary-fixed": "#390b00",
-                        "surface-dim": "#d9dadb",
-                        "surface-container": "#edeeef",
-                        "error": "#ba1a1a",
-                        "surface-container-low": "#f3f4f5",
-                        "inverse-on-surface": "#f0f1f2",
-                        "inverse-surface": "#2e3132",
-                        "on-secondary": "#ffffff",
-                        "on-secondary-fixed-variant": "#3f465b",
-                        "primary-container": "#001a4b",
-                        "on-tertiary-container": "#bd725a",
-                        "on-error": "#ffffff",
-                        "outline-variant": "#c5c6d0",
-                        "tertiary-container": "#3c0d01",
-                        "on-tertiary-fixed-variant": "#723522",
-                        "on-error-container": "#93000a",
-                        "on-primary-fixed-variant": "#314577",
-                        "on-primary": "#ffffff",
-                        "primary-fixed-dim": "#b2c5ff",
-                        "surface": "#f8f9fa",
-                        "primary": "#000311",
-                        "on-surface": "#191c1d",
-                        "on-primary-container": "#7084ba",
-                        "secondary-fixed-dim": "#bfc6df",
-                        "secondary": "#575e74",
-                        "surface-variant": "#e1e3e4",
-                        "on-secondary-fixed": "#141b2e",
-                        "inverse-primary": "#b2c5ff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sp-2.3.3/sl-2.0.3/datatables.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sp-2.3.3/sl-2.0.3/datatables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sp-2.3.3/sl-2.0.3/datatables.min.js"></script>
@@ -94,22 +23,17 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
         }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
+        /* Estilización Avanzada de la Tabla de Productos */
         #tablaProductos {
             border-collapse: separate !important;
             border-spacing: 0 !important;
-            margin-top: 15px !important;
-            margin-bottom: 15px !important;
             border-radius: 12px !important;
             overflow: hidden !important;
-            border: 1px solid #e2e8f0 !important;
+            border: 1px solid #dee2e6 !important;
         }
-
 
             #tablaProductos thead th {
                 background-color: #001A4B !important;
@@ -122,341 +46,224 @@
                 border: none !important;
             }
 
-
             #tablaProductos tbody td {
                 background-color: #ffffff !important;
                 color: #334155 !important;
                 padding: 12px 16px !important;
                 vertical-align: middle !important;
                 border-bottom: 1px solid #f1f5f9 !important;
-                font-size: 1rem;
-                transition: background-color 0.2s ease;
-                font-weight: 600 !important;
+                font-size: 0.9rem;
+                font-weight: 500 !important;
             }
 
             #tablaProductos tbody tr:hover td {
                 background-color: #f8fafc !important;
-                cursor: pointer;
             }
 
-            #tablaProductos tbody tr:last-child td:first-child {
-                border-bottom-left-radius: 12px;
-            }
-
-            #tablaProductos tbody tr:last-child td:last-child {
-                border-bottom-right-radius: 12px;
-            }
-
-
-        .btn-editar {
+        /* Diseño de botones de la tabla */
+        .btn-action {
             border-radius: 6px !important;
-            font-weight: 500 !important;
+            font-weight: 600 !important;
             padding: 5px 12px !important;
-            font-size: 0.85rem !important;
-            border-color: #0ea5e9 !important;
-            color: #0ea5e9 !important;
+            font-size: 0.8rem !important;
             transition: all 0.2s ease !important;
         }
 
-            .btn-editar:hover {
-                background-color: #0ea5e9 !important;
-                color: white !important;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
-            }
-
-        .btn-eliminar {
-            border-radius: 6px !important;
-            font-weight: 500 !important;
-            padding: 5px 12px !important;
-            font-size: 0.85rem !important;
-            border-color: #ef4444 !important;
-            color: #ef4444 !important;
-            transition: all 0.2s ease !important;
-        }
-
-            .btn-eliminar:hover {
-                background-color: #ef4444 !important;
-                color: white !important;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
-            }
-
-
-
-        .dataTables_paginate .paginate_button {
-            padding: 6px 12px !important;
-            margin-left: 5px !important;
-            border-radius: 6px !important;
-            border: 1px solid #cbd5e1 !important;
-            background: white !important;
-            color: #0f172a !important;
-            font-weight: 500 !important;
-            font-size: 0.85rem !important;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-            .dataTables_paginate .paginate_button:hover {
-                background: #f1f5f9 !important;
-                color: #0f172a !important;
-                border-color: #94a3b8 !important;
-            }
-
-            .dataTables_paginate .paginate_button.current {
-                background: #0f172a !important;
-                color: white !important;
-                border-color: #0f172a !important;
-            }
-
-            .dataTables_paginate .paginate_button.disabled {
-                opacity: 0.5 !important;
-                cursor: not-allowed !important;
-                background: #f8fafc !important;
-            }
-
+        /* Rediseño de Botones de Exportación de DataTables a Bootstrap 5 */
         .dt-buttons .btn {
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            margin-right: 5px;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            font-size: 0.85rem !important;
+            padding: 6px 14px !important;
+            margin-right: 5px !important;
+            border: none !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
         }
-
-        .dt-buttons {
-            margin-bottom: 10px;
-        }
-
-
-        div.dt-search {
-            display: inline-flex !important;
-            align-items: center;
-        }
-
-
-
-        .buttons-copy {
-            background-color: #3B82F6 !important;
-            color: white !important;
-        }
-
-            .buttons-copy:hover {
-                background-color: #06B6D4 !important;
-                transform: translateY(10px);
-            }
-
-        .buttons-csv {
-            background-color: #10B981 !important;
-            color: white !important;
-        }
-
-            .buttons-csv:hover {
-                background-color: #047857 !important;
-                transform: translateY(10px);
-            }
-
-        .buttons-excel {
-            background-color: #27ae60 !important;
-            color: white !important;
-        }
-
-            .buttons-excel:hover {
-                background-color: #219150 !important;
-                transform: translateY(10px);
-            }
-
-        .buttons-pdf {
-            background-color: #e74c3c !important;
-            color: white !important;
-        }
-
-            .buttons-pdf:hover {
-                background-color: #df3030 !important;
-                transform: translateY(10px);
-            }
-
-        .buttons-print {
-            background-color: #4B5563 !important;
-            color: white !important;
-        }
-
-            .buttons-print:hover {
-                background-color: #4F46E5 !important;
-                transform: translateY(10px);
-            }
     </style>
-
-
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalEditarProductoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
+    <div class="container-fluid py-4 bg-light min-vh-100">
 
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalEditarProductoLabel">
-                        <i class="fas fa-box-open me-2"></i>Editar Detalles del Producto
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+        <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalEditarProductoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-3">
+                    <div class="modal-header bg-dark text-white py-3">
+                        <h5 class="modal-title d-flex align-items-center gap-2 fw-bold" id="modalEditarProductoLabel">
+                            <i class="bi bi-box-seam-fill"></i>
+                            <span>Detalles del Producto</span>
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                <div class="modal-body">
-                    <form id="formEditarProducto" autocomplete="off" enctype="multipart/form-data">
+                    <div class="modal-body p-4">
+                        <form id="formEditarProducto" autocomplete="off" enctype="multipart/form-data">
+                            <input type="hidden" id="txtIdProducto" name="id" />
 
-                        <input type="hidden" id="txtIdProducto" name="id" />
+                            <div class="row g-4">
+                                <div class="col-lg-8">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="txtNombre" class="form-label small fw-bold text-secondary">Nombre del Producto</label>
+                                            <input type="text" class="form-control rounded-2" id="txtNombre" name="nombre" required />
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="txtDescripcion" class="form-label small fw-bold text-secondary">Descripción</label>
+                                            <textarea class="form-control rounded-2" id="txtDescripcion" name="descripcion" rows="2"></textarea>
+                                        </div>
 
-                                    <div class="col-12">
-                                        <label for="txtNombre" class="form-label fw-bold">Nombre del Producto</label>
-                                        <input type="text" class="form-control" id="txtNombre" name="nombre" required />
-                                    </div>
+                                        <div class="col-md-6">
+                                            <label for="ddlCategoria" class="form-label small fw-bold text-secondary">Categoría</label>
+                                            <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select rounded-2"></asp:DropDownList>
+                                        </div>
 
-                                    <div class="col-12">
-                                        <label for="txtDescripcion" class="form-label fw-bold">Descripción</label>
-                                        <textarea class="form-control" id="txtDescripcion" name="descripcion" rows="2"></textarea>
-                                    </div>
+                                        <div class="col-md-6">
+                                            <label for="ddlMarca" class="form-label small fw-bold text-secondary">Marca</label>
+                                            <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select rounded-2">
+                                                <asp:ListItem></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
 
-                                    <div class="col-md-6">
-                                        <label for="ddlCategoria" class="form-label fw-bold">Categoría</label>
-                                        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select"></asp:DropDownList>
-                                    </div>
+                                        <div class="col-md-4">
+                                            <label for="txtEstado" class="form-label small fw-bold text-secondary">Estado (1: Activo, 0: Inactivo)</label>
+                                            <input type="text" class="form-control rounded-2" id="txtEstado" name="estado" min="0" max="1" required />
+                                        </div>
 
-                                    <div class="col-md-6">
-                                        <label for="ddlMarca" class="form-label fw-bold">Marca</label>
-                                        <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select">
-                                            <asp:ListItem></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="txtEstado" class="form-label fw-bold">Estado</label>
-                                        <input type="text" class="form-control" id="txtEstado" name="estado" step="0.01" min="0" required />
+                                        <div class="col-md-4">
+                                            <label for="txtPrecio" class="form-label small fw-bold text-secondary">Precio ($)</label>
+                                            <input type="number" class="form-control rounded-2" id="txtPrecio" name="precio" step="0.01" min="0" required />
+                                        </div>
 
-                                    </div>
+                                        <div class="col-md-4">
+                                            <label for="txtStock" class="form-label small fw-bold text-secondary">Stock Actual</label>
+                                            <input type="number" class="form-control rounded-2" id="txtStock" name="stock" min="0" required />
+                                        </div>
 
-                                    <div class="col-md-6">
-                                        <label for="txtPrecio" class="form-label fw-bold">Precio ($)</label>
-                                        <input type="number" class="form-control" id="txtPrecio" name="precio" step="0.01" min="0" required />
-                                    </div>
+                                        <div class="col-md-6">
+                                            <label for="txtLimiteMinimo" class="form-label small fw-bold text-secondary">Límite Mínimo (Stock Crítico)</label>
+                                            <input type="number" class="form-control rounded-2" id="txtLimiteMinimo" name="limiteMinimo" min="0" required />
+                                        </div>
 
-                                    <div class="col-md-6">
-                                        <label for="txtStock" class="form-label fw-bold">Stock Actual</label>
-                                        <input type="number" class="form-control" id="txtStock" name="stock" min="0" required />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="txtLimiteMinimo" class="form-label fw-bold">Límite Mínimo (Stock Crítico)</label>
-                                        <input type="number" class="form-control" id="txtLimiteMinimo" name="limiteMinimo" min="0" required />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="txtLimiteVenta" class="form-label fw-bold">Límite de Venta (Por transacción)</label>
-                                        <input type="number" class="form-control" id="txtLimiteVenta" name="limiteVenta" min="1" required />
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 border-start ps-lg-4 mt-4 mt-lg-0 d-flex flex-column justify-content-between">
-                                <div>
-                                    <label class="form-label fw-bold d-block mb-3">Imagen del Producto</label>
-
-                                    <div class="text-center p-3 border rounded bg-light mb-3" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
-                                        <img id="imgPrevisualizacion" src="https://via.placeholder.com/180" class="img-fluid rounded shadow-sm" alt="Previsualización" style="max-height: 180px; object-fit: contain;" />
-                                    </div>
-
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white"><i class="bi bi-link-45deg"></i></span>
-                                        <input type="text" id="txtImagenUrl" class="form-control" placeholder="Pega el link aquí..." />
+                                        <div class="col-md-6">
+                                            <label for="txtLimiteVenta" class="form-label small fw-bold text-secondary">Límite de Venta (Por transacción)</label>
+                                            <input type="number" class="form-control rounded-2" id="txtLimiteVenta" name="limiteVenta" min="1" required />
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-4 border-start ps-lg-4 d-flex flex-column justify-content-between">
+                                    <div>
+                                        <label class="form-label small fw-bold text-secondary mb-3">Imagen del Producto</label>
+                                        <div class="text-center p-3 border rounded bg-light mb-3 d-flex align-items-center justify-content-center" style="min-height: 220px;">
+                                            <img id="imgPrevisualizacion" src="https://via.placeholder.com/180" class="img-fluid rounded shadow-sm" alt="Previsualización" style="max-height: 180px; object-fit: contain;" />
+                                        </div>
+
+                                        <div class="input-group shadow-sm">
+                                            <span class="input-group-text bg-white border-end-0 text-secondary"><i class="bi bi-link-45deg"></i></span>
+                                            <input type="text" id="txtImagenUrl" class="form-control border-start-0 ps-0" placeholder="URL de la imagen..." />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                    </form>
+                    <div class="modal-footer bg-light border-top-0 py-3">
+                        <button type="button" class="btn btn-outline-secondary px-4 fw-semibold" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                        </button>
+                        <button type="button" class="btn btn-success px-4 fw-semibold shadow-sm" id="btnGuardar">
+                            <i class="bi bi-check-circle me-1"></i>Guardar Cambios
+                        </button>
+                    </div>
                 </div>
-
-                <div class="modal-footer bg-light">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times me-1"></i>Cancelar
-                    </button>
-                    <button type="button" class="btn btn-success" id="btnGuardar">
-                        <i class="fas fa-save me-1"></i>Guardar Cambios
-                    </button>
-                </div>
-
             </div>
         </div>
+        <header class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom" data-purpose="main-header">
+            <div>
+                <h1 class="h2 fw-bold text-dark mb-1">Gestión de Productos</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 small uppercase tracking-wider font-weight-bold">
+                        <li class="breadcrumb-item text-primary fw-semibold text-uppercase small">Inventario</li>
+                        <li class="breadcrumb-item active text-muted small" aria-current="page">Catálogo</li>
+                    </ol>
+                </nav>
+            </div>
+            <div>
+                <asp:LinkButton ID="btnCrearProducto" runat="server" OnClick="btnCrearProducto_Click"
+                    CssClass="btn btn-dark d-inline-flex align-items-center gap-2 px-4 py-2.5 rounded-3 shadow-sm fw-semibold text-sm">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Crear producto</span>
+                </asp:LinkButton>
+            </div>
+        </header>
+        <main class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table id="tablaProductos" class="table table-hover align-middle w-100 m-0" clientidmode="Static">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Límite Venta</th>
+                                <th>Límite Mín</th>
+                                <th>Marca</th>
+                                <th>Categoría</th>
+                                <th>Estado</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer class="row g-3">
+            <div class="col-12 col-md-4">
+                <div class="card bg-primary text-white border-0 shadow-sm rounded-3 p-4 position-relative overflow-hidden group">
+                    <div class="position-absolute end-0 bottom-0 mb-2 me-3 opacity-25" style="font-size: 4rem; line-height: 1;">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <span class="text-uppercase small tracking-widest fw-bold opacity-75 d-block mb-1">Total Productos</span>
+                    <asp:Label ID="lblTotalProductos" runat="server" CssClass="display-6 fw-bold tracking-tight" Text="0"></asp:Label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card bg-white border border-light shadow-sm rounded-3 p-4 position-relative overflow-hidden">
+                    <div class="position-absolute end-0 bottom-0 mb-2 me-3 text-danger opacity-25" style="font-size: 4rem; line-height: 1;">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <span class="text-uppercase small tracking-widest fw-bold text-muted d-block mb-1">Productos en Alerta</span>
+                    <h3 class="display-6 fw-bold text-danger tracking-tight mb-0">--</h3>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card bg-white border border-light shadow-sm rounded-3 p-4 position-relative overflow-hidden">
+                    <div class="position-absolute end-0 bottom-0 mb-2 me-3 text-success opacity-25" style="font-size: 4rem; line-height: 1;">
+                        <i class="bi bi-tags"></i>
+                    </div>
+                    <span class="text-uppercase small tracking-widest fw-bold text-muted d-block mb-1">Categorías del Sistema</span>
+                    <h3 class="display-6 fw-bold text-success tracking-tight mb-0">--</h3>
+                </div>
+            </div>
+        </footer>
     </div>
-    <header class="flex justify-between items-center w-full px-12 py-8 bg-surface">
-        <div>
-            <h2 class="text-3xl font-black text-primary-container tracking-tight">Gestión de Productos</h2>
-            <div class="flex items-center gap-2 mt-1">
-                <span class="text-sm text-on-secondary-container font-medium uppercase tracking-widest">Inventario</span>
-                <span class="text-slate-300">/</span>
-                <span class="text-sm text-slate-500">Catálogo</span>
-            </div>
-        </div>
-        <div class="flex items-center gap-4">
-            <asp:LinkButton ID="btnCrearProducto" runat="server"
-                OnClick="btnCrearProducto_Click"
-                CssClass="flex items-center gap-2 px-6 py-3 bg-primary-container text-white rounded-md font-semibold text-sm hover:opacity-90 transition-all">
-    <span class="material-symbols-outlined text-sm">add</span>
-    Crear producto
-            </asp:LinkButton>
-        </div>
-    </header>
-    <section class="px-12 pb-6 space-y-6">
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-        </div>
-    </section>
-    <section class="px-12 flex-1">
-        <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-outline-variant/10">
-            <table id="tablaProductos" class="table table-striped table-hover" style="width: 100%" clientidmode="Static">
-                <thead>
-                    <tr>
-                        <th>Imagen</th>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Limite de Venta</th>
-                        <th>Limite Minimo</th>
-                        <th>Marca</th>
-                        <th>Categoria</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <footer class="px-12 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-primary-container text-white p-8 rounded-xl flex flex-col gap-1 shadow-sm relative overflow-hidden group">
-            <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-9xl">inventory_2</span>
-            </div>
-            <span class="text-[11px] font-black uppercase tracking-[0.2em] opacity-60">TOTAL PRODUCTOS</span>
-
-            <asp:Label ID="lblTotalProductos" runat="server" CssClass="text-4xl font-extrabold tracking-tight" Text="0"></asp:Label>
-        </div>
-
-        <div class="bg-surface-container-lowest border border-outline-variant/10 p-8 rounded-xl flex flex-col gap-1 shadow-sm relative overflow-hidden">
-        </div>
-
-        <div class="bg-surface-container-lowest border border-outline-variant/10 p-8 rounded-xl flex flex-col gap-1 shadow-sm relative overflow-hidden">
-        </div>
-    </footer>
     <script>
         $(document).ready(function () {
             var table = $('#tablaProductos').DataTable({
                 responsive: true,
                 colReorder: true,
+                "initComplete": function (settings, json) {
+                    $('#tablaProductos thead').hide();
+                },
                 layout: {
                     topStart: 'search',
                     bottomStart: 'pageLength',

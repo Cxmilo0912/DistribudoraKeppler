@@ -235,6 +235,7 @@
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
+    <Content Include="Vista\Administrador\GestionPedidos.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
     <Content Include="Vista\Assets\css\Index.css" />
     <Content Include="Vista\Assets\js\Carrito.js" />
@@ -260,15 +261,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datos\CategoriaD.cs" />
-    <Compile Include="Datos\ClienteD.cs" />
-    <Compile Include="Datos\ConexionDB.cs" />
-    <Compile Include="Datos\DashboardAdministradorD.cs" />
-    <Compile Include="Datos\MarcaD.cs" />
-    <Compile Include="Datos\PedidoD.cs" />
-    <Compile Include="Datos\ProductoD.cs" />
+    <Compile Include="Datos\AdminDatos\CategoriaD.cs" />
+    <Compile Include="Datos\ClienteDatos\ClienteD.cs" />
+    <Compile Include="Datos\AdminDatos\ConexionDB.cs" />
+    <Compile Include="Datos\AdminDatos\DashboardAdministradorD.cs" />
+    <Compile Include="Datos\AdminDatos\MarcaD.cs" />
+    <Compile Include="Datos\AdminDatos\PedidoD.cs" />
+    <Compile Include="Datos\AdminDatos\ProductoD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
-    <Compile Include="Datos\GestionUsuarioD.cs" />
+    <Compile Include="Datos\AdminDatos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -276,14 +277,14 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Logica\CategoriaL.cs" />
-    <Compile Include="Logica\ClienteL.cs" />
-    <Compile Include="Logica\DashboardAdministradorL.cs" />
-    <Compile Include="Logica\GestionUsuarioL.cs" />
+    <Compile Include="Logica\AdminLogica\CategoriaL.cs" />
+    <Compile Include="Logica\ClienteLogica\ClienteL.cs" />
+    <Compile Include="Logica\AdminLogica\DashboardAdministradorL.cs" />
+    <Compile Include="Logica\AdminLogica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />
-    <Compile Include="Logica\MarcaL.cs" />
-    <Compile Include="Logica\PedidoL.cs" />
-    <Compile Include="Logica\ProductoL.cs" />
+    <Compile Include="Logica\AdminLogica\MarcaL.cs" />
+    <Compile Include="Logica\AdminLogica\PedidoL.cs" />
+    <Compile Include="Logica\AdminLogica\ProductoL.cs" />
     <Compile Include="Logica\UsuarioL.cs" />
     <Compile Include="Modelo\Barrio.cs" />
     <Compile Include="Modelo\Categoria.cs" />
@@ -346,6 +347,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionPedidos.aspx.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\GestionPedidos.aspx.designer.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

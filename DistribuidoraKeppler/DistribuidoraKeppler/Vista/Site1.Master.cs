@@ -56,7 +56,7 @@ namespace DistribuidoraKeppler.Vista
         }
 
         // CERRAR SESIÓN CON SWEET ALERT
-        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        protected void btnCerrarSesión_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
             Session.Clear();
@@ -75,5 +75,8 @@ namespace DistribuidoraKeppler.Vista
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "logout", script, true);
         }
+
+
+
     }
 }

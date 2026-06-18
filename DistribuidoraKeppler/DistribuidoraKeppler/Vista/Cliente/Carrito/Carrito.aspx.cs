@@ -14,6 +14,7 @@ namespace DistribuidoraKeppler.Vista.Cliente.Carrito
 {
     public partial class Carrito1 : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,7 +22,9 @@ namespace DistribuidoraKeppler.Vista.Cliente.Carrito
         [WebMethod]
         public static bool MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
         {
-            Modelo.Cliente cliente = (Modelo.Cliente)HttpContext.Current.Session["ClienteId"];
+            
+            Modelo.Cliente cliente = (Modelo.Cliente)HttpContext.Current.Session["Cliente"];
+            int idCliente = cliente.Id;
             Pedido nuevoPedido = new Pedido
             {
                 Fecha = DateTime.Now,
@@ -30,7 +33,7 @@ namespace DistribuidoraKeppler.Vista.Cliente.Carrito
                 Total = oPedido.Total,
                 IdCliente = new Modelo.Cliente
                 {
-                    Id = cliente.Id
+                    Id = idCliente
                 } 
 
             };

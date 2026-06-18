@@ -41,6 +41,79 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
         }
-    }
 
+        public int MtTotalUsuariosDelSistema()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                using (SqlCommand cmd = new SqlCommand("spTotalUsuarios", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
+        public int MtTotalAdministradores()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand("spTotalAdministradores", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
+        public int MtTotalDistribuidores()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand("spTotalDistribuidores", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
+        public int MtTotalPreventistas()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand("spTotalPreventistas", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+
+        }
+
+        public int MtUsuariosInactivos()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand("spUsuariosInactivos", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
+        public int MtTotalPersonalBodega()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand("spTotalPersonalBodega", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+}
 }

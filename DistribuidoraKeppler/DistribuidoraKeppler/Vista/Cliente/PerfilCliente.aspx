@@ -1,348 +1,140 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilCliente.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Cliente.WebForm1" %>
+﻿<%@ Page Title="Perfil de Usuario - Keppler" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilCliente.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Cliente.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: #f4f6f9;
-        }
-
-        .perfil-wrap {
-            max-width: 820px;
-            margin: 2.5rem auto;
-            padding: 0 1rem;
-        }
-
-        /* ── Header de perfil ── */
-        .perfil-header {
-            background: #0f1f35;
-            border-radius: 16px;
-            padding: 2rem 2.25rem;
-            display: flex;
-            align-items: center;
-            gap: 1.75rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .perfil-avatar-wrap {
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .perfil-avatar-img {
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2.5px solid #3b7dd8;
-            display: block;
-        }
-
-        .perfil-avatar-placeholder {
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            background: #1e3a5f;
-            border: 2.5px solid #3b7dd8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'DM Serif Display', serif;
-            font-size: 30px;
-            color: #aaccf5;
-        }
-
-        .perfil-header-info {
-            flex: 1;
-        }
-
-        .perfil-nombre {
-            font-size: 21px;
-            font-weight: 600;
-            color: #e8f0fb;
-            margin: 0 0 3px;
-        }
-
-        .perfil-email-display {
-            font-size: 13px;
-            color: #6b8bb0;
-            margin: 0 0 12px;
-        }
-
-        .perfil-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #1a3455;
-            border: 0.5px solid #2d5080;
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 11px;
-            color: #6ba3d6;
-            font-weight: 500;
-        }
-
-            .perfil-badge::before {
-                content: '';
-                display: inline-block;
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: #3ecf8e;
-            }
-
-        .perfil-upload-zone {
-            margin-left: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 8px;
-        }
-
-            .perfil-upload-zone input[type=file] {
-                font-size: 12px;
-                color: #6b8bb0;
-            }
-
-        .btn-foto {
-            background: transparent;
-            border: 0.5px solid #2d5080;
-            border-radius: 8px;
-            color: #6ba3d6;
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 7px 18px;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-
-            .btn-foto:hover {
-                background: #1a3455;
-                color: #aaccf5;
-            }
-
-        /* ── Cards ── */
-        .perfil-card {
-            background: #ffffff;
-            border: 0.5px solid #e2e6ed;
-            border-radius: 14px;
-            padding: 1.75rem 2rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .perfil-card-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: #8a95a3;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            margin: 0 0 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 0.5px solid #eaedf1;
-        }
-
-        /* ── Grid de campos ── */
-        .perfil-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-        }
-
-        .field-full {
-            grid-column: 1 / -1;
-        }
-
-        .perfil-field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-            .perfil-field label {
-                font-size: 11px;
-                font-weight: 600;
-                color: #8a95a3;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
-            }
-
-            .perfil-field .form-control,
-            .perfil-field input {
-                background: #f8f9fb;
-                border: 0.5px solid #dde1e8;
-                border-radius: 8px;
-                padding: 10px 14px;
-                font-size: 14px;
-                font-family: 'Outfit', sans-serif;
-                color: #1a2332;
-                transition: border-color 0.2s, box-shadow 0.2s;
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-                .perfil-field .form-control:focus,
-                .perfil-field input:focus {
-                    outline: none;
-                    border-color: #3b7dd8;
-                    box-shadow: 0 0 0 3px rgba(59, 125, 216, 0.12);
-                    background: #ffffff;
-                }
-
-        /* ── Botones ── */
-        .btn-guardar {
-            margin-top: 1.5rem;
-            background: #0f1f35;
-            color: #aaccf5;
-            border: none;
-            border-radius: 8px;
-            padding: 11px 28px;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-
-            .btn-guardar:hover {
-                background: #1a3455;
-                color: #d0e4f7;
-            }
-
-        .btn-pass {
-            margin-top: 1.5rem;
-            background: transparent;
-            color: #2563eb;
-            border: 0.5px solid #bdd3f7;
-            border-radius: 8px;
-            padding: 11px 28px;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-            .btn-pass:hover {
-                background: #eff5ff;
-            }
-        
-
-        @media (max-width: 600px) {
-            .perfil-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .perfil-upload-zone {
-                margin-left: 0;
-                align-items: flex-start;
-            }
-
-            .perfil-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .field-full {
-                grid-column: 1;
-            }
+        /* Aplicamos la fuente Outfit de forma global para mantener la estética premium */
+        body, input, button, textarea {
+            font-family: 'Outfit', sans-serif !important;
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <%-- ── Header de perfil ── --%>
-        <div class="perfil-header">
-            <div class="perfil-avatar-wrap">
-                <asp:Image ID="imgPerfil" runat="server" CssClass="perfil-avatar-img" />
+    <div class="max-w-4xl mx-auto space-y-6 py-4 animate-fade-in">
+
+        <div class="bg-gradient-to-r from-[#001838] to-[#000b1a] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-950/10 border border-slate-900/40">
+
+            <div class="flex flex-col sm:flex-row items-center gap-5 w-full md:w-auto">
+                <div class="relative group shrink-0">
+                    <asp:Image ID="imgPerfil" runat="server"
+                        CssClass="w-24 h-24 rounded-full object-cover border-4 border-blue-500/30 shadow-lg"
+                        ImageUrl="https://i.pravatar.cc/150?img=33" />
+                </div>
+
+                <div class="text-center sm:text-left">
+                    <h2 class="text-2xl font-bold text-white tracking-tight">
+                        <asp:Literal ID="litNombreHeader" runat="server" Text="Mi Empresa S.A.S" />
+                    </h2>
+                    <p class="text-sm text-slate-400 mt-0.5">
+                        <asp:Literal ID="litEmailHeader" runat="server" Text="contacto@miempresa.com" />
+                    </p>
+                    <div class="mt-3">
+                        <span class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Cliente Activo
+                        </span>
+                    </div>
+                </div>
             </div>
 
-            <div class="perfil-header-info">
-                <p class="perfil-nombre">
-                    <asp:Literal ID="litNombreHeader" runat="server" Text="Mi Empresa" />
-                </p>
-                <p class="perfil-email-display">
-                    <asp:Literal ID="litEmailHeader" runat="server" Text="correo@empresa.com" />
-                </p>
-                <span class="perfil-badge">Cliente activo</span>
-            </div>
+            <div class="flex flex-col items-center md:items-end gap-2 w-full md:w-auto border-t border-slate-800/60 md:border-t-0 pt-4 md:pt-0">
+                <asp:FileUpload ID="fuImagen" runat="server"
+                    CssClass="block w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-slate-200 hover:file:bg-slate-700 transition-all cursor-pointer max-w-xs" />
 
-            <div class="perfil-upload-zone">
-                <asp:FileUpload ID="fuImagen" runat="server" CssClass="form-control" />
                 <asp:Button ID="btnSubirFoto" runat="server"
-                    Text="Cambiar foto"
-                    CssClass="btn-foto"
+                    Text="Actualizar foto"
+                    CssClass="w-full md:w-auto mt-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs px-4 py-2 rounded-xl border border-slate-700/40 transition-all cursor-pointer shadow-sm"
                     OnClick="btnSubirFoto_Click" />
             </div>
         </div>
 
-        <%-- ── Información de la empresa ── --%>
-        <div class="perfil-card">
-            <p class="perfil-card-title">Información de la empresa</p>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            <div class="perfil-grid">
-                <div class="perfil-field">
-                    <label for="<%= txtNombre.ClientID %>">Empresa</label>
-                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm lg:col-span-2 flex flex-col justify-between">
+                <div>
+                    <div class="border-b border-slate-100 pb-3 mb-5">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Información Corporativa</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtNombre.ClientID %>">Razón Social / Empresa</label>
+                            <asp:TextBox ID="txtNombre" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtTelefono.ClientID %>">Teléfono de Contacto</label>
+                            <asp:TextBox ID="txtTelefono" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtEmail.ClientID %>">Correo Electrónico Institucional</label>
+                            <asp:TextBox ID="txtEmail" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtDireccion.ClientID %>">Dirección de Despacho</label>
+                            <asp:TextBox ID="txtDireccion" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="perfil-field">
-                    <label for="<%= txtTelefono.ClientID %>">Teléfono</label>
-                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
-                </div>
-
-                <div class="perfil-field field-full">
-                    <label for="<%= txtEmail.ClientID %>">Email</label>
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
-                </div>
-
-                <div class="perfil-field field-full">
-                    <label for="<%= txtDireccion.ClientID %>">Dirección</label>
-                    <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" />
-                </div>
-            </div>
-
-            <asp:Button ID="btnGuardar" runat="server"
-                Text="Guardar cambios"
-                OnClick="btnGuardar_Click"
-                CssClass="btn-guardar" />
-        </div>
-
-        <%-- ── Seguridad ── --%>
-        <div class="perfil-card">
-            <p class="perfil-card-title">Seguridad</p>
-
-            <div class="perfil-grid">
-                <div class="perfil-field field-full">
-                    <label for="<%= txtActual.ClientID %>">Contraseña actual</label>
-                    <asp:TextBox ID="txtActual" runat="server"
-                        TextMode="Password"
-                        CssClass="form-control"
-                        placeholder="Ingresa tu contraseña actual" />
-                </div>
-
-                <div class="perfil-field">
-                    <label for="<%= txtNueva.ClientID %>">Nueva contraseña</label>
-                    <asp:TextBox ID="txtNueva" runat="server"
-                        TextMode="Password"
-                        CssClass="form-control"
-                        placeholder="Mínimo 8 caracteres" />
-                </div>
-
-                <div class="perfil-field">
-                    <label for="<%= txtConfirmar.ClientID %>">Confirmar contraseña</label>
-                    <asp:TextBox ID="txtConfirmar" runat="server"
-                        TextMode="Password"
-                        CssClass="form-control"
-                        placeholder="Repite la nueva contraseña" />
+                <div class="pt-6 mt-6 border-t border-slate-100 flex justify-end">
+                    <asp:Button ID="btnGuardar" runat="server"
+                        Text="Guardar Cambios"
+                        OnClick="btnGuardar_Click"
+                        CssClass="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold text-sm px-6 py-2.5 rounded-xl cursor-pointer shadow-md shadow-blue-600/10 transition-all active:scale-[0.98]" />
                 </div>
             </div>
 
-            <asp:Button ID="btnCambiarPass" runat="server"
-                Text="Actualizar contraseña"
-                CssClass="btn-pass"
-                OnClick="btnCambiarPass_Click" />
+            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="border-b border-slate-100 pb-3 mb-5">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Seguridad de la Cuenta</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtActual.ClientID %>">Contraseña Actual</label>
+                            <asp:TextBox ID="txtActual" runat="server"
+                                TextMode="Password"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all"
+                                placeholder="••••••••" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtNueva.ClientID %>">Nueva Contraseña</label>
+                            <asp:TextBox ID="txtNueva" runat="server"
+                                TextMode="Password"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all"
+                                placeholder="Mín. 8 caracteres" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtConfirmar.ClientID %>">Confirmar Contraseña</label>
+                            <asp:TextBox ID="txtConfirmar" runat="server"
+                                TextMode="Password"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all"
+                                placeholder="Repita la nueva clave" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 mt-6 border-t border-slate-100">
+                    <asp:Button ID="btnCambiarPass" runat="server"
+                        Text="Actualizar Clave"
+                        CssClass="w-full bg-slate-100 hover:bg-slate-200 text-blue-600 border border-blue-200/60 font-semibold text-sm px-4 py-2.5 rounded-xl cursor-pointer transition-all active:scale-[0.98]"
+                        OnClick="btnCambiarPass_Click" />
+                </div>
+            </div>
+
         </div>
+    </div>
 </asp:Content>
