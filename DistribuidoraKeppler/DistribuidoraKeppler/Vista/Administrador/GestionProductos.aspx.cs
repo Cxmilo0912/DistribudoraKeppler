@@ -59,10 +59,6 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             }
         }
 
-        protected void btnCrearProducto_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("CreacionProducto.aspx");
-        }
 
         protected void btnEditar_Command(object sender, CommandEventArgs e)
         {
@@ -130,6 +126,11 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             return oProductoL.MtEliminarProducto(id);
 
 
+        }
+
+        protected void btnCrearProducto_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("CrearProducto.aspx");
         }
     }
 }
