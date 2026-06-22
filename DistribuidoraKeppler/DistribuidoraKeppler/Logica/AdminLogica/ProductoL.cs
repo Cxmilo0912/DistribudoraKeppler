@@ -116,5 +116,10 @@ namespace DistribuidoraKeppler.Logica
 
             return resultado;
         }
+
+        public int MtContarTotalProductos()
+        {
+            return productos.MtContarProductosTotales();
+        }
     }
 }

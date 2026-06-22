@@ -1,90 +1,795 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="DistribuidoraKeppler.Index" %>
 
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_box" />
-    <link rel="stylesheet" href="Vista/Assets/css/Index.css" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#94d4b5",
-                        "on-primary-fixed-variant": "#005234",
-                        "on-primary-fixed": "#002112",
-                        "background": "#121414",
-                        "on-error-container": "#ffdad6",
-                        "tertiary": "#94d4b5",
-                        "on-primary": "#003823",
-                        "surface-container": "#1e2020",
-                        "primary-container": "#08a56e",
-                        "inverse-primary": "#006c46",
-                        "on-secondary-fixed": "#351000",
-                        "on-tertiary-fixed-variant": "#09513a",
-                        "surface-variant": "#333535",
-                        "surface-container-highest": "#333535",
-                        "surface": "#121414",
-                        "secondary-fixed-dim": "#ffb693",
-                        "secondary": "#ffb693",
-                        "on-tertiary-fixed": "#002115",
-                        "on-secondary-container": "#572000",
-                        "on-surface-variant": "#bccabf",
-                        "surface-container-high": "#282a2a",
-                        "surface-bright": "#383939",
-                        "primary-fixed-dim": "#5ddda1",
-                        "primary": "#5ddda1",
-                        "inverse-on-surface": "#2f3131",
-                        "error": "#ffb4ab",
-                        "on-primary-container": "#00311d",
-                        "outline-variant": "#3d4a41",
-                        "surface-dim": "#121414",
-                        "primary-fixed": "#7bfabb",
-                        "inverse-surface": "#e2e2e2",
-                        "tertiary-fixed": "#aff0d1",
-                        "on-tertiary": "#003826",
-                        "on-tertiary-container": "#003121",
-                        "on-error": "#690005",
-                        "secondary-fixed": "#ffdbcc",
-                        "error-container": "#93000a",
-                        "on-secondary": "#561f00",
-                        "surface-tint": "#5ddda1",
-                        "on-secondary-fixed-variant": "#7a3000",
-                        "outline": "#86948a",
-                        "tertiary-container": "#5f9d81",
-                        "surface-container-lowest": "#0d0f0f",
-                        "on-surface": "#e2e2e2",
-                        "on-background": "#e2e2e2",
-                        "surface-container-low": "#1a1c1c",
-                        "secondary-container": "#fe6b00"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Space Grotesk"]
-                    }
-                },
-            },
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distribuidora Keppler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    </script>
+
+        :root {
+            --blue: #0b1184;
+            --blue-deep: #060b5c;
+            --blue-mid: #1a24c2;
+            --blue-light: #7b8cff;
+            --surface: #f0f2f8;
+            --white: #ffffff;
+            --ink: #1a1f3a;
+            --ink-muted: #5a6280;
+            --border: #dde0ef;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* ════════════════════════════════════════
+           NAV
+        ════════════════════════════════════════ */
+        .kp-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+            height: 64px;
+            background: rgba(6, 11, 92, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(123, 140, 255, 0.15);
+        }
+
+        .kp-nav__brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+            .kp-nav__brand span {
+                color: var(--blue-light);
+            }
+
+        .kp-nav__links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+            .kp-nav__links a {
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.65);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+                .kp-nav__links a:hover {
+                    color: #fff;
+                }
+
+        .kp-nav__cta {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-nav {
+            padding: 0.4rem 1.1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.03em;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-nav--outline {
+            background: transparent;
+            border: 1.5px solid rgba(123, 140, 255, 0.5);
+            color: var(--blue-light);
+        }
+
+            .btn-nav--outline:hover {
+                border-color: var(--blue-light);
+                color: #fff;
+            }
+
+        .btn-nav--fill {
+            background: var(--blue-light);
+            border: 1.5px solid var(--blue-light);
+            color: var(--blue-deep);
+        }
+
+            .btn-nav--fill:hover {
+                background: #fff;
+                border-color: #fff;
+                color: var(--blue-deep);
+            }
+
+        /* ════════════════════════════════════════
+           HERO
+        ════════════════════════════════════════ */
+        .kp-hero {
+            min-height: 100vh;
+            background: linear-gradient(150deg, var(--blue-deep) 0%, var(--blue) 55%, var(--blue-mid) 100%);
+            display: flex;
+            align-items: center;
+            padding-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .kp-hero::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle, rgba(123,140,255,0.22) 1px, transparent 1px);
+                background-size: 32px 32px;
+                pointer-events: none;
+            }
+
+            .kp-hero::after {
+                content: '';
+                position: absolute;
+                width: 700px;
+                height: 700px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(123,140,255,0.15) 0%, transparent 70%);
+                top: -200px;
+                right: -100px;
+                pointer-events: none;
+            }
+
+        .kp-hero__inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .kp-hero__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 1.5rem;
+        }
+
+            .kp-hero__eyebrow::before {
+                content: '';
+                display: block;
+                width: 24px;
+                height: 2px;
+                background: var(--blue-light);
+            }
+
+        .kp-hero__headline {
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            color: var(--white);
+            margin-bottom: 1.75rem;
+        }
+
+            .kp-hero__headline em {
+                font-style: normal;
+                color: var(--blue-light);
+            }
+
+        .kp-hero__body {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+        }
+
+        .kp-hero__actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.75rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.02em;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-hero--primary {
+            background: var(--white);
+            color: var(--blue-deep);
+            border: 2px solid var(--white);
+        }
+
+            .btn-hero--primary:hover {
+                background: var(--blue-light);
+                border-color: var(--blue-light);
+                color: var(--blue-deep);
+                transform: translateY(-2px);
+            }
+
+        .btn-hero--secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+            .btn-hero--secondary:hover {
+                border-color: rgba(255,255,255,0.7);
+                transform: translateY(-2px);
+            }
+
+        /* Stats */
+        .kp-hero__stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(123,140,255,0.2);
+            border-radius: 1rem;
+            min-width: 200px;
+            backdrop-filter: blur(8px);
+        }
+
+        .kp-stat__number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .kp-stat__label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-top: 0.2rem;
+        }
+
+        .kp-stat__divider {
+            height: 1px;
+            background: rgba(123,140,255,0.2);
+        }
+
+        /* ════════════════════════════════════════
+           SECCIÓN CATÁLOGO
+        ════════════════════════════════════════ */
+        .kp-catalog {
+            background: var(--white);
+            padding: 4rem 0;
+        }
+
+        .kp-catalog__header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2.5rem 2.5rem;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .kp-catalog__title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--blue);
+            letter-spacing: -0.03em;
+        }
+
+            .kp-catalog__title span {
+                color: var(--ink-muted);
+                font-weight: 400;
+                font-size: 0.9rem;
+                margin-left: 0.75rem;
+            }
+
+        .kp-catalog__body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2.5rem;
+        }
+
+        /* Sidebar */
+        .kp-sidebar {
+            position: sticky;
+            top: 80px;
+            align-self: start;
+        }
+
+        .kp-sidebar__box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.85rem;
+            padding: 1.5rem;
+        }
+
+        .kp-sidebar__heading {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: 1rem;
+        }
+
+        .kp-filter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            border-radius: 0.45rem;
+            background: transparent;
+            border: none;
+            font-size: 0.84rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            text-align: left;
+            margin-bottom: 0.25rem;
+        }
+
+            .kp-filter-btn:hover {
+                background: #e8eaf5;
+            }
+
+            .kp-filter-btn.active {
+                background: #e4e6f8;
+                color: var(--blue);
+                font-weight: 700;
+            }
+
+        .kp-filter-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            background: var(--border);
+            color: var(--ink-muted);
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+        }
+
+        .kp-filter-btn.active .kp-filter-badge {
+            background: rgba(11,17,132,0.12);
+            color: var(--blue);
+        }
+
+        #btnVerMas {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.45rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--blue);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+            #btnVerMas:hover {
+                text-decoration: underline;
+            }
+
+        /* Product grid */
+        .kp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .kp-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 0.85rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+            .kp-card:hover {
+                box-shadow: 0 8px 32px rgba(11,17,132,0.1);
+                transform: translateY(-3px);
+            }
+
+        .kp-card__img {
+            height: 180px;
+            overflow: hidden;
+            background: var(--surface);
+        }
+
+            .kp-card__img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.4s;
+            }
+
+        .kp-card:hover .kp-card__img img {
+            transform: scale(1.06);
+        }
+
+        .kp-card__body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1.1rem;
+        }
+
+        .kp-card__brand {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .kp-card__name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.3;
+            margin-bottom: auto;
+        }
+
+        .kp-card__divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1rem 0 0.75rem;
+        }
+
+        .kp-card__btn {
+            width: 100%;
+            padding: 0.55rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.02em;
+            background: transparent;
+            border: 1.5px solid var(--blue);
+            color: var(--blue);
+            border-radius: 0.45rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+            .kp-card__btn:hover {
+                background: var(--blue);
+                color: #fff;
+            }
+
+        /* Promo card */
+        .kp-promo-card {
+            border: 1.5px dashed var(--border);
+            border-radius: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            gap: 0.75rem;
+            background: var(--surface);
+        }
+
+        .kp-promo-card__icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(11,17,132,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .kp-promo-card__title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .kp-promo-card__sub {
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+            line-height: 1.5;
+        }
+
+        .kp-promo-card__link {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+            .kp-promo-card__link:hover {
+                text-decoration: underline;
+            }
+
+        /* ── CSS Puro para el Modal Reemplazando Tailwind ── */
+        .kp-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: none; /* Oculto por defecto */
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+            .kp-modal.active {
+                display: flex; /* Se muestra al activar */
+            }
+
+        .kp-modal__content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: kpFadeIn 0.3s ease;
+        }
+
+        @keyframes kpFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ════════════════════════════════════════
+           RESPONSIVE
+        ════════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .kp-catalog__body {
+                grid-template-columns: 1fr;
+            }
+
+            .kp-sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .kp-hero__inner {
+                grid-template-columns: 1fr;
+            }
+
+            .kp-hero__stats {
+                display: none;
+            }
+
+            .kp-nav__links {
+                display: none;
+            }
+
+            .kp-catalog__body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="modal" class="kp-modal" onclick="cerrarModalExterno(event)">
+        <div class="kp-modal__content">
+            <div class="row g-0">
+                <div class="col-md-6 bg-light" style="min-height: 300px;">
+                    <img id="modal-img" class="w-100 h-100" style="object-fit: cover;" src="" alt="Producto" />
+                </div>
+                <div class="col-md-6 p-4 d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h2 id="modal-nombre" class="h3 fw-bold text-dark m-0"></h2>
+                            <p id="modal-marca" class="text-muted small m-0 mt-1"></p>
+                        </div>
+                        <button type="button" onclick="cerrarModal()" class="btn-close" aria-label="Close"></button>
+                    </div>
+
+                    <div class="mb-3">
+                        <span id="modal-precio" class="h4 fw-bold text-primary"></span>
+                    </div>
+
+                    <div class="row g-2 text-center mb-3">
+                        <div class="col-6">
+                            <div class="p-2 bg-light rounded">
+                                <span class="text-muted d-block small">Stock</span>
+                                <span id="modal-stock" class="fw-semibold text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 bg-light rounded">
+                                <span class="text-muted d-block small">Categoría</span>
+                                <span id="modal-categoria" class="fw-semibold text-dark"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-grow-1">
+                        <h3 class="h6 fw-bold text-secondary mb-2">Descripción</h3>
+                        <p id="modal-descripcion" class="text-muted small lh-base"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="kp-nav">
+        <a href="#inicio" class="kp-nav__brand">Distribuidora<span> Keppler</span></a>
+        <ul class="kp-nav__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+        </ul>
+        <div class="kp-nav__cta">
+            <a href="Vista/Auth/Login.aspx" class="btn-nav btn-nav--outline">Iniciar sesión</a>
+            <a href="Vista/Cliente/Registro.aspx" class="btn-nav btn-nav--fill">Registrarse</a>
+        </div>
+    </nav>
+
+    <form id="form1" runat="server">
+        <section id="inicio" class="kp-hero">
+            <div class="kp-hero__inner">
+                <div>
+                    <div class="kp-hero__eyebrow">Distribución nacional de confianza</div>
+                    <h1 class="kp-hero__headline">MÁS ALLÁ<br />
+                        <em>DEL MUNDO.</em></h1>
+                    <p class="kp-hero__body">Llevamos sus productos con rapidez, confianza y seguridad. Logística eficiente adaptada a cada cliente, con seguimiento en tiempo real y atención personalizada.</p>
+                    <div class="kp-hero__actions">
+                        <a href="#catalogo" class="btn-hero btn-hero--primary">Ver catálogo →</a>
+                        <a href="Vista/Cliente/Registro.aspx" class="btn-hero btn-hero--secondary">Crear cuenta</a>
+                    </div>
+                </div>
+                <div class="kp-hero__stats">
+                    <div>
+                        <div class="kp-stat__number">+<asp:Label ID="lblTotalProductos" runat="server" Text=""></asp:Label></div>
+                        <div class="kp-stat__label">Productos</div>
+                    </div>
+                    <div class="kp-stat__divider"></div>
+                    <div>
+                        <div class="kp-stat__number">12</div>
+                        <div class="kp-stat__label">Categorías</div>
+                    </div>
+                    <div class="kp-stat__divider"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalogo" class="kp-catalog">
+            <div class="kp-catalog__header">
+                <h2 class="kp-catalog__title">Catálogo<span>Explore todos nuestros productos</span></h2>
+            </div>
+
+            <div class="kp-catalog__body">
+                <aside class="kp-sidebar">
+                    <div class="kp-sidebar__box">
+                        <p class="kp-sidebar__heading">Categorías</p>
+                        <button type="button" id="btnTodasCategorias" class="kp-filter-btn active">
+                            <span>Todos los productos</span>
+                            <span class="kp-filter-badge">
+                                <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label></span>
+                        </button>
+                        <asp:Repeater ID="rptCategorias" runat="server">
+                            <ItemTemplate>
+                                <button type="button" class="kp-filter-btn categoria-item" data-categoria="<%# Eval("Nombre") %>">
+                                    <span><%# Eval("Nombre") %></span>
+                                </button>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <button type="button" id="btnVerMas">Ver más ↓</button>
+                    </div>
+                </aside>
+
+                <div>
+                    <div class="kp-grid">
+                        <asp:Repeater ID="rptProductos" runat="server">
+                            <ItemTemplate>
+                                <div class="kp-card" data-categoria="<%# Eval("CategoriaNombre") %>">
+                                    <div class="kp-card__img">
+                                        <img src="<%# Eval("Imagen") %>" alt="Producto" loading="lazy" />
+                                    </div>
+                                    <div class="kp-card__body">
+                                        <p class="kp-card__brand"><%# Eval("MarcaNombre") %></p>
+                                        <p class="kp-card__name"><%# Eval("Nombre") %></p>
+                                        <div class="kp-card__divider"></div>
+
+                                        <button type="button" class="kp-card__btn btn-detalle"
+                                            data-nombre="<%# Eval("Nombre") %>"
+                                            data-marca="<%# Eval("MarcaNombre") %>"
+                                            data-precio="$ <%# Eval("Precio") %>"
+                                            data-stock="<%# Eval("Stock") %>"
+                                            data-categoria="<%# Eval("CategoriaNombre") %>"
+                                            data-descripcion="<%# Eval("Descripcion") %>"
+                                            data-imagen="<%# Eval("Imagen") %>">
+                                            Ver detalle
+                                        </button>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                        <div class="kp-promo-card">
+                            <div class="kp-promo-card__icon">🛒</div>
+                            <p class="kp-promo-card__title">¿Listo para pedir?</p>
+                            <p class="kp-promo-card__sub">Inicie sesión para gestionar sus pedidos y acceder a precios diferenciados.</p>
+                            <a href="Vista/Auth/Login.aspx" class="kp-promo-card__link">Iniciar sesión →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
     <script>
         function abrirModal(nombre, marca, precio, stock, categoria, descripcion, imagen) {
-            const modal = document.getElementById('modal');
-
             document.getElementById('modal-nombre').innerText = nombre;
             document.getElementById('modal-marca').innerText = marca;
             document.getElementById('modal-precio').innerText = precio;
@@ -93,351 +798,98 @@
             document.getElementById('modal-descripcion').innerText = descripcion;
             document.getElementById('modal-img').src = imagen;
 
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            document.getElementById('modal').classList.add('active');
         }
 
         function cerrarModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('modal').classList.remove('active');
         }
-    </script>
-    <title>Distribuidora Keppler</title>
-    <style>
-        @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
 
-            100% {
-                transform: translateX(-50%);
+        function cerrarModalExterno(e) {
+            if (e.target.id === 'modal') {
+                cerrarModal();
             }
         }
 
-        .animate-marquee {
-            animation: marquee 20s linear infinite;
-        }
-    </style>
-</head>
-<div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
-
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="cerrarModal()"></div>
-
-    <!-- Contenido -->
-    <div class="relative w-[95%] max-w-5xl bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-[fadeIn_.3s_ease]">
-
-        <!-- Imagen -->
-        <div class="md:w-1/2 h-64 md:h-auto bg-gray-100">
-            <img id="modal-img" class="w-full h-full object-cover" src="https://es.dreamstime.com/photos-images/coca-cola-logo.html" alt="hola" />
-        </div>
-        <!-- Info -->
-        <div class="md:w-1/2 p-6 flex flex-col">
-
-            <!-- Header -->
-            <div class="flex justify-between items-start mb-4">
-                <div>
-                    <h2 id="modal-nombre" class="text-2xl font-extrabold text-gray-900"></h2>
-                    <p id="modal-marca" class="text-sm text-gray-500"></p>
-                </div>
-
-                <button onclick="cerrarModal()" class="text-gray-400 hover:text-black text-xl">
-                    ✕
-                </button>
-            </div>
-
-            <!-- Precio -->
-            <div class="mb-4">
-                <span id="modal-precio" class="text-2xl font-bold text-primary"></span>
-            </div>
-
-            <!-- Info rápida -->
-            <div class="grid grid-cols-2 gap-4 text-sm mb-4">
-                <div class="bg-gray-100 p-3 rounded-lg">
-                    <span class="text-gray-500 block">Stock</span>
-                    <span id="modal-stock" class="font-semibold text-gray-800"></span>
-                </div>
-                <div class="bg-gray-100 p-3 rounded-lg">
-                    <span class="text-gray-500 block">Categoría</span>
-                    <span id="modal-categoria" class="font-semibold text-gray-800"></span>
-                </div>
-            </div>
-
-            <!-- Descripción -->
-            <div class="flex-1 mb-6">
-                <h3 class="text-sm font-bold text-gray-700 mb-2">Descripción</h3>
-                <p id="modal-descripcion" class="text-sm text-gray-600 leading-relaxed"></p>
-            </div>
-
-        </div>
-    </div>
-</div>
-<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
-    <div id="app">
-        <section id="inicio" class="relative h-screen bg-black overflow-hidden flex flex-col">
-            <canvas id="canvas" class="absolute inset-0 w-full h-full"></canvas>
-            <div class="relative z-10 hero">
-                <!-- TopNavBar -->
-                <nav class="absolute top-0 left-0 right-0 z-20 flex justify-between items-center w-full px-4 md:px-8 py-4 bg-[#1a1c1c]/80 backdrop-blur">
-                    <div class="hidden md:flex items-center gap-8">
-                        <span class="text-xl md:text-2xl font-black tracking-tighter text-[#5ddda1] uppercase font-headline">Distribuidora - Keppler</span>
-
-                        <a href="#inicio" class="menu-item text-xl md:text-lg font-black tracking-tighter text-[#5ddda1] uppercase font-headline uppercase cursor-pointer">Inicio</a>
-
-                        <a href="#catalogo" class="menu-item text-xl md:text-lg font-black tracking-tighter text-[#5ddda1] uppercase font-headline uppercase cursor-pointer">Catálogo</a>
-                    </div>
-                </nav>
-
-
-                <!-- Main Content Canvas -->
-                <main class="pt-24 flex-1 flex items-center">
-                    <!-- Hero Carousel Section -->
-                    <div class="max-w-7x1 mx-auto px-6 lg:px-12 w-full">
-                        <div id="Prueba" class="flex flex-col md:flex-row items-center md:items-stretch justify-start gap-10 md:gap-20 w-full h-full">
-                            <!-- Text Area -->
-                            <div class="w-full md:w-2/3 text-center md:text-left space-y-4 md:space-y-6">
-                                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-on-background tracking-tighter leading-none font-headline">MÁS ALLÁ
-                            <br />
-                                    <span class="text-primary">DEL MUNDO.</span>
-                                </h1>
-                                <p class="text-lg lg:text-xl text-on-surface-variant max-w-xl font-body leading-relaxed">
-                                    Llevamos tus productos con rapidez, confianza y seguridad, asegurando que lleguen a su destino en perfectas condiciones. Nuestro compromiso es ofrecer un servicio de logística eficiente y confiable, adaptándonos a las necesidades de cada cliente.
-                                </p>
-                            </div>
-                            <!-- CTA Buttons Column (Aligned Right and Centered Vertically) -->
-                            <div class="w-full md:w-1/3 flex flex-col gap-4 items-center md:items-end md:justify-center">
-                                <a href="Vista/Cliente/Registro.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg">
-                                    <span class="font-label font-bold text-lg uppercase tracking-tight">Registrarse</span>
-                                    <span class="material-symbols-outlined">account_box</span>
-                                </a>
-
-
-                                <a href="Vista/Auth/Login.aspx" class="flex items-center justify-between px-4 py-3 md:px-6 md:py-5 text-base md:text-lg"><span class="font-label font-bold text-lg uppercase tracking-tight">Iniciar Sesión</span>
-                                    <span class="material-symbols-outlined">login
-                                    </span>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Bottom Data Ticker (Kinetic Element) -->
-
-                </main>
-            </div>
-        </section>
-
-
-        <section id="catalogo" class="min-h-screen bg-white">
-            <div class="flex">
-                <!-- Main Content Area -->
-                <main class="flex-1 p-8 max-w-7xl mx-auto">
-                    <div class="grid grid-cols-12 gap-8">
-                        <!-- Left Sidebar Filters -->
-                        <aside class="col-span-12 lg:col-span-3 space-y-6">
-                            <div class="bg-white border border-outline-variant p-6 rounded-xl shadow-sm">
-                                <h3 class="text-black font-bold text-lg mb-4 flex items-center">
-                                    <span class="material-symbols-outlined mr-2 text-primary">filter_list</span>
-                                    Productos por Categoría
-                                </h3>
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between p-2 rounded-lg  text-primary font-semibold text-sm">
-                                        <button id="btnTodasCategorias"
-                                            class="filtro-btn categoria-item w-full flex items-center justify-between p-2 rounded-lg text-black font-bold hover:bg-gray-50 text-sm font-medium">
-                                            <span>Todos los productos</span>
-                                            <span class="bg-gray-200 text-gray-700 text-[10px] px-2 py-0.5 rounded-full">
-                                                <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <asp:Repeater ID="rptCategorias" runat="server">
-                                        <ItemTemplate>
-                                            <button class="filtro-btn categoria-item w-full flex items-center justify-between p-2 rounded-lg text-black font-bold hover:bg-gray-50 text-sm font-medium"
-                                                data-categoria="<%# Eval("Nombre") %>">
-                                                <span><%# Eval("Nombre") %></span>
-                                            </button>
-
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                    <button id="btnVerMas" class="w-full mt-2 text-primary font-bold text-sm hover:underline">
-                                        Ver más
-                                    </button>
-                                </div>
-                            </div>
-                        </aside>
-                        <!-- Product Grid -->
-                        <div class="col-span-12 lg:col-span-9">
-                            <div class="flex items-center justify-between mb-8">
-                                <h2 class="text-2xl font-bold text-black">Catálogo</h2>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                <asp:Repeater ID="rptProductos" runat="server">
-                                    <ItemTemplate>
-
-                                        <div class="bg-white border border-outline-variant rounded-xl overflow-hidden hover:shadow-lg transition-all group flex flex-col" data-categoria="<%# Eval("CategoriaNombre") %>">
-
-                                            <div class="h-52 overflow-hidden relative">
-                                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                    src="<%# Eval("Imagen") %>" alt="..." />
-                                                <span class="absolute top-3 left-3 bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Fresh Produce
-                                                </span>
-                                            </div>
-
-                                            <div class="p-6 flex-grow flex flex-col">
-                                                <h3 class="text-lg font-bold text-black mb-1">
-                                                    <%# Eval("Nombre") %>
-                                                </h3>
-                                                <p class="text-sm text-gray-500 mb-4">
-                                                    <%# Eval("MarcaNombre") %>
-                                                </p>
-
-                                                <div class="mt-auto space-y-4">
-                                                    <div class="h-[1px] bg-gray-100 w-full"></div>
-                                                    <button type="button"
-                                                        onclick="abrirModal(
-                                                        '<%# Eval("Nombre") %>',
-                                                        '<%# Eval("MarcaNombre") %>',
-                                                        '$ <%# Eval("Precio") %>',
-                                                        '<%# Eval("Stock") %>',
-                                                        '<%# Eval("CategoriaNombre") %>',
-                                                        '<%# Eval("Descripcion") %>',
-                                                        'img.jpg'
-                                                        )"
-                                                        class="w-full py-2.5 rounded-lg border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all active:scale-95">
-                                                        Ver Más...
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                            <br />
-                            <!-- Skeleton/Promo Card 6 -->
-                            <div class="bg-surface-container border border-dashed border-outline-variant rounded-xl overflow-hidden flex flex-col items-center justify-center p-8 text-center gap-4">
-                                <div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-on-primary-container text-3xl">add_business</span>
-                                </div>
-                                <h3 class="text-lg font-bold text-on-surface">¿Quieres hacer un pedido?</h3>
-                                <p class="text-sm text-on-surface-variant">Para hacer tu pedido debes iniciar primero sesión</p>
-                                <a href="Vista/Auth/Login.aspx" class="mt-2 text-primary font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">Iniciar Sesión <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </main>
-    </div>
-    </section>
-
-
-</body>
-
-<script type="module" src="Vista/Assets/js/Index.js"></script>
-<script type="module">
-    import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-        const canvas = document.getElementById('canvas');
-
-        if (canvas) {
-            const app = TubesCursor(canvas, {
-                tubes: {
-                    colors: ["#f967fb", "#53bc28", "#6958d5"],
-                    lights: {
-                        intensity: 200,
-                        colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
-                    }
-                }
-            });
-        }
-
-        //VER MÁS
-        const btn = document.getElementById("btnVerMas");
-
-        if (!btn) return;
-
-        const limite = 3;
-        let expandido = false;
-
-        function aplicarItem() {
-            const categorias = document.querySelectorAll(".categoria-item");
-
-            categorias.forEach((cat, index) => {
-                if (!expandido && index >= limite) {
-                    cat.classList.add("hidden");
-                } else {
-                    cat.classList.remove("hidden");
-                }
+        document.addEventListener("DOMContentLoaded", () => {
+            // Clics de los botones detalle
+            const botonesDetalle = document.querySelectorAll(".btn-detalle");
+            botonesDetalle.forEach(boton => {
+                boton.addEventListener("click", () => {
+                    abrirModal(
+                        boton.dataset.nombre,
+                        boton.dataset.marca,
+                        boton.dataset.precio,
+                        boton.dataset.stock,
+                        boton.dataset.categoria,
+                        boton.dataset.descripcion,
+                        boton.dataset.imagen
+                    );
+                });
             });
 
-            btn.innerText = expandido ? "Ver menos" : "Ver más";
-        }
+            // Funcionalidad "Ver más" en categorías
+            const btn = document.getElementById("btnVerMas");
+            if (btn) {
+                const limite = 3;
+                let expandido = false;
 
-        btn.addEventListener("click", () => {
-            expandido = !expandido;
-            aplicarItem();
-        });
+                function aplicarItem() {
+                    const categorias = document.querySelectorAll(".categoria-item");
+                    categorias.forEach((cat, index) => {
+                        if (!expandido && index >= limite) {
+                            cat.style.display = "none";
+                        } else {
+                            cat.style.display = "flex";
+                        }
+                    });
+                    btn.innerText = expandido ? "Ver menos ↑" : "Ver más ↓";
+                }
 
-        aplicarItem();
-    });
-
-
-    // FILTRO DE CATEGORÍAS
-    const filtros = document.querySelectorAll(".filtro-btn");
-    const productos = document.querySelectorAll("#rptProductos .group, [data-categoria]");
-
-    // Helper: normalizar texto para comparar sin tildes ni mayúsculas
-    function normalizar(str) {
-        return str.trim().toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    }
-
-    let categoriaActiva = null;
-
-    filtros.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const categoriaSeleccionada = btn.dataset.categoria;
-
-            // Si ya estaba activo, deseleccionar (mostrar todo)
-            if (categoriaActiva === categoriaSeleccionada) {
-                categoriaActiva = null;
-            } else {
-                categoriaActiva = categoriaSeleccionada;
+                btn.addEventListener("click", () => {
+                    expandido = !expandido;
+                    aplicarItem();
+                });
+                aplicarItem();
             }
 
-            // Actualizar estilos de botones activos
-            filtros.forEach(b => b.classList.remove("bg-surface-container-low", "text-primary", "font-semibold"));
-            if (categoriaActiva) {
-                btn.classList.add("bg-surface-container-low", "text-primary", "font-semibold");
+            // Filtro de categorías funcional
+            const filtros = document.querySelectorAll(".kp-filter-btn");
+
+            function normalizar(str) {
+                return str.trim().toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
             }
 
-            // Filtrar tarjetas
-            document.querySelectorAll("[data-categoria]").forEach(card => {
-                if (!categoriaActiva) {
+            filtros.forEach(btnFiltro => {
+                btnFiltro.addEventListener("click", () => {
+                    filtros.forEach(b => b.classList.remove("active"));
+                    btnFiltro.classList.add("active");
+
+                    const categoriaSeleccionada = btnFiltro.dataset.categoria;
+
+                    document.querySelectorAll(".kp-card").forEach(card => {
+                        if (!categoriaSeleccionada) {
+                            card.style.display = ""; // Muestra todos
+                        } else {
+                            const catCard = normalizar(card.dataset.categoria || "");
+                            const catFiltro = normalizar(categoriaSeleccionada);
+                            card.style.display = catCard === catFiltro ? "" : "none";
+                        }
+                    });
+                });
+            });
+
+            // Botón directo para restablecer el filtro
+            document.getElementById("btnTodasCategorias")?.addEventListener("click", () => {
+                filtros.forEach(b => b.classList.remove("active"));
+                document.getElementById("btnTodasCategorias").classList.add("active");
+                document.querySelectorAll(".kp-card").forEach(card => {
                     card.style.display = "";
-                } else {
-                    const catCard = normalizar(card.dataset.categoria || "");
-                    const catFiltro = normalizar(categoriaActiva);
-                    card.style.display = catCard === catFiltro ? "" : "none";
-                }
+                });
             });
         });
-    });
-
-    // Botón "Todas las Categorías"
-    document.querySelector(".bg-surface-container-low.text-primary")
-        ?.addEventListener("click", () => {
-            categoriaActiva = null;
-            filtros.forEach(b => b.classList.remove("bg-surface-container-low", "text-primary", "font-semibold"));
-            document.querySelectorAll("[data-categoria]").forEach(card => {
-                card.style.display = "";
-            });
-        });
-
-</script>
+    </script>
+</body>
 </html>

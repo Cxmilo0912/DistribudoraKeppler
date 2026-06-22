@@ -74,3 +74,9 @@ additional_value = 0.00
 Cadena armada en C#: 4Vj8eK4rloUd272L48hsrarnUA~508029~KEP-1781728080180~26500.00~COP
 Firma MD5: 612d61de914192610e1326f7531ddce6
 --- FIN OK ---
+Cadena armada en C#: 4Vj8eK4rloUd272L48hsrarnUA~508029~KEP-1781819593274~26500.00~COP
+Firma MD5: 1a5ac1464839c5044275c4b042d7abae
+--- FIN OK ---
+Cadena armada en C#: 4Vj8eK4rloUd272L48hsrarnUA~508029~KEP-1782154030224~26500.00~COP
+Firma MD5: 08b54f41169cf837a65e3f10d4f2dbdd
+--- FIN OK ---

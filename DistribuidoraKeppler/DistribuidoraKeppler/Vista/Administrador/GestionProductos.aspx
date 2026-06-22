@@ -191,7 +191,7 @@
                 </nav>
             </div>
             <div>
-                <asp:LinkButton ID="btnCrearProducto" runat="server" OnClick="btnCrearProducto_Click"
+                <asp:LinkButton ID="btnCrearProducto" runat="server" OnClick="btnCrearProducto_Click1"
                     CssClass="btn btn-dark d-inline-flex align-items-center gap-2 px-4 py-2.5 rounded-3 shadow-sm fw-semibold text-sm">
                     <i class="bi bi-plus-lg"></i>
                     <span>Crear producto</span>
@@ -261,9 +261,6 @@
             var table = $('#tablaProductos').DataTable({
                 responsive: true,
                 colReorder: true,
-                "initComplete": function (settings, json) {
-                    $('#tablaProductos thead').hide();
-                },
                 layout: {
                     topStart: 'search',
                     bottomStart: 'pageLength',

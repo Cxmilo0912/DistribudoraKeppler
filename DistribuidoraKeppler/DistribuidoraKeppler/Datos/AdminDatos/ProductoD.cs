@@ -252,11 +252,11 @@ namespace DistribuidoraKeppler.Datos
                 LimiteMaximo = oDr["LimiteMaximo"] == DBNull.Value
                                       ? (int?)null
                                       : Convert.ToInt32(oDr["LimiteMaximo"]),
-                IdMarca = new Marca 
+                IdMarca = new Marca
                 {
                     Id = Convert.ToInt32(oDr["IdMarca"])
                 },
-                IdCategoria = new Categoria 
+                IdCategoria = new Categoria
                 {
                     Id = Convert.ToInt32(oDr["IdCategoria"])
                 },
@@ -327,6 +327,18 @@ namespace DistribuidoraKeppler.Datos
                     int filasAfectadas = cmd.ExecuteNonQuery();
 
                     return filasAfectadas > 0;
+                }
+            }
+        }
+
+        public int MtContarProductosTotales()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand("spContarTotalProductos", cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
         }

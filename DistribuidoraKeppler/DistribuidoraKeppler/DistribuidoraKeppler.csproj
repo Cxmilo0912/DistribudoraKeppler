@@ -229,6 +229,7 @@
   <ItemGroup>
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
+    <Content Include="Vista\Administrador\CrearProducto.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Administrador\EditarProducto.aspx" />
     <Content Include="Vista\Administrador\GestionCategorias.aspx" />
@@ -236,6 +237,7 @@
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Administrador\GestionPedidos.aspx" />
+    <Content Include="Vista\Administrador\Inventario.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
     <Content Include="Vista\Assets\css\Index.css" />
     <Content Include="Vista\Assets\js\Carrito.js" />
@@ -306,6 +308,13 @@
     <Compile Include="Vista\Administrador\CreacionProducto.aspx.designer.cs">
       <DependentUpon>CreacionProducto.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Administrador\CrearProducto.aspx.cs">
+      <DependentUpon>CrearProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearProducto.aspx.designer.cs">
+      <DependentUpon>CrearProducto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -354,6 +363,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\GestionPedidos.aspx.designer.cs">
       <DependentUpon>GestionPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Inventario.aspx.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Inventario.aspx.designer.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

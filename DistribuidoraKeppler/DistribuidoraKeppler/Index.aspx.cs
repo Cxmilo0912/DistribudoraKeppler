@@ -26,10 +26,11 @@ namespace DistribuidoraKeppler
             List<Producto> productos = productoL.ListarProductos();
             // Aquí puedes enlazar la lista de productos a un control de tu página, como un GridView o Repeater.
             // Por ejemplo, si tienes un GridView llamado gvProductos:
-            rptProductos.DataSource = productos;
+            rptProductos.DataSource = productos.Where(p=> p.Estado == "Activo");
             rptProductos.DataBind();
+            lblTotalProductos.Text = productoL.MtContarTotalProductos().ToString();
 
-            lblTotal.Text = productos.Count.ToString();
+            lblTotal.Text = productos.Count(p=> p.Estado == "Activo").ToString();
         }
 
         public void MtCargarCategorias()
