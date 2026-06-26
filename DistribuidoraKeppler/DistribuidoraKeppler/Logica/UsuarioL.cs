@@ -77,23 +77,27 @@ namespace DistribuidoraKeppler.Logica
         }
 
         // Metodo para Crear Usuario nuevo
-        public bool MtCrearUsuario(Usuario usuario, string clave)
+
+        public List<Rol> MtListarRoles()
         {
-            if (usuario == null) return false;
-
-            if (string.IsNullOrEmpty(usuario.Nombre) ||
-                string.IsNullOrEmpty(usuario.Email) ||
-                string.IsNullOrEmpty(clave))
-                return false;
-
-            var existente = oUsuarioD.ObtenerPorCorreo(usuario.Email);
-            if (existente != null)
-                return false;
-
-            usuario.Contrasena = HashHelper.Encriptar(clave);
-
-            return oUsuarioD.MtInsertarUsuario(usuario);
+            return oUsuarioD.MtListarRoles();
         }
-    }
 
+        public bool MtCrearUsuario(Usuario usuario, int idRol)
+        {
+            return oUsuarioD.MtCrearUsuario(usuario, idRol);
+        }
+
+        public bool MtEditarUsuario(Usuario oUsuario)
+        {
+            return oUsuarioD.MtEditarUsuario(oUsuario);
+        }
+
+        public bool MtEliminarUsuario(int id)
+        {
+            return oUsuarioD.MtEliminarUsuario(id);
+        }
+
+
+}
 }

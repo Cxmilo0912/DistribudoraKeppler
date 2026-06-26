@@ -230,6 +230,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Vista\Administrador\CreacionProducto.aspx" />
     <Content Include="Vista\Administrador\CrearProducto.aspx" />
+    <Content Include="Vista\Administrador\CrearTrabajador.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Administrador\EditarProducto.aspx" />
     <Content Include="Vista\Administrador\GestionCategorias.aspx" />
@@ -243,13 +244,15 @@
     <Content Include="Vista\Assets\js\Carrito.js" />
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
+    <Content Include="Vista\Assets\js\Pago.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Auth\NuevoUsuario.aspx" />
     <Content Include="Vista\Auth\RecuperarPassword.aspx" />
     <Content Include="Vista\Auth\ResetPassword.aspx" />
+    <Content Include="Vista\Auth\SeleccionRol.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\Carrito\Carrito.aspx" />
-    <Content Include="Vista\Cliente\Carrito\ResultadoPago.aspx" />
+    <Content Include="Vista\Cliente\Carrito\Pago.aspx" />
     <Content Include="Vista\Cliente\CatalogoProductos.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
     <Content Include="Vista\Cliente\Registro.aspx" />
@@ -314,6 +317,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\CrearProducto.aspx.designer.cs">
       <DependentUpon>CrearProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearTrabajador.aspx.cs">
+      <DependentUpon>CrearTrabajador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearTrabajador.aspx.designer.cs">
+      <DependentUpon>CrearTrabajador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
@@ -399,6 +409,13 @@
     <Compile Include="Vista\Auth\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Auth\SeleccionRol.aspx.cs">
+      <DependentUpon>SeleccionRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\SeleccionRol.aspx.designer.cs">
+      <DependentUpon>SeleccionRol.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -413,12 +430,12 @@
     <Compile Include="Vista\Cliente\Carrito\Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Cliente\Carrito\ResultadoPago.aspx.cs">
-      <DependentUpon>ResultadoPago.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\Carrito\Pago.aspx.cs">
+      <DependentUpon>Pago.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Cliente\Carrito\ResultadoPago.aspx.designer.cs">
-      <DependentUpon>ResultadoPago.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\Carrito\Pago.aspx.designer.cs">
+      <DependentUpon>Pago.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Cliente\CatalogoProductos.aspx.cs">
       <DependentUpon>CatalogoProductos.aspx</DependentUpon>

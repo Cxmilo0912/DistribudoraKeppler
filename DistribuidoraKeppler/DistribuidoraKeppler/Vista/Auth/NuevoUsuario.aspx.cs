@@ -42,14 +42,14 @@ namespace DistribuidoraKeppler.Vista.Auth
             }
 
 
-            if (Session["IdUsuario"] == null || Session["RolUsuario"] == null)
+            if (Session["IdUsuario"] == null || Session["Rol"] == null)
             {
                 Response.Redirect("~/Vista/Auth/Login.aspx");
                 return;
             }
 
             int IdUsuario = Convert.ToInt32(Session["IdUsuario"]);
-            string rol = Session["RolUsuario"].ToString();
+            string rol = Session["Rol"].ToString();
 
 
             LoginL oLoginL = new LoginL();

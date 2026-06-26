@@ -4,6 +4,7 @@ $(document).ready(function () {
         searching: true,
         paging: true,
         pageLength: 2,
+        responsive: true,
         "initComplete": function (settings, json) {
             $('#example thead').hide();
         },
@@ -15,21 +16,21 @@ $(document).ready(function () {
                             extend: 'copyHtml5',
                             text: '<i class="bi bi-clipboard"></i> Copiar',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4]
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         }, {
                             extend: 'csvHtml5',
                             text: '<i class="bi bi-filetype-csv"></i> CSV',
 
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4]
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         }, {
                             extend: 'excelHtml5',
                             text: '<i class="bi bi-file-earmark-excel"></i> Excel',
 
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4]
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         }, {
                             extend: 'pdfHtml5',
@@ -64,9 +65,17 @@ $(document).ready(function () {
             }
         },
         "columns": [
+            {
+                "data": "Foto",
+                "render": function (data) {
+                    var src = (data && data.length > 10) ? data.replace("~/", "/DistribuidoraKeppler/") : "https://ui-avatars.com/api/?name=User&background=e2e8f0&color=64748b";
+                    return '<img src="' + src + '" class="rounded-circle" style="width:38px;height:38px;object-fit:cover;" />';
+                }
+            },
             { "data": "Id" },
             { "data": "Nombre" },
             { "data": "Email" },
+            { "data": "Documento" },
             {
                 "data": "Rol.Nombre",
                 "render": function (data) {
@@ -111,7 +120,7 @@ $(document).ready(function () {
         ],
         language: {
             "paginate": {
-                "previous": "<i class='bi bi-chevron-left'></i> Anterior", // Puedes meter iconos de Bootstrap aquí
+                "previous": "<i class='bi bi-chevron-left'></i> Anterior",
                 "next": "Siguiente <i class='bi bi-chevron-right'></i>"
             }
         },
@@ -146,4 +155,120 @@ $(document).ready(function () {
             // buscamos el texto con posibles espacios alrededor
         }
     });
+
+    $(document).on('click', '.btn-editar', function () {
+        var row = $(this).closest('tr');
+        if (row.hasClass('child')) { row = row.prev(); }
+
+        var data = $('#example').DataTable().row(row).data();
+
+        if (data != null) {
+            $('#txtIdTrabajador').val(data.Id);
+            $('#txtNombre').val(data.Nombre);
+            $('#txtDocumento').val(data.Documento);
+            $('#txtEmail').val(data.Email);
+            $("select[id$=ddlRol] option:contains('" + data.Rol.Nombre + "')").prop('selected', true);
+            $('#ddlEstado').val(data.Estado);
+
+            $('#modalEditarUsuario').modal('show');
+
+        }
+    });
+    function limpiarFormulario() {
+        $('#modalEditarUsuario input').val(''); //limipia todo
+
+    }
+    $(document).on('click', '#btnGuardar', function () {
+        var usuario = {
+            Id: parseInt($('#txtIdTrabajador').val()) || 0,
+            Nombre: $('#txtNombre').val().trim(),
+            Email: $('#txtEmail').val().trim(),
+            Documento: parseInt($('#txtDocumento').val()) || 0,
+            Rol: {
+                Id: parseInt($("select[id$='ddlRol']").val()) || 0
+            },
+            Estado: parseInt($("select[id$='ddlEstado']").val()) || 0
+        };
+
+        if (usuario.Nombre === "") {
+            Swal.fire({ title: 'Error', text: 'El usuario debe contener un nombre', icon: 'error' });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Está editando la información del usuario',
+            text: '¿Desea guardar los cambios?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, guardar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#10B981',
+            cancelButtonColor: '#ef4444'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "GestionUsuarios.aspx/MtEditarUsuario",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ oUsuario: usuario }),
+                    dataType: "json",
+                    success: function (respuesta) {
+                        if (respuesta.d) {
+                            Swal.fire('¡Actualizado!', 'El usuario se modificó con éxito.', 'success');
+                            $('#modalEditarUsuario').modal('hide');
+                            limpiarFormulario();
+                            $('#example').DataTable().ajax.reload();
+                        } else {
+                            Swal.fire('Error', 'No se pudieron guardar los cambios.', 'error');
+                        }
+                    }
+                });
+            } else {
+                Swal.fire('Cancelado', 'No se realizó ninguna modificación.', 'info');
+                $('#modalEditarUsuario').modal('hide');
+                limpiarFormulario();
+            }
+        });
+    });
+
+    $(document).on('click', '.btn-eliminar', function () {
+        var row = $(this).closest('tr');
+        if (row.hasClass('child')) row = row.prev();
+
+        var data = $('#example').DataTable().row(row).data();
+
+        Swal.fire({
+            title: '¿Deseas eliminar el usuario?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Continuar',
+            cancelButtonText: 'Se me ache achi 🤌🏻',
+            confirmButtonColor: '#10B981',
+            cancelButtonColor: '#ef4444'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "GestionUsuarios.aspx/MtEliminarUsuario",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ id: data.Id }), // Solo se envia el Id
+                    dataType: "json",
+                    success: function (respuesta) {
+                        if (respuesta.d) {
+                            Swal.fire('¡Eliminado!', 'El usuario se ha eliminado con éxito.', 'success');
+                            $('#example').DataTable().ajax.reload(); // Refrescar tabla
+                        } else {
+                            Swal.fire('¡Ooops!', 'El usuario no se ha eliminado debido a un error del sistema.', 'error');
+                            alert("No se pudo eliminar el usuario.");
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error(xhr.responseText); //Esta linea imprime en caso de error
+                    }
+                })
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Cancelado', 'No se pudo eliminar el usuario.', 'error');
+            }
+        })
+    })
 });

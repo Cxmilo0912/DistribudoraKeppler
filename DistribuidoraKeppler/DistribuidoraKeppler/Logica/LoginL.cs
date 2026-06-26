@@ -1,6 +1,7 @@
 ﻿using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Modelo;
 using DistribuidoraKeppler.Utilidades;
+using System.Collections.Generic;
 
 namespace DistribuidoraKeppler.Logica
 {
@@ -62,6 +63,12 @@ namespace DistribuidoraKeppler.Logica
             datos.ActualizarPassword(email, hash);
 
             return datos.ActualizarPassword(email, hash);
+        }
+
+        public List<Rol> MtRolesPorUsuario(int idUsuario)
+        {
+            UsuarioD oUsuarioD = new UsuarioD();
+            return oUsuarioD.MtRolesPorUsuario(idUsuario);
         }
     }
 }

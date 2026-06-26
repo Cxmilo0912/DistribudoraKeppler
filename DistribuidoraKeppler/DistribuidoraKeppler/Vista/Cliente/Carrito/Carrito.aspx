@@ -56,6 +56,12 @@
 
         #logoCar {
             color: #1e3a8a;
+            
+        }
+
+        #spnTotal {
+            color: #1e3a8a;
+            
         }
     </style>
 </asp:Content>
@@ -77,9 +83,6 @@
                         <div id="contenedorCarrito">
                         </div>
 
-                        <div class="text-end mt-3">
-                            <h5>Total: <span id="carrito-total" class="text-success">$0.00</span></h5>
-                        </div>
                     </div>
 
                     <div id="panelVacio" class="text-center py-5" style="display: none;">
@@ -101,7 +104,7 @@
                     <hr />
                     <div class="d-flex justify-content-between mb-4">
                         <span class="fw-bold fs-5">Total</span>
-                        <span id="total" class="fw-bold fs-5 ">$0.00</span>
+                        <span id="spnTotal" class="fw-bold fs-5 text-success">$<span id="total">0.00</span></span>
                     </div>
 
                     <button type="button" id="btnConfirmarPedido" class="btn w-100 btn-confirmar">
@@ -120,7 +123,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../Assets/js/Carrito.js?v=2.0"></script>
+    <script src="../../Assets/js/Carrito.js?v=2.3"></script>
 
 
 </asp:Content>

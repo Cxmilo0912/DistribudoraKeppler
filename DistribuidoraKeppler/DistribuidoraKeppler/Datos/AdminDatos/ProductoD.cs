@@ -56,7 +56,7 @@ namespace DistribuidoraKeppler.Datos
             {
                 conexion.Open();
 
-                string query = @"SELECT p.Imagen, p.Id, p.Nombre, p.Descripcion, p.Precio, p.Stock, 
+                string query = @"SELECT p.Imagen,p.CodigoProducto, p.Id, p.Nombre, p.Descripcion, p.Precio, p.Stock, 
                                         p.LimiteVenta, p.LimiteMinimo, p.IdCategoria, p.IdMarca, p.Estado,
                                         m.Nombre AS Marca, c.Nombre AS Categoria
                                  FROM Producto p
@@ -72,6 +72,7 @@ namespace DistribuidoraKeppler.Datos
                         lista.Add(new Producto
                         {
                             Imagen = reader["Imagen"].ToString(),
+                            CodigoProducto = reader["CodigoProducto"].ToString(),
                             Id = Convert.ToInt32(reader["Id"]),
                             Nombre = reader["Nombre"].ToString(),
                             Descripcion = reader["Descripcion"].ToString(),
@@ -95,28 +96,6 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
             return lista;
-        }
-
-        public bool EliminarProducto(int id)
-        {
-            try
-            {
-                using (var conexion = ConexionDB.MtAbrirConexion())
-                {
-                    conexion.Open();
-                    string query = "DELETE FROM Producto WHERE Id = @Id";
-                    using (var comando = new SqlCommand(query, conexion))
-                    {
-                        comando.Parameters.AddWithValue("@Id", id);
-                        int filasAfectadas = comando.ExecuteNonQuery();
-                        return filasAfectadas > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al eliminar el producto: " + ex.Message);
-            }
         }
 
         // -- PARTE HECHA POR JHON -- INICIO //
@@ -313,23 +292,6 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        public bool MtEliminarProducto(int id)
-        {
-            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
-            {
-                cn.Open();
-
-                string consulta = @"Delete From Producto Where Id = @Id";
-
-                using (SqlCommand cmd = new SqlCommand(consulta, cn))
-                {
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    int filasAfectadas = cmd.ExecuteNonQuery();
-
-                    return filasAfectadas > 0;
-                }
-            }
-        }
 
         public int MtContarProductosTotales()
         {

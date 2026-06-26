@@ -13,8 +13,7 @@ namespace DistribuidoraKeppler.Vista
         {
             if (Session["Usuario"] != null || Session["Cliente"] != null)
             {
-                lblRol.Text = Session["Rol"].ToString();
-
+                lblRol.Text = Session["Rol"]?.ToString() ?? "";
                 string rol = SesionHelper.Rol; // Obtener el rol del usuario desde la sesión
 
                 menuAdmin.Visible = false;
@@ -51,12 +50,12 @@ namespace DistribuidoraKeppler.Vista
             }
             else
             {
-                Response.Redirect("~/Vista/Auth/Login.aspx");
+                Response.Redirect("~/Vista/Auth/Login.aspx", false);
             }
         }
 
         // CERRAR SESIÓN CON SWEET ALERT
-        protected void btnCerrarSesión_Click(object sender, EventArgs e)
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
             Session.Clear();
@@ -69,7 +68,7 @@ namespace DistribuidoraKeppler.Vista
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    window.location.href = '../Auth/Login.aspx';
+                    window.location.href = '../../Auth/Login.aspx';
                 });
             ";
 

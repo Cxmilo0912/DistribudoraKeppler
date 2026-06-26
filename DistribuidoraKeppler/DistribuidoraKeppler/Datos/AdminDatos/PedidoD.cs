@@ -9,7 +9,7 @@ namespace DistribuidoraKeppler.Datos
 {
     public class PedidoD
     {
-        public bool MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
+        public int MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
         {
             try
             {
@@ -49,14 +49,53 @@ namespace DistribuidoraKeppler.Datos
                             cmdDetalle.ExecuteNonQuery();
                         }
                     }
-
+                    return idPedido;
                 }
-                return true;
+
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return 0;
+            }
+        }
+
+
+        public bool MtActualizarPedido(Pedido oPedido)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consulta = @"BEGIN TRY
+                                    BEGIN TRANSACTION;
+
+                                    UPDATE Pedido 
+                                    SET Estado = @estado
+                                    WHERE Id = @idPedido;
+
+                                    INSERT INTO PedidoMetodoPago (IdPedido, IdMetodoPago) 
+                                    VALUES (@idPedido, @mPago);
+
+                                    COMMIT TRANSACTION;
+                                    END TRY
+                                    BEGIN CATCH
+                                    IF @@TRANCOUNT > 0
+                                    BEGIN
+                                    ROLLBACK TRANSACTION;
+                                    END
+
+                                    ;THROW;
+                                    END CATCH;
+                                    ";
+
+                using (SqlCommand cmd = new SqlCommand(consulta,cn))
+                {
+                    cmd.Parameters.AddWithValue("@estado", oPedido.Estado);
+                    cmd.Parameters.AddWithValue("@idPedido", oPedido.Id);
+                    cmd.Parameters.AddWithValue("@mPago", oPedido.IdMetodoPago);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
         }
     }

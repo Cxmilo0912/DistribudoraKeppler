@@ -52,5 +52,21 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
         }
+
+        public bool MtEditarMarca(Marca oMarca)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string query = @"UPDATE Marca SET Nombre = @nombre, Logo = @logo WHERE Id = @id"; 
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", oMarca.Nombre);
+                    cmd.Parameters.AddWithValue("@logo", oMarca.Logo);
+                    cmd.Parameters.AddWithValue("@id", oMarca.Id);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
     }
 }

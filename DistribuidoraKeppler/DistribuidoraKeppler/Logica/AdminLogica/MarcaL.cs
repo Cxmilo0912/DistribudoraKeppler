@@ -15,5 +15,13 @@ namespace DistribuidoraKeppler.Logica
             List<Marca> lista = oMarcas.ListarMarcas();
             return lista;
         }
+
+        public bool MtEditarMarca(Marca oMarca)
+        {
+            MarcaD oMarcas = new MarcaD();
+            bool resultado = oMarcas.MtEditarMarca(oMarca);
+            return resultado;
+        }
+
     }
 }

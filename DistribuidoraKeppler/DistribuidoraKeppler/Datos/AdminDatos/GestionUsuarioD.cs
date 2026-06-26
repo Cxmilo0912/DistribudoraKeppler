@@ -27,8 +27,10 @@ namespace DistribuidoraKeppler.Datos
                             {
                                 Id = Convert.ToInt32(dr["Id"]),
                                 Nombre = dr["Nombre"].ToString(),
+                                Documento = Convert.ToInt32(dr["Documento"]),
                                 Email = dr["Email"].ToString(),
                                 Estado = Convert.ToByte(dr["Estado"]),
+                                Foto = dr["Foto"].ToString(),
                                 Rol = new Rol
                                 {
                                     Nombre = dr["NombreRol"].ToString()

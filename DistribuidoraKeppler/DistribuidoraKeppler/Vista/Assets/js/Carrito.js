@@ -1,9 +1,15 @@
 ﻿$(document).ready(function () {
-    MtRenderizarCarro();
     $(document).on('click', '#btnConfirmarPedido', function (e) {
 
         e.preventDefault();
-        let carrito = JSON.parse(localStorage.getItem('carritoCompras')) || [];
+        let claveCarrito = 'carritoCompras';
+        const userId = localStorage.getItem("usuarioActivoId");
+        if (userId) {
+            claveCarrito = `carritoCliente-${userId}`;
+        }
+
+
+        let carrito = JSON.parse(localStorage.getItem(claveCarrito)) || [];
 
         var totalPago = 0;
 
@@ -24,7 +30,6 @@
         var pedido = {
             Total: totalPago
         }
-        var referenciaUnica = "KEP-" + new Date().getTime();
         var moneda = "COP";
         var correoCompra = "julilo09123452@gmail.com";
 
@@ -60,7 +65,21 @@
             }),
             dataType: "json",
             success: function (respuesta) {
-                console.log("Pedido Creado");
+
+                var idPedido = respuesta.d.IdPedido;
+                if (!idPedido || idPedido === 0) {
+                    Swal.fire('Error', 'No se pudo crear el pedido', 'error');
+                    return;
+                }
+
+                var referenciaUnica = "KEP-" + idPedido;
+                let claveCarrito = 'carritoCompras';
+                const userId = localStorage.getItem("usuarioActivoId");
+                if (userId) {
+                    claveCarrito = `carritoCliente-${userId}`;
+                }
+
+                localStorage.removeItem(claveCarrito);
 
                 $.ajax({
                     type: "POST",
@@ -91,8 +110,8 @@
                                 'signature': resultado.Signature || resultado.signature,
                                 'test': '1', // Modo pruebas
                                 'buyerEmail': correoCompra,
-                                'responseUrl': 'https://figurine-chivalry-porcupine.ngrok-free.dev/Vista/Cliente/Carrito/ResultadoPago.aspx',
-                                'confirmationUrl': 'https://figurine-chivalry-porcupine.ngrok-free.dev/Vista/Cliente/Carrito/ResultadoPago.aspx'
+                                'responseUrl': 'https://localhost:44317//Vista/Cliente/Carrito/Pago.aspx',
+                                'confirmationUrl': 'https://figurine-chivalry-porcupine.ngrok-free.dev/Vista/Cliente/Carrito/Pago.aspx'
                             };
 
                             var $formVirtual = $('<form>', {
@@ -121,36 +140,50 @@
     });
 });
 
+
+
 function MtRenderizarCarro() {
-    let carrito = JSON.parse(localStorage.getItem('carritoCompras')) || [];
-    const contenedor = document.getElementById('contenedorCarrito');
-    const totalDOM = document.getElementById('carrito-total');
-    const panel = document.getElementById('panelVacio');
+
+    const contenedor = document.getElementById("contenedorCarrito");
+    const lblSubTotal = document.getElementById("subtotal");
+    const totalDOM = document.getElementById("total");
+    const panel = document.getElementById("panelVacio");
+    let claveCarrito = 'carritoCompras';
+    const userId = localStorage.getItem("usuarioActivoId");
+    if (userId) {
+        claveCarrito = `carritoCliente-${userId}`;
+    }
+
+    let carrito = JSON.parse(localStorage.getItem(claveCarrito)) || [];
+
+    let acumulado = 0;
 
     if (!contenedor) return;
 
-    contenedor.innerHTML = '';
-    let totalGeneral = 0;
 
-    if (carrito.length === 0) {
+    if (carrito.length == 0) {
         contenedor.innerHTML = '';
         panel.style.display = 'block';
+        lblSubTotal.innerText = "0.00";
+        totalDOM.innerText = "0.00";
         return;
     }
+    panel.style.display = 'none';
+    contenedor.innerHTML = '';
 
     carrito.forEach((prod, posicion) => {
-        const subTotal = (prod.precio * prod.cantidad).toFixed(2);
-        totalGeneral += prod.precio * prod.cantidad;
+        const subTotal = prod.precio * prod.cantidad;
+        acumulado += subTotal;
 
         const productoHtml = `
             <div class="producto-row p-3 mb-3 border-bottom">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="fw-bold mb-0">${prod.nombre}</h6>
-                        <small class="text-muted">$${prod.precio.toFixed(2)} x ${prod.cantidad}</small>
+                        <small style="font-size: 0.9rem;" class="text-muted">$${prod.precio} x ${prod.cantidad}</small>
                     </div>
                     <div class="d-flex align-items-center">
-                        <span class="fw-bold text-success me-3">$${subTotal}</span>
+                        <span style="color: #1e3a8a; font-size: 1.1rem;" class="fw-bold me-3">$${subTotal}</span>
                         <button type="button" class="btn btn-outline-danger btn-sm border-0" onclick="MtEliminarProducto(${posicion})">
                             <i class="bi bi-trash"></i>
                         </button>
@@ -158,24 +191,35 @@ function MtRenderizarCarro() {
                 </div>
             </div>
         `;
-
         contenedor.insertAdjacentHTML('beforeend', productoHtml);
     });
 
-    if (totalDOM) {
-        totalDOM.innerText = `$${totalGeneral.toFixed(2)}`;
-    }
+    const totalArreglado = acumulado.toLocaleString();
+    if (lblSubTotal) lblSubTotal.innerText = totalArreglado;
+    if (totalDOM) totalDOM.innerText = totalArreglado;
 };
 
+
+
 function MtEliminarProducto(posicion) {
-    let carrito = JSON.parse(localStorage.getItem('carritoCompras')) || [];
+
+    let claveCarrito = 'carritoCompras';
+    const userId = localStorage.getItem("usuarioActivoId");
+    if (userId) {
+        claveCarrito = `carritoCliente-${userId}`;
+    }
+
+
+    let carrito = JSON.parse(localStorage.getItem(claveCarrito)) || [];
 
     carrito.splice(posicion, 1);
 
-    localStorage.setItem('carritoCompras', JSON.stringify(carrito));
+    localStorage.setItem(claveCarrito, JSON.stringify(carrito));
 
     MtRenderizarCarro();
 };
+
+document.addEventListener('DOMContentLoaded', MtRenderizarCarro);
 
 
 
