@@ -125,7 +125,7 @@ namespace DistribuidoraKeppler.Datos
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
-                con.Open();
+                con.Open(); 
                 string sql = "UPDATE Cliente SET Contrasena = @Pass WHERE Id = @Id";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@Pass", nuevaContrasena);

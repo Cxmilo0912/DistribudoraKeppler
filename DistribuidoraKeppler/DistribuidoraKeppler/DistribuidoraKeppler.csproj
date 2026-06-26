@@ -178,7 +178,12 @@
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Cliente\CatalogoProductos.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
+<<<<<<< Updated upstream
     <Content Include="Vista\Cliente\EditarPerfil.aspx" />
+=======
+    <Content Include="Vista\Cliente\Historial.aspx" />
+    <Content Include="Vista\Cliente\MisPedidos.aspx" />
+>>>>>>> Stashed changes
     <Content Include="Vista\Cliente\Registro.aspx" />
     <Content Include="Vista\Cliente\DetalleProducto.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
@@ -320,6 +325,20 @@
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\Historial.aspx.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\Historial.aspx.designer.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\MisPedidos.aspx.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\MisPedidos.aspx.designer.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Cliente\DetalleProducto.aspx.cs">
       <DependentUpon>DetalleProducto.aspx</DependentUpon>
