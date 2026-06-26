@@ -228,113 +228,74 @@
 
     <div class="px-4 px-md-5 py-4">
 
-        <!-- ── ENCABEZADO ────────────────────────────────────────────────── -->
+        <!-- ENCABEZADO -->
         <header class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
             <div>
-                <span class="badge rounded-pill px-3 py-1 mb-2 text-white fw-semibold d-inline-block"
-                    style="background-color: var(--kepler-blue); font-size: 0.7rem; letter-spacing: 0.04em;">Módulo Inventario
-                </span>
-                <h2 class="fw-bold text-dark mb-1">Gestión de marcas</h2>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 small">
-                        <li class="breadcrumb-item text-muted fw-semibold">Inventario</li>
-                        <li class="breadcrumb-item active text-muted" aria-current="page">Marcas</li>
-                    </ol>
-                </nav>
+                <p class="text-muted mb-1 small fw-semibold" style="letter-spacing: 0.04em; text-transform: uppercase;">Inventario / Marcas</p>
+                <h2 class="fw-bold text-dark mb-0" style="font-size: 1.5rem;">Gestión de Marcas</h2>
             </div>
-            <button type="button"
-                class="btn btn-kepler d-inline-flex align-items-center gap-2"
-                data-bs-toggle="modal"
-                data-bs-target="#modalMarca">
+            <button type="button" class="btn btn-kepler d-inline-flex align-items-center gap-2"
+                data-bs-toggle="modal" data-bs-target="#modalMarca">
                 <i class="bi bi-plus-lg"></i>
-                <span>Agregar marca</span>
+                <span>Nueva Marca</span>
             </button>
         </header>
 
-        <!-- ── GRID BENTO (HERO + STATS) ─────────────────────────────────── -->
+        <!-- STATS -->
         <div class="row g-3 mb-4">
-
-            <!-- Hero Card -->
-            <div class="col-12 col-xl-6">
-                <div class="kepler-card kepler-hero-card card text-white p-4 position-relative overflow-hidden h-100">
-                    <div class="position-relative d-flex flex-column h-100 justify-content-between" style="z-index: 1;">
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="kepler-stat-card kepler-card h-100">
+                    <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <span class="glass-badge badge rounded-pill px-3 py-1 text-white small mb-3 d-inline-block">Control de marca
-                            </span>
-                            <h4 class="fw-bold mb-2">Catálogo de marcas</h4>
-                            <p class="small mb-0" style="opacity: .65; max-width: 400px;">
-                                Administra y centraliza las marcas que distribuye Kepler. Una buena clasificación
-                                por marca agiliza la gestión de proveedores y el control de stock.
-                            </p>
+                            <p class="text-muted mb-1" style="font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;">Total Marcas</p>
+                            <asp:Label ID="lblTotalMarcas" runat="server" CssClass="fw-bold mb-0" Style="font-size: 1.75rem; color: var(--kepler-blue);" Text="0" />
                         </div>
-                        <div class="d-flex gap-3 mt-4">
-                            <div class="glass-badge px-3 py-2 rounded-3 text-center" style="min-width: 100px;">
-                                <asp:Label ID="lblTotalMarcas" runat="server"
-                                    CssClass="d-block fw-bold mb-0"
-                                    Style="font-size: 1.75rem;"
-                                    Text="0" />
-                                <span style="font-size: .65rem; text-transform: uppercase; letter-spacing: .05em; opacity: .6;">Total marcas</span>
-                            </div>
-                            <div class="glass-badge px-3 py-2 rounded-3 text-center" style="min-width: 100px;">
-                                <span class="d-block fw-bold mb-0" style="font-size: 1.75rem;">200</span>
-                                <span style="font-size: .65rem; text-transform: uppercase; letter-spacing: .05em; opacity: .6;">Productos</span>
-                            </div>
+                        <div class="rounded-3 d-flex align-items-center justify-content-center"
+                            style="width: 46px; height: 46px; background-color: var(--kepler-blue-light); color: var(--kepler-blue); flex-shrink: 0;">
+                            <i class="bi bi-patch-check-fill fs-5"></i>
                         </div>
-                    </div>
-                    <div class="position-absolute rounded-circle bg-white"
-                        style="width: 260px; height: 260px; bottom: -80px; right: -80px; opacity: .04; z-index: 0;">
                     </div>
                 </div>
             </div>
-
-            <!-- Stat: Nuevas este mes -->
-            <div class="col-12 col-md-6 col-xl-3">
-                <div class="kepler-stat-card kepler-card h-100 d-flex flex-column justify-content-between">
-                    <div class="d-flex justify-content-between align-items-start">
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="kepler-stat-card kepler-card h-100">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p class="text-muted mb-1" style="font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;">Nuevas este mes</p>
+                            <h3 class="fw-bold mb-0" style="font-size: 1.75rem; color: #1e9e5a;">3</h3>
+                        </div>
                         <div class="rounded-3 d-flex align-items-center justify-content-center"
-                            style="width: 42px; height: 42px; background-color: #e3f7ec; color: #1e9e5a;">
+                            style="width: 46px; height: 46px; background-color: #e3f7ec; color: #1e9e5a; flex-shrink: 0;">
                             <i class="bi bi-calendar-check-fill fs-5"></i>
                         </div>
-                        <span class="small fw-semibold text-success">
-                            <i class="bi bi-arrow-up-short"></i>Este mes
-                        </span>
-                    </div>
-                    <div class="mt-4">
-                        <p class="text-muted mb-1" style="font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;">Nuevas marcas</p>
-                        <h3 class="fw-bold mb-0" style="color: var(--kepler-blue); font-size: 2rem;">3</h3>
                     </div>
                 </div>
             </div>
-
-            <!-- Stat: Productos asociados -->
-            <div class="col-12 col-md-6 col-xl-3">
-                <div class="kepler-stat-card kepler-card h-100 d-flex flex-column justify-content-between">
-                    <div class="d-flex justify-content-between align-items-start">
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="kepler-stat-card kepler-card h-100">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p class="text-muted mb-1" style="font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;">Productos asociados</p>
+                            <h3 class="fw-bold mb-0" style="font-size: 1.75rem; color: var(--kepler-blue);">200</h3>
+                        </div>
                         <div class="rounded-3 d-flex align-items-center justify-content-center"
-                            style="width: 42px; height: 42px; background-color: #eef0fd; color: var(--kepler-blue);">
+                            style="width: 46px; height: 46px; background-color: var(--kepler-blue-light); color: var(--kepler-blue); flex-shrink: 0;">
                             <i class="bi bi-box-seam-fill fs-5"></i>
                         </div>
-                        <span class="small text-muted">Asociados</span>
-                    </div>
-                    <div class="mt-4">
-                        <p class="text-muted mb-1" style="font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;">Productos asociados</p>
-                        <h3 class="fw-bold mb-0" style="color: var(--kepler-blue); font-size: 2rem;">200</h3>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- FIN GRID BENTO -->
 
-        <!-- ── TABLA DE MARCAS ────────────────────────────────────────────── -->
+        <!-- TABLA -->
         <div class="kepler-card card overflow-hidden mb-4">
             <div class="card-header bg-white border-0 px-4 pt-4 pb-3 d-flex justify-content-between align-items-center">
-                <h5 class="fw-bold mb-0 text-dark">
-                    <i class="bi bi-list-ul me-2" style="color: var(--kepler-blue);"></i>
+                <h6 class="fw-bold mb-0 text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-tag-fill" style="color: var(--kepler-blue);"></i>
                     Lista de marcas
-                </h5>
-                <span class="badge rounded-pill px-3 py-2 border fw-normal small"
-                    style="background-color: var(--kepler-blue-light); color: var(--kepler-blue); font-size: .72rem;">Registro activo
+                </h6>
+                <span class="badge rounded-pill px-3 py-2"
+                    style="background-color: var(--kepler-blue-light); color: var(--kepler-blue); font-size: .7rem; font-weight: 600;">Registro activo
                 </span>
             </div>
             <div class="card-body p-0">
@@ -342,8 +303,8 @@
                     <table class="table kepler-table table-hover align-middle mb-0 w-100">
                         <thead>
                             <tr>
-                                <th>Nombre de la marca</th>
-                                <th class="text-end" style="width: 160px;">Acciones</th>
+                                <th>Marca</th>
+                                <th class="text-end" style="width: 180px;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -360,16 +321,11 @@
                                         </td>
                                         <td class="text-end">
                                             <div class="d-inline-flex gap-2">
-                                                <asp:LinkButton runat="server"
-                                                    CssClass="btn btn-sm btn-action-edit px-3"
-                                                    title="Editar marca">
-                                                    <i class="bi bi-pencil-square me-1"></i>Editar
-                                                </asp:LinkButton>
-                                                <asp:LinkButton runat="server"
-                                                    CssClass="btn btn-sm btn-action-del px-3"
-                                                    title="Eliminar marca">
-                                                    <i class="bi bi-trash3 me-1"></i>Eliminar
-                                                </asp:LinkButton>
+                                                <button type="button" class="btn btn-sm btn-action-edit px-3 btn-editar"
+                                                    data-id="<%# Eval("Id") %>"
+                                                    data-nombre="<%# Eval("Nombre") %>">
+                                                    <i class="bi bi-pencil-square me-1"></i>Editar</button>
+                                                <button type="button" class="btn btn-sm btn-action-del px-3 btn-eliminar"><i class="bi bi-trash3 me-1"></i>Eliminar</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -380,90 +336,163 @@
                 </div>
             </div>
         </div>
-        <!-- FIN TABLA -->
 
     </div>
-    <!-- FIN CONTENEDOR PRINCIPAL -->
 
-    <!-- =========================================================================
-         MODAL AGREGAR MARCA
-         ========================================================================= -->
-    <div class="modal fade kepler-modal" id="modalMarca" tabindex="-1"
-        aria-labelledby="modalMarcaLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+    <!-- MODAL AGREGAR MARCA -->
+    <div class="modal fade" id="modalMarca" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 480px;">
+            <div class="modal-content" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.12);">
 
-                <div class="modal-header">
-                    <h5 class="modal-title d-flex align-items-center gap-2 fw-bold fs-6 text-white"
-                        id="modalMarcaLabel">
-                        <i class="bi bi-patch-plus-fill fs-5"></i>
-                        <span>Agregar nueva marca</span>
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white shadow-none"
-                        data-bs-dismiss="modal" aria-label="Close">
-                    </button>
+                <!-- Header -->
+                <div class="d-flex align-items-center justify-content-between px-4 py-3" style="border-bottom: 1px solid #f1f5f9;">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px; background: linear-gradient(135deg, #0b1184, #060a52);">
+                            <i class="bi bi-patch-plus-fill text-white"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark" style="font-size: 0.95rem;">Nueva Marca</h6>
+                            <p class="text-muted mb-0" style="font-size: 0.75rem;">Complete los datos de la marca</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
                 </div>
 
-                <div class="modal-body">
-                    <div class="row g-3">
-
-                        <div class="col-12">
-                            <label class="form-label">Nombre de la marca</label>
-                            <asp:TextBox ID="txtNombreMarca" runat="server"
-                                CssClass="form-control"
-                                placeholder="Ej: Coca-Cola, Scott, Colgate..." />
+                <!-- Body -->
+                <div class="px-4 py-4" style="background: #fff;">
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Nombre de la marca *</label>
+                        <asp:TextBox ID="txtNombreMarca" runat="server"
+                            CssClass="form-control"
+                            placeholder="Ej: Coca-Cola, Colgate, Scott..." />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">País de origen</label>
+                        <asp:TextBox ID="txtPaisOrigen" runat="server"
+                            CssClass="form-control"
+                            placeholder="Ej: Colombia, Estados Unidos..." />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Descripción</label>
+                        <asp:TextBox ID="txtTextMode" runat="server"
+                            TextMode="MultiLine" Rows="3"
+                            CssClass="form-control"
+                            placeholder="Breve descripción de la marca..." />
+                    </div>
+                    <div class="mb-1">
+                        <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Logo</label>
+                        <div class="upload-zone">
+                            <i class="bi bi-cloud-arrow-up fs-4 mb-1 d-block" style="color: var(--kepler-blue); opacity: .5;"></i>
+                            <input type="file" id="fuLogo" name="fuLogo" class="form-control form-control-sm mt-2" accept=".png,.jpg,.jpeg" />
+                            <p class="text-muted mb-0 mt-2" style="font-size: .72rem;">PNG, JPG · Máx 5 MB</p>
                         </div>
-
-                        <div class="col-12">
-                            <label class="form-label">País de origen</label>
-                            <asp:TextBox ID="txtPaisOrigen" runat="server"
-                                CssClass="form-control"
-                                placeholder="Ej: Colombia, Estados Unidos..." />
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label">Descripción</label>
-                            <asp:TextBox ID="txtTextMode" runat="server"
-                                TextMode="MultiLine" Rows="3"
-                                CssClass="form-control"
-                                placeholder="Breve descripción de la marca..." />
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label">Logo de la marca</label>
-                            <div class="upload-zone">
-                                <i class="bi bi-cloud-arrow-up fs-3 mb-2 d-block" style="color: var(--kepler-blue); opacity: .5;"></i>
-                                <asp:FileUpload ID="fuLogo" runat="server"
-                                    CssClass="form-control form-control-sm" />
-                                <p class="text-muted mb-0 mt-2" style="font-size: .75rem;">
-                                    Formatos PNG, JPG · Máximo 5 MB
-                                </p>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button"
-                        class="btn btn-link link-secondary text-decoration-none fw-semibold small"
-                        data-bs-dismiss="modal">
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-end gap-2 px-4 py-3" style="background: #f8fafc; border-top: 1px solid #f1f5f9;">
+                    <button type="button" class="btn btn-sm fw-semibold text-muted" data-bs-dismiss="modal"
+                        style="background: #f1f5f9; border: none; border-radius: 10px; padding: 8px 18px;">
                         Cancelar
                     </button>
-                    <asp:Button
-                        ID="btnGuardarMarca"
-                        runat="server"
-                        Text="Guardar marca"
+                    <asp:Button ID="btnGuardarMarca" runat="server"
+                        Text="Guardar Marca"
                         OnClick="btnGuardarMarca_Click"
-                        CssClass="btn btn-kepler px-4" />
+                        CssClass="btn btn-kepler btn-sm px-4"
+                        UseSubmitBehavior="false" />
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!--Modal Editar -->
+    <div class="modal fade" id="modalEditarMarca" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+            <div class="modal-content" style="border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.12);">
+
+                <!-- Header -->
+                <div class="d-flex align-items-center justify-content-between px-4 py-3" style="border-bottom: 1px solid #f1f5f9;">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px; background: linear-gradient(135deg, #0b1184, #060a52);">
+                            <i class="bi bi-pencil-square text-white"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark" style="font-size: 0.95rem;">Editar Marca</h6>
+                            <p class="text-muted mb-0" style="font-size: 0.75rem;">Modifica los datos de la marca</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Body -->
+                <div class="px-4 py-4" style="background: #fff;">
+                    <asp:HiddenField ID="hfIdMarca" runat="server" />
+
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Nombre de la marca *</label>
+                        <input id="txtEditNombreMarca" type="text" class="form-control" />
+                        <asp:TextBox ID="txtEditNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+
+                    <div class="mb-1">
+                        <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Logo</label>
+                        <div class="upload-zone">
+                            <i class="bi bi-cloud-arrow-up fs-4 mb-1 d-block" style="color: var(--kepler-blue); opacity: .5;"></i>
+                            <asp:FileUpload ID="fuImagen" runat="server" CssClass="form-control form-control-sm mt-2" />
+                            <p class="text-muted mb-0 mt-2" style="font-size: .72rem;">PNG, JPG · Máx 5 MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-end gap-2 px-4 py-3" style="background: #f8fafc; border-top: 1px solid #f1f5f9;">
+                    <button type="button" class="btn btn-sm fw-semibold text-muted" data-bs-dismiss="modal"
+                        style="background: #f1f5f9; border: none; border-radius: 10px; padding: 8px 18px;">
+                        Cancelar
+                    </button>
+                    <asp:Button ID="btnActualizarMarca" runat="server"
+                        Text="Actualizar Marca"
+                        OnClick="btnActualizarMarca_Click"
+                        CssClass="btn btn-ke"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function abrirModal(nombre, logo) {
+            document.getElementById('txtEditNombreMarca').innerText = nombre;
+
+            document.getElementById('modalEditarMarca').classList.add('active');
+        };
+
+        function cerrarModal() {
+            document.getElementById('modalEditarMarca').classList.remove('active')
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.btn-editar').forEach(function (boton) {
+                boton.addEventListener('click', function () {
+                    var idMarca = boton.dataset.id;
+                    var nombreMarca = boton.dataset.nombre;
+
+                    document.getElementById('<%= hfIdMarca.ClientID %>').value = idMarca;
+                    document.getElementById('<%= txtEditNombre.ClientID %>').value = nombreMarca;
+
+                    var inputNativo = document.getElementById('txtEditNombreMarca');
+                    if (inputNativo) inputNativo.value = nombreMarca;
+
+                    new bootstrap.Modal(document.getElementById('modalEditarMarca')).show();
+                });
+            });
+        });
+    </script>
 
 </asp:Content>

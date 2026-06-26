@@ -251,7 +251,7 @@
                         <i class="bi bi-tags"></i>
                     </div>
                     <span class="text-uppercase small tracking-widest fw-bold text-muted d-block mb-1">Categorías del Sistema</span>
-                    <h3 class="display-6 fw-bold text-success tracking-tight mb-0">--</h3>
+                    <asp:Label ID="lblCat" runat="server" CssClass="display-6 fw-bold tracking-tight" Text="0"></asp:Label>
                 </div>
             </div>
         </footer>
@@ -500,45 +500,6 @@
             });
         });
 
-        $(document).on('click', '.btn-eliminar', function () {
-            var row = $(this).closest('tr');
-            if (row.hasClass('child')) row = row.prev();
-
-            var data = $('#tablaProductos').DataTable().row(row).data();
-
-            Swal.fire({
-                title: '¿Deseas eliminar el producto?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, Te Amo💗',
-                cancelButtonText: 'No, Soy Infiel👻',
-                confirmButtonColor: '#10B981',
-                cancelButtonColor: '#ef4444'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "POST",
-                        url: "GestionProductos.aspx/MtEliminarProducto",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify({ id: data.Id }), // Solo se envia el Id
-                        dataType: "json",
-                        success: function (respuesta) {
-                            if (respuesta.d) {
-                                alert("Producto eliminado correctamente.");
-                                $('#tablaProductos').DataTable().ajax.reload(); // Refrescar tabla
-                            } else {
-                                alert("No se pudo eliminar el producto.");
-                            }
-                        },
-                        error: function (xhr) {
-                            console.error(xhr.responseText); //Esta linea imprime en caso de error
-                        }
-                    })
-                    Swal.fire('¡Eliminado!', 'El producto se ha eliminado con éxito.', 'success');
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire('Cancelado', 'No se pudo eliminar el producto.', 'error');
-                }
-            })
-        });
+       
     </script>
 </asp:Content>

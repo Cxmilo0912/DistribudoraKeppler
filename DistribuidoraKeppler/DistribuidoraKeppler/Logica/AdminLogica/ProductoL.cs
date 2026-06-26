@@ -30,10 +30,6 @@ namespace DistribuidoraKeppler.Logica
         {
             return productos.ListarProductos();
         }
-        public bool EliminarProducto(int idProducto)
-        {
-            return productos.EliminarProducto(idProducto);
-        }
 
         //--METODOS CREADOS POR JHON -- INICIO//
 
@@ -110,12 +106,6 @@ namespace DistribuidoraKeppler.Logica
             return verificacion;
         }
 
-        public bool MtEliminarProducto(int id) 
-        {
-            bool resultado = productos.MtEliminarProducto(id);
-
-            return resultado;
-        }
 
         public int MtContarTotalProductos()
         {

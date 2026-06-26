@@ -22,5 +22,10 @@ namespace DistribuidoraKeppler.Logica
         {
             return this.categoria.RegistrarCategoria(categoria);
         }
+
+        public int MtContarCategorias()
+        {
+            return categoria.MtContarCategorias();
+        }
     }
 }

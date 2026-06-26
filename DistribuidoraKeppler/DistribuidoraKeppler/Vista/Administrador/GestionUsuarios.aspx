@@ -14,6 +14,8 @@
 
     <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sp-2.3.3/sl-2.0.3/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <link rel="stylesheet" href="../Assets/css/GestionUsuario.css" />
     <style>
@@ -74,7 +76,46 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid py-4 bg-light min-vh-100">
-
+        <div id="modalEditarUsuario" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content rounded-2xl border-0 shadow-xl p-6 space-y-5">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="text-base font-bold text-slate-800"><i class="fas fa-user-edit text-blue-600 mr-2"></i>Editar Usuario</h3>
+                        <button type="button" class="text-slate-400 hover:text-slate-600" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
+                    </div>
+                    <input type="hidden" id="txtIdTrabajador" name="id" />
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nombre</label>
+                            <input type="text" id="txtNombre" class="w-full border border-slate-200 rounded-xl py-2.5 px-4 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all" placeholder="Nombre completo" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Documento</label>
+                            <input type="text" id="txtDocumento" class="w-full border border-slate-200 rounded-xl py-2.5 px-4 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all" placeholder="C.C. o NIT" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Correo Electrónico</label>
+                            <input type="email" id="txtEmail" class="w-full border border-slate-200 rounded-xl py-2.5 px-4 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all" placeholder="correo@ejemplo.com" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Rol</label>
+                            <asp:DropDownList ID="ddlRol" runat="server" CssClass="w-full bg-white border border-slate-200 pl-4 pr-10 py-2.5 rounded-xl text-sm text-slate-700 appearance-none focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all cursor-pointer"></asp:DropDownList>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Estado</label>
+                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="w-full bg-white border border-slate-200 pl-4 pr-10 py-2.5 rounded-xl text-sm text-slate-700 appearance-none focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all cursor-pointer">
+                                <asp:ListItem Text="Activo" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="Inactivo" Value="0"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
+                        <button type="button" data-bs-dismiss="modal" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-5 py-2.5 rounded-xl text-xs font-semibold transition-all">Cancelar</button>
+                        <button type="button" id="btnGuardar"class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-xs font-semibold shadow-lg shadow-blue-600/10 transition-all">Guardar Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <header class="d-flex flex-column flex-md-row align-items-md-center justify-content-between pb-4 mb-4 border-bottom" data-purpose="main-header">
             <div>
                 <h1 class="h2 fw-bold text-dark mb-1">Gestión de Usuarios</h1>
@@ -82,11 +123,8 @@
             </div>
 
             <div class="d-flex align-items-center gap-3 mt-3 mt-md-0">
-                <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2 px-4 py-2 rounded-3 shadow-sm fw-semibold">
-                    <i class="bi bi-person-plus-fill"></i>
-                    <span>Agregar Usuario</span>
-                </button>
-
+                <a href="CrearTrabajador.aspx" class="btn btn-primary d-inline-flex align-items-center gap-2 px-4 py-2 rounded-3 shadow-sm fw-semibold"><i class="bi bi-person-plus-fill"></i>
+                    <span>Agregar Usuario</span></a>
                 <div class="position-relative">
                     <button type="button" class="btn btn-white border rounded-circle d-flex align-items-center justify-center p-2 shadow-sm hover-bg-light" style="width: 42px; height: 42px;">
                         <i class="bi bi-bell text-secondary fs-5"></i>
@@ -118,7 +156,7 @@
                         <div>
                             <span class="text-muted small fw-bold text-uppercase">Administradores</span>
                             <br />
-                            <asp:label ID="lblAdmins" runat="server" text="" cssclass="fw-bold text-dark mt-1 mb-0 "></asp:label>
+                            <asp:Label ID="lblAdmins" runat="server" Text="" CssClass="fw-bold text-dark mt-1 mb-0 "></asp:Label>
                         </div>
                         <div class="p-3 bg-dark-subtle text-dark rounded-3 fs-3 d-flex">
                             <i class="bi bi-shield-lock"></i>
@@ -205,6 +243,7 @@
                     <table id="example" class="table table-hover align-middle w-full text-sm m-0">
                         <thead class="table-light text-secondary uppercase">
                             <tr>
+                                <th class="border-bottom-0 fw-bold">Foto</th>
                                 <th class="border-bottom-0 fw-bold">Id</th>
                                 <th class="border-bottom-0 fw-bold">Nombre</th>
                                 <th class="border-bottom-0 fw-bold">Email</th>
@@ -218,5 +257,5 @@
         </div>
     </div>
 
-    <script src="../Assets/js/GestionUsuario.js?v=1.6"></script>
+    <script src="../Assets/js/GestionUsuario.js?v=2.2.1"></script>
 </asp:Content>

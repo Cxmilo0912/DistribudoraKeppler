@@ -13,7 +13,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 {
     public partial class GestionUsuarios : System.Web.UI.Page
     {
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MtCargas();
@@ -28,23 +28,49 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             lblPrev.Text = oGestionUsuarioL.MtTotalPreventistas().ToString();
             lblDistribuidores.Text = oGestionUsuarioL.MtTotalDistribuidores().ToString();
             lblInactivo.Text = oGestionUsuarioL.MtUsuariosInactivos().ToString();
+            UsuarioL oCrear = new UsuarioL();
+            List<Rol> roles = oCrear.MtListarRoles();
+            ddlRol.DataSource = roles.ToList();
+            ddlRol.DataTextField = "Nombre";
+            ddlRol.DataValueField = "Id";
+            ddlRol.DataBind();
         }
         [WebMethod]
         public static object MtListarTrabajadores()
         {
             GestionUsuarioL oGestionUsuarioL = new GestionUsuarioL();
             List<Modelo.Usuario> lista = oGestionUsuarioL.MtListarTrabajadores();
-            
-            return new {data = lista };
+
+            return new { data = lista };
         }
-        protected void LinkButton1_Click(object sender, EventArgs e)
+
+        [WebMethod]
+        public static bool MtEditarUsuario(Modelo.Usuario oUsuario)
         {
+            Modelo.Usuario oNuevoUsuario = new Modelo.Usuario
+            {
+                Id = oUsuario.Id,
+                Nombre = oUsuario.Nombre,
+                Email = oUsuario.Email,
+                Documento = oUsuario.Documento,
+                Rol = oUsuario.Rol,
+                Estado = oUsuario.Estado
+            };
 
+            UsuarioL oUsuarioL = new UsuarioL();
+
+            bool resultado = oUsuarioL.MtEditarUsuario(oNuevoUsuario);
+
+            return resultado;
         }
 
-        protected void lbtnEditar_Click(object sender, EventArgs e)
+        [WebMethod]
+
+        public static bool MtEliminarUsuario(int id)
         {
-
+            UsuarioL oUsuarioL = new UsuarioL();
+            return oUsuarioL.MtEliminarUsuario(id);
         }
+
     }
 }

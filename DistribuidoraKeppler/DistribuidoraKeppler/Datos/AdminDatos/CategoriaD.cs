@@ -76,5 +76,19 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
         }
+
+        public int MtContarCategorias()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consulta = @"Select Count(Id) From Categoria";
+
+                using (SqlCommand cmd = new SqlCommand(consulta,cn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
     }
 }

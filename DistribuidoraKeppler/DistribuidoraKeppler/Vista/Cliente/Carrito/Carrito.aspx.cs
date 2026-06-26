@@ -20,7 +20,7 @@ namespace DistribuidoraKeppler.Vista.Cliente.Carrito
 
         }
         [WebMethod]
-        public static bool MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
+        public static object MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
         {
             
             Modelo.Cliente cliente = (Modelo.Cliente)HttpContext.Current.Session["Cliente"];
@@ -40,7 +40,9 @@ namespace DistribuidoraKeppler.Vista.Cliente.Carrito
 
             PedidoL oPedidoL = new PedidoL();
 
-            return oPedidoL.MtCrearPedido(nuevoPedido, oDetalles);
+            int idPedido = oPedidoL.MtCrearPedido(nuevoPedido, oDetalles);
+
+            return new { Success = idPedido > 0, IdPedido = idPedido };
 
         }
 

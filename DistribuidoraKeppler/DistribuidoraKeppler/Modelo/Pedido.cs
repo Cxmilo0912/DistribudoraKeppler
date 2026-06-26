@@ -19,6 +19,10 @@ namespace DistribuidoraKeppler.Modelo
 
         public decimal Total { get; set; }
 
+        public string MetodoPago { get; set; }
+
+        public int IdMetodoPago { get; set; }
+
         public Cliente IdCliente { get; set; }
 
 

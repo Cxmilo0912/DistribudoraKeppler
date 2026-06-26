@@ -32,32 +32,6 @@ namespace DistribuidoraKeppler.Vista.Aministrador
 
             return new { data = listaProductos };
         }
-        protected void btnEliminar_Command(object sender, CommandEventArgs e)
-        {
-            if (e.CommandName == "Eliminar")
-            {
-                try
-                {
-                    int idProducto = Convert.ToInt32(e.CommandArgument);
-
-                    ProductoL logica = new ProductoL();
-                    bool eliminado = logica.EliminarProducto(idProducto);
-
-                    if (eliminado)
-                    {
-                        CargarProductos();
-
-                        ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                            "mostrarAlerta('¡Éxito!', 'Producto eliminado correctamente', 'success');", true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                        $"mostrarAlerta('Error', '{ex.Message}', 'error');", true);
-                }
-            }
-        }
 
 
         protected void btnEditar_Command(object sender, CommandEventArgs e)
@@ -77,6 +51,8 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             DashboardAdministradorL oAdminL = new DashboardAdministradorL();
             lblTotalProductos.Text = oAdminL.MtProductosTotales().ToString();
 
+            CategoriaL oCategoriaL = new CategoriaL();
+            lblCat.Text = oCategoriaL.MtContarCategorias().ToString();
             ProductoL oProductoL = new ProductoL();
             List<Categoria> lista = oProductoL.MtObtenerCategoriasConTodos();
 
@@ -91,6 +67,8 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             ddlMarca.DataTextField = "Nombre";
             ddlMarca.DataValueField = "Id";
             ddlMarca.DataBind();
+
+
         }
 
         [WebMethod]
@@ -118,15 +96,6 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             return resultado;
         }
 
-        [WebMethod]
-        public static bool MtEliminarProducto(int id)
-        {
-
-            ProductoL oProductoL = new ProductoL();
-            return oProductoL.MtEliminarProducto(id);
-
-
-        }
 
         protected void btnCrearProducto_Click1(object sender, EventArgs e)
         {
