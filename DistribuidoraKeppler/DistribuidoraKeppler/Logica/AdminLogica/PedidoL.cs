@@ -9,24 +9,33 @@ namespace DistribuidoraKeppler.Logica
 {
     public class PedidoL
     {
-        public int MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
         {
-            if (oPedido.Total <= 0) return 0;
-            if (oDetalles.Count <= 0) return 0;
 
             PedidoD oPedidoCompleto = new PedidoD();
 
             return oPedidoCompleto.MtCrearPedido(oPedido, oDetalles);
-
         }
 
-        public bool MtActualizarPedido(Pedido oPedido)
+        public List<Pedido> MtObtenerUltimosPedidosPorCliente(int idCliente, int cantidad = 5)
         {
-            PedidoD oPedidoD = new PedidoD();
+            if (idCliente <= 0) return new List<Pedido>();
+            return new PedidoD().MtObtenerUltimosPedidosPorCliente(idCliente, cantidad);
+        }
 
-            return oPedidoD.MtActualizarPedido(oPedido);
+        {
 
 
+        public bool MtPuedeCancelar(Pedido pedido)
+        {
+            if (pedido.Estado != "Pendiente" && pedido.Estado != "En Proceso")
+                return false;
+            return DateTime.Today <= MtFechaLimiteCancelacion(pedido.Fecha);
+        }
+
+        public bool MtCancelarPedido(int idPedido, int idCliente)
+        {
+            if (idPedido <= 0 || idCliente <= 0) return false;
+            return new PedidoD().MtCancelarPedido(idPedido, idCliente);
         }
     }
 }

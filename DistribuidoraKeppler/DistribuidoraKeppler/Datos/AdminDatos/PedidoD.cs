@@ -9,7 +9,6 @@ namespace DistribuidoraKeppler.Datos
 {
     public class PedidoD
     {
-        public int MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
         {
             try
             {
@@ -53,49 +52,73 @@ namespace DistribuidoraKeppler.Datos
                 }
 
             }
+                return true;
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return 0;
             }
         }
 
-
-        public bool MtActualizarPedido(Pedido oPedido)
+        public List<Pedido> MtObtenerUltimosPedidosPorCliente(int idCliente, int cantidad = 5)
         {
-            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            var lista = new List<Pedido>();
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
-                cn.Open();
-                string consulta = @"BEGIN TRY
-                                    BEGIN TRANSACTION;
-
-                                    UPDATE Pedido 
-                                    SET Estado = @estado
-                                    WHERE Id = @idPedido;
-
-                                    INSERT INTO PedidoMetodoPago (IdPedido, IdMetodoPago) 
-                                    VALUES (@idPedido, @mPago);
-
-                                    COMMIT TRANSACTION;
-                                    END TRY
-                                    BEGIN CATCH
-                                    IF @@TRANCOUNT > 0
-                                    BEGIN
-                                    ROLLBACK TRANSACTION;
-                                    END
-
-                                    ;THROW;
-                                    END CATCH;
-                                    ";
-
-                using (SqlCommand cmd = new SqlCommand(consulta,cn))
+                con.Open();
+                string sql = @"SELECT TOP (@cantidad) Id, CodigoPedido, Fecha, Estado, DireccionEntrega, Total
+                               FROM Pedido
+                               WHERE IdCliente = @IdCliente
+                               ORDER BY Fecha DESC";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                cmd.Parameters.AddWithValue("@IdCliente", idCliente);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
                 {
-                    cmd.Parameters.AddWithValue("@estado", oPedido.Estado);
-                    cmd.Parameters.AddWithValue("@idPedido", oPedido.Id);
-                    cmd.Parameters.AddWithValue("@mPago", oPedido.IdMetodoPago);
+                    lista.Add(new Pedido
+                    {
+                        Id           = Convert.ToInt32(dr["Id"]),
+                        CodigoPedido = dr["CodigoPedido"] == DBNull.Value ? null : dr["CodigoPedido"].ToString(),
+                        Fecha        = Convert.ToDateTime(dr["Fecha"]),
+                        Estado       = dr["Estado"].ToString(),
+                        DireccionEntrega = dr["DireccionEntrega"].ToString(),
+                        Total        = Convert.ToDecimal(dr["Total"])
+                    });
+                }
+            }
+            return lista;
+        }
 
+        {
+            {
+
+
+
+                {
+
+        public bool MtCancelarPedido(int idPedido, int idCliente)
+        {
+            try
+            {
+                using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+                {
+                    cn.Open();
+                    string sql = @"UPDATE Pedido SET Estado = 'Cancelado'
+                                   WHERE Id = @idPedido AND IdCliente = @idCliente
+                                   AND Estado IN ('Pendiente', 'En Proceso')";
+                    using (SqlCommand cmd = new SqlCommand(sql, cn))
+                    {
+                        cmd.Parameters.AddWithValue("@idPedido", idPedido);
+                        cmd.Parameters.AddWithValue("@idCliente", idCliente);
                     return cmd.ExecuteNonQuery() > 0;
                 }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
     }
