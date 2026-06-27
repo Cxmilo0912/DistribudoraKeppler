@@ -11,42 +11,50 @@ namespace DistribuidoraKeppler.Vista
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string rol = SesionHelper.Rol; // Obtener el rol del usuario desde la sesión
-
-            menuAdmin.Visible = false;
-            menuCliente.Visible = false;
-            menuRepartidor.Visible = false;
-            menuPreventista.Visible = false;
-            menuBodega.Visible = false;
-
-            if (string.IsNullOrEmpty(rol))
-                return;
-
-            switch (rol)
+            if (Session["Usuario"] != null || Session["Cliente"] != null)
             {
-                case "Administrador":
-                    menuAdmin.Visible = true;
-                    break;
+                lblRol.Text = Session["Rol"]?.ToString() ?? "";
+                string rol = SesionHelper.Rol; // Obtener el rol del usuario desde la sesión
 
-                case "Cliente":
-                    menuCliente.Visible = true;
-                    break;
+                menuAdmin.Visible = false;
+                menuCliente.Visible = false;
+                menuRepartidor.Visible = false;
+                menuPreventista.Visible = false;
+                menuBodega.Visible = false;
 
-                case "Repartidor":
-                    menuRepartidor.Visible = true;
-                    break;
+                if (string.IsNullOrEmpty(rol))
+                    return;
 
-                case "Preventista":
-                    menuPreventista.Visible = true;
-                    break;
+                switch (rol)
+                {
+                    case "Administrador":
+                        menuAdmin.Visible = true;
+                        break;
 
-                case "Bodega":
-                    menuBodega.Visible = true;
-                    break;
+                    case "Cliente":
+                        menuCliente.Visible = true;
+                        break;
+
+                    case "Repartidor":
+                        menuRepartidor.Visible = true;
+                        break;
+
+                    case "Preventista":
+                        menuPreventista.Visible = true;
+                        break;
+
+                    case "Bodega":
+                        menuBodega.Visible = true;
+                        break;
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Vista/Auth/Login.aspx", false);
             }
         }
 
-        // 🚪 CERRAR SESIÓN CON SWEET ALERT
+        // CERRAR SESIÓN CON SWEET ALERT
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
@@ -60,11 +68,14 @@ namespace DistribuidoraKeppler.Vista
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    window.location.href = '../Auth/Login.aspx';
+                    window.location.href = '../../Auth/Login.aspx';
                 });
             ";
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "logout", script, true);
         }
+
+
+
     }
 }

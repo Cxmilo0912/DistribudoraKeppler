@@ -9,7 +9,6 @@ namespace DistribuidoraKeppler.Datos
 {
     public class PedidoD
     {
-        public bool MtCrearPedido(Pedido oPedido, List<DetallePedido> oDetalles)
         {
             try
             {
@@ -49,14 +48,15 @@ namespace DistribuidoraKeppler.Datos
                             cmdDetalle.ExecuteNonQuery();
                         }
                     }
-
+                    return idPedido;
                 }
+
+            }
                 return true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
             }
         }
 
@@ -90,68 +90,12 @@ namespace DistribuidoraKeppler.Datos
             return lista;
         }
 
-        public List<Pedido> MtObtenerTodosPedidosPorCliente(int idCliente)
         {
-            var lista = new List<Pedido>();
-            using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
-                con.Open();
-                string sql = @"SELECT Id, CodigoPedido, Fecha, Estado, DireccionEntrega, Total
-                               FROM Pedido
-                               WHERE IdCliente = @IdCliente
-                               ORDER BY Fecha DESC";
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@IdCliente", idCliente);
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+
+
+
                 {
-                    lista.Add(new Pedido
-                    {
-                        Id               = Convert.ToInt32(dr["Id"]),
-                        CodigoPedido     = dr["CodigoPedido"] == DBNull.Value ? null : dr["CodigoPedido"].ToString(),
-                        Fecha            = Convert.ToDateTime(dr["Fecha"]),
-                        Estado           = dr["Estado"].ToString(),
-                        DireccionEntrega = dr["DireccionEntrega"].ToString(),
-                        Total            = Convert.ToDecimal(dr["Total"])
-                    });
-                }
-            }
-            return lista;
-        }
-
-        public void MtObtenerEstadisticasCliente(int idCliente,
-            out int pedidosMes, out decimal totalMes, out int enProceso,
-            out int pedidosMesAnterior, out decimal totalMesAnterior)
-        {
-            pedidosMes = 0; totalMes = 0; enProceso = 0;
-            pedidosMesAnterior = 0; totalMesAnterior = 0;
-
-            using (SqlConnection con = ConexionDB.MtAbrirConexion())
-            {
-                con.Open();
-                string sql = @"
-                    SELECT
-                        COUNT(CASE WHEN MONTH(Fecha) = MONTH(GETDATE()) AND YEAR(Fecha) = YEAR(GETDATE()) THEN 1 END) AS PedidosMes,
-                        ISNULL(SUM(CASE WHEN MONTH(Fecha) = MONTH(GETDATE()) AND YEAR(Fecha) = YEAR(GETDATE()) THEN Total END), 0) AS TotalMes,
-                        COUNT(CASE WHEN Estado NOT IN ('Entregado','Cancelado') THEN 1 END) AS EnProceso,
-                        COUNT(CASE WHEN MONTH(Fecha) = MONTH(DATEADD(MONTH,-1,GETDATE())) AND YEAR(Fecha) = YEAR(DATEADD(MONTH,-1,GETDATE())) THEN 1 END) AS PedidosMesAnterior,
-                        ISNULL(SUM(CASE WHEN MONTH(Fecha) = MONTH(DATEADD(MONTH,-1,GETDATE())) AND YEAR(Fecha) = YEAR(DATEADD(MONTH,-1,GETDATE())) THEN Total END), 0) AS TotalMesAnterior
-                    FROM Pedido
-                    WHERE IdCliente = @IdCliente";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@IdCliente", idCliente);
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    pedidosMes         = Convert.ToInt32(dr["PedidosMes"]);
-                    totalMes           = Convert.ToDecimal(dr["TotalMes"]);
-                    enProceso          = Convert.ToInt32(dr["EnProceso"]);
-                    pedidosMesAnterior = Convert.ToInt32(dr["PedidosMesAnterior"]);
-                    totalMesAnterior   = Convert.ToDecimal(dr["TotalMesAnterior"]);
-                }
-            }
-        }
 
         public bool MtCancelarPedido(int idPedido, int idCliente)
         {
@@ -167,8 +111,8 @@ namespace DistribuidoraKeppler.Datos
                     {
                         cmd.Parameters.AddWithValue("@idPedido", idPedido);
                         cmd.Parameters.AddWithValue("@idCliente", idCliente);
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
+                    return cmd.ExecuteNonQuery() > 0;
+                }
                 }
             }
             catch (Exception ex)

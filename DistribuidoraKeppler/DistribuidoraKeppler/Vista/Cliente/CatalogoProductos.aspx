@@ -2,6 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
     <style>
         body {
             font-family: 'Outfit', sans-serif;
@@ -216,7 +218,7 @@
             color: #0f1f35;
         }
 
-        .btn-carrito {
+        .btn-agregar {
             width: 38px;
             height: 38px;
             background: #eef2ff;
@@ -231,12 +233,20 @@
             transition: background 0.2s, transform 0.15s;
         }
 
-            .btn-carrito:hover {
+            .btn-agregar:hover {
                 background: #1e3a8a;
                 color: #fff;
                 transform: scale(1.08);
             }
 
+        .bi-cart-fill {
+            color: #1E3A8A;
+            font-size: 20px;
+        }
+
+            .bi-cart-fill:hover {
+                color: #eef2ff;
+            }
         /* ── Ver más ── */
         .cat-ver-mas {
             text-align: center;
@@ -312,6 +322,13 @@
                 CssClass="btn-buscar"
                 OnClick="btnBuscar_Click" />
         </div>
+        <div id="cart-floating-button" onclick="window.location='Carrito/Carrito.aspx'" style="position: fixed; bottom: 30px; right: 30px; cursor: pointer; z-index: 1000;">
+            <div style="background-color: #1E3A8A; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative;">
+                <i class="bi bi-cart-fill" style="color: white; font-size: 30px;"></i>
+
+                <span id="cart-count" style="position: absolute; top: 0; right: 0; background-color: #e74c3c; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; border: 2px solid white;"></span>
+            </div>
+        </div>
 
         <%-- ── Filtros de categoría ── --%>
         <div class="cat-filters">
@@ -353,13 +370,13 @@
                         <div class="prod-footer">
                             <span class="prod-precio">$<%# string.Format("{0:N0}", Eval("Precio")) %>
                             </span>
-                            <asp:LinkButton runat="server"
-                                CssClass="btn-carrito"
-                                CommandArgument='<%# Eval("Id") %>'
-                                OnCommand="AgregarCarrito_Command"
-                                ToolTip="Agregar al carrito">
-                                &#128722;
-                            </asp:LinkButton>
+                            <button type="button" class="btn-agregar"
+                                data-id='<%# Eval("Id") %>'
+                                data-imagen='<%# Eval("Imagen") %>'
+                                data-nombre='<%# Eval("Nombre") %>'
+                                data-precio='<%# Eval("Precio") %>'>
+                                <i class="bi bi-cart-fill"></i>
+                            </button>
                         </div>
 
                     </div>
@@ -381,4 +398,61 @@
                 OnClick="btnVerMas_Click" />
         </asp:Panel>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Actualiza el número apenas carga la página
+            MtActualizarContador();
+
+            document.addEventListener('click', function (e) {
+                const boton = e.target.closest('.btn-agregar');
+
+                if (boton) {
+                    const producto = {
+                        id: boton.getAttribute('data-id'),
+                        nombre: boton.getAttribute('data-nombre'),
+                        precio: parseFloat(boton.getAttribute('data-precio')),
+                        cantidad: 1
+                    };
+                    MtAgregarAlCarrito(producto);
+                }
+            });
+        });
+
+        function MtAgregarAlCarrito(nuevoProducto) {
+            let carritoClave = 'carritoCompras';
+            const userId = localStorage.getItem("usuarioActivoId");
+            if (userId) {
+                carritoClave = `carritoCliente-${userId}`;
+            }
+            let carrito = JSON.parse(localStorage.getItem(carritoClave)) || [];
+            const existe = carrito.find(p => p.id == nuevoProducto.id);
+            if (existe) {
+                existe.cantidad++;
+            } else {
+                carrito.push(nuevoProducto);
+            }
+
+            localStorage.setItem(carritoClave, JSON.stringify(carrito));
+
+
+            MtActualizarContador();
+
+
+        }
+
+        function MtActualizarContador() {
+            let carritoClave = 'carritoCompras';
+            const userId = localStorage.getItem("usuarioActivoId");
+            if (userId) {
+                carritoClave = `carritoCliente-${userId}`;
+            }
+            let carrito = JSON.parse(localStorage.getItem(carritoClave)) || [];            
+            const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+            const badge = document.getElementById('cart-count');
+            if (badge) {
+                badge.innerText = total;
+            }
+        }
+    </script>
 </asp:Content>

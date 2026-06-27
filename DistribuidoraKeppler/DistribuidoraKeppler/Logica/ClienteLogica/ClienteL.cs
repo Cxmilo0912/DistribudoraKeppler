@@ -6,7 +6,6 @@ namespace DistribuidoraKeppler.Logica
 {
     public class ClienteL
     {
-        UsuarioD usuarioD = new UsuarioD();
 
         ClienteD oClienteD = new ClienteD();
 
@@ -34,7 +33,7 @@ namespace DistribuidoraKeppler.Logica
                 string.IsNullOrEmpty(cliente.NombreEmpresa))
                 return false;
 
-            var existente = usuarioD.ObtenerPorCorreo(cliente.Email);
+            var existente = oClienteD.MtObtenerPorEmail(cliente.Email);
 
             if (existente != null)
                 return false;
@@ -73,7 +72,7 @@ namespace DistribuidoraKeppler.Logica
             if (!cliente.Email.Contains("@"))
                 return false;
 
-            var existente = usuarioD.ObtenerPorCorreo(cliente.Email);
+            var existente = oClienteD.MtObtenerPorEmail(cliente.Email);
 
             if (existente != null)
             {

@@ -1,369 +1,251 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DistribuidoraKeppler.Vista.Site1" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DistribuidoraKeppler.Vista.Site1" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head runat="server">
-    <meta charset="utf-8" />
-    <title>Kepler</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kepler - Distribución Inteligente</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Iconos -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+    <script type="text/javascript">
+        const idUsuarioGlobal = '<%= Session["IdCliente"] != null ? Session["IdCliente"].ToString() : "0" %>';
+        if (idUsuarioGlobal !== "0") {
+            localStorage.setItem("usuarioActivoId", idUsuarioGlobal);
+        }
+    </script>
 </head>
 
-<body class="bg-gray-100">
-    <form id="form1" runat="server">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+    <form id="form1" runat="server" class="min-h-screen flex">
 
-        <!-- SIDEBAR -->
-        <aside class="fixed left-0 top-0 h-full w-64 bg-blue-900 text-white flex flex-col p-5">
+        <aside class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-[#0f143c] to-[#090d26] text-slate-300 flex flex-col justify-between border-r border-white/[0.06] shadow-2xl z-50">
 
             <!-- LOGO -->
             <div class="flex items-center gap-3 mb-8">
                 <div class="bg-blue-600 p-3 rounded-xl">
                     <span class="material-symbols-outlined">inventory</span>
                 </div>
-<<<<<<< Updated upstream
                 <div>
                     <h2 class="font-bold text-lg">Kepler</h2>
                     <p class="text-xs text-gray-300">Distribución</p>
-=======
+                </div>
+            </div>
 
-                <!-- CONTENEDOR SCRAP DEL MENÚ (SCROLL INVISIBLE SI CRECE) -->
                 <div class="flex-1 overflow-y-auto px-4 py-6 space-y-7 scrollbar-none">
                     <nav id="sidebarMenu" class="space-y-1">
 
-                        <!-- SECCIÓN: ADMINISTRADOR -->
-                        <div id="menuAdmin" runat="server" class="space-y-1">
+                        <div id="menuAdmin" runat="server" class="space-y-1 text-slate-300">
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/DashboardAdministrador.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">dashboard</span> Tablero
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionUsuarios.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">group</span> Usuarios
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionProductos.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">inventory_2</span> Productos
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionMarcas1.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">branding_watermark</span> Marcas
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionCategorias.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">category</span> Categorías
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionPedidos.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</span> Pedidos
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/Inventario.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">warehouse</span> Inventario
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">bar_chart</span> Reportes
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Usuario/PerfilUsuario.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">settings</span> Configuración
                             </asp:HyperLink>
                         </div>
 
-                        <!-- SECCIÓN: CLIENTE -->
-                        <div id="menuCliente" runat="server" class="space-y-1">
+                        <div id="menuCliente" runat="server" class="space-y-1 text-slate-300">
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/DashboardCliente.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">dashboard</span> Dashboard
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/CatalogoProductos.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">store</span> Catálogo
                             </asp:HyperLink>
 
-                            <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/MisPedidos.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                            <asp:HyperLink runat="server" NavigateUrl="#"
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</span> Mis Pedidos
                             </asp:HyperLink>
 
-                            <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/Historial.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                            <asp:HyperLink runat="server" NavigateUrl="#"
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">history</span> Historial
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/PerfilCliente.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">settings</span> Configuración
                             </asp:HyperLink>
                         </div>
 
-                        <!-- SECCIÓN: DISTRIBUIDOR / REPARTIDOR -->
-                        <div id="menuRepartidor" runat="server" class="space-y-1">
+                        <div id="menuRepartidor" runat="server" class="space-y-1 text-slate-300">
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Repartidor/Repartidor.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">dashboard</span> Dashboard
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</span> Pedidos
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">groups</span> Repartidores
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">schedule</span> Horario
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">history</span> Historial
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">bar_chart</span> Reportes
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">comment</span> Observaciones
                             </asp:HyperLink>
                         </div>
 
-                        <!-- SECCIÓN: PREVENTISTA -->
-                        <div id="menuPreventista" runat="server" class="space-y-1">
+                        <div id="menuPreventista" runat="server" class="space-y-1 text-slate-300">
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Preventista/Preventista.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</span> Pedidos
                             </asp:HyperLink>
                         </div>
 
-                        <!-- SECCIÓN: BODEGA -->
-                        <div id="menuBodega" runat="server" class="space-y-1">
+                        <div id="menuBodega" runat="server" class="space-y-1 text-slate-300">
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Bodega/DashboardBodega.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">dashboard</span> Dashboard
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">inventory_2</span> Productos
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="#"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</span> Pedidos
                             </asp:HyperLink>
 
                             <asp:HyperLink runat="server" NavigateUrl="~/Vista/Usuario/PerfilUsuario.aspx"
-                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent">
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
                                 <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">settings</span> Configuración
                             </asp:HyperLink>
                         </div>
 
                     </nav>
->>>>>>> Stashed changes
                 </div>
+
+                <div class="p-4 border-t border-white/[0.06] bg-black/10 space-y-3 flex-shrink-0">
+                    <div class="flex items-center gap-3 bg-white/[0.03] p-3 rounded-xl border border-white/[0.06]">
+                        <img src="https://i.pravatar.cc/40?img=33" alt="Avatar" class="w-9 h-9 rounded-full ring-2 ring-blue-500/30 object-cover" />
+                        <div class="min-w-0 flex-1">
+                            <p class="text-xs font-semibold text-white truncate">Operador Activo</p>
+                            <asp:Label ID="lblRol" runat="server" CssClass="text-[10px] font-bold text-blue-400 block uppercase tracking-wider truncate" Text="Rol Sistema"></asp:Label>
+                        </div>
+                    </div>
+
+                    <asp:LinkButton ID="btnCerrarSesion" runat="server"
+                        CssClass="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-semibold text-xs py-2.5 rounded-xl text-center flex items-center justify-center gap-2 transition-all duration-200 shadow-lg shadow-red-950/20"
+                        OnClick="btnCerrarSesion_Click">
+                        <span class="material-symbols-outlined !text-[16px]">logout</span>
+                        <span>Cerrar Sesión</span>
+                    </asp:LinkButton>
+                </div>
+
             </div>
-
-            <!-- MENÚ -->
-            <nav class="space-y-2 text-sm flex-1">
-
-                <!-- ADMIN -->
-                <div id="menuAdmin" runat="server" class="space-y-1">
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/DashboardAdministrador.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">dashboard</span> Tablero
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionUsuarios.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">group</span> Gestión de usuarios
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionProductos.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">inventory_2</span> Gestión de productos
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server"
-                        NavigateUrl="~/Vista/Administrador/GestionMarcas1.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                        <span class="material-symbols-outlined">branding_watermark</span>Gestión de marcas
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Administrador/GestionCategorias.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">category</span> Gestión de categorías
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">warehouse</span> Inventario
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">bar_chart</span> Reportes
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Usuario/PerfilUsuario.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">settings</span> Configuración
-                    </asp:HyperLink>
-
-                </div>
-
-                <!-- CLIENTE -->
-                <div id="menuCliente" runat="server" class="space-y-1">
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/DashboardCliente.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">dashboard</span> Dashboard
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/CatalogoProductos.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">store</span> Catálogo
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">shopping_cart</span> Mis pedidos
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">history</span> Historial
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/PerfilCliente.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">settings</span> Configuración
-                    </asp:HyperLink>
-
-                </div>
-
-                <!-- DISTRIBUIDOR -->
-                <div id="menuRepartidor" runat="server" class="space-y-1">
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Repartidor/Repartidor.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">dashboard</span> Dashboard
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">groups</span> Repartidores
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">schedule</span> Horario
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">history</span> Historial
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">bar_chart</span> Reportes
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">comment</span> Observaciones
-                    </asp:HyperLink>
-
-                </div>
-
-                <!-- PREVENTISTA -->
-                <div id="menuPreventista" runat="server" class="space-y-1">
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Preventista/Preventista.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
-                    </asp:HyperLink>
-                </div>
-
-                <!-- BODEGA -->
-                <div id="menuBodega" runat="server" class="space-y-1">
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Bodega/DashboardBodega.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">dashboard</span> Dashboard
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">inventory_2</span> Productos
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="#"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">shopping_cart</span> Pedidos
-                    </asp:HyperLink>
-
-                    <asp:HyperLink runat="server" NavigateUrl="~/Vista/Usuario/PerfilUsuario.aspx"
-                        CssClass="flex items-center gap-2 p-2 rounded hover:bg-blue-700">
-                    <span class="material-symbols-outlined">settings</span> Configuración
-                    </asp:HyperLink>
-                </div>
-
-            </nav>
-
-            <!-- PERFIL ABAJO -->
-            <div class="bg-blue-800 p-3 rounded-xl flex items-center gap-3 mt-4">
-                <img src="https://i.pravatar.cc/40" class="rounded-full" />
-                <div>
-                    <p class="text-sm font-semibold">Usuario</p>
-                    <p class="text-xs text-gray-300">Rol</p>
-                </div>
-            </div>
-            <!-- CERRAR SESIÓN -->
-            <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar sesión"
-                CssClass="mt-3 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg"
-                    OnClick="btnCerrarSesion_Click" />
-
         </aside>
 
-        <main class="ml-64 p-6">
+        <main class="flex-1 ml-64 p-8 min-h-screen">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </main>
 
     </form>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlActual = window.location.pathname.split("/").pop().toLowerCase();
+            const enlaces = document.querySelectorAll("#sidebarMenu a");
+
+            enlaces.forEach(enlace => {
+                const href = enlace.getAttribute("href");
+
+                if (href) {
+                    const paginaEnlace = href.split("/").pop().toLowerCase();
+
+                    if (urlActual === paginaEnlace) {
+                        // Limpiamos los estados base
+                        enlace.classList.remove("text-slate-300", "hover:bg-white/[0.05]", "hover:text-white", "border-transparent");
+
+                        // Asignamos las clases activas manteniendo el border-l-4 intacto para evitar saltos bruscos
+                        enlace.classList.add(
+                            "bg-gradient-to-r",
+                            "from-blue-600/20",
+                            "to-blue-600/5",
+                            "text-white",
+                            "font-semibold",
+                            "border-l-4",
+                            "border-blue-500"
+                        );
+
+                        const icono = enlace.querySelector(".material-symbols-outlined");
+                        if (icono) {
+                            icono.classList.remove("opacity-70");
+                            icono.classList.add("text-blue-400", "opacity-100");
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

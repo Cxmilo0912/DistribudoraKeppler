@@ -8,16 +8,16 @@ namespace DistribuidoraKeppler.Datos
 {
     public class UsuarioD
     {
-
         public Usuario MtObtenerUsuarioPorEmail(string email)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
                 con.Open();
 
-                string sql = @"SELECT U.*, R.Nombre AS NomRol 
+                string sql = @"SELECT U.*,R.Id as IdRol, R.Nombre AS NomRol 
                                FROM Usuario U 
-                               INNER JOIN Rol R ON U.IdRol = R.Id 
+                                Inner Join UsuarioRol UR ON U.Id = UR.IdUsuario
+                               INNER JOIN Rol R ON UR.IdRol = R.Id 
                                WHERE U.Email = @Email";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -132,33 +132,6 @@ namespace DistribuidoraKeppler.Datos
         }
 
 
-        public bool MtInsertarUsuario(Usuario usuario)
-        {
-            using (SqlConnection con = ConexionDB.MtAbrirConexion())
-            {
-                con.Open();
-
-                string sql = @"INSERT INTO Usuario 
-                               (Nombre, Email, Contrasena, Foto, Estado, Documento, IdRol) 
-                               VALUES 
-                               (@Nombre, @Email, @Contrasena, @Foto, @Estado, @Documento, @IdRol)";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-
-                cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
-                cmd.Parameters.AddWithValue("@Email", usuario.Email);
-                cmd.Parameters.AddWithValue("@Contrasena", usuario.Contrasena);
-                cmd.Parameters.AddWithValue("@Foto",
-                    string.IsNullOrEmpty(usuario.Foto) ? (object)DBNull.Value : usuario.Foto);
-                cmd.Parameters.AddWithValue("@Estado", usuario.Estado);
-                cmd.Parameters.AddWithValue("@Documento", usuario.Documento);
-                cmd.Parameters.AddWithValue("@IdRol", usuario.Rol.Id);
-
-                return cmd.ExecuteNonQuery() > 0;
-            }
-        }
-
-
         public bool ActualizarUsuario(Usuario usuario)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
@@ -247,12 +220,12 @@ namespace DistribuidoraKeppler.Datos
 
                 string sql = @"
         SELECT Email FROM Usuario 
-        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETDATE()
+        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETUTCDATE()
 
         UNION
 
         SELECT Email FROM Cliente 
-        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETDATE()";
+        WHERE TokenRecuperacion = @Token AND FechaExpiracion > GETUTCDATE()";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@Token", token);
@@ -263,7 +236,7 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        public void ActualizarPassword(string email, string nueva)
+        public bool ActualizarPassword(string email, string nueva)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
             {
@@ -282,7 +255,138 @@ namespace DistribuidoraKeppler.Datos
                 cmd.Parameters.AddWithValue("@Pass", nueva);
                 cmd.Parameters.AddWithValue("@Email", email);
 
-                cmd.ExecuteNonQuery();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+        public List<Rol> MtListarRoles()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                List<Rol> roles = new List<Rol>();
+                cn.Open();
+                string consulta = @"SELECT * FROM Rol Where Nombre != 'Cliente';";
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            roles.Add(new Rol
+                            {
+                                Id = Convert.ToInt32(dr["Id"]),
+                                Nombre = dr["Nombre"].ToString()
+                            });
+                        }
+                    }
+                }
+                return roles;
+            }
+        }
+
+        public bool MtCrearUsuario(Usuario usuario, int idRol)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                int idUsuario = 0;
+                string consultaUsuario = @"INSERT INTO Usuario 
+                                    (Nombre, Email, Contrasena, Estado, Documento) 
+                                    VALUES (@Nombre, @Email, @Contrasena, @Estado, @Documento);
+                                    Select SCOPE_IDENTITY()";
+
+                string consultaRol = @"Insert Into UsuarioRol (IdUsuario, IdRol)
+                                     Values(@idUsuario, @idRol)";
+                using (SqlCommand cmd = new SqlCommand(consultaUsuario, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                    cmd.Parameters.AddWithValue("@Email", usuario.Email);
+                    cmd.Parameters.AddWithValue("@Contrasena", usuario.Contrasena);
+                    cmd.Parameters.AddWithValue("@Estado", usuario.Estado);
+                    cmd.Parameters.AddWithValue("@Documento", usuario.Documento);
+
+                    idUsuario = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+
+                using (SqlCommand cmdRol = new SqlCommand(consultaRol, cn))
+                {
+                    cmdRol.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    cmdRol.Parameters.AddWithValue("@idRol", idRol);
+
+                    return cmdRol.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool MtEditarUsuario(Usuario oUsuario)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consulta = @"UPDATE Usuario 
+                                    SET Nombre = @Nombre, 
+                                        Email = @Email, 
+                                        Documento = @Documento, 
+                                        IdRol = @RolId, 
+                                        Estado = @Estado 
+                                    WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", oUsuario.Nombre);
+                    cmd.Parameters.AddWithValue("@Email", oUsuario.Email);
+                    cmd.Parameters.AddWithValue("@Documento", oUsuario.Documento);
+                    cmd.Parameters.AddWithValue("@RolId", oUsuario.Rol.Id);
+                    cmd.Parameters.AddWithValue("@Estado", oUsuario.Estado);
+                    cmd.Parameters.AddWithValue("@Id", oUsuario.Id);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+        }
+
+        public bool MtEliminarUsuario(int id)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consulta = @"DELETE FROM Usuario WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+            }
+        }
+
+        public List<Rol> MtRolesPorUsuario(int idUsuario)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                List<Rol> roles = new List<Rol>();
+                string consulta = @"SELECT r.Id, r.Nombre 
+                FROM UsuarioRol ur
+                INNER JOIN Rol r ON ur.IdRol = r.Id
+                WHERE ur.IdUsuario = @idUsuario";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            roles.Add(new Rol
+                            {
+                                Id = Convert.ToInt32(dr["Id"]),
+                                Nombre = dr["Nombre"].ToString()
+                            });
+
+                        }
+                    }
+                }
+                return roles;
             }
         }
     }

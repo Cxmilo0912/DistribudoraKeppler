@@ -45,5 +45,24 @@ namespace DistribuidoraKeppler.Datos
                 return total;
             }
         }
+
+        public int MtTotalProductos()
+        {
+            int total = 0;
+
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                string consulta = "Select Count(Id) From Producto";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    total = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+
+                return total;
+            }
+        }
     }
 }
