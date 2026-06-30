@@ -28,16 +28,17 @@
 
         <aside class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-[#0f143c] to-[#090d26] text-slate-300 flex flex-col justify-between border-r border-white/[0.06] shadow-2xl z-50">
 
-            <!-- LOGO -->
-            <div class="flex items-center gap-3 mb-8">
-                <div class="bg-blue-600 p-3 rounded-xl">
-                    <span class="material-symbols-outlined">inventory</span>
+            <div class="flex flex-col flex-1 min-h-0 overflow-hidden">
+
+                <div class="flex items-center gap-3 px-6 py-5 border-b border-white/[0.06] flex-shrink-0">
+                    <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 p-2.5 rounded-xl text-white shadow-lg shadow-blue-500/20 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-[22px]">inventory</span>
+                    </div>
+                    <div>
+                        <h2 class="font-black text-white text-base tracking-wide uppercase">Keppler</h2>
+                        <p class="text-[11px] text-blue-400 font-medium tracking-wider uppercase">Logística Urbana</p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="font-bold text-lg">Kepler</h2>
-                    <p class="text-xs text-gray-300">Distribución</p>
-                </div>
-            </div>
 
                 <div class="flex-1 overflow-y-auto px-4 py-6 space-y-7 scrollbar-none">
                     <nav id="sidebarMenu" class="space-y-1">
