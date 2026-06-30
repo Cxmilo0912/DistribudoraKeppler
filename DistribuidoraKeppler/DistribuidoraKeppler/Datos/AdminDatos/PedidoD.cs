@@ -88,7 +88,7 @@ namespace DistribuidoraKeppler.Datos
                                     END CATCH;
                                     ";
 
-                using (SqlCommand cmd = new SqlCommand(consulta,cn))
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
                 {
                     cmd.Parameters.AddWithValue("@estado", oPedido.Estado);
                     cmd.Parameters.AddWithValue("@idPedido", oPedido.Id);
@@ -98,5 +98,69 @@ namespace DistribuidoraKeppler.Datos
                 }
             }
         }
+
+        //=== Metodos creado por Jhon ===
+        public List<Pedido> MtListarPedidos()
+        {
+            List<Pedido> lista = new List<Pedido>();
+
+            using (SqlConnection conn = ConexionDB.MtAbrirConexion())
+            {
+                conn.Open();
+
+                string consulta = @"SELECT p.Id,
+                                           p.CodigoPedido,
+                                           p.Fecha,
+                                           p.Estado,
+                                           p.DireccionEntrega,
+                                           p.Total,
+                                           c.Id         AS IdCliente,
+                                           c.NombreEmpresa,
+                                           c.Email      AS EmailCliente
+                                    FROM   Pedido p
+                                    INNER JOIN Cliente c ON c.Id = p.IdCliente
+                                    ORDER  BY p.Fecha DESC";
+
+                SqlCommand cmd = new SqlCommand(consulta, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(new Pedido()
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        CodigoPedido = dr["CodigoPedido"].ToString(),
+                        Fecha = Convert.ToDateTime(dr["Fecha"]),
+                        Estado = dr["Estado"].ToString(),
+                        DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
+                        Total = Convert.ToDecimal(dr["Total"]),
+                        IdCliente = new Cliente
+                        {
+                            Id = Convert.ToInt32(dr["IdCliente"]),
+                            NombreEmpresa = dr["NombreEmpresa"].ToString(),
+                            Email = dr["EmailCliente"] == DBNull.Value ? "" : dr["EmailCliente"].ToString()
+                        }
+                    });
+                }
+            }
+            return lista;
+        }
+
+        public bool MtCambiarEstadoPedido(int idPedido, string nuevoEstado)
+        {
+            using (SqlConnection conn = ConexionDB.MtAbrirConexion())
+            {
+                conn.Open();
+
+                string consulta = "UPDATE Pedido SET Estado = @estado WHERE Id = @id";
+
+                SqlCommand cmd = new SqlCommand(consulta, conn);
+                cmd.Parameters.AddWithValue("@estado", nuevoEstado);
+                cmd.Parameters.AddWithValue("@id", idPedido);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+        //=== Metodos creados por Jhon ===
     }
 }
