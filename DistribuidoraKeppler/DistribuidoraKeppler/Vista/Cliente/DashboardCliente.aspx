@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="DashboardCliente.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Cliente.DashboardCliente" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta charset="utf-8" />
@@ -40,13 +40,12 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="flex min-h-screen -mx-8 -my-8">
+<asp:Content ID="Content2" class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 min-h-screen flex" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <main class="flex-1 p-8 overflow-y-auto custom-scrollbar">
         <header class="flex justify-between items-start mb-8">
             <div>
-                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">¡Bienvenido de nuevo, <asp:Label ID="lblNombreCliente" runat="server" />!</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-1">Aquí tienes el resumen de tu cuenta para hoy, <asp:Label ID="lblFechaHoy" runat="server" />.</p>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">¡Bienvenido de nuevo, Carlos!</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-1">Aquí tienes el resumen de tu cuenta para hoy, 24 de Mayo.</p>
             </div>
             <div class="flex gap-3">
                 <button class="px-5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:bg-slate-50 transition-colors">
@@ -66,10 +65,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-4xl font-extrabold mb-1"><%= PedidosMes %></span>
-                    <span class="<%= TrendPedidosClass %> text-xs font-bold flex items-center">
-                        <span class="material-icons-outlined text-sm mr-1"><%= TrendPedidosIcon %></span>
-                        <%= TrendPedidosText %>
+                    <span class="text-4xl font-extrabold mb-1">2</span>
+                    <span class="text-emerald-500 text-xs font-bold flex items-center">
+                        <span class="material-icons-outlined text-sm mr-1">trending_up</span>
+                        +15% vs mes anterior
                     </span>
                 </div>
             </div>
@@ -81,10 +80,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-4xl font-extrabold mb-1">L. <%= string.Format("{0:N2}", TotalMes) %></span>
-                    <span class="<%= TrendTotalClass %> text-xs font-bold flex items-center">
-                        <span class="material-icons-outlined text-sm mr-1"><%= TrendTotalIcon %></span>
-                        <%= TrendTotalText %>
+                    <span class="text-4xl font-extrabold mb-1">L. 45,200.00</span>
+                    <span class="text-rose-500 text-xs font-bold flex items-center">
+                        <span class="material-icons-outlined text-sm mr-1">trending_down</span>
+                        -5% vs mes anterior
                     </span>
                 </div>
             </div>
@@ -96,10 +95,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-4xl font-extrabold mb-1"><%= EnProceso %></span>
+                    <span class="text-4xl font-extrabold mb-1">2</span>
                     <span class="text-slate-400 text-xs font-bold flex items-center">
-                        <span class="material-icons-outlined text-sm mr-1">pending</span>
-                        Pedidos activos
+                        <span class="material-icons-outlined text-sm mr-1">remove</span>
+                        Sin cambios
                     </span>
                 </div>
             </div>
@@ -109,25 +108,24 @@
             Accesos Rápidos
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <a href="CatalogoProductos.aspx" class="bg-primary hover:bg-secondary text-white p-8 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all group border-0 no-underline">
+            <button class="bg-primary hover:bg-secondary text-white p-8 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all group border-0">
                 <span class="material-icons-outlined text-4xl group-hover:scale-110 transition-transform">add_shopping_cart</span>
                 <span class="text-lg font-bold">Realizar pedido</span>
-            </a>
-            <a href="CatalogoProductos.aspx" class="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-primary dark:hover:border-primary transition-all group no-underline">
+            </button>
+            <button class="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-primary dark:hover:border-primary transition-all group">
                 <span class="material-icons-outlined text-4xl text-primary group-hover:scale-110 transition-transform">grid_view</span>
                 <span class="text-lg font-bold">Ver catálogo</span>
-            </a>
-            <a href="Historial.aspx" class="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-primary dark:hover:border-primary transition-all group no-underline">
+            </button>
+            <button class="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-primary dark:hover:border-primary transition-all group">
                 <span class="material-icons-outlined text-4xl text-primary group-hover:scale-110 transition-transform">history</span>
                 <span class="text-lg font-bold">Ver historial</span>
-            </a>
+            </button>
         </div>
         <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden">
             <div class="p-6 flex justify-between items-center">
                 <h3 class="text-lg font-bold">Últimos Pedidos</h3>
-                <a class="text-primary font-bold text-sm hover:underline" href="MisPedidos.aspx">Ver todos</a>
+                <a class="text-primary font-bold text-sm hover:underline" href="#">Ver todos</a>
             </div>
-            <asp:Panel ID="pnlTabla" runat="server">
             <div class="overflow-x-auto">
                 <table class="w-full text-left">
                     <thead class="bg-slate-50 dark:bg-slate-900/50 border-y border-slate-100 dark:border-slate-700">
@@ -139,31 +137,43 @@
                             <th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase">Acción</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                        <asp:Repeater ID="rptPedidos" runat="server" OnItemDataBound="rptPedidos_ItemDataBound">
-                            <ItemTemplate>
-                                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
-                                    <td class="px-6 py-4 font-bold"><asp:Literal ID="litCodigo" runat="server" /></td>
-                                    <td class="px-6 py-4 text-slate-500 dark:text-slate-400"><asp:Literal ID="litFecha" runat="server" /></td>
-                                    <td class="px-6 py-4 font-bold"><asp:Literal ID="litTotal" runat="server" /></td>
-                                    <td class="px-6 py-4"><asp:Literal ID="litEstado" runat="server" /></td>
-                                    <td class="px-6 py-4">
-                                        <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
-                                    </td>
-                                </tr>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                    <tbody class="divide-y divide-slate-50 dark:divide-slate-700">
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 font-bold">#KEP-9802</td>
+                            <td class="px-6 py-4 text-slate-500 dark:text-slate-400">22 Mayo, 2024</td>
+                            <td class="px-6 py-4 font-bold">L. 12,450.00</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 text-[10px] font-bold rounded-full uppercase">Pendiente</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 font-bold">#KEP-9745</td>
+                            <td class="px-6 py-4 text-slate-500 dark:text-slate-400">18 Mayo, 2024</td>
+                            <td class="px-6 py-4 font-bold">L. 8,900.00</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 text-[10px] font-bold rounded-full uppercase">En Camino</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4 font-bold">#KEP-9688</td>
+                            <td class="px-6 py-4 text-slate-500 dark:text-slate-400">15 Mayo, 2024</td>
+                            <td class="px-6 py-4 font-bold">L. 23,850.00</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-[10px] font-bold rounded-full uppercase">Entregado</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary font-bold text-sm hover:underline">Detalles</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            </asp:Panel>
-            <asp:Panel ID="pnlSinPedidos" runat="server" Visible="false">
-            <div class="py-16 flex flex-col items-center text-slate-400">
-                <span class="material-icons-outlined text-5xl mb-3">inbox</span>
-                <p class="font-semibold">Aún no tienes pedidos</p>
-                <p class="text-sm mt-1">Explora el catálogo y realiza tu primer pedido</p>
-            </div>
-            </asp:Panel>
         </div>
     </main>
     <aside class="w-80 flex-shrink-0 p-8 space-y-6">
@@ -221,5 +231,8 @@
             </div>
         </div>
     </aside>
-    </div>
+    <script>
+        // Dark mode toggle could be implemented here
+        // For now, it respects system preferences or the 'light' class on html
+    </script>
 </asp:Content>
