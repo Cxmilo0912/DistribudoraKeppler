@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="Pedidos.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Administrador.Pedidos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="GestionPedidos.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Administrador.Pedidos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Kepler Admin - Gestión de Pedidos</title>
@@ -8,16 +8,14 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style data-purpose="kepler-pedidos-theme">
-        /* ── Variables globales Kepler ─────────────────────────────── */
         :root {
             --kepler-blue: #0b1184;
             --kepler-blue-dark: #060a52;
             --kepler-blue-light: #eef0fd;
             --kepler-bg: #f4f6fb;
-            /* Estados de pedido */
             --status-pending: #f5a623;
             --status-pending-bg: #fef6e7;
             --status-confirmed: #185fa5;
@@ -35,7 +33,6 @@
             background-color: var(--kepler-bg);
         }
 
-        /* ── Blindaje sidebar Master Page ──────────────────────────── */
         aside a, .sidebar a, .nav-link,
         .list-group-item a, [class*="sidebar"] a, [class*="menu"] a {
             color: #ffffff !important;
@@ -44,10 +41,8 @@
 
             aside a:hover, .sidebar a:hover, .nav-link:hover {
                 color: rgba(255,255,255,0.8) !important;
-                text-decoration: none !important;
             }
 
-        /* ── Botón primario Kepler ─────────────────────────────────── */
         .btn-kepler {
             background-color: var(--kepler-blue);
             border-color: var(--kepler-blue);
@@ -65,7 +60,6 @@
                 box-shadow: 0 6px 18px rgba(11,17,132,.22);
             }
 
-        /* ── Botón secundario ─────────────────────────────────────── */
         .btn-kepler-outline {
             background: #fff;
             border: 1px solid #e3e6f0;
@@ -80,14 +74,6 @@
                 background: #f4f6fb;
             }
 
-        /* ── Tarjeta base ──────────────────────────────────────────── */
-        .kepler-card {
-            border: none !important;
-            border-radius: 1.25rem;
-            box-shadow: 0 2px 14px rgba(17,24,76,.06);
-        }
-
-        /* ── Barra de búsqueda ─────────────────────────────────────── */
         .kepler-search-wrap {
             position: relative;
             flex: 1;
@@ -124,7 +110,7 @@
             border: none;
             border-radius: 1rem;
             background: #fff;
-            padding: 0.72rem 2.6rem 0.72rem 2.6rem;
+            padding: 0.72rem 2.6rem;
             font-size: 0.9rem;
             box-shadow: 0 1px 6px rgba(17,24,76,.07);
             outline: none;
@@ -135,9 +121,7 @@
                 box-shadow: 0 0 0 0.2rem rgba(11,17,132,.12);
             }
 
-        /* ── Filtros de estado ─────────────────────────────────────── */
         .kepler-filter-btn {
-            border: none;
             border-radius: 999px;
             font-size: 0.83rem;
             font-weight: 600;
@@ -148,8 +132,7 @@
             transition: background .15s ease, color .15s ease, border-color .15s ease;
         }
 
-            .kepler-filter-btn.active,
-            .kepler-filter-btn:hover {
+            .kepler-filter-btn.active, .kepler-filter-btn:hover {
                 background: var(--kepler-blue);
                 color: #fff;
                 border-color: var(--kepler-blue);
@@ -162,7 +145,6 @@
                 margin-left: 4px;
             }
 
-        /* ── Tarjeta de pedido ─────────────────────────────────────── */
         .order-card {
             background: #fff;
             border-radius: 1.1rem;
@@ -229,7 +211,6 @@
             color: #1e2433;
         }
 
-        /* ── Badges de estado ──────────────────────────────────────── */
         .status-badge {
             display: inline-block;
             border-radius: 999px;
@@ -265,7 +246,6 @@
             color: var(--status-delivered);
         }
 
-        /* ── Highlight de búsqueda ─────────────────────────────────── */
         .highlight {
             background-color: #fde68a;
             font-weight: 700;
@@ -273,7 +253,6 @@
             border-radius: 2px;
         }
 
-        /* ── Estado vacío ──────────────────────────────────────────── */
         #empty-state {
             display: none;
             text-align: center;
@@ -297,7 +276,6 @@
             color: #c5cae5;
         }
 
-        /* ── Paginación ────────────────────────────────────────────── */
         .kepler-page-btn {
             border-radius: 0.6rem;
             border: 1px solid #e3e6f0;
@@ -319,13 +297,35 @@
                 border-color: var(--kepler-blue);
                 font-weight: 700;
             }
-    </style>
 
+        /* ── Modal cambio de estado ──────────────────────────────────── */
+        .modal-status-btn {
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.45rem 1.1rem;
+            border: 2px solid transparent;
+            transition: all .15s ease;
+            cursor: pointer;
+        }
+
+            .modal-status-btn.selected {
+                border-color: var(--kepler-blue) !important;
+                box-shadow: 0 0 0 3px rgba(11,17,132,.15);
+            }
+
+        /* ── Spinner de carga ────────────────────────────────────────── */
+        #loading-state {
+            text-align: center;
+            padding: 3rem 0;
+        }
+    </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="px-4 px-md-5 py-4 d-flex flex-column" style="min-height: calc(100vh - 64px);">
 
-        <!-- ── ENCABEZADO ────────────────────────────────────────────── -->
+        <!-- ── ENCABEZADO ─────────────────────────────────────────────── -->
         <header class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
             <div>
                 <span class="badge rounded-pill px-3 py-1 mb-2 text-white fw-semibold d-inline-block"
@@ -341,38 +341,20 @@
             </div>
         </header>
 
-        <!-- ── BÚSQUEDA Y CONTROLES ──────────────────────────────────── -->
+        <!-- ── BÚSQUEDA Y CONTROLES ───────────────────────────────────── -->
         <section class="mb-4">
             <div class="d-flex align-items-center flex-wrap gap-3 mb-3">
 
-                <!-- Buscador -->
                 <div class="kepler-search-wrap">
                     <i class="bi bi-search search-icon"></i>
-                    <input class="kepler-search-input"
-                        id="order-search"
-                        placeholder="Buscar por número de pedido, cliente o correo..."
-                        type="text" />
+                    <input class="kepler-search-input" id="order-search"
+                        placeholder="Buscar por código, cliente o correo..." type="text" />
                     <i class="bi bi-x-circle clear-icon" id="clear-search"></i>
                 </div>
 
-                <!-- Datepicker placeholder -->
-                <div class="position-relative">
-                    <input class="kepler-search-input"
-                        placeholder="Filtrar por fecha"
-                        type="text"
-                        style="width: 200px; padding-left: 1rem; padding-right: 2.6rem;" />
-                    <i class="bi bi-calendar3" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #9aa0b4; pointer-events: none;"></i>
-                </div>
-
-                <!-- Acciones -->
                 <div class="d-flex gap-2 ms-auto">
-                    <button class="btn btn-kepler d-flex align-items-center gap-2">
-                        <i class="bi bi-plus-lg"></i>
-                        <span>Nuevo pedido</span>
-                    </button>
-                    <button class="btn btn-kepler-outline d-flex align-items-center gap-2">
-                        <i class="bi bi-download"></i>
-                        <span>Exportar</span>
+                    <button class="btn btn-kepler-outline d-flex align-items-center gap-2" onclick="exportarCSV()">
+                        <i class="bi bi-download"></i><span>Exportar</span>
                     </button>
                 </div>
             </div>
@@ -400,8 +382,14 @@
             </div>
         </section>
 
-        <!-- ── LISTA DE PEDIDOS ──────────────────────────────────────── -->
+        <!-- ── LISTA DE PEDIDOS ───────────────────────────────────────── -->
         <section class="flex-grow-1 mb-4">
+
+            <!-- Cargando -->
+            <div id="loading-state">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="text-muted mt-2 small">Cargando pedidos...</p>
+            </div>
 
             <!-- Estado vacío -->
             <div id="empty-state">
@@ -410,119 +398,166 @@
                 <p class="text-muted small">Prueba con términos diferentes o limpia los filtros.</p>
             </div>
 
-            <!-- Grid de tarjetas de pedido -->
+            <!-- Grid de pedidos -->
             <div class="d-flex flex-column gap-3" id="order-list"></div>
 
         </section>
 
-        <!-- ── PAGINACIÓN ────────────────────────────────────────────── -->
+        <!-- ── PAGINACIÓN ─────────────────────────────────────────────── -->
         <footer class="d-flex align-items-center justify-content-between pt-3 border-top">
             <p class="small text-muted mb-0" id="results-count"></p>
-            <div class="d-flex gap-1">
-                <button class="kepler-page-btn">Anterior</button>
-                <button class="kepler-page-btn active">1</button>
-                <button class="kepler-page-btn">2</button>
-                <button class="kepler-page-btn">3</button>
-                <button class="kepler-page-btn">Siguiente</button>
-            </div>
+            <div class="d-flex gap-1" id="pagination-wrap"></div>
         </footer>
+    </div> 
 
-    </div>
-
-    <!-- Scripts -->
+    <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script data-purpose="pedidos-logic">
-        const ORDERS_DATA = [
-            { id: '#ORD-5821', client: 'Roberto Gómez', email: 'robertoream@gmail.com', date: '12 oct 2023', total: '$1.250,00', status: 'Pendiente' },
-            { id: '#ORD-5822', client: 'Roberto Gómez', email: 'robertoream@gmail.com', date: '12 oct 2023', total: '$1.250,00', status: 'Confirmado' },
-            { id: '#ORD-5823', client: 'Roberto Gómez', email: 'robertoream@gmail.com', date: '12 oct 2023', total: '$1.250,00', status: 'En preparacion' },
-            { id: '#ORD-5824', client: 'Roberto Gómez', email: 'robertoream@gmail.com', date: '12 oct 2023', total: '$1.250,00', status: 'En reparto' },
-            { id: '#ORD-5825', client: 'Roberto Gómez', email: 'robertoream@gmail.com', date: '12 oct 2023', total: '$1.250,00', status: 'Entregado' },
-            { id: '#ORD-6001', client: 'Ana Martínez', email: 'anamtz@outlook.com', date: '15 oct 2023', total: '$850,50', status: 'Pendiente' },
-            { id: '#ORD-6002', client: 'Luis Pérez', email: 'lperez@company.com', date: '16 oct 2023', total: '$2.100,00', status: 'Confirmado' }
-        ];
 
+        /* ── Estado global ──────────────────────────────────────────── */
+        let ORDERS_DATA = [];
+        let searchTerm = '';
+        let statusFilter = 'all';
+        let currentPage = 1;
+        const PAGE_SIZE = 10;
+
+        // Para el modal de cambio de estado
+        let pedidoSeleccionado = null;
+        let nuevoEstado = null;
+
+        /* ── Referencias DOM ───────────────────────────────────────── */
         const orderList = document.getElementById('order-list');
         const searchInput = document.getElementById('order-search');
         const clearBtn = document.getElementById('clear-search');
         const emptyState = document.getElementById('empty-state');
+        const loadingState = document.getElementById('loading-state');
         const resultsCount = document.getElementById('results-count');
         const filterBtns = document.querySelectorAll('.kepler-filter-btn');
+        const pagWrap = document.getElementById('pagination-wrap');
 
-        let searchTerm = '';
-        let statusFilter = 'all';
+        /* ── Cargar pedidos desde el servidor ──────────────────────── */
+        function cargarPedidos() {
+            loadingState.style.display = 'block';
+            orderList.innerHTML = '';
+            emptyState.classList.remove('visible');
 
-        /* ── Resaltado de texto ─────────────────────────────────── */
-        function highlight(text, term) {
-            if (!term.trim()) return text;
-            return text.replace(new RegExp(`(${term})`, 'gi'), '<span class="highlight">$1</span>');
+            fetch('GestionPedidos.aspx/MtListarPedidos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                body: '{}'
+            })
+                .then(r => r.json())
+                .then(json => {
+                    ORDERS_DATA = json.d.data;
+                    loadingState.style.display = 'none';
+                    updateCounts();
+                    render();
+                })
+                .catch(err => {
+                    loadingState.style.display = 'none';
+                    orderList.innerHTML = '<p class="text-danger small">Error al cargar los pedidos. Verifique la conexión.</p>';
+                    console.error(err);
+                });
         }
 
-        /* ── Clase CSS del badge de estado ─────────────────────── */
+        /* ── Resaltado ─────────────────────────────────────────────── */
+        function highlight(text, term) {
+            if (!term.trim()) return text;
+            return text.replace(new RegExp('(' + term + ')', 'gi'), '<span class="highlight">$1</span>');
+        }
+
+        /* ── Clase CSS de badge ────────────────────────────────────── */
         function statusClass(status) {
             return 'status-' + status.replace(/\s+/g, '-');
         }
 
-        /* ── Renderizado ────────────────────────────────────────── */
-        function render() {
-            const filtered = ORDERS_DATA.filter(o => {
+        /* ── Filtrar datos ─────────────────────────────────────────── */
+        function filteredData() {
+            return ORDERS_DATA.filter(o => {
                 const q = searchTerm.toLowerCase();
-                const matchSearch = o.id.toLowerCase().includes(q)
-                    || o.client.toLowerCase().includes(q)
-                    || o.email.toLowerCase().includes(q);
-                const matchStatus = statusFilter === 'all' || o.status === statusFilter;
+                const matchSearch = o.codigoPedido.toLowerCase().includes(q)
+                    || o.cliente.toLowerCase().includes(q)
+                    || o.emailCliente.toLowerCase().includes(q);
+                const matchStatus = statusFilter === 'all' || o.estado === statusFilter;
                 return matchSearch && matchStatus;
             });
+        }
 
-            resultsCount.textContent = `Mostrando ${filtered.length} de ${ORDERS_DATA.length} pedidos`;
+        /* ── Renderizado ───────────────────────────────────────────── */
+        function render() {
+            const filtered = filteredData();
+            const total = filtered.length;
+            const pages = Math.ceil(total / PAGE_SIZE) || 1;
+            if (currentPage > pages) currentPage = pages;
 
-            if (filtered.length === 0) {
+            const desde = (currentPage - 1) * PAGE_SIZE;
+            const pagina = filtered.slice(desde, desde + PAGE_SIZE);
+
+            resultsCount.textContent = 'Mostrando ' + pagina.length + ' de ' + total + ' pedidos';
+
+            if (pagina.length === 0) {
                 orderList.innerHTML = '';
                 emptyState.classList.add('visible');
+                renderPaginacion(pages);
                 return;
             }
 
             emptyState.classList.remove('visible');
-            orderList.innerHTML = filtered.map((o, i) => `
-                <div class="order-card" style="animation-delay:${i * 45}ms">
+            orderList.innerHTML = pagina.map((o, i) => `
+                <div class="order-card" style="animation-delay:${i * 40}ms">
 
-                    <div class="order-id">${highlight(o.id, searchTerm)}</div>
+                    <div class="order-id">${highlight('#' + o.codigoPedido, searchTerm)}</div>
 
                     <div style="flex:1; min-width:160px;">
-                        <div class="order-client-name">${highlight(o.client, searchTerm)}</div>
-                        <div class="order-client-email">${highlight(o.email, searchTerm)}</div>
+                        <div class="order-client-name">${highlight(o.cliente, searchTerm)}</div>
+                        <div class="order-client-email">${highlight(o.emailCliente, searchTerm)}</div>
                     </div>
 
                     <div class="order-date d-none d-md-block" style="min-width:110px;">
-                        <i class="bi bi-calendar3 me-1" style="font-size:.75rem;opacity:.5;"></i>${o.date}
+                        <i class="bi bi-calendar3 me-1" style="font-size:.75rem;opacity:.5;"></i>${o.fecha}
                     </div>
 
                     <div style="min-width:90px;">
                         <div class="order-total-label">Total</div>
-                        <div class="order-total-value">${o.total}</div>
+                        <div class="order-total-value">$${o.total}</div>
                     </div>
 
                     <div style="min-width:130px;">
-                        <span class="status-badge ${statusClass(o.status)}">${o.status}</span>
+                        <span class="status-badge ${statusClass(o.estado)}">${o.estado}</span>
                     </div>
-
-                    <div class="d-flex gap-3 ms-auto" style="color:#c5cae5;">
-                        <button class="btn btn-sm btn-light border rounded-2" title="Ver detalle" style="color:var(--kepler-blue);">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-light border rounded-2" title="Editar" style="color:#c2790a;">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                    </div>
+                   
 
                 </div>
             `).join('');
+
+            renderPaginacion(pages);
         }
 
-        /* ── Contadores de badges ───────────────────────────────── */
+        /* ── Paginación ────────────────────────────────────────────── */
+        function renderPaginacion(pages) {
+            let html = `<button class="kepler-page-btn" ${currentPage === 1 ? 'disabled' : ''}
+                            onclick="cambiarPagina(${currentPage - 1})">Anterior</button>`;
+
+            for (let p = 1; p <= pages; p++) {
+                html += `<button class="kepler-page-btn ${p === currentPage ? 'active' : ''}"
+                             onclick="cambiarPagina(${p})">${p}</button>`;
+            }
+
+            html += `<button class="kepler-page-btn" ${currentPage === pages ? 'disabled' : ''}
+                         onclick="cambiarPagina(${currentPage + 1})">Siguiente</button>`;
+
+            pagWrap.innerHTML = html;
+        }
+
+        function cambiarPagina(p) {
+            currentPage = p;
+            render();
+        }
+
+        /* ── Contadores de filtros ──────────────────────────────────── */
         function updateCounts() {
-            const count = s => ORDERS_DATA.filter(o => o.status === s).length;
+            const count = s => ORDERS_DATA.filter(o => o.estado === s).length;
             document.getElementById('count-all').textContent = ORDERS_DATA.length;
             document.getElementById('count-pending').textContent = count('Pendiente');
             document.getElementById('count-confirmed').textContent = count('Confirmado');
@@ -531,10 +566,35 @@
             document.getElementById('count-delivered').textContent = count('Entregado');
         }
 
-        /* ── Eventos ────────────────────────────────────────────── */
+
+        function seleccionarEstado(estado) {
+            nuevoEstado = estado;
+            document.querySelectorAll('.modal-status-btn').forEach(b => b.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }       
+
+        /* ── Exportar CSV ──────────────────────────────────────────── */
+        function exportarCSV() {
+            const data = filteredData();
+            if (data.length === 0) { alert('No hay pedidos para exportar.'); return; }
+
+            let csv = 'Código,Cliente,Email,Fecha,Total,Estado\n';
+            data.forEach(o => {
+                csv += `${o.codigoPedido},"${o.cliente}","${o.emailCliente}","${o.fecha}","${o.total}","${o.estado}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'pedidos_keppler.csv';
+            link.click();
+        }
+
+        /* ── Eventos ────────────────────────────────────────────────── */
         searchInput.addEventListener('input', e => {
             searchTerm = e.target.value;
             clearBtn.style.display = searchTerm ? 'block' : 'none';
+            currentPage = 1;
             render();
         });
 
@@ -542,6 +602,7 @@
             searchInput.value = '';
             searchTerm = '';
             clearBtn.style.display = 'none';
+            currentPage = 1;
             render();
         });
 
@@ -550,13 +611,13 @@
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 statusFilter = btn.dataset.filter;
+                currentPage = 1;
                 render();
             });
         });
 
-        /* ── Init ───────────────────────────────────────────────── */
-        updateCounts();
-        render();
-    </script>
+        /* ── Init ───────────────────────────────────────────────────── */
+        cargarPedidos();
 
+    </script>
 </asp:Content>
