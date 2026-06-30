@@ -68,5 +68,23 @@ namespace DistribuidoraKeppler.Logica
             return resultado ? null : "No se pudo actualizar el estado del pedido";
         }
         // === Metodos creados Por Jhon ===
+
+        // === Metodos creados por Andres ===
+        public List<Pedido> MtListarPedidosCliente(int idCliente)
+        {
+            if (idCliente <= 0) return new List<Pedido>();
+
+            PedidoD oPedidoD = new PedidoD();
+            return oPedidoD.MtListarPedidosPorCliente(idCliente);
+        }
+
+        public List<DetallePedido> MtObtenerDetallePedido(int idPedido)
+        {
+            if (idPedido <= 0) return new List<DetallePedido>();
+
+            PedidoD oPedidoD = new PedidoD();
+            return oPedidoD.MtObtenerDetallesPedido(idPedido);
+        }
+        // === Metodos creados por Andres ===
     }
 }
