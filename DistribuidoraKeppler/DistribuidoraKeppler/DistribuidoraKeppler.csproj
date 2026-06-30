@@ -260,6 +260,8 @@
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
+    <Content Include="Vista\Cliente\MisPedidos.aspx" />
+    <Content Include="Vista\Cliente\Historial.aspx" />
     <Content Include="Vista\Repartidor\PerfilRepartidor.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
     <Content Include="Vista\Usuario\PerfilUsuario.aspx" />
@@ -485,6 +487,20 @@
     </Compile>
     <Compile Include="Vista\Cliente\PerfilCliente.aspx.designer.cs">
       <DependentUpon>PerfilCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\MisPedidos.aspx.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\MisPedidos.aspx.designer.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\Historial.aspx.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\Historial.aspx.designer.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Repartidor\PerfilRepartidor.aspx.cs">
       <DependentUpon>PerfilRepartidor.aspx</DependentUpon>
