@@ -38,6 +38,14 @@ namespace DistribuidoraKeppler.Logica
             if (existente != null)
                 return false;
 
+            if (!string.IsNullOrEmpty(cliente.Nit))
+            {
+                var existentePorNit = oClienteD.MtObtenerPorNit(cliente.Nit);
+
+                if (existentePorNit != null)
+                    return false;
+            }
+
             cliente.Contrasena = HashHelper.Encriptar(clave);
 
             return oClienteD.MtInsertarDatosCliente(cliente);

@@ -68,5 +68,72 @@ namespace DistribuidoraKeppler.Logica
             return resultado ? null : "No se pudo actualizar el estado del pedido";
         }
         // === Metodos creados Por Jhon ===
+
+        // === Metodos creados por Andres ===
+        public List<Pedido> MtListarPedidosCliente(int idCliente)
+        {
+            if (idCliente <= 0) return new List<Pedido>();
+
+            PedidoD oPedidoD = new PedidoD();
+            return oPedidoD.MtListarPedidosPorCliente(idCliente);
+        }
+
+        public List<DetallePedido> MtObtenerDetallePedido(int idPedido)
+        {
+            if (idPedido <= 0) return new List<DetallePedido>();
+
+            PedidoD oPedidoD = new PedidoD();
+            return oPedidoD.MtObtenerDetallesPedido(idPedido);
+        }
+        // === Metodos creados por Andres ===
+
+        // === Cancelacion de pedido por el cliente (plazo de 3 dias habiles) ===
+        private static readonly HashSet<string> EstadosNoCancelables = new HashSet<string>
+        {
+            "Entregado", "Cancelado", "Rechazado", "Devuelto"
+        };
+
+        private int MtContarDiasHabiles(DateTime desde, DateTime hasta)
+        {
+            int dias = 0;
+            DateTime fecha = desde.Date.AddDays(1);
+
+            while (fecha <= hasta.Date)
+            {
+                if (fecha.DayOfWeek != DayOfWeek.Saturday && fecha.DayOfWeek != DayOfWeek.Sunday)
+                    dias++;
+
+                fecha = fecha.AddDays(1);
+            }
+
+            return dias;
+        }
+
+        public string MtCancelarPedidoCliente(int idPedido, int idCliente)
+        {
+            if (idPedido <= 0 || idCliente <= 0)
+                return "Datos inválidos";
+
+            PedidoD oPedidoD = new PedidoD();
+            Pedido pedido = oPedidoD.MtObtenerPedidoPorId(idPedido);
+
+            if (pedido == null)
+                return "El pedido no existe";
+
+            if (pedido.IdCliente.Id != idCliente)
+                return "El pedido no pertenece a este cliente";
+
+            if (EstadosNoCancelables.Contains(pedido.Estado))
+                return "Este pedido ya no se puede cancelar";
+
+            int diasHabilesTranscurridos = MtContarDiasHabiles(pedido.Fecha, DateTime.Now);
+
+            if (diasHabilesTranscurridos > 3)
+                return "El plazo de 3 días hábiles para cancelar el pedido ya venció";
+
+            bool ok = oPedidoD.MtCancelarPedido(idPedido);
+            return ok ? null : "No se pudo cancelar el pedido";
+        }
+        // === Cancelacion de pedido por el cliente (plazo de 3 dias habiles) ===
     }
 }
