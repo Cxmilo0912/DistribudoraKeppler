@@ -73,7 +73,7 @@ namespace DistribuidoraKeppler.Vista.Auth
                             Session["Usuario"] = resultado.Usuario;
                             Response.Redirect("~/Vista/Preventista/Preventista.aspx", false);
                             break;
-                        case "repartidor":
+                        case "distribuidor":
                             Session["Usuario"] = resultado.Usuario;
                             Response.Redirect("~/Vista/Repartidor/Repartidor.aspx", false);
                             break;

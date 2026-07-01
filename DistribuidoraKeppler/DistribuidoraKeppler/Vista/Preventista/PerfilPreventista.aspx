@@ -46,6 +46,8 @@
                     <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
             </button>
+            <a href="Preventista.aspx" class="text-gray-500"><i class="bi bi-arrow-left text-xl"></i></a>
+
             <h1 class="text-xl font-bold text-slate-800">Perfil del Preventista</h1>
             <!-- Spacer for centering title -->
             <div class="w-10"></div>

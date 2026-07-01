@@ -15,12 +15,8 @@ namespace DistribuidoraKeppler.Vista.Aministrador
         DashboardAdministradorL oAdminL = new DashboardAdministradorL();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) //ejecuta el metodo
+            if (!IsPostBack) 
             {
-                if (SesionHelper.Rol != "Administrador")
-                {
-                    Response.Redirect("~/Vista/Auth/Login.aspx");
-                }
                 CargarInfoCards();
 
             }
@@ -31,6 +27,16 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             lblTotalClientes.Text = total.ToString();
             int totalProductos = oAdminL.MtProductosActivos();
             lblProductosActivos.Text = totalProductos.ToString();
+            double ventadDiaria = oAdminL.MtVentasDiarias();
+            lblVentas.Text = ventadDiaria.ToString();
+            int pedidosActivos = oAdminL.MtPedidosActivos();
+            lblPedidos.Text = pedidosActivos.ToString();
+            dynamic productoVendido = oAdminL.MtProductoMasVendido();
+            lblNombre.Text = productoVendido.Nombre;
+            lblCantidadVendida.Text = productoVendido.CantidadVendida.ToString();
+            lblClasificacion.Text = productoVendido.Clasificacion;
+            lblEstadoInventario.Text = productoVendido.EstadoInventario;
+            lblAccionRecomendada.Text = productoVendido.AccionRecomendada;
 
         }
 

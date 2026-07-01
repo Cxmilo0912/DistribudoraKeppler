@@ -31,7 +31,7 @@ namespace DistribuidoraKeppler.Datos
                         cmdPedido.Parameters.AddWithValue("@estado", oPedido.Estado);
                         cmdPedido.Parameters.AddWithValue("@direccion", oPedido.DireccionEntrega);
                         cmdPedido.Parameters.AddWithValue("@total", oPedido.Total);
-                        cmdPedido.Parameters.AddWithValue("@idCliente", oPedido.IdCliente.Id);
+                        cmdPedido.Parameters.AddWithValue("@idCliente", oPedido.Cliente.Id);
 
                         idPedido = Convert.ToInt32(cmdPedido.ExecuteScalar());
 
@@ -134,7 +134,7 @@ namespace DistribuidoraKeppler.Datos
                         Estado = dr["Estado"].ToString(),
                         DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                         Total = Convert.ToDecimal(dr["Total"]),
-                        IdCliente = new Cliente
+                        Cliente = new Cliente
                         {
                             Id = Convert.ToInt32(dr["IdCliente"]),
                             NombreEmpresa = dr["NombreEmpresa"].ToString(),
@@ -203,7 +203,7 @@ namespace DistribuidoraKeppler.Datos
                         Estado = dr["Estado"].ToString(),
                         DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                         Total = Convert.ToDecimal(dr["Total"]),
-                        IdCliente = new Cliente
+                        Cliente = new Cliente
                         {
                             Id = Convert.ToInt32(dr["IdCliente"]),
                             NombreEmpresa = dr["NombreEmpresa"].ToString(),
@@ -287,7 +287,7 @@ namespace DistribuidoraKeppler.Datos
                         Estado = dr["Estado"].ToString(),
                         DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                         Total = Convert.ToDecimal(dr["Total"]),
-                        IdCliente = new Cliente { Id = Convert.ToInt32(dr["IdCliente"]) }
+                        Cliente = new Cliente { Id = Convert.ToInt32(dr["IdCliente"]) }
                     };
                 }
             }

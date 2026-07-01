@@ -38,7 +38,7 @@
                 <p class="text-sm text-slate-400 mt-1">Configure los accesos y datos de identidad del nuevo integrante de la plataforma.</p>
             </div>
             <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-                <button type="button" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-xl text-xs font-semibold border border-slate-700/40 transition-all cursor-pointer">
+                <button type="button" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-xl text-xs font-semibold border border-slate-700/40 transition-all cursor-pointer" onclick="window.location.href='GestionUsuarios.aspx'">
                     Cancelar
                 </button>
                 <asp:Button ID="btnGuardar" runat="server" CssClass="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl flex items-center justify-center gap-2 text-xs font-semibold shadow-lg shadow-blue-600/10 transition-all active:scale-[0.98] cursor-pointer" OnClick="btnGuardar_Click" Text="Crear Usuario" />

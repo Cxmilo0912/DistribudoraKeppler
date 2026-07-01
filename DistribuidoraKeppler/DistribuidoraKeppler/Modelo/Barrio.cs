@@ -11,5 +11,7 @@ namespace DistribuidoraKeppler.Modelo
 
         public string Nombre { get; set; }
 
+        public Sector Sector { get; set; }
+
     }
 }

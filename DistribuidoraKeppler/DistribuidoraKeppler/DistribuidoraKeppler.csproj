@@ -228,7 +228,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.aspx" />
-    <Content Include="Vista\Administrador\CreacionProducto.aspx" />
+    <Content Include="Vista\Administrador\AsignarSector.aspx" />
+    <Content Include="Vista\Administrador\Barrios.aspx" />
     <Content Include="Vista\Administrador\CrearProducto.aspx" />
     <Content Include="Vista\Administrador\CrearTrabajador.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
@@ -239,12 +240,17 @@
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
     <Content Include="Vista\Administrador\GestionPedidos.aspx" />
     <Content Include="Vista\Administrador\Inventario.aspx" />
+    <Content Include="Vista\Administrador\Municipios.aspx" />
+    <Content Include="Vista\Administrador\Sectores.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
     <Content Include="Vista\Assets\css\Index.css" />
     <Content Include="Vista\Assets\js\Carrito.js" />
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
+    <Content Include="Vista\Assets\js\Inventario.js" />
     <Content Include="Vista\Assets\js\Pago.js" />
+    <Content Include="Vista\Assets\js\Municipio.js" />
+    <Content Include="Vista\Assets\js\Sector.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Auth\NuevoUsuario.aspx" />
     <Content Include="Vista\Auth\RecuperarPassword.aspx" />
@@ -257,6 +263,9 @@
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
     <Content Include="Vista\Cliente\Registro.aspx" />
     <Content Include="Vista\Cliente\DetalleProducto.aspx" />
+    <Content Include="Vista\Preventista\Clientes.aspx" />
+    <Content Include="Vista\Preventista\CrearPedido.aspx" />
+    <Content Include="Vista\Preventista\Pedidos.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
@@ -269,12 +278,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\AdminDatos\CategoriaD.cs" />
+    <Compile Include="Datos\AdminDatos\MunicipioD.cs" />
+    <Compile Include="Datos\AdminDatos\SectorD.cs" />
+    <Compile Include="Datos\AdminDatos\BarrioD.cs" />
     <Compile Include="Datos\ClienteDatos\ClienteD.cs" />
     <Compile Include="Datos\AdminDatos\ConexionDB.cs" />
     <Compile Include="Datos\AdminDatos\DashboardAdministradorD.cs" />
     <Compile Include="Datos\AdminDatos\MarcaD.cs" />
     <Compile Include="Datos\AdminDatos\PedidoD.cs" />
     <Compile Include="Datos\AdminDatos\ProductoD.cs" />
+    <Compile Include="Datos\PreventistaDatos\PreventistaD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\AdminDatos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
@@ -284,7 +297,9 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logica\AdminLogica\BarrioL.cs" />
     <Compile Include="Logica\AdminLogica\CategoriaL.cs" />
+    <Compile Include="Logica\AdminLogica\MunicipioL.cs" />
     <Compile Include="Logica\ClienteLogica\ClienteL.cs" />
     <Compile Include="Logica\AdminLogica\DashboardAdministradorL.cs" />
     <Compile Include="Logica\AdminLogica\GestionUsuarioL.cs" />
@@ -292,26 +307,37 @@
     <Compile Include="Logica\AdminLogica\MarcaL.cs" />
     <Compile Include="Logica\AdminLogica\PedidoL.cs" />
     <Compile Include="Logica\AdminLogica\ProductoL.cs" />
+    <Compile Include="Logica\PreventistaLogica\PreventistaL.cs" />
+    <Compile Include="Logica\AdminLogica\SectorL.cs" />
     <Compile Include="Logica\UsuarioL.cs" />
     <Compile Include="Modelo\Barrio.cs" />
     <Compile Include="Modelo\Categoria.cs" />
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\DetallePedido.cs" />
     <Compile Include="Modelo\Marca.cs" />
+    <Compile Include="Modelo\Municipio.cs" />
     <Compile Include="Modelo\Pedido.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\ResultadoLogin.cs" />
     <Compile Include="Modelo\Rol.cs" />
+    <Compile Include="Modelo\Sector.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilidades\HashHelper.cs" />
     <Compile Include="Utilidades\SesionHelper.cs" />
-    <Compile Include="Vista\Administrador\CreacionProducto.aspx.cs">
-      <DependentUpon>CreacionProducto.aspx</DependentUpon>
+    <Compile Include="Vista\Administrador\AsignarSector.aspx.cs">
+      <DependentUpon>AsignarSector.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Administrador\CreacionProducto.aspx.designer.cs">
-      <DependentUpon>CreacionProducto.aspx</DependentUpon>
+    <Compile Include="Vista\Administrador\AsignarSector.aspx.designer.cs">
+      <DependentUpon>AsignarSector.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Barrios.aspx.cs">
+      <DependentUpon>Barrios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Barrios.aspx.designer.cs">
+      <DependentUpon>Barrios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\CrearProducto.aspx.cs">
       <DependentUpon>CrearProducto.aspx</DependentUpon>
@@ -382,6 +408,20 @@
     </Compile>
     <Compile Include="Vista\Administrador\Inventario.aspx.designer.cs">
       <DependentUpon>Inventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Municipios.aspx.cs">
+      <DependentUpon>Municipios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Municipios.aspx.designer.cs">
+      <DependentUpon>Municipios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Sectores.aspx.cs">
+      <DependentUpon>Sectores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Sectores.aspx.designer.cs">
+      <DependentUpon>Sectores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -466,6 +506,27 @@
     </Compile>
     <Compile Include="Vista\Cliente\Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\Clientes.aspx.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Clientes.aspx.designer.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\CrearPedido.aspx.cs">
+      <DependentUpon>CrearPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\CrearPedido.aspx.designer.cs">
+      <DependentUpon>CrearPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\Pedidos.aspx.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Pedidos.aspx.designer.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>

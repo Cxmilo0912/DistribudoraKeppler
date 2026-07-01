@@ -34,8 +34,8 @@ namespace DistribuidoraKeppler.Vista.Administrador
                     fecha = p.Fecha.ToString("dd MMM yyyy"),
                     estado = p.Estado,
                     total = p.Total.ToString("N2"),
-                    cliente = p.IdCliente.NombreEmpresa,
-                    emailCliente = p.IdCliente.Email
+                    cliente = p.Cliente.NombreEmpresa,
+                    emailCliente = p.Cliente.Email
                 });
             }
 

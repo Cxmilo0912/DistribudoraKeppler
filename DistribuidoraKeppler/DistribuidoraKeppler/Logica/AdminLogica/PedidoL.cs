@@ -47,7 +47,7 @@ namespace DistribuidoraKeppler.Logica
                 return "El ID del pedido no es valido";
             }
 
-            string[] estadosValidos = { "Pendiente", "Confirmado", "En preparacion", "En reparto", "Entregado" };
+            string[] estadosValidos = { "Pendiente", "Aprovado", "En preparacion", "En reparto", "Entregado" };
             bool esValido = false;
 
             foreach (string e in estadosValidos)
@@ -120,7 +120,7 @@ namespace DistribuidoraKeppler.Logica
             if (pedido == null)
                 return "El pedido no existe";
 
-            if (pedido.IdCliente.Id != idCliente)
+            if (pedido.Cliente.Id != idCliente)
                 return "El pedido no pertenece a este cliente";
 
             if (EstadosNoCancelables.Contains(pedido.Estado))

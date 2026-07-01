@@ -12,7 +12,7 @@ namespace DistribuidoraKeppler.Datos
 {
     public class ProductoD
     {
-        public bool MtRegistrarProducto(Producto producto)
+        public bool MtRegistrarProducto(Producto producto, int idMarca, int idCategoria)
         {
             try
             {
@@ -33,8 +33,8 @@ namespace DistribuidoraKeppler.Datos
                         comando.Parameters.AddWithValue("@Estado", producto.Estado);
                         comando.Parameters.AddWithValue("@LimiteVenta", producto.LimiteVenta);
                         comando.Parameters.AddWithValue("@LimiteMinimo", producto.LimiteMinimo);
-                        comando.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
-                        comando.Parameters.AddWithValue("@IdMarca", producto.IdMarca);
+                        comando.Parameters.AddWithValue("@IdCategoria", idCategoria);
+                        comando.Parameters.AddWithValue("@IdMarca", idMarca);
 
                         int filasAfectadas = comando.ExecuteNonQuery();
                         return filasAfectadas > 0;
@@ -200,7 +200,7 @@ namespace DistribuidoraKeppler.Datos
                         {
                             oLista.Add(new Categoria
                             {
-                                Id = (int)oDr["Id"],
+                                Id = Convert.ToInt32(oDr["Id"]),
                                 Nombre = oDr["Nombre"].ToString()
                             });
                         }

@@ -317,28 +317,45 @@ namespace DistribuidoraKeppler.Datos
             }
         }
 
-        public bool MtEditarUsuario(Usuario oUsuario)
+        public bool MtEditarUsuario(Usuario oUsuario, int idRol)
         {
             using (SqlConnection cn = ConexionDB.MtAbrirConexion())
             {
                 cn.Open();
-                string consulta = @"UPDATE Usuario 
+                string consultaUpdate = @"UPDATE Usuario 
                                     SET Nombre = @Nombre, 
                                         Email = @Email, 
                                         Documento = @Documento, 
-                                        IdRol = @RolId, 
                                         Estado = @Estado 
                                     WHERE Id = @Id";
-                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                using (SqlCommand cmdUpdate = new SqlCommand(consultaUpdate, cn))
                 {
-                    cmd.Parameters.AddWithValue("@Nombre", oUsuario.Nombre);
-                    cmd.Parameters.AddWithValue("@Email", oUsuario.Email);
-                    cmd.Parameters.AddWithValue("@Documento", oUsuario.Documento);
-                    cmd.Parameters.AddWithValue("@RolId", oUsuario.Rol.Id);
-                    cmd.Parameters.AddWithValue("@Estado", oUsuario.Estado);
-                    cmd.Parameters.AddWithValue("@Id", oUsuario.Id);
-                    int filasAfectadas = cmd.ExecuteNonQuery();
-                    return filasAfectadas > 0;
+                    cmdUpdate.Parameters.AddWithValue("@Nombre", oUsuario.Nombre);
+                    cmdUpdate.Parameters.AddWithValue("@Email", oUsuario.Email);
+                    cmdUpdate.Parameters.AddWithValue("@Documento", oUsuario.Documento);
+                    cmdUpdate.Parameters.AddWithValue("@Estado", oUsuario.Estado);
+                    cmdUpdate.Parameters.AddWithValue("@Id", oUsuario.Id);
+                    cmdUpdate.ExecuteNonQuery();
+                }
+
+
+                string consultaDelete = @"Delete From UsuarioRol Where IdUsuario = @idUsuario";
+
+                using (SqlCommand cmdDelete = new SqlCommand(consultaDelete,cn))
+                {
+                    cmdDelete.Parameters.AddWithValue("@idUsuario", oUsuario.Id);
+                    cmdDelete.ExecuteNonQuery();
+                }
+
+                string consultaInsertRol = @"Insert Into UsuarioRol (IdUsuario, IdRol)
+                                     Values(@idUsuario, @idRol)";
+
+                using (SqlCommand cmdInsert = new SqlCommand(consultaInsertRol, cn))
+                {
+                    cmdInsert.Parameters.AddWithValue("@idUsuario", oUsuario.Id);
+                    cmdInsert.Parameters.AddWithValue("@idRol", idRol);
+
+                    return cmdInsert.ExecuteNonQuery() > 0;
                 }
             }
         }
@@ -387,6 +404,101 @@ namespace DistribuidoraKeppler.Datos
                     }
                 }
                 return roles;
+            }
+        }
+
+        public List<object> MtListarPersonalMovilizado()
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                List<object> lista = new List<object>();
+
+                string consulta = @"Select u.Id as IdUsuario, u.Nombre as Trabajador, u.Documento, u.Email, r.Nombre as Cargo,
+                                   ISNULL(s.Nombre, 'Sin sector asignado') as SectorAsignado, m.Nombre as NombreMunicipio From Rol r 
+                                   Inner Join UsuarioRol ur  
+                                   ON
+                                   r.Id = ur.IdRol
+                                   Inner Join Usuario u 
+                                   ON
+                                   ur.IdUsuario = u.Id
+                                   Left Join AsignarSector asec 
+                                   ON
+                                   u.Id = asec.IdUsuario
+                                   Left Join Sector s
+                                   ON
+                                   asec.IdSector = s.Id
+                                   Inner Join Municipio m 
+                                   ON
+                                   s.IdMunicipio = m.Id
+                                   Where r.Nombre IN ('Preventista', 'Distribuidor');";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            lista.Add(new
+                            {
+                                Id = dr["IdUsuario"].ToString(),
+                                Trabajador = dr["Trabajador"].ToString(),
+                                Email = dr["Email"].ToString(),
+                                Cargo = dr["Cargo"].ToString(),
+                                Documento = dr["Documento"].ToString(),
+                                SectorAsignado = dr["SectorAsignado"].ToString(),
+                                Municipio = dr["NombreMunicipio"].ToString()
+                            });
+                        }
+                    }
+                    return lista;
+                }
+
+            }
+        }
+
+        public bool MtAsignarSector(int idTrabajador, int idSector)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+
+                string consulta = @"Insert Into AsignarSector(IdUsuario, IdSector) 
+                                    Values(@idUsuario, @idSector)";
+
+                using (SqlCommand cmd = new SqlCommand(consulta, cn))
+                {
+                    cmd.Parameters.AddWithValue("@idUsuario", idTrabajador);
+                    cmd.Parameters.AddWithValue("@idSector", idSector);
+
+                    return cmd.ExecuteNonQuery() > 0;
+
+                }
+            }
+        }
+
+        public bool MtReasignarSector(int idUsuario, int idSector)
+        {
+            using (SqlConnection cn = ConexionDB.MtAbrirConexion())
+            {
+                cn.Open();
+                string consultaBorrar = @"Delete From AsignarSector Where IdUsuario = @idUsuario";
+                using (SqlCommand cmdBorrar = new SqlCommand(consultaBorrar, cn))
+                {
+                    cmdBorrar.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    cmdBorrar.ExecuteNonQuery();
+                }
+
+                string consultaInsertar = @"Insert Into AsignarSector(IdUsuario, IdSector) 
+                                    Values(@idUsuario, @idSector)";
+
+                using (SqlCommand cmdInsertar = new SqlCommand(consultaInsertar, cn))
+                {
+                    cmdInsertar.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    cmdInsertar.Parameters.AddWithValue("@idSector", idSector);
+                    return cmdInsertar.ExecuteNonQuery() > 0;
+                }
             }
         }
     }
