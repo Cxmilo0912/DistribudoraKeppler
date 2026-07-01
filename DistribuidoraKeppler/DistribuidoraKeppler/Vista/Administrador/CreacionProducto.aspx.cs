@@ -37,7 +37,7 @@ namespace DistribuidoraKeppler.Vista.Aministrador
             }
             catch (Exception ex)
             {
-                LanzarAlerta("Error de Carga", "No se pudieron cargar las categorías.", "error");
+                LanzarAlerta("Error de Carga", "No se pudieron cargar las categorías: " + ex.Message, "error");
             }
         }
         protected void btnCerrar_Click(object sender, EventArgs e)
