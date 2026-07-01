@@ -10,13 +10,13 @@ namespace DistribuidoraKeppler.Logica
     public class ProductoL
     {
         ProductoD productos = new ProductoD();
-        public string MtRegistrarProducto(Producto oProducto)
+        public string MtRegistrarProducto(Producto oProducto, int idMarca, int idCategoria)
         {
-            if (string.IsNullOrEmpty(oProducto.Nombre) || string.IsNullOrEmpty(oProducto.Descripcion) || oProducto.Precio <= 0 || oProducto.Stock < 0 || string.IsNullOrEmpty(oProducto.Estado) || oProducto.LimiteVenta <= 0 || oProducto.LimiteMinimo < 0 || oProducto.IdCategoria.Id <= 0)
+            if (string.IsNullOrEmpty(oProducto.Nombre) || string.IsNullOrEmpty(oProducto.Descripcion) || oProducto.Precio <= 0 || oProducto.Stock < 0 || oProducto.LimiteVenta <= 0)
             {
                 return "Todos los campos son obligatorios y deben ser válidos.";
             }
-            bool resultado = productos.MtRegistrarProducto(oProducto);
+            bool resultado = productos.MtRegistrarProducto(oProducto, idMarca, idCategoria);
             if (resultado)
             {
                 return "OK";

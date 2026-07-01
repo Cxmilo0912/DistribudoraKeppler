@@ -257,5 +257,5 @@
         </div>
     </div>
 
-    <script src="../Assets/js/GestionUsuario.js?v=2.2.1"></script>
+    <script src="../Assets/js/GestionUsuario.js?v=2.3"></script>
 </asp:Content>

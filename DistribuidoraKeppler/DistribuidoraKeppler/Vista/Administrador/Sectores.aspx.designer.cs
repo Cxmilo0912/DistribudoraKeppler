@@ -11,34 +11,25 @@ namespace DistribuidoraKeppler.Vista.Administrador
 {
 
 
-    public partial class Inventario
+    public partial class Sectores
     {
 
         /// <summary>
-        /// Control ddlCat.
+        /// Control ddlMunicipio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCat;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMunicipio;
 
         /// <summary>
-        /// Control ddlMarca.
+        /// Control ddlEditMunicipio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMarca;
-
-        /// <summary>
-        /// Control rptInventario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptInventario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEditMunicipio;
     }
 }

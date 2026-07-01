@@ -14,12 +14,13 @@ namespace DistribuidoraKeppler.Vista.Administrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                UsuarioL oCrearUsuarioL = new UsuarioL();
-                List<Rol> roles = oCrearUsuarioL.MtListarRoles();
-                ddlRoles.DataSource = roles.ToList();
-                ddlRoles.DataTextField = "Nombre";
-                ddlRoles.DataValueField = "Id";
-                ddlRoles.DataBind();
+            UsuarioL oCrearUsuarioL = new UsuarioL();
+            List<Rol> roles = oCrearUsuarioL.MtListarRoles();
+            ddlRoles.DataSource = roles.ToList();
+            ddlRoles.DataTextField = "Nombre";
+            ddlRoles.DataValueField = "Id";
+            ddlRoles.DataBind();
+
 
 
         }

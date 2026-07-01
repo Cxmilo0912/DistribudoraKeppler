@@ -4,6 +4,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <style>
         body, input, select, textarea, button {
@@ -39,12 +42,11 @@
                 <p class="text-sm text-slate-400 mt-1">Registre los datos correspondientes para ingresar el artículo al sistema.</p>
             </div>
             <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-                <button type="button" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-xl text-xs font-semibold border border-slate-700/40 transition-all cursor-pointer">
+                <button type="button" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 px-5 py-2.5 rounded-xl text-xs font-semibold border border-slate-700/40 transition-all cursor-pointer" onclick="window.location.href='GestionProductos.aspx'">
                     Cancelar
                 </button>
-                <button type="button" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl flex items-center justify-center gap-2 text-xs font-semibold shadow-lg shadow-blue-600/10 transition-all active:scale-[0.98] cursor-pointer">
-                    <i class="fas fa-save"></i>Guardar Producto
-                </button>
+
+                <asp:LinkButton ID="btnGuardar" runat="server" CssClass="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl flex items-center justify-center gap-2 text-xs font-semibold shadow-lg shadow-blue-600/10 transition-all active:scale-[0.98] cursor-pointer" OnClick="btnGuardar_Click"><i class="fas fa-save"></i>Guardar Producto</asp:LinkButton>
             </div>
         </div>
 
@@ -60,7 +62,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nombre del Producto *</label>
-                        <input type="text" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all placeholder:text-slate-400" placeholder="Ej. Coca Cola Sin Azúcar 500ml" />
+                        <asp:TextBox ID="txtNombre" runat="server" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all placeholder:text-slate-400" placeholder="Ej. Coca Cola Sin Azúcar 500ml"></asp:TextBox>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -79,7 +81,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Descripción</label>
-                        <textarea rows="4" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all placeholder:text-slate-400 resize-none" placeholder="Escriba aquí los detalles del producto, empaque o notas comerciales..."></textarea>
+                        <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="6" Columns="50" CssClass="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all placeholder:text-slate-400 resize-none" placeholder="Escriba aquí los detalles del producto, empaque o notas comerciales..."></asp:TextBox>
                     </div>
                 </div>
 
@@ -92,22 +94,22 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Stock Inicial *</label>
-                            <input type="number" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" value="0" min="0" />
+                            <asp:TextBox ID="txtStock" runat="server" CssClass="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all"></asp:TextBox>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Límite de Venta (Por Pedido)</label>
-                            <input type="number" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" placeholder="Sin límite" min="1" />
+                            <asp:TextBox ID="txtLimiteVenta" runat="server" CssClass="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all"></asp:TextBox>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 text-red-600">Límite Mínimo (Alerta Stock) *</label>
-                            <input type="number" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" placeholder="Ej. 10" min="0" />
+                            <asp:TextBox ID="txtLimiteMinimo" runat="server" CssClass="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" placeholder="Ej. 10"></asp:TextBox>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 text-emerald-600">Límite Máximo (Capacidad)</label>
-                            <input type="number" class="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" placeholder="Ej. 500" min="1" />
+                            <asp:TextBox ID="txtLimiteMaximo" runat="server" CssClass="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" placeholder="Ej. 500"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -124,8 +126,8 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Precio de Venta *</label>
                         <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold">$</span>
-                            <input type="text" class="w-full pl-9 pr-4 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 text-sm text-slate-800 font-semibold transition-all placeholder:text-slate-300" placeholder="0.00" />
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold">$ </span>
+                            <asp:TextBox ID="txtPrecio" runat="server" CssClass="w-full border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 py-2.5 px-4 text-sm text-slate-800 transition-all" placeholder="0.00"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -136,25 +138,24 @@
                         <span>Imagen del Producto</span>
                     </div>
 
-                    <div class="border-2 border-dashed border-blue-100 rounded-xl bg-blue-50/20 p-6 flex flex-col items-center justify-center text-center transition-all hover:bg-blue-50/40 hover:border-blue-300 cursor-pointer">
-                        <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-3 text-blue-600 shadow-sm">
-                            <i class="fas fa-cloud-upload-alt text-base"></i>
-                        </div>
-                        <p class="text-xs font-bold text-slate-800">Cargar Archivo</p>
-                        <p class="text-[11px] text-slate-400 mt-1 leading-normal px-2">Suelte el archivo aquí o haga clic para buscar.</p>
+                    <!-- Preview -->
+                    <div class="w-full h-44 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-content-center overflow-hidden">
+                        <img id="imgPrevisualizacion"
+                            src="https://placehold.co/200x180?text=Sin+imagen"
+                            class="max-h-full max-w-full object-contain p-3"
+                            alt="Previsualización" />
                     </div>
 
-                    <div class="border border-slate-100 bg-slate-50/50 rounded-xl p-2.5 flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-lg bg-white overflow-hidden flex-shrink-0 border border-slate-200 flex items-center justify-center">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6UwbMNGRsts1XJGbXovUL49N5MKmrq9aiZpVBdV5TPexRals1Cu7f2lAST5kgvg1iXS0u0ku-KBhWJyn-Zwej6e3jW_YJDWv-rZvEXh00IMs5h0_FOdjRibFydnMmRB9KjhW1TyyskZJhArvjMD2eh9NQdcV1UM23r6EswYdGLouF0jyl4q2JkxuznM0jnPTGjF-lUHFxFpmBNmBXUT_FNHx0FtpF2Z9dJ5x7FPBvcAHPKSlDeobDfrHkn0IXhnEFjUfWffPZI1Q" alt="Preview" class="max-h-full max-w-full object-contain p-0.5" />
+                    <!-- Input URL -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">URL de la imagen</label>
+                        <div class="relative">
+                            <i class="fas fa-link absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input type="text" id="txtImagenUrl"
+                                oninput="document.getElementById('imgPrevisualizacion').src = this.value || 'https://placehold.co/200x180?text=Sin+imagen'"
+                                class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 transition-all placeholder:text-slate-400"
+                                placeholder="https://ejemplo.com/imagen.png" />
                         </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-[11px] font-bold text-slate-700 truncate">preview_producto.jpg</p>
-                            <p class="text-[10px] text-emerald-600 font-medium mt-0.5"><i class="fas fa-check-circle"></i>Listo para subir</p>
-                        </div>
-                        <button type="button" class="text-slate-400 hover:text-red-500 p-1.5 transition-colors cursor-pointer">
-                            <i class="fas fa-trash-alt text-xs"></i>
-                        </button>
                     </div>
                 </div>
 
@@ -165,6 +166,29 @@
         <p class="text-center text-[11px] text-slate-400 font-medium">
             * Los campos marcados con asterisco son requeridos para procesar el formulario de forma segura en la base de datos.
         </p>
-
     </div>
+    <script>
+
+        $(document).ready(function () {
+            $('#txtImagenUrl').on('input change keyup paste', function () {
+
+                // Recibir el valor de la url
+                var urlIngresada = $(this).val().trim();
+
+                // Cuando esta vacio el campo pone una imagen por defecto
+                var imagenPorDefecto = "https://placehold.co/110?text=Sin+Imagen";
+
+                // Si hay algo escrito se intenta cargar
+                if (urlIngresada !== "") {
+                    $('#imgPrevisualizacion').attr('src', urlIngresada);
+                } else {
+                    // Si se elimina vuelve la imagen por defecto
+                    $('#imgPrevisualizacion').attr('src', imagenPorDefecto);
+                }
+            });
+            $('#imgPrevisualizacion').on('error', function () {
+                $(this).off('error').attr('src', 'https://placehold.co/130/ff0000/ffffff?text=Error+en+URL');
+            });
+        });
+    </script>
 </asp:Content>

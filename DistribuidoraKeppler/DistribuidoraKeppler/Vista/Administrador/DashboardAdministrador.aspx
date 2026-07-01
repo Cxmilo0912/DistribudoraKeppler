@@ -155,7 +155,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <!-- BEGIN: Header -->
     <header class="d-flex align-items-center justify-content-between px-4 px-md-5 py-3 flex-wrap gap-3">
         <div class="position-relative" style="max-width: 420px; width: 100%;">
             <i class="bi bi-search position-absolute top-50 translate-middle-y text-muted" style="left: 1rem;"></i>
@@ -182,12 +181,9 @@
             </div>
         </div>
     </header>
-    <!-- END: Header -->
 
-    <!-- BEGIN: Dashboard Body -->
     <div class="px-4 px-md-5 pb-5">
 
-        <!-- Welcome Section -->
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 mb-4">
             <div>
                 <h2 class="fw-bold text-dark mb-1">Resumen general</h2>
@@ -199,7 +195,6 @@
             </button>
         </div>
 
-        <!-- BEGIN: Summary Cards -->
         <div class="row g-3 mb-4">
             <div class="col-12 col-sm-6 col-lg-3">
                 <div class="kepler-card card h-100 p-3">
@@ -207,7 +202,10 @@
                         <i class="bi bi-cash-coin"></i>
                     </div>
                     <p class="text-muted small mb-1">Ventas de hoy</p>
-                    <h3 class="fw-bold mb-0">$12.450,00</h3>
+                    <h3 class="fw-bold mb-0">$
+                        <asp:Label ID="lblVentas" runat="server" Text=""></asp:Label>
+
+                    </h3>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
@@ -216,7 +214,9 @@
                         <i class="bi bi-box-seam"></i>
                     </div>
                     <p class="text-muted small mb-1">Pedidos activos</p>
-                    <h3 class="fw-bold mb-0">84</h3>
+                    <h3 class="fw-bold mb-0">
+                        <asp:Label ID="lblPedidos" runat="server" Text=""></asp:Label>
+                    </h3>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
@@ -296,95 +296,100 @@
             <!-- Right: Monthly Growth Card -->
             <div class="col-12 col-lg-4">
                 <div class="kepler-card card h-100 p-4 bg-kepler-gradient text-white d-flex flex-column justify-content-between">
-                    <div>
-                        <h5 class="fw-medium mb-1" style="opacity: 0.9;">Crecimiento mensual</h5>
-                        <p class="small mb-0" style="opacity: 0.6;">Basado en el mismo periodo del mes anterior.</p>
-                        <div class="d-flex align-items-center gap-3 mt-4">
-                            <span class="fw-bold" style="font-size: 2.5rem;">+24.8%</span>
-                            <span class="kepler-product-pill px-3 py-1 d-flex align-items-center gap-1" style="font-size: 0.7rem; font-weight: 700;">
-                                <i class="bi bi-graph-up-arrow"></i>Alto
-                            </span>
-                        </div>
-                    </div>
                     <div class="mt-4">
                         <p class="text-uppercase mb-2" style="font-size: 0.65rem; letter-spacing: 0.08em; opacity: 0.5; font-weight: 700;">Producto más vendido</p>
                         <div class="kepler-product-pill d-flex align-items-center gap-3 p-3">
                             <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 46px; height: 46px; background-color: rgba(255,255,255,0.1);">
-                                <i class="bi bi-cup-hot fs-5"></i>
+                                <i class="bi bi-box-seam fs-5"></i>
                             </div>
-                            <div>
-                                <p class="fw-bold mb-0" style="font-size: 0.85rem;">Café Premium Kepler</p>
-                                <p class="mb-0" style="font-size: 0.75rem; opacity: 0.6;">1.402 unidades</p>
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center justify-content-between gap-2">
+                                    <asp:Label ID="lblNombre" runat="server" CssClass="fw-semibold" Style="font-size: 0.85rem;" Text=""></asp:Label>
+                                    <span class="kepler-product-pill px-2 py-1 d-flex align-items-center gap-1" style="font-size: 0.65rem; font-weight: 700; white-space: nowrap;">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                        <asp:Label ID="lblClasificacion" runat="server" Text=""></asp:Label>
+                                    </span>
+                                </div>
+                                <p class="mb-0 mt-1" style="font-size: 0.65rem; opacity: 0.5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;">Unidades vendidas</p>
+                                <asp:Label ID="lblCantidadVendida" runat="server" CssClass="d-block" Style="font-size: 0.75rem; opacity: 0.6;" Text=""></asp:Label>
                             </div>
                         </div>
                     </div>
+
+                    <div class="mt-3 d-flex align-items-center gap-2 px-3 py-2 rounded-3" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);">
+                        <i class="bi bi-archive" style="opacity: 0.7; font-size: 0.85rem;"></i>
+                        <div class="d-flex flex-column">
+                            <span style="font-size: 0.6rem; opacity: 0.5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;">Estado inventario</span>
+                            <asp:Label ID="lblEstadoInventario" runat="server" CssClass="fw-semibold" Style="font-size: 0.78rem;" Text=""></asp:Label>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 d-flex align-items-start gap-2 px-3 py-2 rounded-3" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                        <i class="bi bi-lightbulb" style="opacity: 0.7; font-size: 0.85rem; margin-top: 2px;"></i>
+                        <div class="d-flex flex-column">
+                            <span style="font-size: 0.6rem; opacity: 0.5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;">Acción recomendada</span>
+                            <asp:Label ID="lblAccionRecomendada" runat="server" Style="font-size: 0.78rem; opacity: 0.85; line-height: 1.4;" Text=""></asp:Label>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-        <!-- END: Charts & Featured Section -->
-
-        <!-- BEGIN: Recent Orders Table -->
-        <div class="kepler-card card">
-            <div class="card-header bg-white border-0 px-4 py-3">
-                <h5 class="fw-bold mb-0">Pedidos recientes</h5>
+            <div class="kepler-card card">
+                <div class="card-header bg-white border-0 px-4 py-3">
+                    <h5 class="fw-bold mb-0">Pedidos recientes</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-kepler mb-0">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3">ID pedido</th>
+                                <th class="py-3">Cliente</th>
+                                <th class="py-3">Fecha</th>
+                                <th class="py-3">Total</th>
+                                <th class="py-3">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="px-4 fw-bold">#ORD-9021</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="kepler-avatar" style="background-color: #e6f1fb; color: #185fa5;">MA</div>
+                                        <span class="fw-medium">Maria Alarcon</span>
+                                    </div>
+                                </td>
+                                <td class="text-muted">24 oct, 2023</td>
+                                <td class="fw-bold">$2.450,00</td>
+                                <td><span class="badge badge-soft-success rounded-pill px-3 py-2">Entregado</span></td>
+                                <td class="text-end px-4">
+                                    <button class="btn btn-link text-muted p-0">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 fw-bold">#ORD-9022</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="kepler-avatar" style="background-color: #f1ecfb; color: #7c4dd6;">JR</div>
+                                        <span class="fw-medium">Juan Ramirez</span>
+                                    </div>
+                                </td>
+                                <td class="text-muted">23 oct, 2023</td>
+                                <td class="fw-bold">$840,00</td>
+                                <td><span class="badge badge-soft-warning rounded-pill px-3 py-2">Pendiente</span></td>
+                                <td class="text-end px-4">
+                                    <button class="btn btn-link text-muted p-0">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-kepler mb-0">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-3">ID pedido</th>
-                            <th class="py-3">Cliente</th>
-                            <th class="py-3">Fecha</th>
-                            <th class="py-3">Total</th>
-                            <th class="py-3">Estado</th>
-                            <th class="py-3 text-end px-4">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="px-4 fw-bold">#ORD-9021</td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="kepler-avatar" style="background-color: #e6f1fb; color: #185fa5;">MA</div>
-                                    <span class="fw-medium">Maria Alarcon</span>
-                                </div>
-                            </td>
-                            <td class="text-muted">24 oct, 2023</td>
-                            <td class="fw-bold">$2.450,00</td>
-                            <td><span class="badge badge-soft-success rounded-pill px-3 py-2">Entregado</span></td>
-                            <td class="text-end px-4">
-                                <button class="btn btn-link text-muted p-0">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 fw-bold">#ORD-9022</td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="kepler-avatar" style="background-color: #f1ecfb; color: #7c4dd6;">JR</div>
-                                    <span class="fw-medium">Juan Ramirez</span>
-                                </div>
-                            </td>
-                            <td class="text-muted">23 oct, 2023</td>
-                            <td class="fw-bold">$840,00</td>
-                            <td><span class="badge badge-soft-warning rounded-pill px-3 py-2">Pendiente</span></td>
-                            <td class="text-end px-4">
-                                <button class="btn btn-link text-muted p-0">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
         </div>
-        <!-- END: Recent Orders Table -->
 
-    </div>
-    <!-- END: Dashboard Body -->
-
-    <!-- Bootstrap 5 JS Bundle (incluye Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </asp:Content>

@@ -47,18 +47,17 @@
             <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:flex-1">
                 <div class="relative w-full sm:max-w-xs">
                     <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                    <input type="text" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" placeholder="Buscar por nombre, SKU..." />
+                    <input type="text" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" placeholder="Buscar por nombre, Codigo..." />
                 </div>
                 <div class="relative w-full sm:w-48">
-                    <select class="w-full bg-white border border-slate-200 pl-4 pr-10 py-2.5 rounded-xl text-xs font-medium text-slate-700 appearance-none focus:outline-none focus:border-blue-600 transition-all cursor-pointer">
-                        <option>Todas las Categorías</option>
-                    </select>
+                    <asp:DropDownList ID="ddlCat" runat="server" CssClass="w-full bg-white border border-slate-200 pl-4 pr-10 py-2.5 rounded-xl text-xs font-medium text-slate-700 appearance-none focus:outline-none focus:border-blue-600 transition-all cursor-pointer">
+                    </asp:DropDownList>
                     <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[10px]"></i>
                 </div>
                 <div class="relative w-full sm:w-48">
-                    <select class="w-full bg-white border border-slate-200 pl-4 pr-10 py-2.5 rounded-xl text-xs font-medium text-slate-700 appearance-none focus:outline-none focus:border-blue-600 transition-all cursor-pointer">
-                        <option>Todas las Marcas</option>
-                    </select>
+                    <asp:DropDownList ID="ddlMarca" runat="server" CssClass="w-full bg-white border border-slate-200 pl-4 pr-10 py-2.5 rounded-xl text-xs font-medium text-slate-700 appearance-none focus:outline-none focus:border-blue-600 transition-all cursor-pointer">
+
+                    </asp:DropDownList>
                     <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[10px]"></i>
                 </div>
             </div>
@@ -101,8 +100,7 @@
                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Existencias</p>
                                 <p class="text-sm font-bold text-slate-800 mt-0.5"><%# Eval("Stock") %> <span class="text-xs font-normal text-slate-400">unid.</span></p>
                             </div>
-                            <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-100 text-blue-700 text-[9px] font-bold rounded-md uppercase tracking-wide">
-                            </span>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-100 text-blue-700 text-[9px] font-bold rounded-md uppercase tracking-wide"></span>
                         </div>
                     </div>
                 </ItemTemplate>
@@ -125,4 +123,5 @@
         </div>
 
     </div>
+    <script src="../Assets/js/Inventario.js?v=1.0"></script>
 </asp:Content>

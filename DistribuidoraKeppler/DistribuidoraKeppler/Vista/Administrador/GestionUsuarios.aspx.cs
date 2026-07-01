@@ -53,13 +53,12 @@ namespace DistribuidoraKeppler.Vista.Aministrador
                 Nombre = oUsuario.Nombre,
                 Email = oUsuario.Email,
                 Documento = oUsuario.Documento,
-                Rol = oUsuario.Rol,
                 Estado = oUsuario.Estado
             };
 
             UsuarioL oUsuarioL = new UsuarioL();
 
-            bool resultado = oUsuarioL.MtEditarUsuario(oNuevoUsuario);
+            bool resultado = oUsuarioL.MtEditarUsuario(oNuevoUsuario, oUsuario.Rol.Id);
 
             return resultado;
         }
