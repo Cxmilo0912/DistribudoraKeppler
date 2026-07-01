@@ -33,13 +33,19 @@ namespace DistribuidoraKeppler.Logica
 
         //--METODOS CREADOS POR JHON -- INICIO//
 
-        //Metodo para Cargar el Catalogo de los produtos 
-        public List<Producto> MtObtenerCatalogoPaginado(string busqueda, int idCategoria, int pagina, int tamPagina, out bool hayMas)
+        //Metodo para Cargar el Catalogo de los produtos
+        public List<Producto> MtObtenerCatalogoPaginado(string busqueda, int idCategoria, int idMarca, decimal? precioMin, decimal? precioMax, string orden, int pagina, int tamPagina, out bool hayMas)
         {
-            var oTodos = productos.MtObtenerCatalogo(busqueda, idCategoria);
+            var oTodos = productos.MtObtenerCatalogo(busqueda, idCategoria, idMarca, precioMin, precioMax, orden);
             var oPaginados = oTodos.Take(pagina * tamPagina).ToList();
             hayMas = oTodos.Count > pagina * tamPagina;
             return oPaginados;
+        }
+
+        // Obtener todas las marcas para el filtro del catalogo
+        public List<Marca> MtObtenerMarcas()
+        {
+            return new MarcaL().MtListarMarcas();
         }
 
         // Metodo para obtener el detalle del producto

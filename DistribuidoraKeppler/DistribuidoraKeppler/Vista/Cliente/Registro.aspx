@@ -329,7 +329,8 @@
                     <div class="field-group">
                         <label for="txtTelefono">Teléfono</label>
                         <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"
-                            TextMode="Phone" placeholder="+57 300 000 0000" />
+                            TextMode="Phone" placeholder="300 000 0000" MaxLength="10"
+                            pattern="3[0-9]{9}" title="Celular colombiano: 10 dígitos, inicia en 3" />
                     </div>
 
                     <!-- Dirección -->

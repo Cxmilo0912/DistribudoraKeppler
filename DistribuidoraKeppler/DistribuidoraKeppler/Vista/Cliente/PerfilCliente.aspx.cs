@@ -45,11 +45,11 @@ namespace DistribuidoraKeppler.Vista.Cliente
 
             string extension = Path.GetExtension(fuImagen.FileName).ToLower();
 
-            string[] permitidas = { ".jpg", ".jpeg", ".png" };
+            string[] permitidas = { ".png" };
 
             if (!permitidas.Contains(extension))
             {
-                Mostrar("Error", "Solo JPG o PNG", "error");
+                Mostrar("Error", "Solo se permite formato PNG", "error");
                 return;
             }
 

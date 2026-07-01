@@ -415,7 +415,7 @@
 
                     <asp:Button ID="btnAgregar" runat="server"
                         CssClass="btn-agregar"
-                        OnClick="btnAgregar_Click"></asp:Button>
+                        OnClientClick="MtAgregarDesdeDetalle(); return false;"></asp:Button>
                 </div>
 
                 <div class="det-garantias">
@@ -460,6 +460,36 @@
             var val = parseInt(input.value) + delta;
             if (val < 1) val = 1;
             input.value = val;
+        }
+
+        function MtAgregarDesdeDetalle() {
+            var boton = document.getElementById('<%= btnAgregar.ClientID %>');
+            var cantidadInput = document.getElementById('<%= txtCantidad.ClientID %>');
+            var cantidad = parseInt(cantidadInput.value) || 1;
+
+            const producto = {
+                id: boton.getAttribute('data-id'),
+                nombre: boton.getAttribute('data-nombre'),
+                precio: parseFloat(boton.getAttribute('data-precio')),
+                descripcion: boton.getAttribute('data-descripcion'),
+                cantidad: cantidad
+            };
+
+            let carritoClave = 'carritoCompras';
+            const userId = localStorage.getItem("usuarioActivoId");
+            if (userId) {
+                carritoClave = `carritoCliente-${userId}`;
+            }
+
+            let carrito = JSON.parse(localStorage.getItem(carritoClave)) || [];
+            const existe = carrito.find(p => p.id == producto.id);
+            if (existe) {
+                existe.cantidad += producto.cantidad;
+            } else {
+                carrito.push(producto);
+            }
+
+            localStorage.setItem(carritoClave, JSON.stringify(carrito));
         }
     </script>
 </asp:Content>

@@ -100,15 +100,31 @@ namespace DistribuidoraKeppler.Datos
         // -- PARTE HECHA POR JHON -- INICIO //
 
         // Metodo para obtener el catalogo de los productos
-        public List<Producto> MtObtenerCatalogo(string busqueda, int idCategoria)
+        public List<Producto> MtObtenerCatalogo(string busqueda, int idCategoria, int idMarca, decimal? precioMin, decimal? precioMax, string orden)
         {
             List<Producto> oLista = new List<Producto>();
+
+            // Whitelist de criterios de orden: nunca se concatena texto proveniente del usuario en el ORDER BY.
+            string ordenSql;
+            switch (orden)
+            {
+                case "reciente":
+                    ordenSql = "p.Id DESC"; // Aproximación: no existe columna de fecha de creación en Producto
+                    break;
+                case "mas_comprado":
+                    ordenSql = "ISNULL(vc.TotalComprado, 0) DESC";
+                    break;
+                case "az":
+                default:
+                    ordenSql = "p.Nombre ASC";
+                    break;
+            }
 
             using (var conexion = ConexionDB.MtAbrirConexion())
             {
                 conexion.Open();
 
-                string sql = @"
+                string sql = $@"
                 SELECT  p.Id, p.Nombre, p.Descripcion, p.Precio,
                         p.Stock, p.Estado, p.Imagen,
                         p.LimiteVenta, p.LimiteMinimo, p.LimiteMaximo,
@@ -118,18 +134,32 @@ namespace DistribuidoraKeppler.Datos
                 FROM    dbo.Producto  p
                 INNER JOIN dbo.Marca     m ON m.Id = p.IdMarca
                 INNER JOIN dbo.Categoria c ON c.Id = p.IdCategoria
+                LEFT JOIN (
+                        SELECT IdProducto, SUM(Cantidad) AS TotalComprado
+                        FROM   dbo.DetallePedido
+                        GROUP BY IdProducto
+                ) vc ON vc.IdProducto = p.Id
                 WHERE   p.Estado = 'Activo'
                   AND  (@Busqueda    = ''
                         OR p.Nombre  LIKE '%' + @Busqueda + '%'
                         OR m.Nombre  LIKE '%' + @Busqueda + '%')
                   AND  (@IdCategoria = 0
                         OR p.IdCategoria = @IdCategoria)
-                ORDER BY p.Nombre";
+                  AND  (@IdMarca = 0
+                        OR p.IdMarca = @IdMarca)
+                  AND  (@PrecioMin IS NULL
+                        OR p.Precio >= @PrecioMin)
+                  AND  (@PrecioMax IS NULL
+                        OR p.Precio <= @PrecioMax)
+                ORDER BY {ordenSql}";
 
                 using (var oCmd = new SqlCommand(sql, conexion))
                 {
                     oCmd.Parameters.Add("@Busqueda", SqlDbType.NVarChar).Value = busqueda ?? ""; // Si busqueda es null, se asigna una cadena vacía para evitar errores en la consulta
                     oCmd.Parameters.Add("@IdCategoria", SqlDbType.Int).Value = idCategoria; // Si idCategoria es 0, se considerará como "todas las categorías" en la consulta
+                    oCmd.Parameters.Add("@IdMarca", SqlDbType.Int).Value = idMarca; // Si idMarca es 0, se considerará como "todas las marcas" en la consulta
+                    oCmd.Parameters.Add("@PrecioMin", SqlDbType.Decimal).Value = (object)precioMin ?? DBNull.Value;
+                    oCmd.Parameters.Add("@PrecioMax", SqlDbType.Decimal).Value = (object)precioMax ?? DBNull.Value;
                     using (var oDr = oCmd.ExecuteReader())
                     {
                         while (oDr.Read())
