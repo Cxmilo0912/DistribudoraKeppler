@@ -43,9 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <Reference Include="Microsoft.CSharp" />
-=======
     <Reference Include="Azure.Core, Version=1.54.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Core.1.54.0\lib\net472\Azure.Core.dll</HintPath>
     </Reference>
@@ -220,7 +218,6 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
->>>>>>> Stashed changes
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -263,10 +260,8 @@
     <Content Include="Vista\Auth\RecuperarPassword.aspx" />
     <Content Include="Vista\Auth\ResetPassword.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
-<<<<<<< Updated upstream
     <Content Include="Vista\Bodega\PerfilBodega.aspx" />
     <Content Include="Vista\Cliente\CambiarContrasena.aspx" />
-=======
     <Content Include="Vista\Bodega\AsignarPedidos.aspx" />
     <Content Include="Vista\Bodega\HistorialEntregas.aspx" />
     <Content Include="Vista\Bodega\ReporteEntregas.aspx" />
@@ -274,7 +269,6 @@
     <Content Include="Vista\Cliente\Carrito\Carrito.aspx" />
     <Content Include="Vista\Cliente\Carrito\Pago.aspx" />
     <Content Include="Vista\Cliente\CatalogoProductos.aspx" />
->>>>>>> Stashed changes
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
     <Content Include="Vista\Cliente\EditarPerfil.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
@@ -285,14 +279,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-    <Compile Include="Datos\CategoriaD.cs" />
-    <Compile Include="Datos\ClienteD.cs" />
-    <Compile Include="Datos\ConexionDB.cs" />
-    <Compile Include="Datos\DashboardAdministradorD.cs" />
-    <Compile Include="Datos\MarcaD.cs" />
-    <Compile Include="Datos\ProductoD.cs" />
-=======
     <Compile Include="Datos\AdminDatos\CategoriaD.cs" />
     <Compile Include="Datos\BodegaDatos\BodegaD.cs" />
     <Compile Include="Datos\ClienteDatos\ClienteD.cs" />
@@ -301,7 +287,6 @@
     <Compile Include="Datos\AdminDatos\MarcaD.cs" />
     <Compile Include="Datos\AdminDatos\PedidoD.cs" />
     <Compile Include="Datos\AdminDatos\ProductoD.cs" />
->>>>>>> Stashed changes
     <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
@@ -311,34 +296,22 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
-    <Compile Include="Logica\CategoriaL.cs" />
-    <Compile Include="Logica\DashboardAdministradorL.cs" />
-    <Compile Include="Logica\GestionUsuarioL.cs" />
-=======
     <Compile Include="Logica\AdminLogica\CategoriaL.cs" />
     <Compile Include="Logica\BodegaLogica\BodegaL.cs" />
     <Compile Include="Logica\ClienteLogica\ClienteL.cs" />
     <Compile Include="Logica\AdminLogica\DashboardAdministradorL.cs" />
     <Compile Include="Logica\AdminLogica\GestionUsuarioL.cs" />
->>>>>>> Stashed changes
     <Compile Include="Logica\LoginL.cs" />
     <Compile Include="Logica\ProductoL.cs" />
     <Compile Include="Modelo\Barrio.cs" />
     <Compile Include="Modelo\Categoria.cs" />
     <Compile Include="Modelo\Cliente.cs" />
-<<<<<<< Updated upstream
-=======
     <Compile Include="Modelo\DetallePedido.cs" />
     <Compile Include="Modelo\HorarioLaboral.cs" />
->>>>>>> Stashed changes
     <Compile Include="Modelo\Marca.cs" />
     <Compile Include="Modelo\Producto.cs" />
-<<<<<<< Updated upstream
-=======
     <Compile Include="Modelo\ReporteEntrega.cs" />
     <Compile Include="Modelo\ResultadoLogin.cs" />
->>>>>>> Stashed changes
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Sector.cs" />
     <Compile Include="Modelo\Usuario.cs" />
@@ -441,10 +414,9 @@
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.designer.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
     <Compile Include="Vista\Bodega\PerfilBodega.aspx.cs">
       <DependentUpon>PerfilBodega.aspx</DependentUpon>
-=======
+      </Compile>
     <Compile Include="Vista\Bodega\AsignarPedidos.aspx.cs">
       <DependentUpon>AsignarPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -475,7 +447,6 @@
     </Compile>
     <Compile Include="Vista\Cliente\Carrito\Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
->>>>>>> Stashed changes
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
