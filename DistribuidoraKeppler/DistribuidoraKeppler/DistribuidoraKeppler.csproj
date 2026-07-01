@@ -263,6 +263,9 @@
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
     <Content Include="Vista\Cliente\Registro.aspx" />
     <Content Include="Vista\Cliente\DetalleProducto.aspx" />
+    <Content Include="Vista\Preventista\Clientes.aspx" />
+    <Content Include="Vista\Preventista\CrearPedido.aspx" />
+    <Content Include="Vista\Preventista\Pedidos.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
@@ -284,6 +287,7 @@
     <Compile Include="Datos\AdminDatos\MarcaD.cs" />
     <Compile Include="Datos\AdminDatos\PedidoD.cs" />
     <Compile Include="Datos\AdminDatos\ProductoD.cs" />
+    <Compile Include="Datos\PreventistaDatos\PreventistaD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
     <Compile Include="Datos\AdminDatos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
@@ -303,6 +307,7 @@
     <Compile Include="Logica\AdminLogica\MarcaL.cs" />
     <Compile Include="Logica\AdminLogica\PedidoL.cs" />
     <Compile Include="Logica\AdminLogica\ProductoL.cs" />
+    <Compile Include="Logica\PreventistaLogica\PreventistaL.cs" />
     <Compile Include="Logica\AdminLogica\SectorL.cs" />
     <Compile Include="Logica\UsuarioL.cs" />
     <Compile Include="Modelo\Barrio.cs" />
@@ -501,6 +506,27 @@
     </Compile>
     <Compile Include="Vista\Cliente\Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\Clientes.aspx.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Clientes.aspx.designer.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\CrearPedido.aspx.cs">
+      <DependentUpon>CrearPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\CrearPedido.aspx.designer.cs">
+      <DependentUpon>CrearPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\Pedidos.aspx.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Pedidos.aspx.designer.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>

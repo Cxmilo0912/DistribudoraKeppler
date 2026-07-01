@@ -25,6 +25,7 @@ namespace DistribuidoraKeppler.Modelo
 
         public Cliente Cliente { get; set; }
 
+        public List<DetallePedido> Detalles { get; set; }
 
     }
 }
