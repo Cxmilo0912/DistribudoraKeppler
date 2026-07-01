@@ -54,6 +54,33 @@
         </div>
     </div>
 
+    <!-- Modal Ruta de Entrega -->
+    <div id="modalRuta" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between p-6 border-b border-slate-100">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">Ruta de Entrega</h3>
+                    <p id="modalRutaCodigo" class="text-sm text-slate-500 mt-0.5"></p>
+                </div>
+                <button type="button" onclick="cerrarModalRuta()" class="p-2 rounded-xl hover:bg-slate-100 transition-colors">
+                    <span class="material-icons-outlined text-slate-500">close</span>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Zona de entrega</p>
+                        <p id="modalRutaDireccion" class="text-sm font-semibold text-slate-800 mt-0.5"></p>
+                    </div>
+                    <span id="modalRutaEstado" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase flex-shrink-0"></span>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-100">
+                    <iframe id="modalRutaMapa" class="w-full h-96 border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="min-h-screen bg-slate-50 p-8">
 
         <!-- Header -->
@@ -75,6 +102,26 @@
             <button type="button" onclick="filtrarPorEstado('Confirmado')" data-estado="Confirmado"
                 class="filtro-btn px-4 py-2 rounded-xl text-sm font-semibold border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
                 Confirmado
+            </button>
+            <button type="button" onclick="filtrarPorEstado('Empaquetado')" data-estado="Empaquetado"
+                class="filtro-btn px-4 py-2 rounded-xl text-sm font-semibold border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
+                Empaquetado
+            </button>
+            <button type="button" onclick="filtrarPorEstado('En Camino')" data-estado="En Camino"
+                class="filtro-btn px-4 py-2 rounded-xl text-sm font-semibold border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
+                En Camino
+            </button>
+            <button type="button" onclick="filtrarPorEstado('Entregado')" data-estado="Entregado"
+                class="filtro-btn px-4 py-2 rounded-xl text-sm font-semibold border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
+                Entregado
+            </button>
+            <button type="button" onclick="filtrarPorEstado('Cancelado')" data-estado="Cancelado"
+                class="filtro-btn px-4 py-2 rounded-xl text-sm font-semibold border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
+                Cancelado
+            </button>
+            <button type="button" onclick="filtrarPorEstado('Devuelto')" data-estado="Devuelto"
+                class="filtro-btn px-4 py-2 rounded-xl text-sm font-semibold border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
+                Devuelto
             </button>
         </div>
 
@@ -133,6 +180,10 @@
             'En preparacion':  'bg-indigo-100 text-indigo-700',
             'En reparto':      'bg-purple-100 text-purple-700',
             'Entregado':       'bg-teal-100 text-teal-700',
+            'Empaquetado':     'bg-indigo-100 text-indigo-700',
+            'En Camino':       'bg-purple-100 text-purple-700',
+            'Cancelado':       'bg-rose-100 text-rose-700',
+            'Devuelto':        'bg-orange-100 text-orange-700',
         };
 
         function obtenerClaseEstado(estado) {
@@ -192,13 +243,60 @@
                         </span>
                     </td>
                     <td class="px-6 py-4">
-                        <button type="button" onclick="abrirDetalle(${p.id}, '${(p.codigoPedido || '#' + p.id).replace(/'/g, "\\'")}', '$ ${p.total}')"
-                            class="text-primary font-bold text-sm hover:underline flex items-center gap-1">
-                            <span class="material-icons-outlined text-base">visibility</span> Ver detalle
-                        </button>
+                        <div class="flex items-center gap-3">
+                            <button type="button" onclick="abrirDetalle(${p.id}, '${(p.codigoPedido || '#' + p.id).replace(/'/g, "\\'")}', '$ ${p.total}')"
+                                class="text-primary font-bold text-sm hover:underline flex items-center gap-1">
+                                <span class="material-icons-outlined text-base">visibility</span> Ver detalle
+                            </button>
+                            ${p.barrio ? `
+                            <button type="button" onclick="abrirRuta('${(p.codigoPedido || '#' + p.id).replace(/'/g, "\\'")}', '${p.barrio.replace(/'/g, "\\'")}', '${p.estado}')"
+                                class="text-primary font-bold text-sm hover:underline flex items-center gap-1">
+                                <span class="material-icons-outlined text-base">map</span> Ver ruta
+                            </button>` : ''}
+                            ${estadosCancelables.includes(p.estado) ? `
+                            <button type="button" onclick="cancelarPedido(${p.id}, '${(p.codigoPedido || '#' + p.id).replace(/'/g, "\\'")}')"
+                                class="text-rose-600 font-bold text-sm hover:underline flex items-center gap-1">
+                                <span class="material-icons-outlined text-base">cancel</span> Cancelar
+                            </button>` : ''}
+                        </div>
                     </td>
                 </tr>
             `).join('');
+        }
+
+        // Estados en los que el cliente aún puede solicitar la cancelación del pedido
+        const estadosCancelables = ['Confirmado', 'Empaquetado', 'En Camino'];
+
+        function cancelarPedido(idPedido, codigo) {
+            Swal.fire({
+                title: '¿Cancelar pedido?',
+                text: `Se cancelará el pedido ${codigo}. Solo es posible dentro de los primeros 3 días hábiles.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, cancelar',
+                cancelButtonText: 'No'
+            }).then((resultado) => {
+                if (!resultado.isConfirmed) return;
+
+                fetch('MisPedidos.aspx/MtCancelarPedido', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idPedido: idPedido })
+                })
+                .then(r => r.json())
+                .then(resp => {
+                    const datos = resp.d;
+                    if (datos.success) {
+                        Swal.fire('Pedido cancelado', 'El pedido se canceló correctamente', 'success')
+                            .then(() => cargarPedidos());
+                    } else {
+                        Swal.fire('No se pudo cancelar', datos.mensaje || 'Intenta nuevamente', 'error');
+                    }
+                })
+                .catch(() => {
+                    Swal.fire('Error', 'No se pudo cancelar el pedido', 'error');
+                });
+            });
         }
 
         function filtrarPorEstado(estado) {
@@ -272,6 +370,37 @@
 
         document.getElementById('modalDetalle').addEventListener('click', function (e) {
             if (e.target === this) cerrarModal();
+        });
+
+        // Dirección de origen de la distribuidora usada como punto de partida de la ruta
+        const direccionDistribuidora = 'Distribuidora Keppler, Bogotá, Colombia';
+
+        function abrirRuta(codigo, barrio, estado) {
+            const zonaEntrega = `${barrio}, Bogotá, Colombia`;
+
+            document.getElementById('modalRutaCodigo').textContent = codigo;
+            document.getElementById('modalRutaDireccion').textContent = zonaEntrega;
+
+            const badgeEstado = document.getElementById('modalRutaEstado');
+            badgeEstado.textContent = estado;
+            badgeEstado.className = 'px-3 py-1 rounded-full text-[10px] font-bold uppercase flex-shrink-0 ' + obtenerClaseEstado(estado);
+
+            const origen = encodeURIComponent(direccionDistribuidora);
+            const destino = encodeURIComponent(zonaEntrega);
+            document.getElementById('modalRutaMapa').src = `https://www.google.com/maps?saddr=${origen}&daddr=${destino}&output=embed`;
+
+            document.getElementById('modalRuta').classList.remove('hidden');
+            document.getElementById('modalRuta').classList.add('flex');
+        }
+
+        function cerrarModalRuta() {
+            document.getElementById('modalRuta').classList.add('hidden');
+            document.getElementById('modalRuta').classList.remove('flex');
+            document.getElementById('modalRutaMapa').src = '';
+        }
+
+        document.getElementById('modalRuta').addEventListener('click', function (e) {
+            if (e.target === this) cerrarModalRuta();
         });
 
         document.addEventListener('DOMContentLoaded', cargarPedidos);

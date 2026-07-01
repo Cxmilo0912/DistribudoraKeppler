@@ -26,12 +26,27 @@ namespace DistribuidoraKeppler.Vista.Cliente
             PedidoL oPedidoL = new PedidoL();
             List<Pedido> pedidos = oPedidoL.MtListarPedidosCliente(cliente.Id);
 
+            // Traduce los estados internos del pedido a los estados que ve el cliente
+            Dictionary<string, string> mapaEstados = new Dictionary<string, string>
+            {
+                { "En Proceso", "Confirmado" },
+                { "Pendiente", "Confirmado" },
+                { "Aprobado", "Confirmado" },
+                { "Confirmado", "Confirmado" },
+                { "En preparacion", "Empaquetado" },
+                { "Empaquetado", "Empaquetado" },
+                { "En reparto", "En Camino" },
+                { "En Camino", "En Camino" },
+                { "Entregado", "Entregado" },
+                { "Rechazado", "Cancelado" },
+                { "Cancelado", "Cancelado" },
+                { "Devuelto", "Devuelto" }
+            };
+
             List<object> resultado = new List<object>();
             foreach (Pedido p in pedidos)
             {
-                if (p.Estado != "En Proceso" && p.Estado != "Aprobado") continue;
-
-                string estadoMostrado = p.Estado == "Aprobado" ? "Confirmado" : p.Estado;
+                string estadoMostrado = mapaEstados.ContainsKey(p.Estado) ? mapaEstados[p.Estado] : p.Estado;
 
                 resultado.Add(new
                 {
@@ -40,7 +55,8 @@ namespace DistribuidoraKeppler.Vista.Cliente
                     fecha = p.Fecha.ToString("dd MMM yyyy"),
                     estado = estadoMostrado,
                     total = p.Total.ToString("N2"),
-                    direccion = p.DireccionEntrega
+                    direccion = p.DireccionEntrega,
+                    barrio = p.IdCliente.Barrio != null ? p.IdCliente.Barrio.Nombre : null
                 });
             }
 
@@ -72,6 +88,22 @@ namespace DistribuidoraKeppler.Vista.Cliente
             }
 
             return new { success = true, data = resultado };
+        }
+
+        [WebMethod]
+        public static object MtCancelarPedido(int idPedido)
+        {
+            Modelo.Cliente cliente = (Modelo.Cliente)HttpContext.Current.Session["Cliente"];
+            if (cliente == null)
+                return new { success = false, mensaje = "Sesión no válida" };
+
+            PedidoL oPedidoL = new PedidoL();
+            string error = oPedidoL.MtCancelarPedidoCliente(idPedido, cliente.Id);
+
+            if (error != null)
+                return new { success = false, mensaje = error };
+
+            return new { success = true };
         }
     }
 }

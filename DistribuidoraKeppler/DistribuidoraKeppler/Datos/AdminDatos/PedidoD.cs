@@ -180,9 +180,12 @@ namespace DistribuidoraKeppler.Datos
                                            p.Total,
                                            c.Id         AS IdCliente,
                                            c.NombreEmpresa,
-                                           c.Email      AS EmailCliente
+                                           c.Email      AS EmailCliente,
+                                           b.Id         AS IdBarrio,
+                                           b.Nombre     AS BarrioNombre
                                     FROM   Pedido p
                                     INNER JOIN Cliente c ON c.Id = p.IdCliente
+                                    LEFT JOIN  Barrio  b ON b.Id = c.IdBarrio
                                     WHERE  p.IdCliente = @idCliente
                                     ORDER  BY p.Fecha DESC";
 
@@ -204,7 +207,12 @@ namespace DistribuidoraKeppler.Datos
                         {
                             Id = Convert.ToInt32(dr["IdCliente"]),
                             NombreEmpresa = dr["NombreEmpresa"].ToString(),
-                            Email = dr["EmailCliente"] == DBNull.Value ? "" : dr["EmailCliente"].ToString()
+                            Email = dr["EmailCliente"] == DBNull.Value ? "" : dr["EmailCliente"].ToString(),
+                            Barrio = dr["IdBarrio"] == DBNull.Value ? null : new Barrio
+                            {
+                                Id = Convert.ToInt32(dr["IdBarrio"]),
+                                Nombre = dr["BarrioNombre"].ToString()
+                            }
                         }
                     });
                 }
@@ -253,5 +261,53 @@ namespace DistribuidoraKeppler.Datos
             return lista;
         }
         //=== Metodos creados por Andres ===
+
+        //=== Metodos para cancelacion de pedido por el cliente ===
+        public Pedido MtObtenerPedidoPorId(int idPedido)
+        {
+            using (SqlConnection conn = ConexionDB.MtAbrirConexion())
+            {
+                conn.Open();
+
+                string consulta = @"SELECT Id, CodigoPedido, Fecha, Estado, DireccionEntrega, Total, IdCliente
+                                    FROM   Pedido
+                                    WHERE  Id = @idPedido";
+
+                SqlCommand cmd = new SqlCommand(consulta, conn);
+                cmd.Parameters.AddWithValue("@idPedido", idPedido);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    return new Pedido()
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        CodigoPedido = dr["CodigoPedido"].ToString(),
+                        Fecha = Convert.ToDateTime(dr["Fecha"]),
+                        Estado = dr["Estado"].ToString(),
+                        DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
+                        Total = Convert.ToDecimal(dr["Total"]),
+                        IdCliente = new Cliente { Id = Convert.ToInt32(dr["IdCliente"]) }
+                    };
+                }
+            }
+            return null;
+        }
+
+        public bool MtCancelarPedido(int idPedido)
+        {
+            using (SqlConnection conn = ConexionDB.MtAbrirConexion())
+            {
+                conn.Open();
+
+                string consulta = "UPDATE Pedido SET Estado = 'Cancelado' WHERE Id = @idPedido";
+
+                SqlCommand cmd = new SqlCommand(consulta, conn);
+                cmd.Parameters.AddWithValue("@idPedido", idPedido);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+        //=== Metodos para cancelacion de pedido por el cliente ===
     }
 }

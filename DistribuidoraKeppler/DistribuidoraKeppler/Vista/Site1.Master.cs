@@ -61,15 +61,16 @@ namespace DistribuidoraKeppler.Vista
             Session.Clear();
             Session.Abandon();
 
-            string script = @"
-                Swal.fire({
+            string urlLogin = ResolveUrl("~/Vista/Auth/Login.aspx");
+            string script = $@"
+                Swal.fire({{
                     title: 'Sesión cerrada',
                     text: 'Has cerrado sesión correctamente',
                     icon: 'success',
                     confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = '../../Auth/Login.aspx';
-                });
+                }}).then(() => {{
+                    window.location.href = '{urlLogin}';
+                }});
             ";
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "logout", script, true);

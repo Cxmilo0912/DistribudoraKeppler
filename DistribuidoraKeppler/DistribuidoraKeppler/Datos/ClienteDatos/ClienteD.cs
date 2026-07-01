@@ -185,6 +185,47 @@ namespace DistribuidoraKeppler.Datos
         }
 
 
+        public Cliente MtObtenerPorNit(string nit)
+        {
+            using (SqlConnection con = ConexionDB.MtAbrirConexion())
+            {
+                con.Open();
+
+                string sql = @"SELECT C.*, B.Id AS BarrioId, B.Nombre AS BarrioNombre
+                               FROM Cliente C
+                               LEFT JOIN Barrio B ON C.IdBarrio = B.Id
+                               WHERE C.Nit = @Nit";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.Add("@Nit", SqlDbType.VarChar).Value = nit;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    return new Cliente
+                    {
+                        Id = Convert.ToInt32(dr["Id"]),
+                        Nit = dr["Nit"].ToString(),
+                        NombreEmpresa = dr["NombreEmpresa"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Telefono = dr["Telefono"].ToString(),
+                        Direccion = dr["Direccion"].ToString(),
+                        Imagen = dr["Imagen"] == DBNull.Value ? null : dr["Imagen"].ToString(),
+                        Contrasena = dr["Contrasena"].ToString(),
+
+                        Barrio = dr["BarrioId"] != DBNull.Value ? new Barrio
+                        {
+                            Id = Convert.ToInt32(dr["BarrioId"]),
+                            Nombre = dr["BarrioNombre"].ToString()
+                        } : null
+                    };
+                }
+            }
+
+            return null;
+        }
+
         public Cliente MtObtenerPorId(int idCliente)
         {
             using (SqlConnection con = ConexionDB.MtAbrirConexion())
