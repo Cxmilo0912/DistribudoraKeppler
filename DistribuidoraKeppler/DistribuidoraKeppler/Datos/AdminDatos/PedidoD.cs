@@ -134,7 +134,7 @@ namespace DistribuidoraKeppler.Datos
                         Estado = dr["Estado"].ToString(),
                         DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                         Total = Convert.ToDecimal(dr["Total"]),
-                        IdCliente = new Cliente
+                        Cliente = new Cliente
                         {
                             Id = Convert.ToInt32(dr["IdCliente"]),
                             NombreEmpresa = dr["NombreEmpresa"].ToString(),
@@ -203,7 +203,7 @@ namespace DistribuidoraKeppler.Datos
                         Estado = dr["Estado"].ToString(),
                         DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                         Total = Convert.ToDecimal(dr["Total"]),
-                        IdCliente = new Cliente
+                        Cliente = new Cliente
                         {
                             Id = Convert.ToInt32(dr["IdCliente"]),
                             NombreEmpresa = dr["NombreEmpresa"].ToString(),
@@ -287,7 +287,7 @@ namespace DistribuidoraKeppler.Datos
                         Estado = dr["Estado"].ToString(),
                         DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                         Total = Convert.ToDecimal(dr["Total"]),
-                        IdCliente = new Cliente { Id = Convert.ToInt32(dr["IdCliente"]) }
+                        Cliente = new Cliente { Id = Convert.ToInt32(dr["IdCliente"]) }
                     };
                 }
             }

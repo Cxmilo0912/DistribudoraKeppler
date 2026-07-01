@@ -68,7 +68,7 @@ namespace DistribuidoraKeppler.Vista
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    window.location.href = '../../Auth/Login.aspx';
+                    window.location.href = '../../Vista/Auth/Login.aspx';
                 });
             ";
 
