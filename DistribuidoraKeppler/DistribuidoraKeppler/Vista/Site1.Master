@@ -167,6 +167,15 @@
             <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">settings</span> Configuración
                                 </asp:HyperLink>
                             </div>
+                            <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/MisPedidos.aspx"
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
+                                <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">shopping_cart</span> Mis Pedidos
+                            </asp:HyperLink>
+
+                            <asp:HyperLink runat="server" NavigateUrl="~/Vista/Cliente/Historial.aspx"
+                                CssClass="group flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.05] hover:text-white border-l-4 border-transparent">
+                                <span class="material-symbols-outlined !text-[20px] opacity-70 group-hover:opacity-100 transition-opacity">history</span> Historial
+                            </asp:HyperLink>
 
                         </div>
 

@@ -53,10 +53,10 @@ namespace DistribuidoraKeppler.Vista.Cliente
                 return;
             }
 
-            // Tamaño (2MB)
-            if (fuImagen.PostedFile.ContentLength > 2 * 1024 * 1024)
+            // Tamaño (5MB)
+            if (fuImagen.PostedFile.ContentLength > 5 * 1024 * 1024)
             {
-                Mostrar("Error", "Máx 2MB", "error");
+                Mostrar("Error", "Máx 5MB", "error");
                 return;
             }
 

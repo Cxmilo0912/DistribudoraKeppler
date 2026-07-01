@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="DistribuidoraKeppler.Index" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="DistribuidoraKeppler.Index" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -11,7 +11,7 @@
     <style>
         /* ── Reset & Base ── */
         *, *::before, *::after {
-            box-sizing: border-box;
+            box-sizing: border-box;enable-background 
             margin: 0;
             padding: 0;
         }
