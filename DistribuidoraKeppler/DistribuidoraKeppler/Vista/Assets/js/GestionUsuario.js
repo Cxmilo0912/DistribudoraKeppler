@@ -111,9 +111,6 @@ $(document).ready(function () {
                 <button type="button" class="btn btn-outline-info btn-sm btn-editar">
                     <i class="bi bi-pencil"></i> Editar
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm btn-eliminar">
-                    <i class="bi bi-trash"></i> Borrar
-                </button>
             </div>`;
                 }
             }

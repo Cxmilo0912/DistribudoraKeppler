@@ -433,7 +433,6 @@
 
                     <div class="mb-3">
                         <label class="form-label" style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Nombre de la marca *</label>
-                        <input id="txtEditNombreMarca" type="text" class="form-control" />
                         <asp:TextBox ID="txtEditNombre" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
 

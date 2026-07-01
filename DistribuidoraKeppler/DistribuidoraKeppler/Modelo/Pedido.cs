@@ -23,7 +23,7 @@ namespace DistribuidoraKeppler.Modelo
 
         public int IdMetodoPago { get; set; }
 
-        public Cliente IdCliente { get; set; }
+        public Cliente Cliente { get; set; }
 
 
     }

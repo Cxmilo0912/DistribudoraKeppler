@@ -334,7 +334,7 @@
                         <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="btn btn-kepler-login" OnClick="btnLogin_Click" />
 
                         <p class="login-signup-text">
-                            ¿No tienes cuenta? <a href="#">Crear cuenta</a>
+                            ¿No tienes cuenta? <a href="../Cliente/Registro.aspx">Crear cuenta</a>
                         </p>
 
                         <p class="login-footer-note">Distribuidora Kepler &copy; 2026</p>

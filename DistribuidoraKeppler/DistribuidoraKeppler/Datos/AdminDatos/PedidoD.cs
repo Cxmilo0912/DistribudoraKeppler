@@ -31,7 +31,7 @@ namespace DistribuidoraKeppler.Datos
                         cmdPedido.Parameters.AddWithValue("@estado", oPedido.Estado);
                         cmdPedido.Parameters.AddWithValue("@direccion", oPedido.DireccionEntrega);
                         cmdPedido.Parameters.AddWithValue("@total", oPedido.Total);
-                        cmdPedido.Parameters.AddWithValue("@idCliente", oPedido.IdCliente.Id);
+                        cmdPedido.Parameters.AddWithValue("@idCliente", oPedido.Cliente.Id);
 
                         idPedido = Convert.ToInt32(cmdPedido.ExecuteScalar());
 

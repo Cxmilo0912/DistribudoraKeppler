@@ -24,6 +24,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8f9fa;
+            padding-right: 0 !important;
         }
 
         /* Estilización Avanzada de la Tabla de Productos */
@@ -206,6 +207,7 @@
                             <tr>
                                 <th>Imagen</th>
                                 <th>Id</th>
+                                <th>CodigoProducto</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Precio</th>
@@ -261,6 +263,14 @@
             var table = $('#tablaProductos').DataTable({
                 responsive: true,
                 colReorder: true,
+                columnDefs: [
+
+                    { responsivePriority: 1, targets: 0 },
+                    { responsivePriority: 2, targets: 2 },
+                    { responsivePriority: 3, targets: 3 },
+                    { responsivePriority: 4, targets: 5 },
+                    { responsivePriority: 100, targets: 12 },
+                ],
                 layout: {
                     topStart: 'search',
                     bottomStart: 'pageLength',
@@ -271,21 +281,21 @@
                                     extend: 'copyHtml5',
                                     text: '<i class="bi bi-clipboard"></i> Copiar',
                                     exportOptions: {
-                                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
                                     }
                                 }, {
                                     extend: 'csvHtml5',
                                     text: '<i class="bi bi-filetype-csv"></i> CSV',
 
                                     exportOptions: {
-                                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
                                     }
                                 }, {
                                     extend: 'excelHtml5',
                                     text: '<i class="bi bi-file-earmark-excel"></i> Excel',
 
                                     exportOptions: {
-                                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
                                     }
                                 }, {
                                     extend: 'pdfHtml5',
@@ -294,13 +304,13 @@
                                     orientation: 'landscape', // Orientación horizontal para mejor visualización de las columnas'
                                     pageSize: 'LEGAL',
                                     exportOptions: {
-                                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
                                     }
                                 }, {
                                     extend: 'print',
                                     text: '<i class="bi bi-printer"></i> Imprimir',
                                     exportOptions: {
-                                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
                                     }
                                 }
                             ]
@@ -322,19 +332,20 @@
                     {
                         "data": "Imagen", // Configuración para mostrar la imagen del producto
                         "render": function (data) { // Renderizar la imagen con un tamaño fijo de 50x50 píxeles, manteniendo la proporción y mostrando un placeholder si la URL no es válida
-                            var urlFinal = (data && data.length > 10) ? data : "https://via.placeholder.com/50?text=N/A"; // la condicion es para verificar si la URL es válida, si no lo es, se muestra un placeholder con el texto
+                            var urlFinal = (data && data.length > 10) ? data : "https://placehold.co/50?text=N/A";
 
                             return `
-    <div class="text-center">
-        <img src="${urlFinal}" 
-             class="rounded shadow-sm border" 
-             style="height:50px; width:50px; object-fit:contain; background-color: #fff;" 
-             onerror="this.src='https://via.placeholder.com/50?text=Error';" />
-    </div>`;
+                            <div class="text-center">
+                                <img src="${urlFinal}" 
+                                     class="rounded shadow-sm border" 
+                                     style="height:50px; width:50px; object-fit:contain; background-color: #fff;" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/50?text=Error';" />
+                            </div>`;
                         }
                     },
+                    { "data": "Id" },
                     {
-                        "data": "Id"
+                        "data": "CodigoProducto"
                     },
                     { "data": "Nombre" },
                     { "data": "Descripcion" },
@@ -408,7 +419,7 @@
         });
         function limpiarFormulario() {
             $('#modalProducto input').val(''); //limipia todo
-            $('#imgPrevisualizacion').attr('src', 'https://via.placeholder.com/110?text=Sin+Imagen'); //vuelve por defecto la img
+            $('#imgPrevisualizacion').attr('src', 'https://placehold.co/110?text=Sin+Imagen'); //vuelve por defecto la img
 
         }
         $('#txtImagenUrl').on('input change keyup paste', function () {
@@ -417,7 +428,7 @@
             var urlIngresada = $(this).val().trim();
 
             // Cuando esta vacio el campo pone una imagen por defecto
-            var imagenPorDefecto = "https://via.placeholder.com/130?text=Sin+Imagen";
+            var imagenPorDefecto = "https://placehold.co/110?text=Sin+Imagen";
 
             // Si hay algo escrito se intenta cargar
             if (urlIngresada !== "") {
@@ -428,7 +439,7 @@
             }
         });
         $('#imgPrevisualizacion').on('error', function () {
-            $(this).attr('src', 'https://via.placeholder.com/130/ff0000/ffffff?text=Error+en+URL');
+            $(this).off('error').attr('src', 'https://placehold.co/130/ff0000/ffffff?text=Error+en+URL');
         });
         $(document).ready(function () {
             $('#btnGuardar').click(function () {
@@ -500,6 +511,6 @@
             });
         });
 
-       
+
     </script>
 </asp:Content>
