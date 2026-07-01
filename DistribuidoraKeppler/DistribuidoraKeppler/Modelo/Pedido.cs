@@ -23,6 +23,13 @@ namespace DistribuidoraKeppler.Modelo
 
         public int IdMetodoPago { get; set; }
 
+        public Cliente IdCliente { get; set; }
+
+        public Sector Sector { get; set; }
+
+        public Usuario Repartidor { get; set; }
+
+        public DateTime? FechaEntrega { get; set; }
         public Cliente Cliente { get; set; }
 
         public List<DetallePedido> Detalles { get; set; }

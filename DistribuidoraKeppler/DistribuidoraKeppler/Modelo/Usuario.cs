@@ -21,5 +21,7 @@ namespace DistribuidoraKeppler.Modelo
         public int Documento { get; set; }
 
         public Rol Rol { get; set; }
+
+        public List<Sector> Sectores { get; set; }
     }
 }

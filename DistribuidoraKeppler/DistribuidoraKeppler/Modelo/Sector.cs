@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace DistribuidoraKeppler.Modelo
     public class Sector
     {
         public int Id { get; set; }
-      
+
         public string Nombre { get; set; }
-      
+
         public List<Barrio> Barrios { get; set; }
 
         public string DiasVisita { get; set; }
