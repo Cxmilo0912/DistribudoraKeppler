@@ -30,6 +30,9 @@ namespace DistribuidoraKeppler.Modelo
         public Usuario Repartidor { get; set; }
 
         public DateTime? FechaEntrega { get; set; }
+        public Cliente Cliente { get; set; }
+
+        public List<DetallePedido> Detalles { get; set; }
 
     }
 }

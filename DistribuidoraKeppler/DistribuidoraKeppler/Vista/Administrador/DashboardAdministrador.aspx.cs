@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Logica;
+using DistribuidoraKeppler.Utilidades;
 
 namespace DistribuidoraKeppler.Vista.Aministrador
 {
@@ -14,25 +15,29 @@ namespace DistribuidoraKeppler.Vista.Aministrador
         DashboardAdministradorL oAdminL = new DashboardAdministradorL();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) //ejecuta el metodo
+            if (!IsPostBack) 
             {
                 CargarInfoCards();
 
             }
         }
-<<<<<<< HEAD
-        public void CargarTotalClientes() 
-        {
-            int total = clienteD.ObtenerTotalClientes(); // Llama a la base de datos
-            lblTotalClientes.Text = total.ToString();    //Muestra el numero de clientes 
-=======
         public void CargarInfoCards()
         {
             int total = oAdminL.MtTotalClientes();
             lblTotalClientes.Text = total.ToString();
             int totalProductos = oAdminL.MtProductosActivos();
             lblProductosActivos.Text = totalProductos.ToString();
->>>>>>> 89bae78a586bbd7f6702809bcfbbc1ebc218e6f7
+            double ventadDiaria = oAdminL.MtVentasDiarias();
+            lblVentas.Text = ventadDiaria.ToString();
+            int pedidosActivos = oAdminL.MtPedidosActivos();
+            lblPedidos.Text = pedidosActivos.ToString();
+            dynamic productoVendido = oAdminL.MtProductoMasVendido();
+            lblNombre.Text = productoVendido.Nombre;
+            lblCantidadVendida.Text = productoVendido.CantidadVendida.ToString();
+            lblClasificacion.Text = productoVendido.Clasificacion;
+            lblEstadoInventario.Text = productoVendido.EstadoInventario;
+            lblAccionRecomendada.Text = productoVendido.AccionRecomendada;
+
         }
 
         

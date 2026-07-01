@@ -1,25 +1,195 @@
-﻿::-webkit-scrollbar {
-    width: 6px;
+﻿/* ==========================================================================
+   1. DISEÑO GLOBAL DE LA TABLA (Estilo Tarjeta Moderna)
+   ========================================================================== */
+#example {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: 1px solid #e2e8f0 !important;
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 10px;
-}
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
+    /* Cabecera de la tabla */
+    #example thead th {
+        background-color: #0f172a !important; /* Un slate-900 muy elegante */
+        color: #ffffff !important;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 14px 16px !important;
+        border: none !important;
     }
 
-.sidebar-bg {
-    background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%);
+    /* Celdas del cuerpo */
+    #example tbody td {
+        background-color: #ffffff !important;
+        color: #334155 !important; /* Texto slate-700 fácil de leer */
+        padding: 12px 16px !important;
+        vertical-align: middle !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease;
+        font-weight: 600 !important;
+    }
+
+    /* Efecto Hover en las filas */
+    #example tbody tr:hover td {
+        background-color: #f8fafc !important; /* Un gris muy suave al pasar el mouse */
+        cursor: pointer;
+    }
+
+    /* Ajuste para la última fila para que respete las esquinas redondeadas */
+    #example tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 12px;
+    }
+
+    #example tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 12px;
+    }
+
+
+/* ==========================================================================
+   2. ESTILOS PARA LOS BOTONES DE ACCIÓN (Editar y Borrar)
+   ========================================================================== */
+.btn-editar {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    padding: 5px 12px !important;
+    font-size: 0.85rem !important;
+    border-color: #0ea5e9 !important;
+    color: #0ea5e9 !important;
+    transition: all 0.2s ease !important;
 }
 
-.nav-item-active {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-left: 4px solid #ffffff;
+    .btn-editar:hover {
+        background-color: #0ea5e9 !important;
+        color: white !important;
+        transform: translateY(-2px); /* Efecto sutil hacia ARRIBA */
+        box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
+    }
+
+.btn-eliminar {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    padding: 5px 12px !important;
+    font-size: 0.85rem !important;
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+    transition: all 0.2s ease !important;
 }
+
+    .btn-eliminar:hover {
+        background-color: #ef4444 !important;
+        color: white !important;
+        transform: translateY(-2px); /* Efecto sutil hacia ARRIBA */
+        box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+    }
+
+
+/* ==========================================================================
+   3. CORRECCIÓN Y CONTROL DE PAGINACIÓN (DataTables DOM 'p')
+   ========================================================================== */
+/* Asegura que los botones de Anterior y Siguiente se vean limpios */
+.dataTables_paginate .paginate_button {
+    padding: 6px 12px !important;
+    margin-left: 5px !important;
+    border-radius: 6px !important;
+    border: 1px solid #cbd5e1 !important;
+    background: white !important;
+    color: #0f172a !important;
+    font-weight: 500 !important;
+    font-size: 0.85rem !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .dataTables_paginate .paginate_button:hover {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+        border-color: #94a3b8 !important;
+    }
+
+    .dataTables_paginate .paginate_button.current {
+        background: #0f172a !important; /* Color oscuro para la página activa */
+        color: white !important;
+        border-color: #0f172a !important;
+    }
+
+    .dataTables_paginate .paginate_button.disabled {
+        opacity: 0.5 !important;
+        cursor: not-allowed !important;
+        background: #f8fafc !important;
+    }
+
+.dt-buttons .btn {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    margin-right: 5px;
+}
+
+.dt-buttons {
+    margin-bottom: 10px;
+}
+
+
+div.dt-search {
+    display: inline-flex !important;
+    align-items: center;
+}
+
+
+
+.buttons-copy {
+    background-color: #3B82F6 !important;
+    color: white !important;
+}
+
+    .buttons-copy:hover {
+        background-color: #06B6D4 !important;
+        transform: translateY(10px);
+    }
+
+.buttons-csv {
+    background-color: #10B981 !important;
+    color: white !important;
+}
+
+    .buttons-csv:hover {
+        background-color: #047857 !important;
+        transform: translateY(10px);
+    }
+
+.buttons-excel {
+    background-color: #27ae60 !important;
+    color: white !important;
+}
+
+    .buttons-excel:hover {
+        background-color: #219150 !important;
+        transform: translateY(10px);
+    }
+
+.buttons-pdf {
+    background-color: #e74c3c !important;
+    color: white !important;
+}
+
+    .buttons-pdf:hover {
+        background-color: #df3030 !important;
+        transform: translateY(10px);
+    }
+
+.buttons-print {
+    background-color: #4B5563 !important;
+    color: white !important;
+}
+
+    .buttons-print:hover {
+        background-color: #4F46E5 !important;
+        transform: translateY(10px);
+    }

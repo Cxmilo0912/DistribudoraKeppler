@@ -1,6 +1,10 @@
 ﻿using DistribuidoraKeppler.Datos;
+using DistribuidoraKeppler.Logica;
 using DistribuidoraKeppler.Modelo;
 using System;
+using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
 
 namespace DistribuidoraKeppler.Vista.Administrador
@@ -11,10 +15,10 @@ namespace DistribuidoraKeppler.Vista.Administrador
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) // evita recargar datos en cada clic
-            {
+
                 CargarMarcas();
-            }
+
+
         }
 
         public void CargarMarcas()
@@ -53,10 +57,10 @@ namespace DistribuidoraKeppler.Vista.Administrador
             // guarda en la BD
             marcaD.InsertarMarca(m);
 
-            
+
             CargarMarcas();
 
-            
+
             txtNombreMarca.Text = "";
 
             // cierra la venta y manda el mensaje 
@@ -72,6 +76,70 @@ namespace DistribuidoraKeppler.Vista.Administrador
       });",
      true
              );
+        }
+        private void Mostrar(string titulo, string mensaje, string tipo)
+        {
+            string script = $"Swal.fire('{titulo}', '{mensaje}', '{tipo}');";
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+        }
+        protected void btnActualizarMarca_Click(object sender, EventArgs e)
+        {
+
+            string extension = Path.GetExtension(fuImagen.FileName).ToLower();
+
+
+            string[] extensionesPermitidas = { ".jpg", ".jpeg", ".png" };
+
+            if (!extensionesPermitidas.Contains(extension))
+            {
+                Mostrar("Error", "Solo se permiten imágenes JPG o PNG", "error");
+                return;
+            }
+
+            string nombreArchivo = $"marca_{txtEditNombre.Text}_{DateTime.Now.Ticks}{extension}";
+
+            string rutaServidor = Server.MapPath("~/Imagenes/Marcas/");
+
+            if (!Directory.Exists(rutaServidor))
+            {
+                Directory.CreateDirectory(rutaServidor);
+            }
+
+            string rutaCompleta = Path.Combine(rutaServidor, nombreArchivo);
+
+            fuImagen.SaveAs(rutaCompleta);
+
+            string rutaDb = "~/Imagenes/Marcas/" + nombreArchivo;
+
+            Marca oMarca = new Marca
+            {
+                Id = Convert.ToInt32(hfIdMarca.Value),
+                Nombre = txtEditNombre.Text,
+                Logo = rutaDb
+            };
+
+            MarcaL oMarcaL = new MarcaL();
+            bool resultado = oMarcaL.MtEditarMarca(oMarca);
+
+            if (resultado)
+            {
+                ScriptManager.RegisterStartupScript(
+    this, GetType(),
+    "alert",
+    @"Swal.fire({
+          icon: 'success',
+          title: 'Marca Actualizada',
+          text: 'La marca se ha actualizado correctamente',
+          confirmButtonColor: '#f59e0b'
+      });",
+    true
+      );
+                CargarMarcas();
+            }
+
+
+
+            
         }
     }
 }

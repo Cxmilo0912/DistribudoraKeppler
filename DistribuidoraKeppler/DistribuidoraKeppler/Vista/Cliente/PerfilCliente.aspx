@@ -1,224 +1,140 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilCliente.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Cliente.WebForm1" %>
+﻿<%@ Page Title="Perfil de Usuario - Keppler" Language="C#" MasterPageFile="~/Vista/Site1.Master" AutoEventWireup="true" CodeBehind="PerfilCliente.aspx.cs" Inherits="DistribuidoraKeppler.Vista.Cliente.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Kepler Distribution - Mi Perfil</title>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-        <style data-purpose="global-styles">
-            body {
-                font-family: 'Inter', sans-serif;
-                background-color: #F8F9FB;
-                color: #111827;
-            }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-            .active-nav {
-                background-color: #0A0A6E;
-                color: white !important;
-            }
-        </style>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    </head>
+    <style>
+        /* Aplicamos la fuente Outfit de forma global para mantener la estética premium */
+        body, input, button, textarea {
+            font-family: 'Outfit', sans-serif !important;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <main class="flex-1 p-10 overflow-y-auto">
+    <div class="max-w-4xl mx-auto space-y-6 py-4 animate-fade-in">
 
-        <!-- Page Header -->
-        <header class="mb-8">
-            <h2 class="text-3xl font-bold text-gray-900">Mi Perfil</h2>
-            <p class="text-gray-500 mt-1">Gestione su información personal y preferencias de cuenta.</p>
-        </header>
+        <div class="bg-gradient-to-r from-[#001838] to-[#000b1a] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-950/10 border border-slate-900/40">
 
-        <!-- Profile Summary Card -->
-        <section class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm mb-10 flex items-center justify-between" data-purpose="profile-card">
-            <div class="flex items-center gap-8">
-                <!-- Avatar -->
-                <div class="relative">
-                    <div class="w-32 h-32 rounded-full border-2 border-gray-100 p-1">
-                        <div class="w-full h-full rounded-full bg-[#f3f4f6] overflow-hidden flex items-center justify-center">
-                            <asp:Image
-                                ID="imgPerfil"
-                                runat="server"
-                                CssClass="object-cover w-full h-full"
-                                AlternateText="Foto de perfil" />
-                        </div>
-                    </div>
-
-                    <%-- FileUpload oculto --%>
-                    <asp:FileUpload ID="fuImagen" runat="server" Style="display: none;" accept="image/*" />
-
-                    <%-- Botón ASP.NET oculto: solo para hacer el postback con el archivo --%>
-                    <asp:Button ID="btnSubirFoto" runat="server" OnClick="btnSubirFoto_Click" Style="display: none;" />
-
-                    <%-- Botón HTML visible: solo abre el explorador de archivos --%>
-                    <button type="button" id="btnCamara"
-                        class="absolute bottom-1 right-1 bg-[#0A0A6E] p-2 rounded-full border-4 border-white text-white hover:bg-blue-900 transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                            <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                        </svg>
-                    </button>
+            <div class="flex flex-col sm:flex-row items-center gap-5 w-full md:w-auto">
+                <div class="relative group shrink-0">
+                    <asp:Image ID="imgPerfil" runat="server"
+                        CssClass="w-24 h-24 rounded-full object-cover border-4 border-blue-500/30 shadow-lg"
+                        ImageUrl="https://i.pravatar.cc/150?img=33" />
                 </div>
 
-                <script>
-                    var btnCamara = document.getElementById('btnCamara');
-                    var fuImagen = document.getElementById('<%= fuImagen.ClientID %>');
-                    var btnSubir = document.getElementById('<%= btnSubirFoto.ClientID %>');
-
-                    // Clic en cámara → abre el explorador
-                    btnCamara.addEventListener('click', function () {
-                        fuImagen.click();
-                    });
-
-                    // Al seleccionar archivo → hace clic en el botón ASP.NET oculto
-                    fuImagen.addEventListener('change', function () {
-                        if (this.files.length > 0) {
-                            btnSubir.click(); // ✅ Esto sí envía el archivo correctamente
-                        }
-                    });
-                </script>
-
-                <!-- User Info -->
-                <div>
-                    <asp:Label
-                        ID="lblNombreEmpresa"
-                        runat="server"
-                        CssClass="text-2xl font-bold text-gray-900 block" />
-                    <div class="flex items-center gap-2 mt-2">
-                        <span class="bg-[#EBE9FE] text-[#4F46E5] text-[10px] font-bold px-2.5 py-1 rounded-md tracking-wider">CLIENTE PREMIUM</span>
-                        <span class="bg-[#F3F4F6] text-gray-500 text-[10px] font-bold px-2.5 py-1 rounded-md">NIT:
-                            <asp:Label ID="lblNit" runat="server" />
+                <div class="text-center sm:text-left">
+                    <h2 class="text-2xl font-bold text-white tracking-tight">
+                        <asp:Literal ID="litNombreHeader" runat="server" Text="Mi Empresa S.A.S" />
+                    </h2>
+                    <p class="text-sm text-slate-400 mt-0.5">
+                        <asp:Literal ID="litEmailHeader" runat="server" Text="contacto@miempresa.com" />
+                    </p>
+                    <div class="mt-3">
+                        <span class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Cliente Activo
                         </span>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="flex gap-3">
-                <asp:Button
-                    ID="btnEditar"
-                    runat="server"
-                    Text="Editar información"
-                    OnClick="btnEditar_Click"
-                    CssClass="bg-[#0A0A6E] text-white px-5 py-2.5 rounded-xl font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer" />
-                <asp:Button
-                    ID="btnCambiarContrasena"
-                    runat="server"
-                    Text="Cambiar contraseña"
-                    OnClick="btnCambiarContrasena_Click"
-                    CssClass="bg-[#F3F4F6] text-gray-700 px-5 py-2.5 rounded-xl font-medium text-sm hover:bg-gray-200 transition-colors cursor-pointer" />
-            </div>
-        </section>
+            <div class="flex flex-col items-center md:items-end gap-2 w-full md:w-auto border-t border-slate-800/60 md:border-t-0 pt-4 md:pt-0">
+                <asp:FileUpload ID="fuImagen" runat="server"
+                    CssClass="block w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-slate-200 hover:file:bg-slate-700 transition-all cursor-pointer max-w-xs" />
 
-        <!-- Details Grid -->
-        <div class="grid grid-cols-2 gap-8 mb-10">
-
-            <!-- Información de Contacto -->
-            <div data-purpose="contact-info-section">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-[#0A0A6E]"><span class="material-symbols-outlined">contact_mail</span></span>
-                    <h4 class="font-bold text-gray-800">Información de Contacto</h4>
-                </div>
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden divide-y divide-gray-50">
-                    <div class="p-5">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nombre Empresa</p>
-                        <asp:Label
-                            ID="lblNombreContacto"
-                            runat="server"
-                            CssClass="text-gray-900 font-medium block" />
-                    </div>
-                    <div class="p-5">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Correo electrónico</p>
-                        <asp:Label
-                            ID="lblEmail"
-                            runat="server"
-                            CssClass="text-gray-900 font-medium block" />
-                    </div>
-                    <div class="p-5">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Teléfono de contacto</p>
-                        <asp:Label
-                            ID="lblTelefono"
-                            runat="server"
-                            CssClass="text-gray-900 font-medium block" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección y Entrega -->
-            <div data-purpose="shipping-info-section">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-[#0A0A6E]"><span class="material-symbols-outlined">local_shipping</span></span>
-                    <h4 class="font-bold text-gray-800">Dirección y Entrega</h4>
-                </div>
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 h-[278px] flex flex-col justify-between">
-                    <div>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Dirección de entrega principal</p>
-                        <asp:Label
-                            ID="lblDireccion"
-                            runat="server"
-                            CssClass="text-gray-900 font-medium text-lg leading-snug block" />
-                    </div>
-
-                    <!-- Geolocalización (Barrio) -->
-                    <div class="bg-[#F8F9FB] rounded-xl p-4 border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-gray-100 shadow-sm text-[#0A0A6E]">
-                                <span class="material-symbols-outlined">map</span>
-                            </div>
-                            <div>
-                                <p class="text-[11px] text-gray-500">Geolocalización activa</p>
-                                <asp:Label
-                                    ID="lblBarrio"
-                                    runat="server"
-                                    CssClass="font-bold text-[#0A0A6E] text-sm block" />
-                            </div>
-                        </div>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                    </div>
-                </div>
+                <asp:Button ID="btnSubirFoto" runat="server"
+                    Text="Actualizar foto"
+                    CssClass="w-full md:w-auto mt-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs px-4 py-2 rounded-xl border border-slate-700/40 transition-all cursor-pointer shadow-sm"
+                    OnClick="btnSubirFoto_Click" />
             </div>
         </div>
 
-        <!-- Configuración de Cuenta -->
-        <section data-purpose="account-config-grid">
-            <h4 class="font-bold text-gray-800 mb-4">Configuración de Cuenta</h4>
-            <div class="grid grid-cols-3 gap-6">
-                <div class="bg-white p-5 rounded-2xl border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer">
-                    <div class="w-12 h-12 bg-[#F0FDF4] rounded-full flex items-center justify-center text-[#16A34A]">
-                        <span class="material-symbols-outlined">verified_user</span>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm lg:col-span-2 flex flex-col justify-between">
+                <div>
+                    <div class="border-b border-slate-100 pb-3 mb-5">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Información Corporativa</h3>
                     </div>
-                    <div>
-                        <p class="font-bold text-gray-900 text-sm">Estado Cuenta</p>
-                        <p class="text-xs text-gray-500">Verificada</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtNombre.ClientID %>">Razón Social / Empresa</label>
+                            <asp:TextBox ID="txtNombre" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtTelefono.ClientID %>">Teléfono de Contacto</label>
+                            <asp:TextBox ID="txtTelefono" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtEmail.ClientID %>">Correo Electrónico Institucional</label>
+                            <asp:TextBox ID="txtEmail" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5 sm:col-span-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtDireccion.ClientID %>">Dirección de Despacho</label>
+                            <asp:TextBox ID="txtDireccion" runat="server"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all" />
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white p-5 rounded-2xl border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer">
-                    <div class="w-12 h-12 bg-[#EFF6FF] rounded-full flex items-center justify-center text-[#2563EB]">
-                        <span class="material-symbols-outlined">notifications</span>
-                    </div>
-                    <div>
-                        <p class="font-bold text-gray-900 text-sm">Notificaciones</p>
-                        <p class="text-xs text-gray-500">Email y SMS</p>
-                    </div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer">
-                    <div class="w-12 h-12 bg-[#F5F3FF] rounded-full flex items-center justify-center text-[#7C3AED]">
-                        <span class="material-symbols-outlined">credit_card</span>
-                    </div>
-                    <div>
-                        <p class="font-bold text-gray-900 text-sm">Método Pago</p>
-                        <p class="text-xs text-gray-500">Transferencia</p>
-                    </div>
+
+                <div class="pt-6 mt-6 border-t border-slate-100 flex justify-end">
+                    <asp:Button ID="btnGuardar" runat="server"
+                        Text="Guardar Cambios"
+                        OnClick="btnGuardar_Click"
+                        CssClass="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold text-sm px-6 py-2.5 rounded-xl cursor-pointer shadow-md shadow-blue-600/10 transition-all active:scale-[0.98]" />
                 </div>
             </div>
-        </section>
 
-    </main>
+            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="border-b border-slate-100 pb-3 mb-5">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Seguridad de la Cuenta</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtActual.ClientID %>">Contraseña Actual</label>
+                            <asp:TextBox ID="txtActual" runat="server"
+                                TextMode="Password"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all"
+                                placeholder="••••••••" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtNueva.ClientID %>">Nueva Contraseña</label>
+                            <asp:TextBox ID="txtNueva" runat="server"
+                                TextMode="Password"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all"
+                                placeholder="Mín. 8 caracteres" />
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider" for="<%= txtConfirmar.ClientID %>">Confirmar Contraseña</label>
+                            <asp:TextBox ID="txtConfirmar" runat="server"
+                                TextMode="Password"
+                                CssClass="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-600/10 transition-all"
+                                placeholder="Repita la nueva clave" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 mt-6 border-t border-slate-100">
+                    <asp:Button ID="btnCambiarPass" runat="server"
+                        Text="Actualizar Clave"
+                        CssClass="w-full bg-slate-100 hover:bg-slate-200 text-blue-600 border border-blue-200/60 font-semibold text-sm px-4 py-2.5 rounded-xl cursor-pointer transition-all active:scale-[0.98]"
+                        OnClick="btnCambiarPass_Click" />
+                </div>
+            </div>
+
+        </div>
+    </div>
 </asp:Content>

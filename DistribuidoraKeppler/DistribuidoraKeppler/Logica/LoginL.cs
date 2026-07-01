@@ -1,28 +1,74 @@
 ﻿using DistribuidoraKeppler.Datos;
-using System;
+using DistribuidoraKeppler.Modelo;
+using DistribuidoraKeppler.Utilidades;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DistribuidoraKeppler.Logica
 {
     public class LoginL
     {
-        public object ValidarLogin(string user, string pass)
+        public ResultadoLogin MtValidarLogin(string email, string clave)
         {
-            UsuarioD datos = new UsuarioD();
-            object resultado = datos.ObtenerUsuario(user, pass);
+            string hash = HashHelper.Encriptar(clave);
+            email = email.Trim();
 
-            if (resultado == null) return null;
+            var usuario = new UsuarioD().MtObtenerUsuarioPorEmail(email);
 
-            return resultado; 
+            if (usuario != null && usuario.Contrasena == hash)
+            {
+                return new ResultadoLogin
+                {
+                    Usuario = usuario,
+                    Rol = usuario.Rol.Nombre
+                };
+            }
+
+            var cliente = new ClienteD().MtObtenerPorEmail(email);
+
+            if (cliente != null && cliente.Contrasena == hash)
+            {
+                return new ResultadoLogin
+                {
+                    Cliente = cliente,
+                    Rol = "Cliente"
+                };
+            }
+
+            return null;
         }
 
-        public string MtUsuarioNuevo( string contrasena, int idEmpleado) 
+    
+        public bool MtUsuarioNuevo(string contrasena, int idEmpleado)
         {
             UsuarioD datos = new UsuarioD();
-            string resultado = datos.MtNuevoUsuario(contrasena, idEmpleado);
-            return resultado;
+
+            string hash = HashHelper.Encriptar(contrasena);
+
+            return datos.ActualizarContrasena(idEmpleado, hash);
+        }
+
+        public bool CambiarContrasenaCliente(int idCliente, string nuevaContrasena)
+        {
+            ClienteD clienteD = new ClienteD();
+
+            string hash = HashHelper.Encriptar(nuevaContrasena);
+
+            return clienteD.ActualizarContrasena(idCliente, hash);
+        }
+        public bool CambiarContrasenaPorEmail(string email, string nuevaContrasena)
+        {
+            string hash = HashHelper.Encriptar(nuevaContrasena);
+
+            UsuarioD datos = new UsuarioD();
+            datos.ActualizarPassword(email, hash);
+
+            return datos.ActualizarPassword(email, hash);
+        }
+
+        public List<Rol> MtRolesPorUsuario(int idUsuario)
+        {
+            UsuarioD oUsuarioD = new UsuarioD();
+            return oUsuarioD.MtRolesPorUsuario(idUsuario);
         }
     }
 }

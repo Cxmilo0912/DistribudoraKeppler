@@ -1,66 +1,88 @@
 ﻿using DistribuidoraKeppler.Datos;
 using DistribuidoraKeppler.Logica;
 using DistribuidoraKeppler.Modelo;
+using DistribuidoraKeppler.Utilidades;
 using System;
+using System.Collections.Generic;
 
 namespace DistribuidoraKeppler.Vista.Auth
 {
     public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {   
+        {
+
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             LoginL logica = new LoginL();
-            object ingreso = logica.ValidarLogin(txtUsuario.Text, txtClave.Text);
+
+            ResultadoLogin resultado = logica.MtValidarLogin(
+                txtUsuario.Text.Trim(),
+                txtClave.Text.Trim()
+            );
 
 
-            // VALIDACIÓN POR TIPO DE MODELO
-            if (ingreso != null)
+            if (resultado != null)
             {
-                if (ingreso is Usuario u)
+
+
+                if (resultado.Rol == "Cliente")
                 {
-                    if (txtClave.Text == u.Documento.ToString())
-                    {
-                        Session["IdUsuario"] = u.Id;
-                        Session["RolUsuario"] = u.Rol.Nombre;
-                        Response.Redirect("NuevoUsuario.aspx");
-                    }
-                    Session["SesionTrabajador"] = u;
+                    Session["Rol"] = resultado.Rol;
+                    SesionHelper.Usuario = resultado.Usuario;
+                    SesionHelper.Rol = resultado.Rol;
+                    Session["Cliente"] = resultado.Cliente;
+                    Session["IdCliente"] = resultado.Cliente.Id;
+                    Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx", false);
 
-                    switch (u.Rol.Id)
-                    {
-                        case 1:
-                            Session["rol"] = "Admin";
-                            Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx");
-                            break;
-
-                        case 2:
-                            Session["rol"] = "Preventista";
-                            Response.Redirect("~/Vista/Preventista/Preventista.aspx");
-                            break;
-
-                        case 3:
-                            Session["rol"] = "Repartidor";
-                            Response.Redirect("~/Vista/Repartidor/Repartidor.aspx");
-                            break;
-
-                        case 4:
-                            Session["rol"] = "Bodega";
-                            Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx");
-                            break;
-                    }
                 }
-
-
-                else if (ingreso is Modelo.Cliente c)
+                else
                 {
-                    Session["SesionCliente"] = c;
-                    Session["rol"] = "Cliente";
+                    Session["Rol"] = resultado.Rol;
+                    SesionHelper.Usuario = resultado.Usuario;
+                    SesionHelper.Rol = resultado.Rol;
 
-                    Response.Redirect("~/Vista/Cliente/DashboardCliente.aspx");
+                    string rol = resultado.Rol.Trim().ToLower();
+                    List<Rol> roles = logica.MtRolesPorUsuario(resultado.Usuario.Id);
+
+
+                    if (roles.Count > 1)
+                    {
+                        Session["RolesDisponibles"] = roles;
+                        Session["UsuarioTemporal"] = resultado.Usuario;
+                        Response.Redirect("~/Vista/Auth/SeleccionRol.aspx");
+                    }
+                    if (resultado.Usuario.Estado == 0)
+                    {
+                        string script = "Swal.fire('Error', 'Usuario inactivo, por favor contacte con el administrador', 'error');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    }
+                    switch (rol)
+                    {
+                        case "administrador":
+                            Session["Usuario"] = resultado.Usuario;
+                            Response.Redirect("~/Vista/Administrador/DashboardAdministrador.aspx", false);
+                            break;
+                        case "bodega":
+                            Session["Usuario"] = resultado.Usuario;
+                            Response.Redirect("~/Vista/Bodega/DashboardBodega.aspx", false);
+                            break;
+                        case "preventista":
+                            Session["Usuario"] = resultado.Usuario;
+                            Response.Redirect("~/Vista/Preventista/Preventista.aspx", false);
+                            break;
+                        case "distribuidor":
+                            Session["Usuario"] = resultado.Usuario;
+                            Response.Redirect("~/Vista/Repartidor/Repartidor.aspx", false);
+                            break;
+                        default:
+                            Response.Write("Rol no reconocido: " + resultado.Rol);
+                            break;
+                    }
+
+                    Context.ApplicationInstance.CompleteRequest();
                 }
             }
             else
@@ -68,9 +90,6 @@ namespace DistribuidoraKeppler.Vista.Auth
                 string script = "Swal.fire('Error', 'Usuario o contraseña incorrectos', 'error');";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
             }
-
-
-
         }
     }
 }

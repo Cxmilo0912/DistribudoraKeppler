@@ -11,7 +11,7 @@ namespace DistribuidoraKeppler.Vista.Cliente
 {
 
 
-    public partial class dbCliente
+    public partial class DashboardCliente
     {
     }
 }

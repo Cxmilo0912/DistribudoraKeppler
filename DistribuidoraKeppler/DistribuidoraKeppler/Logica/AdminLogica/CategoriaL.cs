@@ -1,0 +1,31 @@
+﻿using DistribuidoraKeppler.Datos;
+using DistribuidoraKeppler.Modelo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace DistribuidoraKeppler.Logica
+{
+    public class CategoriaL
+    {
+        CategoriaD categoria = new CategoriaD();
+        public List<Categoria> MtObtenerCategorias()
+        {
+            return categoria.MtObtenerCategorias();
+        }
+        public bool EliminarCategoria(int idCategoria)
+        {
+            return categoria.EliminarCategoria(idCategoria);
+        }
+        public bool RegistrarCategoria(Categoria categoria)
+        {
+            return this.categoria.RegistrarCategoria(categoria);
+        }
+
+        public int MtContarCategorias()
+        {
+            return categoria.MtContarCategorias();
+        }
+    }
+}

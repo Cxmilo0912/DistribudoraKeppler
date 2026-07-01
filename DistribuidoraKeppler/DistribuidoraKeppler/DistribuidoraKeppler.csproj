@@ -43,6 +43,63 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.54.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.54.0\lib\net472\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.3.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.3.10\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.3.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.3.9\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Azure.Core, Version=1.54.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Core.1.54.0\lib\net472\Azure.Core.dll</HintPath>
@@ -161,6 +218,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
@@ -227,6 +287,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -236,29 +297,35 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Index.aspx" />
-    <Content Include="Vista\Administrador\CreacionProducto.aspx" />
+    <Content Include="Vista\Administrador\AsignarSector.aspx" />
+    <Content Include="Vista\Administrador\Barrios.aspx" />
+    <Content Include="Vista\Administrador\CrearProducto.aspx" />
+    <Content Include="Vista\Administrador\CrearTrabajador.aspx" />
     <Content Include="Vista\Administrador\DashboardAdministrador.aspx" />
     <Content Include="Vista\Administrador\EditarProducto.aspx" />
     <Content Include="Vista\Administrador\GestionCategorias.aspx" />
-    <Content Include="Vista\Administrador\EditarPerfil.aspx" />
     <Content Include="Vista\Administrador\GestionMarcas1.aspx" />
     <Content Include="Vista\Administrador\GestionProductos.aspx" />
     <Content Include="Vista\Administrador\GestionUsuarios.aspx" />
+    <Content Include="Vista\Administrador\GestionPedidos.aspx" />
+    <Content Include="Vista\Administrador\Inventario.aspx" />
+    <Content Include="Vista\Administrador\Municipios.aspx" />
+    <Content Include="Vista\Administrador\Sectores.aspx" />
     <Content Include="Vista\Assets\css\GestionUsuario.css" />
-    <Content Include="Vista\Administrador\PerfilAdministrador.aspx" />
     <Content Include="Vista\Assets\css\Index.css" />
+    <Content Include="Vista\Assets\js\Carrito.js" />
     <Content Include="Vista\Assets\js\GestionUsuario.js" />
     <Content Include="Vista\Assets\js\Index.js" />
+    <Content Include="Vista\Assets\js\Inventario.js" />
+    <Content Include="Vista\Assets\js\Pago.js" />
+    <Content Include="Vista\Assets\js\Municipio.js" />
+    <Content Include="Vista\Assets\js\Sector.js" />
     <Content Include="Vista\Auth\Login.aspx" />
     <Content Include="Vista\Auth\NuevoUsuario.aspx" />
     <Content Include="Vista\Auth\RecuperarPassword.aspx" />
     <Content Include="Vista\Auth\ResetPassword.aspx" />
+    <Content Include="Vista\Auth\SeleccionRol.aspx" />
     <Content Include="Vista\Bodega\DashboardBodega.aspx" />
     <Content Include="Vista\Bodega\PerfilBodega.aspx" />
     <Content Include="Vista\Cliente\CambiarContrasena.aspx" />
@@ -270,25 +337,36 @@
     <Content Include="Vista\Cliente\Carrito\Pago.aspx" />
     <Content Include="Vista\Cliente\CatalogoProductos.aspx" />
     <Content Include="Vista\Cliente\DashboardCliente.aspx" />
-    <Content Include="Vista\Cliente\EditarPerfil.aspx" />
+    <Content Include="Vista\Cliente\Registro.aspx" />
+    <Content Include="Vista\Cliente\DetalleProducto.aspx" />
+    <Content Include="Vista\Preventista\Clientes.aspx" />
+    <Content Include="Vista\Preventista\CrearPedido.aspx" />
+    <Content Include="Vista\Preventista\Pedidos.aspx" />
     <Content Include="Vista\Preventista\PerfilPreventista.aspx" />
     <Content Include="Vista\Preventista\Preventista.aspx" />
     <Content Include="Vista\Cliente\PerfilCliente.aspx" />
+    <Content Include="Vista\Cliente\MisPedidos.aspx" />
+    <Content Include="Vista\Cliente\Historial.aspx" />
     <Content Include="Vista\Repartidor\PerfilRepartidor.aspx" />
     <Content Include="Vista\Repartidor\Repartidor.aspx" />
+    <Content Include="Vista\Usuario\PerfilUsuario.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\AdminDatos\CategoriaD.cs" />
     <Compile Include="Datos\BodegaDatos\BodegaD.cs" />
+    <Compile Include="Datos\AdminDatos\MunicipioD.cs" />
+    <Compile Include="Datos\AdminDatos\SectorD.cs" />
+    <Compile Include="Datos\AdminDatos\BarrioD.cs" />
     <Compile Include="Datos\ClienteDatos\ClienteD.cs" />
     <Compile Include="Datos\AdminDatos\ConexionDB.cs" />
     <Compile Include="Datos\AdminDatos\DashboardAdministradorD.cs" />
     <Compile Include="Datos\AdminDatos\MarcaD.cs" />
     <Compile Include="Datos\AdminDatos\PedidoD.cs" />
     <Compile Include="Datos\AdminDatos\ProductoD.cs" />
+    <Compile Include="Datos\PreventistaDatos\PreventistaD.cs" />
     <Compile Include="Datos\UsuarioD.cs" />
-    <Compile Include="Datos\GestionUsuarioD.cs" />
+    <Compile Include="Datos\AdminDatos\GestionUsuarioD.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -298,17 +376,27 @@
     </Compile>
     <Compile Include="Logica\AdminLogica\CategoriaL.cs" />
     <Compile Include="Logica\BodegaLogica\BodegaL.cs" />
+    <Compile Include="Logica\AdminLogica\BarrioL.cs" />
+    <Compile Include="Logica\AdminLogica\CategoriaL.cs" />
+    <Compile Include="Logica\AdminLogica\MunicipioL.cs" />
     <Compile Include="Logica\ClienteLogica\ClienteL.cs" />
     <Compile Include="Logica\AdminLogica\DashboardAdministradorL.cs" />
     <Compile Include="Logica\AdminLogica\GestionUsuarioL.cs" />
     <Compile Include="Logica\LoginL.cs" />
-    <Compile Include="Logica\ProductoL.cs" />
+    <Compile Include="Logica\AdminLogica\MarcaL.cs" />
+    <Compile Include="Logica\AdminLogica\PedidoL.cs" />
+    <Compile Include="Logica\AdminLogica\ProductoL.cs" />
+    <Compile Include="Logica\PreventistaLogica\PreventistaL.cs" />
+    <Compile Include="Logica\AdminLogica\SectorL.cs" />
+    <Compile Include="Logica\UsuarioL.cs" />
     <Compile Include="Modelo\Barrio.cs" />
     <Compile Include="Modelo\Categoria.cs" />
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\DetallePedido.cs" />
     <Compile Include="Modelo\HorarioLaboral.cs" />
     <Compile Include="Modelo\Marca.cs" />
+    <Compile Include="Modelo\Municipio.cs" />
+    <Compile Include="Modelo\Pedido.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\ReporteEntrega.cs" />
     <Compile Include="Modelo\ResultadoLogin.cs" />
@@ -316,12 +404,35 @@
     <Compile Include="Modelo\Sector.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vista\Administrador\CreacionProducto.aspx.cs">
-      <DependentUpon>CreacionProducto.aspx</DependentUpon>
+    <Compile Include="Utilidades\HashHelper.cs" />
+    <Compile Include="Utilidades\SesionHelper.cs" />
+    <Compile Include="Vista\Administrador\AsignarSector.aspx.cs">
+      <DependentUpon>AsignarSector.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Administrador\CreacionProducto.aspx.designer.cs">
-      <DependentUpon>CreacionProducto.aspx</DependentUpon>
+    <Compile Include="Vista\Administrador\AsignarSector.aspx.designer.cs">
+      <DependentUpon>AsignarSector.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Barrios.aspx.cs">
+      <DependentUpon>Barrios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Barrios.aspx.designer.cs">
+      <DependentUpon>Barrios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearProducto.aspx.cs">
+      <DependentUpon>CrearProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearProducto.aspx.designer.cs">
+      <DependentUpon>CrearProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearTrabajador.aspx.cs">
+      <DependentUpon>CrearTrabajador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\CrearTrabajador.aspx.designer.cs">
+      <DependentUpon>CrearTrabajador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\DashboardAdministrador.aspx.cs">
       <DependentUpon>DashboardAdministrador.aspx</DependentUpon>
@@ -336,20 +447,13 @@
     </Compile>
     <Compile Include="Vista\Administrador\EditarProducto.aspx.designer.cs">
       <DependentUpon>EditarProducto.aspx</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Vista\Administrador\GestionCategorias.aspx.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vista\Administrador\GestionCategorias.aspx.designer.cs">
       <DependentUpon>GestionCategorias.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\Administrador\EditarPerfil.aspx.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Vista\Administrador\EditarPerfil.aspx.designer.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Administrador\GestionMarcas1.aspx.cs">
       <DependentUpon>GestionMarcas1.aspx</DependentUpon>
@@ -372,12 +476,33 @@
     <Compile Include="Vista\Administrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Administrador\PerfilAdministrador.aspx.cs">
-      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
+    <Compile Include="Vista\Administrador\GestionPedidos.aspx.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Administrador\PerfilAdministrador.aspx.designer.cs">
-      <DependentUpon>PerfilAdministrador.aspx</DependentUpon>
+    <Compile Include="Vista\Administrador\GestionPedidos.aspx.designer.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Inventario.aspx.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Inventario.aspx.designer.cs">
+      <DependentUpon>Inventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Municipios.aspx.cs">
+      <DependentUpon>Municipios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Municipios.aspx.designer.cs">
+      <DependentUpon>Municipios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Administrador\Sectores.aspx.cs">
+      <DependentUpon>Sectores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Administrador\Sectores.aspx.designer.cs">
+      <DependentUpon>Sectores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Auth\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -406,6 +531,13 @@
     </Compile>
     <Compile Include="Vista\Auth\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Auth\SeleccionRol.aspx.cs">
+      <DependentUpon>SeleccionRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Auth\SeleccionRol.aspx.designer.cs">
+      <DependentUpon>SeleccionRol.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Bodega\DashboardBodega.aspx.cs">
       <DependentUpon>DashboardBodega.aspx</DependentUpon>
@@ -449,15 +581,22 @@
       <DependentUpon>Carrito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Bodega\PerfilBodega.aspx.designer.cs">
-      <DependentUpon>PerfilBodega.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\Carrito\Carrito.aspx.designer.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.cs">
-      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\Carrito\Pago.aspx.cs">
+      <DependentUpon>Pago.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Cliente\CambiarContrasena.aspx.designer.cs">
-      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\Carrito\Pago.aspx.designer.cs">
+      <DependentUpon>Pago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\CatalogoProductos.aspx.cs">
+      <DependentUpon>CatalogoProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\CatalogoProductos.aspx.designer.cs">
+      <DependentUpon>CatalogoProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
@@ -466,12 +605,40 @@
     <Compile Include="Vista\Cliente\DashboardCliente.aspx.designer.cs">
       <DependentUpon>DashboardCliente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Cliente\EditarPerfil.aspx.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\DetalleProducto.aspx.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Cliente\EditarPerfil.aspx.designer.cs">
-      <DependentUpon>EditarPerfil.aspx</DependentUpon>
+    <Compile Include="Vista\Cliente\DetalleProducto.aspx.designer.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\Clientes.aspx.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Clientes.aspx.designer.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\CrearPedido.aspx.cs">
+      <DependentUpon>CrearPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\CrearPedido.aspx.designer.cs">
+      <DependentUpon>CrearPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Preventista\Pedidos.aspx.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Preventista\Pedidos.aspx.designer.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Preventista\PerfilPreventista.aspx.cs">
       <DependentUpon>PerfilPreventista.aspx</DependentUpon>
@@ -494,6 +661,20 @@
     <Compile Include="Vista\Cliente\PerfilCliente.aspx.designer.cs">
       <DependentUpon>PerfilCliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Cliente\MisPedidos.aspx.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\MisPedidos.aspx.designer.cs">
+      <DependentUpon>MisPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Cliente\Historial.aspx.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Cliente\Historial.aspx.designer.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Repartidor\PerfilRepartidor.aspx.cs">
       <DependentUpon>PerfilRepartidor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -514,6 +695,13 @@
     </Compile>
     <Compile Include="Vista\Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Usuario\PerfilUsuario.aspx.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Usuario\PerfilUsuario.aspx.designer.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -564,5 +752,7 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
   </Target>
+  <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
 </Project>
