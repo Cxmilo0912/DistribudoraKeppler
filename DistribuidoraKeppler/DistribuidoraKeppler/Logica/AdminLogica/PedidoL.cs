@@ -47,7 +47,7 @@ namespace DistribuidoraKeppler.Logica
                 return "El ID del pedido no es valido";
             }
 
-            string[] estadosValidos = { "Pendiente", "Confirmado", "En preparacion", "En reparto", "Entregado" };
+            string[] estadosValidos = { "Pendiente", "Aprovado", "En preparacion", "En reparto", "Entregado" };
             bool esValido = false;
 
             foreach (string e in estadosValidos)
