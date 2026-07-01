@@ -18,6 +18,15 @@ namespace DistribuidoraKeppler.Vista.Cliente
                 Response.Redirect("~/Vista/Auth/Login.aspx");
         }
 
+        protected string ObtenerInicialCliente()
+        {
+            string nombre = DistribuidoraKeppler.Utilidades.SesionHelper.Cliente != null
+                ? DistribuidoraKeppler.Utilidades.SesionHelper.Cliente.NombreEmpresa
+                : null;
+
+            return !string.IsNullOrWhiteSpace(nombre) ? nombre.Trim().Substring(0, 1).ToUpper() : "C";
+        }
+
         private static readonly HashSet<string> EstadosFinalizados = new HashSet<string>
         {
             "Entregado", "Cancelado", "Rechazado", "Devuelto"
@@ -44,6 +53,37 @@ namespace DistribuidoraKeppler.Vista.Cliente
 
             Pedido ultimoPedido = pedidos.OrderByDescending(p => p.Fecha).FirstOrDefault();
 
+            // Traduce los estados internos del pedido a los estados que ve el cliente
+            Dictionary<string, string> mapaEstados = new Dictionary<string, string>
+            {
+                { "En Proceso", "Confirmado" },
+                { "Pendiente", "Confirmado" },
+                { "Aprobado", "Confirmado" },
+                { "Confirmado", "Confirmado" },
+                { "En preparacion", "Empaquetado" },
+                { "Empaquetado", "Empaquetado" },
+                { "En reparto", "En Camino" },
+                { "En Camino", "En Camino" },
+                { "Entregado", "Entregado" },
+                { "Rechazado", "Cancelado" },
+                { "Cancelado", "Cancelado" },
+                { "Devuelto", "Devuelto" }
+            };
+
+            List<object> ultimosPedidos = pedidos
+                .OrderByDescending(p => p.Fecha)
+                .Take(3)
+                .Select(p => new
+                {
+                    id = p.Id,
+                    codigoPedido = p.CodigoPedido ?? ("#" + p.Id),
+                    fecha = p.Fecha.ToString("dd MMM yyyy"),
+                    total = p.Total.ToString("N2"),
+                    estado = mapaEstados.ContainsKey(p.Estado) ? mapaEstados[p.Estado] : p.Estado
+                })
+                .Cast<object>()
+                .ToList();
+
             return new
             {
                 success = true,
@@ -55,7 +95,8 @@ namespace DistribuidoraKeppler.Vista.Cliente
                 totalPedidos = pedidos.Count,
                 ultimoPedidoCodigo = ultimoPedido != null ? (ultimoPedido.CodigoPedido ?? ("#" + ultimoPedido.Id)) : null,
                 ultimoPedidoFecha = ultimoPedido != null ? ultimoPedido.Fecha.ToString("dd MMM yyyy") : null,
-                ultimoPedidoTotal = ultimoPedido != null ? ultimoPedido.Total.ToString("N2") : null
+                ultimoPedidoTotal = ultimoPedido != null ? ultimoPedido.Total.ToString("N2") : null,
+                ultimosPedidos = ultimosPedidos
             };
         }
     }
