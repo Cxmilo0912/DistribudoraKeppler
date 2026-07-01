@@ -749,3 +749,9 @@ risk =
 reference_sale = KEP-6
 additional_value = 0.00
 --- Ref: KEP-6 | Estado: 4 | Valor: 12000.00 ---
+Cadena armada en C#: 4Vj8eK4rloUd272L48hsrarnUA~508029~KEP-7~267000.00~COP
+Firma MD5: fdd04357c7467afda542f6581bdcb51e
+--- FIN OK ---
+Cadena armada en C#: 4Vj8eK4rloUd272L48hsrarnUA~508029~KEP-12~21000.00~COP
+Firma MD5: 791d38d9428f529753e46a6af8e93f0f
+--- FIN OK ---

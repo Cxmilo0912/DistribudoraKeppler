@@ -78,6 +78,49 @@
                 background: #1e40af;
             }
 
+        /* ── Filtros de marca y precio ── */
+        .cat-filters-extra {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .cat-select {
+            background: #ffffff;
+            border: 1px solid #e2e6ed;
+            border-radius: 10px;
+            padding: 9px 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            color: #1a2332;
+        }
+
+        .cat-precio-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid #e2e6ed;
+            border-radius: 10px;
+            padding: 6px 14px;
+        }
+
+            .cat-precio-box span {
+                color: #b0b8c4;
+                font-size: 13px;
+            }
+
+        .cat-precio-input {
+            border: none;
+            outline: none;
+            width: 90px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            color: #1a2332;
+        }
+
         /* ── Filtros de categoría ── */
         .cat-filters {
             display: flex;
@@ -330,6 +373,26 @@
             </div>
         </div>
 
+        <%-- ── Filtros de marca y precio ── --%>
+        <div class="cat-filters-extra">
+            <asp:DropDownList ID="ddlMarca" runat="server" CssClass="cat-select" />
+
+            <div class="cat-precio-box">
+                <asp:TextBox ID="txtPrecioMin" runat="server" TextMode="Number"
+                    placeholder="Precio mín." CssClass="cat-precio-input" />
+                <span>—</span>
+                <asp:TextBox ID="txtPrecioMax" runat="server" TextMode="Number"
+                    placeholder="Precio máx." CssClass="cat-precio-input" />
+            </div>
+
+            <asp:DropDownList ID="ddlOrden" runat="server" CssClass="cat-select"
+                AutoPostBack="true" OnSelectedIndexChanged="ddlOrden_SelectedIndexChanged">
+                <asp:ListItem Text="Ordenar por: A-Z" Value="az" />
+                <asp:ListItem Text="Más recientes" Value="reciente" />
+                <asp:ListItem Text="Más comprados" Value="mas_comprado" />
+            </asp:DropDownList>
+        </div>
+
         <%-- ── Filtros de categoría ── --%>
         <div class="cat-filters">
             <asp:Repeater ID="rptCategorias" runat="server">
@@ -374,7 +437,8 @@
                                 data-id='<%# Eval("Id") %>'
                                 data-imagen='<%# Eval("Imagen") %>'
                                 data-nombre='<%# Eval("Nombre") %>'
-                                data-precio='<%# Eval("Precio") %>'>
+                                data-precio='<%# Eval("Precio") %>'
+                                data-descripcion='<%# Eval("Descripcion") %>'>
                                 <i class="bi bi-cart-fill"></i>
                             </button>
                         </div>
@@ -411,6 +475,7 @@
                         id: boton.getAttribute('data-id'),
                         nombre: boton.getAttribute('data-nombre'),
                         precio: parseFloat(boton.getAttribute('data-precio')),
+                        descripcion: boton.getAttribute('data-descripcion'),
                         cantidad: 1
                     };
                     MtAgregarAlCarrito(producto);

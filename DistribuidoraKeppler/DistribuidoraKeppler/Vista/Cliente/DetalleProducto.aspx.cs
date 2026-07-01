@@ -46,6 +46,12 @@ namespace DistribuidoraKeppler.Vista.Cliente
 
                 imgProducto.AlternateText = oProducto.Nombre;
 
+                // Datos para agregar al carrito desde el cliente (JS)
+                btnAgregar.Attributes["data-id"] = oProducto.Id.ToString();
+                btnAgregar.Attributes["data-nombre"] = oProducto.Nombre;
+                btnAgregar.Attributes["data-precio"] = oProducto.Precio.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                btnAgregar.Attributes["data-descripcion"] = oProducto.Descripcion;
+
                 // Stock y límites de venta
                 if (oProducto.Stock > 0)
                 {
@@ -71,11 +77,6 @@ namespace DistribuidoraKeppler.Vista.Cliente
             {
                 Response.Redirect("/Vista/Cliente/CatalogoProductos.aspx");
             }
-        }
-
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-            // Detalle para el siguiente sprint
         }
     }
 }

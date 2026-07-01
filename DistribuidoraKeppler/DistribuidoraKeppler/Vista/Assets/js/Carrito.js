@@ -180,6 +180,7 @@ function MtRenderizarCarro() {
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="fw-bold mb-0">${prod.nombre}</h6>
+                        ${prod.descripcion ? `<small style="font-size: 0.85rem;" class="text-muted d-block">${prod.descripcion}</small>` : ''}
                         <small style="font-size: 0.9rem;" class="text-muted">$${prod.precio} x ${prod.cantidad}</small>
                     </div>
                     <div class="d-flex align-items-center">
