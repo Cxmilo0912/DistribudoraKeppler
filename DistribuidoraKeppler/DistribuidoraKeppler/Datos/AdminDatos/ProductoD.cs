@@ -43,7 +43,6 @@ namespace DistribuidoraKeppler.Datos
             }
             catch (Exception ex)
             {
-                // Esto enviará el mensaje de error hacia arriba para que lo veas en el SweetAlert
                 throw new Exception("Error en la inserción: " + ex.Message);
             }
         }
