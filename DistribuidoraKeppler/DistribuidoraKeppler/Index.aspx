@@ -788,6 +788,79 @@
         </section>
     </form>
 
+    <footer style="background: var(--blue-deep); color: rgba(255,255,255,0.65); padding: 4rem 2.5rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+
+            <!-- Columnas -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(123,140,255,0.15);">
+
+                <!-- Marca -->
+                <div>
+                    <a href="#inicio" style="font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; text-decoration: none;">Distribuidora<span style="color: var(--blue-light);"> Keppler</span>
+                    </a>
+                    <p style="margin-top: 1rem; font-size: 0.85rem; line-height: 1.8; max-width: 280px;">
+                        Tu texto aquí — descripción breve de la empresa o slogan.
+                    </p>
+                    <!-- Redes sociales -->
+                    <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+                        <a href="#" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(123,140,255,0.3); display: flex; align-items: center; justify-content: center; color: var(--blue-light); text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s;"
+                            onmouseover="this.style.borderColor='var(--blue-light)'" onmouseout="this.style.borderColor='rgba(123,140,255,0.3)'">in
+                        </a>
+                        <a href="#" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(123,140,255,0.3); display: flex; align-items: center; justify-content: center; color: var(--blue-light); text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s;"
+                            onmouseover="this.style.borderColor='var(--blue-light)'" onmouseout="this.style.borderColor='rgba(123,140,255,0.3)'">ig
+                        </a>
+                        <a href="#" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(123,140,255,0.3); display: flex; align-items: center; justify-content: center; color: var(--blue-light); text-decoration: none; font-size: 0.85rem; transition: border-color 0.2s;"
+                            onmouseover="this.style.borderColor='var(--blue-light)'" onmouseout="this.style.borderColor='rgba(123,140,255,0.3)'">fb
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div>
+                    <p style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem;">Navegación</p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem;">
+                        <li><a href="#inicio" style="font-size: 0.84rem; color: rgba(255,255,255,0.55); text-decoration: none;">Inicio</a></li>
+                        <li><a href="#catalogo" style="font-size: 0.84rem; color: rgba(255,255,255,0.55); text-decoration: none;">Catálogo</a></li>
+                        <li><a href="Vista/Auth/Login.aspx" style="font-size: 0.84rem; color: rgba(255,255,255,0.55); text-decoration: none;">Iniciar sesión</a></li>
+                        <li><a href="Vista/Cliente/Registro.aspx" style="font-size: 0.84rem; color: rgba(255,255,255,0.55); text-decoration: none;">Registrarse</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div>
+                    <p style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem;">Contacto</p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem;">
+                        <li style="font-size: 0.84rem;">📞 +57 3148155644</li>
+                        <li style="font-size: 0.84rem;">✉️ Tu correo</li>
+                        <li style="font-size: 0.84rem;">📍Sogamoso - Boyaca Carrera 17 #20 A-17</li>
+                    </ul>
+                </div>
+
+                <!-- Horario -->
+                <div>
+                    <p style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem;">Horario</p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem;">
+                        <li style="font-size: 0.84rem;">Lun – Vie: 8:00 – 18:00</li>
+                        <li style="font-size: 0.84rem;">Sábado: 8:00 – 13:00</li>
+                        <li style="font-size: 0.84rem; color: rgba(255,255,255,0.3);">Domingo: Cerrado</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <p style="font-size: 0.78rem; margin: 0;">
+                    © 2026 Distribuidora Keppler. Todos los derechos reservados.
+                </p>
+                <p style="font-size: 0.78rem; margin: 0; color: rgba(255,255,255,0.3);">
+                    Hecho con ♥ en Colombia
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
     <script>
         function abrirModal(nombre, marca, precio, stock, categoria, descripcion, imagen) {
             document.getElementById('modal-nombre').innerText = nombre;

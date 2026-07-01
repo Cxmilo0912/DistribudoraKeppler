@@ -11,34 +11,43 @@ namespace DistribuidoraKeppler.Vista.Administrador
 {
 
 
-    public partial class Inventario
+    public partial class AsignarSector
     {
 
         /// <summary>
-        /// Control ddlCat.
+        /// Control rptTrabajadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCat;
+        protected global::System.Web.UI.WebControls.Repeater rptTrabajadores;
 
         /// <summary>
-        /// Control ddlMarca.
+        /// Control ddlTrabajador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMarca;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTrabajador;
 
         /// <summary>
-        /// Control rptInventario.
+        /// Control ddlMunicipio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptInventario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMunicipio;
+
+        /// <summary>
+        /// Control ddlSector.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSector;
     }
 }

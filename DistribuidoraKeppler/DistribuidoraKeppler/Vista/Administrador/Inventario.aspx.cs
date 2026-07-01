@@ -21,11 +21,28 @@ namespace DistribuidoraKeppler.Vista.Administrador
 
         private void MtCargarInventario()
         {
-            ProductoL  oProductoL = new ProductoL();
+            ProductoL oProductoL = new ProductoL();
             List<Producto> lista = oProductoL.ListarProductos();
 
             rptInventario.DataSource = lista;
             rptInventario.DataBind();
+            List<Categoria> listaCat = oProductoL.MtObtenerCategoriasConTodos();
+
+            MarcaL oMarcaL = new MarcaL();
+            List<Marca> listaM = oMarcaL.MtListarMarcas();
+            ddlCat.DataSource = listaCat.ToList();
+            ddlCat.DataTextField = "Nombre";
+            ddlCat.DataValueField = "Id";
+            ddlCat.DataBind();
+            ddlCat.Items.Insert(0, new ListItem("--- Seleccione una Categoria ---", "0"));
+
+
+            ddlMarca.DataSource = listaM.ToList();
+            ddlMarca.DataTextField = "Nombre";
+            ddlMarca.DataValueField = "Id";
+            ddlMarca.DataBind();
+            ddlMarca.Items.Insert(0, new ListItem("--- Seleccione una Marca ---", "0"));
+
         }
     }
 }

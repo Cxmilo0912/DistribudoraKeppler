@@ -21,7 +21,7 @@ namespace DistribuidoraKeppler.Logica
         // Metodo para actualizar datos del Usuario
         public bool MtActualizarPerfil(Usuario u)
         {
-            
+
             if (u == null)
                 return false;
 
@@ -88,9 +88,9 @@ namespace DistribuidoraKeppler.Logica
             return oUsuarioD.MtCrearUsuario(usuario, idRol);
         }
 
-        public bool MtEditarUsuario(Usuario oUsuario)
+        public bool MtEditarUsuario(Usuario oUsuario, int idRol)
         {
-            return oUsuarioD.MtEditarUsuario(oUsuario);
+            return oUsuarioD.MtEditarUsuario(oUsuario, idRol);
         }
 
         public bool MtEliminarUsuario(int id)
@@ -98,6 +98,20 @@ namespace DistribuidoraKeppler.Logica
             return oUsuarioD.MtEliminarUsuario(id);
         }
 
+        public List<object> MtListarPersonalMovilizado()
+        {
+            return oUsuarioD.MtListarPersonalMovilizado();
 
-}
+        }
+
+        public bool MtAsignarSector(int idTrabajador, int idSector)
+        {
+            return oUsuarioD.MtAsignarSector(idTrabajador, idSector);
+        }
+
+        public bool MtReasignarSector(int idTrabajador, int idSector)
+        {
+            return oUsuarioD.MtReasignarSector(idTrabajador, idSector);
+        }
+    }
 }

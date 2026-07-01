@@ -31,7 +31,7 @@ namespace DistribuidoraKeppler.Vista.Cliente.Carrito
                 Estado = "En Proceso",
                 DireccionEntrega = cliente.Direccion,
                 Total = oPedido.Total,
-                IdCliente = new Modelo.Cliente
+                Cliente = new Modelo.Cliente
                 {
                     Id = idCliente
                 } 

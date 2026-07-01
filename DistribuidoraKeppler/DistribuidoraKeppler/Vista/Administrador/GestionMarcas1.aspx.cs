@@ -15,10 +15,9 @@ namespace DistribuidoraKeppler.Vista.Administrador
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
+
                 CargarMarcas();
-            }
+
 
         }
 
