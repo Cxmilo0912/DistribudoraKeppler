@@ -98,8 +98,8 @@ namespace DistribuidoraKeppler.Vista.Preventista
             var actividad = pedidos.Select(p => new
             {
                 codigo = p.CodigoPedido,
-                cliente = p.IdCliente.NombreEmpresa,
-                direccion = p.IdCliente.Direccion,
+                cliente = p.Cliente.NombreEmpresa,
+                direccion = p.Cliente.Direccion,
                 total = p.Total.ToString("N2"),
                 estado = p.Estado
             }).ToList();

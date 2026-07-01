@@ -120,7 +120,7 @@ namespace DistribuidoraKeppler.Logica
             if (pedido == null)
                 return "El pedido no existe";
 
-            if (pedido.IdCliente.Id != idCliente)
+            if (pedido.Cliente.Id != idCliente)
                 return "El pedido no pertenece a este cliente";
 
             if (EstadosNoCancelables.Contains(pedido.Estado))

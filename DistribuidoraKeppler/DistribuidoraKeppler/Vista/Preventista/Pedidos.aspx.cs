@@ -33,7 +33,7 @@ namespace DistribuidoraKeppler.Vista.Preventista
                 fecha = p.Fecha.ToString("dd/MM/yyyy"),
                 estado = p.Estado,
                 total = p.Total.ToString("N2"),
-                cliente = p.IdCliente.NombreEmpresa,
+                cliente = p.Cliente.NombreEmpresa,
                 detalles = p.Detalles.Select(d => new
                 {
                     producto = d.IdProducto.Nombre,

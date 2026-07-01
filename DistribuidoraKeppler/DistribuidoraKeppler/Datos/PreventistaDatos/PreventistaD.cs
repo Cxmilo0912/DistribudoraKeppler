@@ -102,7 +102,7 @@ namespace DistribuidoraKeppler.Datos.PreventistaDatos
                         Nombre = dr["Nombre"] == DBNull.Value ? "" : dr["Nombre"].ToString(),
                         DiasVisita = dr["DiasVisita"] == DBNull.Value ? "" : dr["DiasVisita"].ToString(),
                         CapacidadMaxima = dr["CapacidadMaxima"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CapacidadMaxima"]),
-                        Estado = dr["Estado"] != DBNull.Value && Convert.ToBoolean(dr["Estado"])
+                        Estado = Convert.ToByte(dr["Estado"])
                     };
                 }
 
@@ -160,7 +160,7 @@ namespace DistribuidoraKeppler.Datos.PreventistaDatos
                             Fecha = Convert.ToDateTime(dr["Fecha"]),
                             Estado = dr["Estado"] == DBNull.Value ? "" : dr["Estado"].ToString(),
                             Total = dr["Total"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Total"]),
-                            IdCliente = new Cliente
+                            Cliente = new Cliente
                             {
                                 Id = Convert.ToInt32(dr["IdCliente"]),
                                 NombreEmpresa = dr["NombreEmpresa"].ToString(),
@@ -335,7 +335,7 @@ namespace DistribuidoraKeppler.Datos.PreventistaDatos
                                 Estado = dr["Estado"] == DBNull.Value ? "" : dr["Estado"].ToString(),
                                 DireccionEntrega = dr["DireccionEntrega"] == DBNull.Value ? "" : dr["DireccionEntrega"].ToString(),
                                 Total = dr["Total"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Total"]),
-                                IdCliente = new Cliente
+                                Cliente = new Cliente
                                 {
                                     Id = Convert.ToInt32(dr["IdCliente"]),
                                     NombreEmpresa = dr["NombreEmpresa"].ToString()

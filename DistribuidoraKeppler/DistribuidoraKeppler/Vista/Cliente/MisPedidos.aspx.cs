@@ -56,7 +56,7 @@ namespace DistribuidoraKeppler.Vista.Cliente
                     estado = estadoMostrado,
                     total = p.Total.ToString("N2"),
                     direccion = p.DireccionEntrega,
-                    barrio = p.IdCliente.Barrio != null ? p.IdCliente.Barrio.Nombre : null
+                    barrio = p.Cliente.Barrio != null ? p.Cliente.Barrio.Nombre : null
                 });
             }
 
